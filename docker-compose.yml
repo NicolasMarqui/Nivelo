@@ -1,0 +1,35 @@
+# cSpell:disable
+
+version: "3.7"
+
+services:
+    db:
+        image: postgres:12.2
+        restart: always
+        environment:
+            POSTGRES_DB: nivelo
+            POSTGRES_USER: postgres
+            POSTGRES_PASSWORD: postgres
+            PGDATA: /var/lib/postgresql/data
+        volumes:
+            - db-data:/var/lib/postgresql/data
+        ports:
+            - "5432:5432"
+
+    pgadmin:
+        image: dpage/pgadmin4:4.30
+        restart: always
+        environment:
+            PGADMIN_DEFAULT_EMAIL: nick.marqui@gmail.com
+            PGADMIN_DEFAULT_PASSWORD: admin
+            PGADMIN_LISTEN_PORT: 80
+        ports:
+            - "8080:80"
+        volumes:
+            - pgadmin-data:/var/lib/pgadmin
+        links:
+            - "db:pgsql-server"
+
+volumes:
+    db-data:
+    pgadmin-data:
