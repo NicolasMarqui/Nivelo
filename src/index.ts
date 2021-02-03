@@ -20,7 +20,7 @@ const main = async () => {
         entities: [User],
         synchronize: true,
     }).then(() => {
-        console.log("Database connected");
+        console.log("Database connected", __dirname);
     });
 
     const app = express();
@@ -31,6 +31,7 @@ const main = async () => {
             resolvers: [UserResolver],
             validate: false,
         }),
+        context: () => ({}),
     });
 
     apolloServer.applyMiddleware({ app });
@@ -41,7 +42,7 @@ const main = async () => {
         res.send("Hello");
     });
 
-    app.listen(PORT, () => `Server running on port ${PORT}`);
+    app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 };
 
 main().catch((err) => {
