@@ -1,6 +1,8 @@
+import { validateNewInfo } from "./../utils/validateNewInfo";
+import { isAuth } from "../middleware";
 import { cookieDuration, COOKIE_NAME } from "../constants";
 import { MyContext } from "./../types";
-import { EmailPasswordInput } from "./inputs/index";
+import { EmailPasswordInput, MoreInfoUser } from "./inputs";
 import { validateRegister } from "./../utils/validateRegister";
 import {
     Arg,
@@ -10,6 +12,7 @@ import {
     ObjectType,
     Query,
     Resolver,
+    UseMiddleware,
 } from "type-graphql";
 import { User } from "./../entities/User";
 import argon2 from "argon2";
@@ -188,6 +191,7 @@ export class UserResolver {
         return { user };
     }
 
+    // Log a User out
     @Mutation(() => Boolean)
     logout(@Ctx() { req, res }: MyContext) {
         return new Promise((resolve) =>
@@ -202,5 +206,43 @@ export class UserResolver {
                 resolve(true);
             })
         );
+    }
+
+    // Save rest of the User info
+    @Mutation(() => UserResponse)
+    @UseMiddleware(isAuth)
+    async addMoreInfo(
+        @Arg("id") id: Number,
+        @Arg("options") options: MoreInfoUser
+    ): Promise<UserResponse> {
+        const errors = validateNewInfo(options);
+        if (errors) {
+            return { errors };
+        }
+
+        const { dateBirth, description, sex, country, city, avatar } = options;
+
+        let user;
+        try {
+            const result = await getConnection()
+                .createQueryBuilder()
+                .update(User)
+                .set({
+                    dateBirth,
+                    description,
+                    sex,
+                    country,
+                    city,
+                    avatar,
+                })
+                .where("id = :id", { id })
+                .returning("*")
+                .execute();
+            user = result.raw[0];
+        } catch (err) {
+            console.log(err);
+        }
+
+        return { user };
     }
 }

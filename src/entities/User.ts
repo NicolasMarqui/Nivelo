@@ -26,31 +26,31 @@ export class User extends BaseEntity {
     @Column()
     password: string;
 
-    @Field()
+    @Field({ nullable: true })
     @Column({ nullable: true })
     dateBirth!: string;
 
-    @Field()
+    @Field({ nullable: true })
     @Column("text", { nullable: true })
     description!: string;
 
-    @Field()
+    @Field({ nullable: true })
     @Column({ nullable: true })
     sex!: string;
 
-    @Field()
+    @Field({ nullable: true })
     @Column({ nullable: true })
     country!: string;
 
-    @Field()
+    @Field({ nullable: true })
     @Column({ nullable: true })
     city!: string;
 
-    @Field()
+    @Field({ nullable: true })
     @Column({ nullable: true })
     followersAmount!: number;
 
-    @Field()
+    @Field({ nullable: true })
     @Column({ nullable: true })
     avatar!: string;
 
