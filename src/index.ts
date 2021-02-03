@@ -1,4 +1,5 @@
 import "reflect-metadata";
+require("dotenv").config();
 import { createConnection } from "typeorm";
 import path from "path";
 import express from "express";
@@ -15,7 +16,7 @@ const main = async () => {
         port: 5432,
         username: "postgres",
         password: "postgres",
-        // logging: true,
+        logging: true,
         migrations: [path.join(__dirname, "./migrations/*")],
         entities: [User],
         synchronize: true,

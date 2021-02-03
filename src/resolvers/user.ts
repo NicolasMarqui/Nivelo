@@ -1,3 +1,4 @@
+import { EmailPasswordInput } from "./inputs/index";
 import { validateRegister } from "./../utils/validateRegister";
 import {
     Arg,
@@ -11,6 +12,8 @@ import { User } from "./../entities/User";
 import argon2 from "argon2";
 import { UsernameEmailPasswordInput } from "./inputs";
 import { getConnection } from "typeorm";
+import jwt from "jsonwebtoken";
+import { validateLogin } from "../utils/validateLogin";
 
 @ObjectType()
 class FieldError {
@@ -31,6 +34,7 @@ class UserResponse {
 
 @Resolver()
 export class UserResolver {
+    // GET all Users
     @Query(() => [User])
     allUsers(): Promise<User[]> | [] {
         const allUsers = User.find();
@@ -38,14 +42,31 @@ export class UserResolver {
         return allUsers;
     }
 
+    // Register new User
     @Mutation(() => UserResponse)
     async signup(
         @Arg("options") options: UsernameEmailPasswordInput
     ): Promise<UserResponse> {
+        // Check if it has any errors
         const errors = validateRegister(options);
 
         if (errors) {
             return { errors };
+        }
+
+        // Check if email already exists
+        const hasEmail = await User.findOne({
+            where: { email: options.email },
+        });
+        if (hasEmail) {
+            return {
+                errors: [
+                    {
+                        field: "email",
+                        message: "Email is not available",
+                    },
+                ],
+            };
         }
 
         const hashedPassword = await argon2.hash(options.password);
@@ -69,12 +90,64 @@ export class UserResolver {
                 return {
                     errors: [
                         {
-                            field: "username",
-                            message: "username already taken",
+                            field: "email",
+                            message: "Email already taken",
                         },
                     ],
                 };
             }
+        }
+
+        const token = jwt.sign(
+            {
+                id: user.id,
+                email: user.email,
+            },
+            "ASIAHS986378923H2JVBJAK___0-902E212EI12EOIBJKAD"
+        );
+
+        console.log(token);
+
+        return { user };
+    }
+
+    // Login a User
+    @Mutation(() => UserResponse)
+    async login(
+        @Arg("options") options: EmailPasswordInput
+    ): Promise<UserResponse> {
+        const errors = validateLogin(options);
+
+        if (errors) {
+            return { errors };
+        }
+
+        const user = await User.findOne({ where: { email: options.email } });
+        if (!user) {
+            return {
+                errors: [
+                    {
+                        field: "email",
+                        message: "Credentials do not match",
+                    },
+                ],
+            };
+        }
+
+        const verifyPassword = await argon2.verify(
+            user.password,
+            options.password
+        );
+        console.log(verifyPassword);
+        if (!verifyPassword) {
+            return {
+                errors: [
+                    {
+                        field: "password",
+                        message: "Credentials do not match",
+                    },
+                ],
+            };
         }
 
         return { user };

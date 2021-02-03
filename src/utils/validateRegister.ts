@@ -30,7 +30,7 @@ export const validateRegister = (options: UsernameEmailPasswordInput) => {
     if (options.name.includes("@")) {
         return [
             {
-                field: "username",
+                field: "name",
                 message: "Name cannot include an @",
             },
         ];
