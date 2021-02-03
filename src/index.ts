@@ -20,7 +20,7 @@ const main = async () => {
         entities: [User],
         synchronize: true,
     }).then(() => {
-        console.log("Database connected", __dirname);
+        console.log("Database connected");
     });
 
     const app = express();
