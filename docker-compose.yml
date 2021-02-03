@@ -29,6 +29,11 @@ services:
             - pgadmin-data:/var/lib/pgadmin
         links:
             - "db:pgsql-server"
+    redis:
+        image: redis
+        command: redis-server --requirepass nick
+        ports:
+            - "6379:6379"
 
 volumes:
     db-data:

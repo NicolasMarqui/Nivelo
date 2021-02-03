@@ -1,7 +1,10 @@
+import { cookieDuration, COOKIE_NAME } from "../constants";
+import { MyContext } from "./../types";
 import { EmailPasswordInput } from "./inputs/index";
 import { validateRegister } from "./../utils/validateRegister";
 import {
     Arg,
+    Ctx,
     Field,
     Mutation,
     ObjectType,
@@ -42,10 +45,32 @@ export class UserResolver {
         return allUsers;
     }
 
+    // Get current logged in User
+    @Query(() => User, { nullable: true })
+    async me(@Ctx() { req }: MyContext) {
+        if (!req.session.user) {
+            return null;
+        }
+
+        const userInfo = jwt.verify(
+            // @ts-ignore: Unreachable code error
+            req.session.user,
+            "ASIAHS986378923H2JVBJAK___0-902E212EI12EOIBJKAD"
+        );
+
+        // @ts-ignore: Unreachable code error
+        const user = await User.findOne({ where: { id: userInfo.id } });
+
+        if (!user) return null;
+
+        return user;
+    }
+
     // Register new User
     @Mutation(() => UserResponse)
     async signup(
-        @Arg("options") options: UsernameEmailPasswordInput
+        @Arg("options") options: UsernameEmailPasswordInput,
+        @Ctx() { req }: MyContext
     ): Promise<UserResponse> {
         // Check if it has any errors
         const errors = validateRegister(options);
@@ -101,12 +126,12 @@ export class UserResolver {
         const token = jwt.sign(
             {
                 id: user.id,
-                email: user.email,
             },
-            "ASIAHS986378923H2JVBJAK___0-902E212EI12EOIBJKAD"
+            "ASIAHS986378923H2JVBJAK___0-902E212EI12EOIBJKAD",
+            { expiresIn: cookieDuration }
         );
 
-        console.log(token);
+        req.session.user = token;
 
         return { user };
     }
@@ -114,7 +139,8 @@ export class UserResolver {
     // Login a User
     @Mutation(() => UserResponse)
     async login(
-        @Arg("options") options: EmailPasswordInput
+        @Arg("options") options: EmailPasswordInput,
+        @Ctx() { req }: MyContext
     ): Promise<UserResponse> {
         const errors = validateLogin(options);
 
@@ -138,7 +164,6 @@ export class UserResolver {
             user.password,
             options.password
         );
-        console.log(verifyPassword);
         if (!verifyPassword) {
             return {
                 errors: [
@@ -150,6 +175,32 @@ export class UserResolver {
             };
         }
 
+        const token = jwt.sign(
+            {
+                id: user.id,
+            },
+            "ASIAHS986378923H2JVBJAK___0-902E212EI12EOIBJKAD",
+            { expiresIn: cookieDuration }
+        );
+
+        req.session.user = token;
+
         return { user };
+    }
+
+    @Mutation(() => Boolean)
+    logout(@Ctx() { req, res }: MyContext) {
+        return new Promise((resolve) =>
+            req.session.destroy((err) => {
+                res.clearCookie(COOKIE_NAME);
+                if (err) {
+                    console.log(err);
+                    resolve(false);
+                    return;
+                }
+
+                resolve(true);
+            })
+        );
     }
 }

@@ -1,11 +1,16 @@
 import "reflect-metadata";
 require("dotenv").config();
+import { cookieDuration } from "./constants";
+import { MyContext } from "./types";
 import { createConnection } from "typeorm";
 import path from "path";
 import express from "express";
 import { ApolloServer } from "apollo-server-express";
 import { buildSchema } from "type-graphql";
 import { UserResolver } from "./resolvers/user";
+import redis from "redis";
+import session from "express-session";
+import connectRedis from "connect-redis";
 
 import { User } from "./entities/User";
 
@@ -16,7 +21,7 @@ const main = async () => {
         port: 5432,
         username: "postgres",
         password: "postgres",
-        logging: true,
+        // logging: true,
         migrations: [path.join(__dirname, "./migrations/*")],
         entities: [User],
         synchronize: true,
@@ -27,12 +32,35 @@ const main = async () => {
     const app = express();
     const PORT = 4000 || process.env.PORT;
 
+    // Initialize Redis
+    const RedisStore = connectRedis(session);
+    const redisClient = redis.createClient({
+        host: "localhost",
+        auth_pass: "nick",
+    });
+
+    app.use(
+        session({
+            name: "qid",
+            store: new RedisStore({ client: redisClient, disableTouch: true }),
+            cookie: {
+                maxAge: cookieDuration,
+                httpOnly: true,
+                sameSite: "lax",
+                secure: false,
+            },
+            saveUninitialized: false,
+            secret: "asjdnkjasdniuh3ru23ib2e2s2fsdver__)_)",
+            resave: false,
+        })
+    );
+
     const apolloServer = new ApolloServer({
         schema: await buildSchema({
             resolvers: [UserResolver],
             validate: false,
         }),
-        context: () => ({}),
+        context: ({ req, res }): MyContext => ({ req, res }),
     });
 
     apolloServer.applyMiddleware({ app });
