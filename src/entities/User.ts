@@ -1,3 +1,4 @@
+import { Tutor } from "./Tutor";
 import { Field, Int, ObjectType } from "type-graphql";
 import {
     Entity,
@@ -6,6 +7,7 @@ import {
     CreateDateColumn,
     UpdateDateColumn,
     BaseEntity,
+    OneToOne,
 } from "typeorm";
 
 @ObjectType()
@@ -53,6 +55,10 @@ export class User extends BaseEntity {
     @Field({ nullable: true })
     @Column({ nullable: true })
     avatar!: string;
+
+    @Field({ nullable: true })
+    @OneToOne(() => Tutor, (tutor) => tutor.user, { nullable: true })
+    tutor: Tutor;
 
     @Field(() => String)
     @CreateDateColumn()

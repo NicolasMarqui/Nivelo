@@ -22,7 +22,7 @@ import jwt from "jsonwebtoken";
 import { validateLogin } from "../utils/validateLogin";
 
 @ObjectType()
-class FieldError {
+export class FieldError {
     @Field()
     field: string;
     @Field()
@@ -43,7 +43,7 @@ export class UserResolver {
     // GET all Users
     @Query(() => [User])
     allUsers(): Promise<User[]> | [] {
-        const allUsers = User.find();
+        const allUsers = User.find({ relations: ["tutor"] });
 
         return allUsers;
     }

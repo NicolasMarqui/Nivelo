@@ -5,7 +5,7 @@
     "username": "postgres",
     "password": "postgres",
     "database": "nivelo",
-    "entities": ["dist/entities/*.js"],
+    "entities": ["src/entities/*.ts"],
     "migrations": ["src/migrations/*.ts"],
     "cli": {
         "migrationsDir": "src/migrations"

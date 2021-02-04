@@ -1,3 +1,4 @@
+import { TutorType } from "./entities/TutorType";
 import "reflect-metadata";
 require("dotenv").config();
 import { cookieDuration } from "./constants";
@@ -11,8 +12,10 @@ import { UserResolver } from "./resolvers/user";
 import redis from "redis";
 import session from "express-session";
 import connectRedis from "connect-redis";
+import { TutorResolver } from "./resolvers/tutor";
 
 import { User } from "./entities/User";
+import { Tutor } from "./entities/Tutor";
 
 const main = async () => {
     await createConnection({
@@ -23,7 +26,7 @@ const main = async () => {
         password: "postgres",
         // logging: true,
         migrations: [path.join(__dirname, "./migrations/*")],
-        entities: [User],
+        entities: [User, Tutor, TutorType],
         synchronize: true,
     }).then(() => {
         console.log("Database connected");
@@ -57,7 +60,7 @@ const main = async () => {
 
     const apolloServer = new ApolloServer({
         schema: await buildSchema({
-            resolvers: [UserResolver],
+            resolvers: [UserResolver, TutorResolver],
             validate: false,
         }),
         context: ({ req, res }): MyContext => ({ req, res }),
