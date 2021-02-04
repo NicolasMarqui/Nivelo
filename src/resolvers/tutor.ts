@@ -1,3 +1,4 @@
+import { JWT_TOKEN } from "./../constants";
 import { MyContext } from "./../types";
 import { isAuth } from "./../middleware/index";
 import { TutorType } from "./../entities/TutorType";
@@ -17,6 +18,7 @@ import { getConnection } from "typeorm";
 import { FieldError } from "./user";
 import { User } from "./../entities/User";
 import jwt from "jsonwebtoken";
+import { Request } from "express";
 
 @ObjectType()
 class TutorResponse {
@@ -55,7 +57,7 @@ export class TutorResolver {
         const userInfo = jwt.verify(
             // @ts-ignore: Unreachable code error
             req.session.user,
-            "ASIAHS986378923H2JVBJAK___0-902E212EI12EOIBJKAD"
+            JWT_TOKEN
         ) as any;
 
         const user = await User.findOne({
@@ -98,4 +100,41 @@ export class TutorResolver {
     }
 
     // Delete a Tutor
+    @Mutation(() => Boolean)
+    @UseMiddleware(isAuth)
+    async deleteTutor(@Arg("id") id: number): Promise<Boolean> {
+        const tutor = await Tutor.findOne({ where: { id: id } });
+
+        if (!tutor) {
+            return false;
+        }
+
+        await tutor.remove();
+        return true;
+    }
+
+    // Update a Tutor
+
+    // Tutor remove his own account
+    @Mutation(() => Boolean)
+    @UseMiddleware(isAuth)
+    async deleteAccount(@Arg("id") id: number, @Ctx() { req }: MyContext) {
+        const userInfo = jwt.verify(
+            // @ts-ignore: Unreachable code error
+            req.session.user,
+            JWT_TOKEN
+        ) as any;
+
+        const user = await User.findOne({
+            where: { id: userInfo.id },
+            relations: ["tutor"],
+        });
+
+        if (user?.tutor.id !== id) {
+            return false;
+        }
+
+        await user?.tutor.remove();
+        return true;
+    }
 }
