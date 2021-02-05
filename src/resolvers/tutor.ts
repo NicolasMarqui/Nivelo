@@ -1,3 +1,4 @@
+import { validateTutorInfo } from "./../utils/validateTutorInfo";
 import { TutorType } from "./../entities/TutorType";
 import { JWT_TOKEN } from "./../constants";
 import { MyContext } from "./../types";
@@ -119,8 +120,29 @@ export class TutorResolver {
     async updateTutor(
         @Arg("id") id: number,
         @Arg("options") options: TutorInput
-    ) {
-        console.log(id, options);
+    ): Promise<TutorResponse> {
+        const errors = validateTutorInfo(options);
+        if (errors) {
+            return { errors };
+        }
+
+        let tutor;
+        try {
+            const result = await getConnection()
+                .createQueryBuilder()
+                .update(Tutor)
+                .set({
+                    ...options,
+                })
+                .where("id = :id", { id })
+                .returning("*")
+                .execute();
+            tutor = result.raw[0];
+        } catch (err) {
+            console.log(err);
+        }
+
+        return { tutor };
     }
 
     // Tutor remove his own account

@@ -44,8 +44,20 @@ export class MoreInfoUser {
 
 @InputType()
 export class TutorInput {
-    @Field()
-    description: string;
+    @Field({ nullable: true })
+    description!: string;
+
+    @Field({ nullable: true })
+    rating!: number;
+
+    @Field({ nullable: true })
+    amountClasses: number;
+
+    @Field({ nullable: true })
+    amountStudents: number;
+
+    @Field({ nullable: true })
+    instructionalVideo!: string;
 }
 
 @InputType()

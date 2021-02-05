@@ -1,4 +1,4 @@
-import { Field, Int, ObjectType } from "type-graphql";
+import { Field, Float, Int, ObjectType } from "type-graphql";
 import {
     BaseEntity,
     Column,
@@ -36,7 +36,7 @@ export class Tutor extends BaseEntity {
     @Column("text", { nullable: true })
     description!: string;
 
-    @Field(() => Int, { nullable: true })
+    @Field(() => Float, { nullable: true })
     @Column({ type: "float", default: 0 })
     rating: number;
 
