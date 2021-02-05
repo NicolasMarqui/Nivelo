@@ -29,6 +29,8 @@ export class TutorType extends BaseEntity {
     rules: string;
 
     @Field(() => Tutor, { nullable: true })
-    @OneToMany(() => Tutor, (tutor) => tutor.type, { nullable: true })
+    @OneToMany(() => Tutor, (tutor) => tutor.type, {
+        nullable: true,
+    })
     tutor: Tutor[];
 }

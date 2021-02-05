@@ -26,7 +26,10 @@ export class Tutor extends BaseEntity {
     user: User;
 
     @Field(() => TutorType, { nullable: true })
-    @ManyToOne(() => TutorType, (type) => type.tutor, { nullable: true })
+    @ManyToOne(() => TutorType, (type) => type.tutor, {
+        nullable: true,
+        cascade: true,
+    })
     type: TutorType;
 
     @Field({ nullable: true })
@@ -53,11 +56,11 @@ export class Tutor extends BaseEntity {
 
     // Add foreign key to platforms
 
-    @Field(() => String)
+    @Field(() => String, { nullable: true })
     @CreateDateColumn()
     createdAt: Date;
 
-    @Field(() => String)
+    @Field(() => String, { nullable: true })
     @UpdateDateColumn()
     updatedAt: Date;
 }

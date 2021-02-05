@@ -1,3 +1,4 @@
+import { TutorType } from "./../entities/TutorType";
 import { JWT_TOKEN } from "./../constants";
 import { MyContext } from "./../types";
 import { isAuth } from "./../middleware/index";
@@ -39,7 +40,7 @@ export class TutorResolver {
     // GET all Tutors
     @Query(() => [Tutor])
     async allTutors() {
-        const allTut = await Tutor.find({ relations: ["user"] });
+        const allTut = await Tutor.find({ relations: ["user", "type"] });
 
         return allTut;
     }
@@ -143,5 +144,46 @@ export class TutorResolver {
 
         await user?.tutor.remove();
         return true;
+    }
+
+    // Link Tutor to its type
+    @Mutation(() => TutorResponse)
+    async typeToTutor(
+        @Arg("id") id: number,
+        @Arg("typeID") typeID: number
+    ): Promise<TutorResponse> {
+        const type = await TutorType.findOne({
+            where: { id: typeID },
+            relations: ["tutor"],
+        });
+
+        if (!type) {
+            return {
+                errors: [
+                    {
+                        field: "general",
+                        message: "This type does not exist.",
+                    },
+                ],
+            };
+        }
+
+        let tutor;
+        try {
+            const result = await getConnection()
+                .createQueryBuilder()
+                .update(Tutor)
+                .set({
+                    type: type,
+                })
+                .where("id = :id", { id })
+                .returning("*")
+                .execute();
+            tutor = result.raw[0];
+        } catch (err) {
+            console.log(err);
+        }
+
+        return { tutor };
     }
 }
