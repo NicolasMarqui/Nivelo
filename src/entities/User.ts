@@ -56,7 +56,7 @@ export class User extends BaseEntity {
     @Column({ nullable: true })
     avatar!: string;
 
-    @Field({ nullable: true })
+    @Field(() => Tutor, { nullable: true })
     @OneToOne(() => Tutor, (tutor) => tutor.user, { nullable: true })
     tutor: Tutor;
 

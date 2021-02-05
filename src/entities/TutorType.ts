@@ -1,6 +1,13 @@
+import { Tutor } from "./Tutor";
 // import { Tutor } from "./Tutor";
 import { Field, Int, ObjectType } from "type-graphql";
-import { Entity, BaseEntity, PrimaryGeneratedColumn, Column } from "typeorm";
+import {
+    Entity,
+    BaseEntity,
+    PrimaryGeneratedColumn,
+    Column,
+    OneToMany,
+} from "typeorm";
 
 @ObjectType()
 @Entity()
@@ -21,6 +28,7 @@ export class TutorType extends BaseEntity {
     @Column({ type: "text" })
     rules: string;
 
-    // @OneToMany(() => Tutor, (tutor) => tutor.tutorTypeId)
-    // type: Tutor[];
+    @Field(() => Tutor, { nullable: true })
+    @OneToMany(() => Tutor, (tutor) => tutor.type, { nullable: true })
+    tutor: Tutor[];
 }

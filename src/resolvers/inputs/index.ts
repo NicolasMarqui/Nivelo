@@ -41,3 +41,21 @@ export class MoreInfoUser {
     @Field({ nullable: true })
     avatar: string;
 }
+
+@InputType()
+export class TutorInput {
+    @Field()
+    description: string;
+}
+
+@InputType()
+export class TypeInput {
+    @Field()
+    name: string;
+
+    @Field()
+    needsApproval: boolean;
+
+    @Field()
+    rules: string;
+}

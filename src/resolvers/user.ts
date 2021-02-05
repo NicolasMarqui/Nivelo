@@ -20,14 +20,7 @@ import { UsernameEmailPasswordInput } from "./inputs";
 import { getConnection } from "typeorm";
 import jwt from "jsonwebtoken";
 import { validateLogin } from "../utils/validateLogin";
-
-@ObjectType()
-export class FieldError {
-    @Field()
-    field: string;
-    @Field()
-    message: string;
-}
+import { FieldError } from "./helpers";
 
 @ObjectType()
 class UserResponse {

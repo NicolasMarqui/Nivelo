@@ -1,7 +1,6 @@
 import { JWT_TOKEN } from "./../constants";
 import { MyContext } from "./../types";
 import { isAuth } from "./../middleware/index";
-import { TutorType } from "./../entities/TutorType";
 import { Tutor } from "./../entities/Tutor";
 import {
     Arg,
@@ -15,10 +14,10 @@ import {
     UseMiddleware,
 } from "type-graphql";
 import { getConnection } from "typeorm";
-import { FieldError } from "./user";
 import { User } from "./../entities/User";
 import jwt from "jsonwebtoken";
-import { Request } from "express";
+import { TutorInput } from "./inputs";
+import { FieldError } from "./helpers";
 
 @ObjectType()
 class TutorResponse {
@@ -114,6 +113,14 @@ export class TutorResolver {
     }
 
     // Update a Tutor
+    @Mutation(() => TutorResponse)
+    @UseMiddleware(isAuth)
+    async updateTutor(
+        @Arg("id") id: number,
+        @Arg("options") options: TutorInput
+    ) {
+        console.log(id, options);
+    }
 
     // Tutor remove his own account
     @Mutation(() => Boolean)

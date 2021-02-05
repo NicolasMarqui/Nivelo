@@ -1,4 +1,3 @@
-import { TutorType } from "./entities/TutorType";
 import "reflect-metadata";
 require("dotenv").config();
 import { cookieDuration } from "./constants";
@@ -13,9 +12,11 @@ import redis from "redis";
 import session from "express-session";
 import connectRedis from "connect-redis";
 import { TutorResolver } from "./resolvers/tutor";
+import { TypeResolver } from "./resolvers/type";
 
 import { User } from "./entities/User";
 import { Tutor } from "./entities/Tutor";
+import { TutorType } from "./entities/TutorType";
 
 const main = async () => {
     await createConnection({
@@ -60,7 +61,7 @@ const main = async () => {
 
     const apolloServer = new ApolloServer({
         schema: await buildSchema({
-            resolvers: [UserResolver, TutorResolver],
+            resolvers: [UserResolver, TutorResolver, TypeResolver],
             validate: false,
         }),
         context: ({ req, res }): MyContext => ({ req, res }),

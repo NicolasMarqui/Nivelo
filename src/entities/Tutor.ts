@@ -1,5 +1,3 @@
-// import { TutorType } from "./TutorType";
-import { User } from "./User";
 import { Field, Int, ObjectType } from "type-graphql";
 import {
     BaseEntity,
@@ -7,15 +5,18 @@ import {
     CreateDateColumn,
     Entity,
     JoinColumn,
+    ManyToOne,
     OneToOne,
     PrimaryGeneratedColumn,
     UpdateDateColumn,
 } from "typeorm";
+import { User } from "./User";
+import { TutorType } from "./TutorType";
 
 @ObjectType()
 @Entity()
 export class Tutor extends BaseEntity {
-    @Field(() => Int)
+    @Field(() => Int, { nullable: true })
     @PrimaryGeneratedColumn()
     id: number;
 
@@ -24,23 +25,23 @@ export class Tutor extends BaseEntity {
     @JoinColumn()
     user: User;
 
-    // @Field(() => Int)
-    // @ManyToOne(() => TutorType, (tutor) => tutor.type)
-    // tutorTypeId: TutorType;
+    @Field(() => TutorType, { nullable: true })
+    @ManyToOne(() => TutorType, (type) => type.tutor, { nullable: true })
+    type: TutorType;
 
     @Field({ nullable: true })
     @Column("text", { nullable: true })
     description!: string;
 
-    @Field(() => Int)
+    @Field(() => Int, { nullable: true })
     @Column({ type: "float", default: 0 })
     rating: number;
 
-    @Field(() => Int)
+    @Field(() => Int, { nullable: true })
     @Column({ default: 0 })
     amountClasses: number;
 
-    @Field(() => Int)
+    @Field(() => Int, { nullable: true })
     @Column({ default: 0 })
     amountStudents: number;
 
