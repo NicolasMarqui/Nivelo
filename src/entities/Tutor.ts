@@ -6,12 +6,14 @@ import {
     Entity,
     JoinColumn,
     ManyToOne,
+    OneToMany,
     OneToOne,
     PrimaryGeneratedColumn,
     UpdateDateColumn,
 } from "typeorm";
 import { User } from "./User";
 import { TutorType } from "./TutorType";
+import { Classes } from "./Classes";
 
 @ObjectType()
 @Entity()
@@ -52,7 +54,9 @@ export class Tutor extends BaseEntity {
     @Column({ nullable: true, type: "text" })
     instructionalVideo!: string;
 
-    // Add foreign key to class
+    @Field(() => Classes, { nullable: true })
+    @OneToMany(() => Classes, (classes) => classes.tutor)
+    classes: Classes[];
 
     // Add foreign key to platforms
 

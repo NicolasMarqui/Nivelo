@@ -14,9 +14,12 @@ import connectRedis from "connect-redis";
 import { TutorResolver } from "./resolvers/tutor";
 import { TypeResolver } from "./resolvers/type";
 
+// Entities
 import { User } from "./entities/User";
 import { Tutor } from "./entities/Tutor";
 import { TutorType } from "./entities/TutorType";
+import { Classes } from "./entities/Classes";
+import { Price } from "./entities/Price";
 
 const main = async () => {
     await createConnection({
@@ -27,7 +30,7 @@ const main = async () => {
         password: "postgres",
         // logging: true,
         migrations: [path.join(__dirname, "./migrations/*")],
-        entities: [User, Tutor, TutorType],
+        entities: [User, Tutor, TutorType, Classes, Price],
         synchronize: true,
     }).then(() => {
         console.log("Database connected");
