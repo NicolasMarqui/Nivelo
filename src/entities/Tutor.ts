@@ -54,7 +54,7 @@ export class Tutor extends BaseEntity {
     @Column({ nullable: true, type: "text" })
     instructionalVideo!: string;
 
-    @Field(() => Classes, { nullable: true })
+    @Field(() => [Classes], { nullable: true })
     @OneToMany(() => Classes, (classes) => classes.tutor)
     classes: Classes[];
 

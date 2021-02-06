@@ -14,7 +14,7 @@ import {
 @Entity()
 export class Price extends BaseEntity {
     @Field(() => Int, { nullable: true })
-    @PrimaryGeneratedColumn("uuid")
+    @PrimaryGeneratedColumn()
     id: number;
 
     @Field(() => Int, { nullable: true })

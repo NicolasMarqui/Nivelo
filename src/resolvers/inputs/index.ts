@@ -1,4 +1,6 @@
-import { InputType, Field } from "type-graphql";
+import { Classes } from "./../../entities/Classes";
+import { Price } from "../../entities/Price";
+import { InputType, Field, Int, ObjectType, Float } from "type-graphql";
 
 @InputType()
 export class UsernameEmailPasswordInput {
@@ -70,4 +72,35 @@ export class TypeInput {
 
     @Field()
     rules: string;
+}
+
+@ObjectType()
+@InputType({ description: "Add a new class" })
+export class ClassesInput implements Partial<Classes> {
+    @Field(() => String)
+    name: string;
+
+    @Field(() => Int, { nullable: true })
+    amountTimeTaught: number;
+
+    @Field(() => String, { nullable: true })
+    level!: string;
+
+    @Field({ nullable: true })
+    description!: string;
+}
+
+@InputType()
+export class PriceInput {
+    @Field(() => Int, { nullable: true })
+    time: number;
+
+    @Field(() => Float, { nullable: true })
+    price: number;
+
+    @Field(() => Boolean)
+    isPromotionalCode: boolean;
+
+    @Field(() => Int, { nullable: true })
+    discountAmount: number;
 }

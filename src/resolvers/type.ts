@@ -25,8 +25,11 @@ class TypeResponse {
 export class TypeResolver {
     // GET all types
     @Query(() => [TutorType])
-    async allTypes() {
-        const types = await TutorType.find({ relations: ["tutor"] });
+    async allTypes(): Promise<TutorType[]> {
+        const types = await TutorType.find({
+            relations: ["tutor", "tutor.user"],
+        });
+
         return types;
     }
 

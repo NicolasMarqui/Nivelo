@@ -16,10 +16,10 @@ import {
 @Entity()
 export class Classes extends BaseEntity {
     @Field(() => Int, { nullable: true })
-    @PrimaryGeneratedColumn("uuid")
+    @PrimaryGeneratedColumn()
     id: number;
 
-    @Field(() => String)
+    @Field(() => String, { nullable: true })
     @Column({ length: 500 })
     name: string;
 
@@ -29,7 +29,7 @@ export class Classes extends BaseEntity {
 
     @Field(() => Int, { nullable: true })
     @Column({ default: 0 })
-    amountTime: number;
+    amountTimeTaught: number;
 
     @Field(() => String, { nullable: true })
     @Column({ nullable: true })
@@ -41,7 +41,7 @@ export class Classes extends BaseEntity {
     @Column("text", { nullable: true })
     description!: string;
 
-    @Field(() => Price, { nullable: true })
+    @Field(() => [Price], { nullable: true })
     @OneToMany(() => Price, (price) => price.classes, {
         cascade: true,
         nullable: true,

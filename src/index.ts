@@ -7,12 +7,16 @@ import path from "path";
 import express from "express";
 import { ApolloServer } from "apollo-server-express";
 import { buildSchema } from "type-graphql";
-import { UserResolver } from "./resolvers/user";
 import redis from "redis";
 import session from "express-session";
 import connectRedis from "connect-redis";
+
+// Resolvers
+import { UserResolver } from "./resolvers/user";
 import { TutorResolver } from "./resolvers/tutor";
 import { TypeResolver } from "./resolvers/type";
+import { ClassesResolver } from "./resolvers/classes";
+import { PriceResolver } from "./resolvers/price";
 
 // Entities
 import { User } from "./entities/User";
@@ -35,6 +39,8 @@ const main = async () => {
     }).then(() => {
         console.log("Database connected");
     });
+
+    // await Classes.delete({});
 
     const app = express();
     const PORT = 4000 || process.env.PORT;
@@ -64,7 +70,13 @@ const main = async () => {
 
     const apolloServer = new ApolloServer({
         schema: await buildSchema({
-            resolvers: [UserResolver, TutorResolver, TypeResolver],
+            resolvers: [
+                UserResolver,
+                TutorResolver,
+                TypeResolver,
+                ClassesResolver,
+                PriceResolver,
+            ],
             validate: false,
         }),
         context: ({ req, res }): MyContext => ({ req, res }),
