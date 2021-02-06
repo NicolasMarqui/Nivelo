@@ -29,8 +29,8 @@ export class Price extends BaseEntity {
     @ManyToOne(() => Classes, (classes) => classes.price, { nullable: true })
     classes: Classes;
 
-    @Field(() => Boolean)
-    @Column({ default: false })
+    @Field(() => Boolean, { nullable: true })
+    @Column({ default: false, nullable: true })
     isPromotionalCode: boolean;
 
     @Field(() => Int, { nullable: true })

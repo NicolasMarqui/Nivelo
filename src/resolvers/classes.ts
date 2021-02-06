@@ -12,7 +12,6 @@ import {
 import { FieldError } from "./helpers";
 import { getConnection } from "typeorm";
 import { ClassesInput } from "./inputs";
-import { raw } from "express";
 
 @ObjectType()
 class ClassesResponse {

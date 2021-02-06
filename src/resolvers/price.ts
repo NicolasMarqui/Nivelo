@@ -1,9 +1,25 @@
 import { Classes } from "./../entities/Classes";
 import { PriceInput } from "./inputs/index";
 import { Price } from "./../entities/Price";
-import { Arg, Mutation, Query, Resolver } from "type-graphql";
+import {
+    Arg,
+    Field,
+    Mutation,
+    ObjectType,
+    Query,
+    Resolver,
+} from "type-graphql";
 import { getConnection } from "typeorm";
+import { FieldError } from "./helpers";
 
+@ObjectType()
+class PriceResponse {
+    @Field(() => [FieldError], { nullable: true })
+    errors?: FieldError[];
+
+    @Field(() => Price, { nullable: true })
+    price?: Price;
+}
 @Resolver()
 export class PriceResolver {
     // Get all classes
@@ -42,5 +58,49 @@ export class PriceResolver {
         }
 
         return price;
+    }
+
+    // Update Price
+    @Mutation(() => PriceResponse)
+    async updatePrice(
+        @Arg("options") options: PriceInput,
+        @Arg("id") id: number
+    ): Promise<PriceResponse> {
+        let price;
+        try {
+            const result = await getConnection()
+                .createQueryBuilder()
+                .update(Price)
+                .set({
+                    ...options,
+                })
+                .where("id = :id", { id })
+                .returning("*")
+                .execute();
+
+            price = result.raw[0];
+        } catch (err) {
+            console.log(err);
+        }
+
+        return { price };
+    }
+
+    // Delete Price
+    @Mutation(() => Boolean)
+    async deletePrice(@Arg("id") id: number): Promise<Boolean> {
+        const priceToDelete = await getConnection()
+            .createQueryBuilder()
+            .createQueryBuilder()
+            .delete()
+            .from(Price)
+            .where("id = :id", { id })
+            .execute();
+
+        if (priceToDelete.affected) {
+            return priceToDelete.affected > 0 ? true : false;
+        }
+
+        return false;
     }
 }

@@ -44,15 +44,6 @@ export class TutorResolver {
         const allTut = await Tutor.find({
             relations: ["user", "type", "classes", "classes.price"],
         });
-
-        // const tuts = await getConnection()
-        //     .getRepository(Tutor)
-        //     .createQueryBuilder("tutor")
-        //     .leftJoinAndSelect("tutor.classes", "classes")
-        //     .leftJoinAndSelect("tutor.user", "user")
-        //     .leftJoinAndSelect("tutor.type", "tutorType")
-        //     .getMany();
-
         return allTut;
     }
 
