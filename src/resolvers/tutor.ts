@@ -42,7 +42,13 @@ export class TutorResolver {
     @Query(() => [Tutor])
     async allTutors() {
         const allTut = await Tutor.find({
-            relations: ["user", "type", "classes", "classes.price"],
+            relations: [
+                "user",
+                "type",
+                "classes",
+                "classes.price",
+                "categories",
+            ],
         });
         return allTut;
     }

@@ -35,8 +35,6 @@ export class Classes extends BaseEntity {
     @Column({ nullable: true })
     level: string;
 
-    // CategoryID
-
     @Field({ nullable: true })
     @Column("text", { nullable: true })
     description!: string;

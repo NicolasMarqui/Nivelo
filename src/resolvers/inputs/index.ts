@@ -1,3 +1,4 @@
+import { Category } from "./../../entities/Category";
 import { Classes } from "./../../entities/Classes";
 import { Price } from "../../entities/Price";
 import { InputType, Field, Int, ObjectType, Float } from "type-graphql";
@@ -102,4 +103,13 @@ export class PriceInput {
 
     @Field(() => Int, { nullable: true })
     discountAmount: number;
+}
+
+@InputType()
+export class CategoryInput implements Partial<Category> {
+    @Field(() => String, { nullable: true })
+    name: string;
+
+    @Field(() => String, { nullable: true })
+    icon!: string;
 }

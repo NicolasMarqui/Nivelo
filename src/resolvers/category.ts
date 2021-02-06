@@ -1,0 +1,82 @@
+import { Tutor } from "./../entities/Tutor";
+import { CategoryInput } from "./inputs/index";
+import { getConnection } from "typeorm";
+import { Category } from "./../entities/Category";
+import {
+    Arg,
+    Field,
+    Mutation,
+    ObjectType,
+    Query,
+    Resolver,
+} from "type-graphql";
+import { FieldError } from "./helpers";
+
+@ObjectType()
+class CategoryResponse {
+    @Field(() => [FieldError], { nullable: true })
+    errors?: FieldError[];
+
+    @Field(() => Category, { nullable: true })
+    category?: Category;
+}
+
+@Resolver()
+export class CategoryResolver {
+    // Get all categories
+    @Query(() => [Category])
+    async allCategories(): Promise<Category[]> {
+        const allCat = await getConnection()
+            .getRepository(Category)
+            .createQueryBuilder("category")
+            .leftJoinAndSelect("category.tutors", "tutor")
+            .getMany();
+
+        return allCat;
+    }
+
+    // Add new category
+    @Mutation(() => CategoryResponse)
+    async newCategory(
+        @Arg("options") options: CategoryInput
+    ): Promise<CategoryResponse> {
+        let category;
+        try {
+            const result = await getConnection()
+                .createQueryBuilder()
+                .insert()
+                .into(Category)
+                .values({
+                    ...options,
+                })
+                .returning("*")
+                .execute();
+            category = result.raw[0];
+        } catch (err) {
+            console.log(err);
+        }
+
+        return { category };
+    }
+
+    // Assign category to tutor
+    @Mutation(() => Category)
+    async categoryToTutor(
+        @Arg("tutorID") tutorID: number,
+        @Arg("categoryID") categoryID: number
+    ): Promise<Category | Boolean> {
+        const category = await Category.findOne({
+            where: { id: categoryID },
+            relations: ["tutors"],
+        });
+        if (!category) return false;
+
+        const tutor = await Tutor.findOne({ where: { id: tutorID } });
+        if (!tutor) return false;
+
+        category.tutors.push(tutor);
+        category.save();
+
+        return category;
+    }
+}

@@ -5,6 +5,8 @@ import {
     CreateDateColumn,
     Entity,
     JoinColumn,
+    JoinTable,
+    ManyToMany,
     ManyToOne,
     OneToMany,
     OneToOne,
@@ -14,6 +16,7 @@ import {
 import { User } from "./User";
 import { TutorType } from "./TutorType";
 import { Classes } from "./Classes";
+import { Category } from "./Category";
 
 @ObjectType()
 @Entity()
@@ -58,7 +61,10 @@ export class Tutor extends BaseEntity {
     @OneToMany(() => Classes, (classes) => classes.tutor)
     classes: Classes[];
 
-    // Add foreign key to platforms
+    @Field(() => [Category], { nullable: true })
+    @ManyToMany(() => Category, (cat) => cat.tutors, { nullable: true })
+    @JoinTable()
+    categories: Category[];
 
     @Field(() => String, { nullable: true })
     @CreateDateColumn()
