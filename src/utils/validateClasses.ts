@@ -10,7 +10,7 @@ export const validateClasses = (options: ClassesInput) => {
         ];
     }
 
-    if (options.name.includes("@")) {
+    if (options.name && options.name.includes("@")) {
         return [
             {
                 field: "name",

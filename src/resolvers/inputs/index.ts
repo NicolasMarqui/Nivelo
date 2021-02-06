@@ -74,10 +74,9 @@ export class TypeInput {
     rules: string;
 }
 
-@ObjectType()
-@InputType({ description: "Add a new class" })
+@InputType()
 export class ClassesInput implements Partial<Classes> {
-    @Field(() => String)
+    @Field(() => String, { nullable: true })
     name: string;
 
     @Field(() => Int, { nullable: true })

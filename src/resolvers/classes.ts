@@ -1,4 +1,3 @@
-import { Price } from "./../entities/Price";
 import { Tutor } from "./../entities/Tutor";
 import { validateClasses } from "./../utils/validateClasses";
 import { Classes } from "./../entities/Classes";
@@ -13,6 +12,7 @@ import {
 import { FieldError } from "./helpers";
 import { getConnection } from "typeorm";
 import { ClassesInput } from "./inputs";
+import { raw } from "express";
 
 @ObjectType()
 class ClassesResponse {
@@ -29,7 +29,13 @@ export class ClassesResolver {
     @Query(() => [Classes])
     async allClasses(): Promise<Classes[] | undefined> {
         const classes = await Classes.find({
-            relations: ["tutor", "price", "tutor.user", "price.classes"],
+            relations: [
+                "tutor",
+                "price",
+                "tutor.user",
+                "price.classes",
+                "tutor.type",
+            ],
         });
 
         return classes;
@@ -75,5 +81,64 @@ export class ClassesResolver {
         }
 
         return { classes };
+    }
+
+    // Update a Class
+    @Mutation(() => ClassesResponse)
+    async updateClass(
+        @Arg("classID") classID: number,
+        @Arg("options") options: ClassesInput
+    ): Promise<ClassesResponse> {
+        const errors = validateClasses(options);
+        if (errors) return { errors };
+
+        let classes;
+        try {
+            const result = await getConnection()
+                .createQueryBuilder()
+                .update(Classes)
+                .set({
+                    ...options,
+                })
+                .where("id = :id", { id: classID })
+                .returning("*")
+                .execute();
+
+            classes = result.raw[0];
+        } catch (err) {
+            console.log(err);
+        }
+
+        return { classes };
+    }
+
+    // Delete a Class
+    @Mutation(() => Boolean)
+    async deleteClass(@Arg("id") id: number): Promise<Boolean> {
+        const classToDelete = await getConnection()
+            .createQueryBuilder()
+            .delete()
+            .from(Classes)
+            .where("id = :id", { id })
+            .execute();
+
+        if (classToDelete.affected) {
+            return classToDelete.affected > 0 ? true : false;
+        }
+
+        return false;
+    }
+
+    // Select one Class
+    @Query(() => Classes)
+    async singleClass(@Arg("id") id: number): Promise<Classes | Boolean> {
+        const singleClass = await Classes.findOne({
+            where: { id },
+            relations: ["tutor", "tutor.user", "tutor.type", "price"],
+        });
+
+        if (!singleClass) return false;
+
+        return singleClass;
     }
 }
