@@ -1,4 +1,3 @@
-import { Tutor } from "./Tutor";
 import { Field, Int, ObjectType } from "type-graphql";
 import {
     Entity,
@@ -8,7 +7,13 @@ import {
     UpdateDateColumn,
     BaseEntity,
     OneToOne,
+    ManyToMany,
+    JoinTable,
+    OneToMany,
 } from "typeorm";
+import { Tutor } from "./Tutor";
+import { Platforms } from "./Platforms";
+import { UserPlatformAccount } from "./UserPlatformAccount";
 
 @ObjectType()
 @Entity()
@@ -57,8 +62,23 @@ export class User extends BaseEntity {
     avatar!: string;
 
     @Field(() => Tutor, { nullable: true })
-    @OneToOne(() => Tutor, (tutor) => tutor.user, { nullable: true })
+    @OneToOne(() => Tutor, (tutor) => tutor.user, {
+        nullable: true,
+        cascade: true,
+    })
     tutor: Tutor;
+
+    @Field(() => [Platforms], { nullable: true })
+    @ManyToMany(() => Platforms, (plat) => plat.users, {
+        nullable: true,
+        cascade: true,
+    })
+    @JoinTable()
+    platforms: Platforms[];
+
+    @Field(() => [UserPlatformAccount], { nullable: true })
+    @OneToMany(() => UserPlatformAccount, (acc) => acc.user, { cascade: true })
+    public userPlatformAccount!: UserPlatformAccount[];
 
     @Field(() => String)
     @CreateDateColumn()

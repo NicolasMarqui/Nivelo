@@ -1,3 +1,4 @@
+import { Platforms } from "./../../entities/Platforms";
 import { Category } from "./../../entities/Category";
 import { Classes } from "./../../entities/Classes";
 import { Price } from "../../entities/Price";
@@ -107,6 +108,15 @@ export class PriceInput {
 
 @InputType()
 export class CategoryInput implements Partial<Category> {
+    @Field(() => String, { nullable: true })
+    name: string;
+
+    @Field(() => String, { nullable: true })
+    icon!: string;
+}
+
+@InputType()
+export class PlatformsInput implements Partial<Platforms> {
     @Field(() => String, { nullable: true })
     name: string;
 

@@ -79,4 +79,47 @@ export class CategoryResolver {
 
         return category;
     }
+
+    // Update category
+    @Mutation(() => Category)
+    async updateCategory(
+        @Arg("id") id: number,
+        @Arg("options") options: CategoryInput
+    ): Promise<Category> {
+        let category;
+        try {
+            const result = await getConnection()
+                .createQueryBuilder()
+                .update(Category)
+                .set({
+                    ...options,
+                })
+                .where("id = :id", { id })
+                .returning("*")
+                .execute();
+
+            category = result.raw[0];
+        } catch (err) {
+            console.log(err);
+        }
+
+        return category;
+    }
+
+    // Delete category
+    @Mutation(() => Boolean)
+    async deleteCategory(@Arg("id") id: number): Promise<Boolean> {
+        const categoryToDelete = await getConnection()
+            .createQueryBuilder()
+            .delete()
+            .from(Category)
+            .where("id = :id", { id })
+            .execute();
+
+        if (categoryToDelete.affected) {
+            return categoryToDelete.affected > 0 ? true : false;
+        }
+
+        return false;
+    }
 }

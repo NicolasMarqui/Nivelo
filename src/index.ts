@@ -18,6 +18,8 @@ import { TypeResolver } from "./resolvers/type";
 import { ClassesResolver } from "./resolvers/classes";
 import { PriceResolver } from "./resolvers/price";
 import { CategoryResolver } from "./resolvers/category";
+import { PlatformsResolver } from "./resolvers/platforms";
+import { UserPlatformAccountResolver } from "./resolvers/userPlatformAccount";
 
 // Entities
 import { User } from "./entities/User";
@@ -26,6 +28,8 @@ import { TutorType } from "./entities/TutorType";
 import { Classes } from "./entities/Classes";
 import { Price } from "./entities/Price";
 import { Category } from "./entities/Category";
+import { Platforms } from "./entities/Platforms";
+import { UserPlatformAccount } from "./entities/UserPlatformAccount";
 
 const main = async () => {
     await createConnection({
@@ -36,7 +40,16 @@ const main = async () => {
         password: "postgres",
         // logging: true,
         migrations: [path.join(__dirname, "./migrations/*")],
-        entities: [User, Tutor, TutorType, Classes, Price, Category],
+        entities: [
+            User,
+            Tutor,
+            TutorType,
+            Classes,
+            Price,
+            Category,
+            Platforms,
+            UserPlatformAccount,
+        ],
         synchronize: true,
     }).then(() => {
         console.log("Database connected");
@@ -79,6 +92,8 @@ const main = async () => {
                 ClassesResolver,
                 PriceResolver,
                 CategoryResolver,
+                PlatformsResolver,
+                UserPlatformAccountResolver,
             ],
             validate: false,
         }),

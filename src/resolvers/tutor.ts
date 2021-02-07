@@ -1,3 +1,4 @@
+import { Category } from "./../entities/Category";
 import { validateTutorInfo } from "./../utils/validateTutorInfo";
 import { TutorType } from "./../entities/TutorType";
 import { JWT_TOKEN } from "./../constants";
@@ -214,5 +215,17 @@ export class TutorResolver {
         }
 
         return { tutor };
+    }
+
+    // Show all tutors by category
+    @Query(() => [Category])
+    async allTutorsByCategory(
+        @Arg("categoryID") categoryID: number
+    ): Promise<Category[]> {
+        const tutors = await Category.find({
+            where: { id: categoryID },
+            relations: ["tutors", "tutors.user", "tutors.type"],
+        });
+        return tutors;
     }
 }

@@ -1,3 +1,4 @@
+import { Platforms } from "./../entities/Platforms";
 import { validateNewInfo } from "./../utils/validateNewInfo";
 import { isAuth } from "../middleware";
 import { cookieDuration, COOKIE_NAME } from "../constants";
@@ -36,7 +37,15 @@ export class UserResolver {
     // GET all Users
     @Query(() => [User])
     allUsers(): Promise<User[]> | [] {
-        const allUsers = User.find({ relations: ["tutor"] });
+        const allUsers = User.find({
+            relations: [
+                "tutor",
+                "tutor.type",
+                "platforms",
+                "userPlatformAccount",
+                "userPlatformAccount.platform",
+            ],
+        });
 
         return allUsers;
     }

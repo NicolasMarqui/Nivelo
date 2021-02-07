@@ -1,3 +1,4 @@
+import { Price } from "./../entities/Price";
 import { Tutor } from "./../entities/Tutor";
 import { validateClasses } from "./../utils/validateClasses";
 import { Classes } from "./../entities/Classes";
@@ -139,5 +140,26 @@ export class ClassesResolver {
         if (!singleClass) return false;
 
         return singleClass;
+    }
+
+    // Assign Price to Classes
+    @Mutation(() => Classes)
+    async priceToClasses(
+        @Arg("classesID") classesID: number,
+        @Arg("priceID") priceID: number
+    ): Promise<Classes | Boolean> {
+        const price = await Price.findOne({ where: { id: priceID } });
+        if (!price) return false;
+
+        const classes = await Classes.findOne({
+            where: { id: classesID },
+            relations: ["tutor", "tutor.user", "tutor.type", "price"],
+        });
+        if (!classes) return false;
+
+        classes.price.push(price);
+        classes.save();
+
+        return classes;
     }
 }
