@@ -49,6 +49,8 @@ export class TutorResolver {
                 "classes",
                 "classes.price",
                 "categories",
+                "user.userPlatformAccount",
+                "user.userPlatformAccount.platform",
             ],
         });
         return allTut;
@@ -227,5 +229,35 @@ export class TutorResolver {
             relations: ["tutors", "tutors.user", "tutors.type"],
         });
         return tutors;
+    }
+
+    // Get a single tutor
+    @Query(() => TutorResponse)
+    async singleTutor(@Arg("id") id: number): Promise<TutorResponse> {
+        const tutor = await Tutor.findOne({
+            where: { id },
+            relations: [
+                "user",
+                "type",
+                "classes",
+                "classes.price",
+                "categories",
+                "user.userPlatformAccount",
+                "user.userPlatformAccount.platform",
+            ],
+        });
+
+        if (!tutor) {
+            return {
+                errors: [
+                    {
+                        field: "general",
+                        message: "Tutor not found...",
+                    },
+                ],
+            };
+        }
+
+        return { tutor };
     }
 }

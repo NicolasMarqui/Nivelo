@@ -247,4 +247,32 @@ export class UserResolver {
 
         return { user };
     }
+
+    // Get a single User
+    @Query(() => UserResponse)
+    async singleUser(@Arg("id") id: number): Promise<UserResponse | undefined> {
+        const user = await User.findOne({
+            where: { id },
+            relations: [
+                "tutor",
+                "tutor.type",
+                "platforms",
+                "userPlatformAccount",
+                "userPlatformAccount.platform",
+            ],
+        });
+
+        if (!user) {
+            return {
+                errors: [
+                    {
+                        field: "general",
+                        message: "User not found...",
+                    },
+                ],
+            };
+        }
+
+        return { user };
+    }
 }
