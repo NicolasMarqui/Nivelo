@@ -10,7 +10,9 @@ import {
     CreateDateColumn,
     UpdateDateColumn,
     OneToMany,
+    ManyToMany,
 } from "typeorm";
+import { User } from "./User";
 
 @ObjectType()
 @Entity()
@@ -45,6 +47,12 @@ export class Classes extends BaseEntity {
         nullable: true,
     })
     price: Price[];
+
+    @Field(() => [User], { nullable: true })
+    @ManyToMany(() => User, (user) => user.classes, {
+        nullable: true,
+    })
+    users: User[];
 
     @Field(() => String, { nullable: true })
     @CreateDateColumn()

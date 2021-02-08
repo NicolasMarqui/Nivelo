@@ -1,3 +1,4 @@
+import { Classes } from "./Classes";
 import { Field, Int, ObjectType } from "type-graphql";
 import {
     Entity,
@@ -76,6 +77,14 @@ export class User extends BaseEntity {
     })
     @JoinTable()
     platforms: Platforms[];
+
+    @Field(() => [Classes], { nullable: true })
+    @ManyToMany(() => Classes, (cl) => cl.users, {
+        nullable: true,
+        cascade: true,
+    })
+    @JoinTable()
+    classes: Classes[];
 
     @Field(() => [UserPlatformAccount], { nullable: true })
     @OneToMany(() => UserPlatformAccount, (acc) => acc.user, { cascade: true })

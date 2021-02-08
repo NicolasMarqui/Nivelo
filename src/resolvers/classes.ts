@@ -1,3 +1,4 @@
+import { User } from "./../entities/User";
 import { Price } from "./../entities/Price";
 import { Tutor } from "./../entities/Tutor";
 import { validateClasses } from "./../utils/validateClasses";
@@ -35,6 +36,7 @@ export class ClassesResolver {
                 "tutor.user",
                 "price.classes",
                 "tutor.type",
+                "users",
             ],
         });
 
@@ -161,5 +163,44 @@ export class ClassesResolver {
         classes.save();
 
         return classes;
+    }
+
+    // Assign User to Classes
+    @Mutation(() => ClassesResponse)
+    async userToClass(
+        @Arg("userID") userID: number,
+        @Arg("classID") classID: number
+    ): Promise<ClassesResponse> {
+        const user = await User.findOne({ where: { id: userID } });
+        if (!user) {
+            return {
+                errors: [
+                    {
+                        field: "general",
+                        message: "Could not find user... Try Again",
+                    },
+                ],
+            };
+        }
+
+        const oneClass = await Classes.findOne({
+            where: { id: classID },
+            relations: ["users"],
+        });
+        if (!oneClass) {
+            return {
+                errors: [
+                    {
+                        field: "general",
+                        message: "Could not find class... Try Again",
+                    },
+                ],
+            };
+        }
+
+        oneClass.users.push(user);
+        oneClass.save();
+
+        return { classes: oneClass };
     }
 }

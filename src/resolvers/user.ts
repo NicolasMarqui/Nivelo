@@ -45,6 +45,7 @@ export class UserResolver {
                 "userPlatformAccount",
                 "userPlatformAccount.platform",
                 "feedback",
+                "classes",
             ],
         });
 
