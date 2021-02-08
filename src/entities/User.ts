@@ -14,6 +14,7 @@ import {
 import { Tutor } from "./Tutor";
 import { Platforms } from "./Platforms";
 import { UserPlatformAccount } from "./UserPlatformAccount";
+import { Feedback } from "./Feedback";
 
 @ObjectType()
 @Entity()
@@ -79,6 +80,10 @@ export class User extends BaseEntity {
     @Field(() => [UserPlatformAccount], { nullable: true })
     @OneToMany(() => UserPlatformAccount, (acc) => acc.user, { cascade: true })
     public userPlatformAccount!: UserPlatformAccount[];
+
+    @Field(() => [Feedback], { nullable: true })
+    @OneToMany(() => Feedback, (feed) => feed.user, { nullable: true })
+    feedback: Feedback[];
 
     @Field(() => String)
     @CreateDateColumn()

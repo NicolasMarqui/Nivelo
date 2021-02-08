@@ -44,6 +44,7 @@ export class UserResolver {
                 "platforms",
                 "userPlatformAccount",
                 "userPlatformAccount.platform",
+                "feedback",
             ],
         });
 
@@ -259,6 +260,7 @@ export class UserResolver {
                 "platforms",
                 "userPlatformAccount",
                 "userPlatformAccount.platform",
+                "feedback",
             ],
         });
 

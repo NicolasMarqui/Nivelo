@@ -1,3 +1,4 @@
+import { Feedback } from "./../../entities/Feedback";
 import { Platforms } from "./../../entities/Platforms";
 import { Category } from "./../../entities/Category";
 import { Classes } from "./../../entities/Classes";
@@ -122,4 +123,16 @@ export class PlatformsInput implements Partial<Platforms> {
 
     @Field(() => String, { nullable: true })
     icon!: string;
+}
+
+@InputType()
+export class FeedbackInput implements Partial<Feedback> {
+    @Field(() => String, { nullable: true })
+    name: string;
+
+    @Field(() => String, { nullable: true })
+    content!: string;
+
+    @Field(() => Int, { nullable: true })
+    rating!: number;
 }

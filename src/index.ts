@@ -20,6 +20,7 @@ import { PriceResolver } from "./resolvers/price";
 import { CategoryResolver } from "./resolvers/category";
 import { PlatformsResolver } from "./resolvers/platforms";
 import { UserPlatformAccountResolver } from "./resolvers/userPlatformAccount";
+import { FeedbackResolver } from "./resolvers/feedback";
 
 // Entities
 import { User } from "./entities/User";
@@ -30,6 +31,7 @@ import { Price } from "./entities/Price";
 import { Category } from "./entities/Category";
 import { Platforms } from "./entities/Platforms";
 import { UserPlatformAccount } from "./entities/UserPlatformAccount";
+import { Feedback } from "./entities/Feedback";
 
 const main = async () => {
     await createConnection({
@@ -49,13 +51,14 @@ const main = async () => {
             Category,
             Platforms,
             UserPlatformAccount,
+            Feedback,
         ],
         synchronize: true,
     }).then(() => {
         console.log("Database connected");
     });
 
-    // await Classes.delete({});
+    // await Feedback.delete({});
 
     const app = express();
     const PORT = 4000 || process.env.PORT;
@@ -94,6 +97,7 @@ const main = async () => {
                 CategoryResolver,
                 PlatformsResolver,
                 UserPlatformAccountResolver,
+                FeedbackResolver,
             ],
             validate: false,
         }),
