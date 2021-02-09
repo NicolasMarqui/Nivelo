@@ -66,6 +66,10 @@ export class Tutor extends BaseEntity {
     @JoinTable()
     categories: Category[];
 
+    @Field(() => [String], { nullable: true })
+    @Column({ nullable: true, type: "text" })
+    availability: String[];
+
     @Field(() => String, { nullable: true })
     @CreateDateColumn()
     createdAt: Date;

@@ -1,5 +1,5 @@
-import "reflect-metadata";
 require("dotenv").config();
+import "reflect-metadata";
 import { cookieDuration } from "./constants";
 import { MyContext } from "./types";
 import { createConnection } from "typeorm";
@@ -10,6 +10,7 @@ import { buildSchema } from "type-graphql";
 import redis from "redis";
 import session from "express-session";
 import connectRedis from "connect-redis";
+import mongoose from "mongoose";
 
 // Resolvers
 import { UserResolver } from "./resolvers/user";
@@ -32,6 +33,9 @@ import { Category } from "./entities/Category";
 import { Platforms } from "./entities/Platforms";
 import { UserPlatformAccount } from "./entities/UserPlatformAccount";
 import { Feedback } from "./entities/Feedback";
+
+import ScheduleSchema from "./models/Schedule";
+import scheduleRouter from "./routes/schedule";
 
 const main = async () => {
     await createConnection({
@@ -58,7 +62,30 @@ const main = async () => {
         console.log("Database connected");
     });
 
-    // await Feedback.delete({});
+    await mongoose
+        .connect(process.env.MONGO_URI as string, {
+            useNewUrlParser: true,
+            useUnifiedTopology: true,
+        })
+        .then(() => {
+            console.log("MongoDB Connected");
+        });
+
+    // const test = {
+    //     tutorID: 18,
+    //     dates: [
+    //         {
+    //             month: "02",
+    //             date: "02-12-2020",
+    //             time: [
+    //                 { from: "06:00", to: "09:00" },
+    //                 { from: "12:00", to: "14:00" },
+    //             ],
+    //         },
+    //     ],
+    // } as any;
+
+    // await ScheduleSchema.create(test);
 
     const app = express();
     const PORT = 4000 || process.env.PORT;
@@ -107,6 +134,7 @@ const main = async () => {
     apolloServer.applyMiddleware({ app });
 
     app.use(express.json());
+    app.use(scheduleRouter);
 
     app.get("/", (_, res) => {
         res.send("Hello");

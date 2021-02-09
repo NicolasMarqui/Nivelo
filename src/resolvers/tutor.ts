@@ -260,4 +260,30 @@ export class TutorResolver {
 
         return { tutor };
     }
+
+    // Add a new available date
+    @Mutation(() => TutorResponse)
+    async addAvailableDate(
+        @Arg("id") id: number,
+        @Arg("options") options: string
+    ): Promise<TutorResponse> {
+        const tutor = await Tutor.findOne({ where: { id } });
+        if (!tutor) {
+            return {
+                errors: [
+                    {
+                        field: "general",
+                        message: "Tutor not found...",
+                    },
+                ],
+            };
+        }
+
+        console.log(options);
+
+        // tutor.availability.push(options);
+        // tutor.save();
+
+        return { tutor };
+    }
 }
