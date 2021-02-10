@@ -5,10 +5,6 @@ const ScheduleSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    isAvailable: {
-        type: Boolean,
-        default: false,
-    },
     obs: String,
     dates: [
         {
@@ -20,6 +16,10 @@ const ScheduleSchema = new mongoose.Schema({
                     to: String,
                 },
             ],
+            isAvailable: {
+                type: Boolean,
+                default: false,
+            },
         },
     ],
 });
