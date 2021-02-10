@@ -54,6 +54,10 @@ export class Classes extends BaseEntity {
     })
     users: User[];
 
+    @Field(() => Boolean, { nullable: true })
+    @Column({ default: true, nullable: true })
+    active: Boolean;
+
     @Field(() => String, { nullable: true })
     @CreateDateColumn()
     createdAt: Date;
