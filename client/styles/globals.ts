@@ -7,7 +7,7 @@ export const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
     font-family: 'Biryani', sans-serif;
     width: 100%;
-    height: 100%;
+    min-height: 100vh;
   }
 `;
 
@@ -23,6 +23,6 @@ export const theme = {
         verificadoColor: "#4895EF",
     },
     fonts: {
-        nunito: "Patua One",
+        patua: "Patua One",
     },
 };

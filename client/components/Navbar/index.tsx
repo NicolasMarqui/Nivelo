@@ -7,7 +7,7 @@ import Link from "next/link";
 const Navbar: React.FC = ({}) => {
     return (
         <Header>
-            <Container style={{ display: "flex" }}>
+            <Container flex>
                 <Flex>
                     <Image
                         src="/logo.svg"

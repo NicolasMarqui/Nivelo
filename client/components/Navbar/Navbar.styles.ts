@@ -3,8 +3,12 @@ import styled from "styled-components";
 
 export const Header = styled.div`
     width: 100%;
-    position: relative;
     padding-top: 20px;
+    z-index: 4;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
 `;
 
 export const Menu = styled.ul`
@@ -17,7 +21,7 @@ export const Menu = styled.ul`
     justify-content: flex-end;
 
     li {
-        margin: 0px 10px;
+        margin: 0px 20px;
         position: relative;
 
         &.navbar__dif {
@@ -35,7 +39,7 @@ export const Menu = styled.ul`
             margin-left: 5px;
 
             a {
-                padding: 10px 14px;
+                padding: 14px 14px 10px;
                 display: block;
             }
 
@@ -66,8 +70,8 @@ export const Menu = styled.ul`
 
         a {
             text-decoration: none;
-            color: #222;
-            font-size: 17px;
+            color: #5f5f5f;
+            font-size: 15px;
             font-weight: 400;
         }
     }
