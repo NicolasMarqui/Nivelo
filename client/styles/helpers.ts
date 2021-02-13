@@ -1,10 +1,17 @@
 import styled from "styled-components";
+import { css } from "styled-components";
 
 export const Container = styled.div`
     padding-right: 15px;
     padding-left: 15px;
     margin-right: auto;
     margin-left: auto;
+
+    /* ${(props) =>
+        props.isFlex &&
+        css`
+            display: flex;
+        `} */
 
     @media (min-width: 768px) {
         width: 750px;
@@ -25,4 +32,10 @@ export const Container = styled.div`
     @media (min-width: 1600px) {
         width: 1657px;
     }
+`;
+
+export const Flex = styled.div`
+    display: flex;
+    flex: 1;
+    align-items: center;
 `;
