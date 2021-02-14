@@ -9,6 +9,10 @@ export const Header = styled.div`
     top: 0;
     left: 0;
     right: 0;
+
+    .nivelo__logo {
+        margin-top: -14px !important;
+    }
 `;
 
 export const Menu = styled.ul`

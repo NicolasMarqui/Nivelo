@@ -11,14 +11,15 @@ interface BreadcumbObjects {
 
 interface BreadcumbProps {
     data: BreadcumbObjects[];
+    color?: string;
 }
 
-export default function Breadcumb({ data }: BreadcumbProps) {
+export default function Breadcumb({ data, color }: BreadcumbProps) {
     return (
         <BreadcumbWrapper>
             {data &&
                 data.map((br: any) => (
-                    <PreTitle key={br.id}>
+                    <PreTitle key={br.id} color={color ? color : "#FF4338"}>
                         {br.linkTo ? (
                             <Link href={`${br.linkTo}`}>{br.text}</Link>
                         ) : (

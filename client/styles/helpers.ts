@@ -102,10 +102,11 @@ export const Title = styled.h2<TitleProps>`
 
 interface PreTitleProps {
     center?: boolean;
+    color?: string;
 }
 
 export const PreTitle = styled.h5<PreTitleProps>`
-    color: ${({ theme }) => theme.colors.primary};
+    color: ${({ theme, color }) => (color ? color : theme.colors.primary)};
     font-size: 16px;
     font-weight: 400;
     width: 100%;
@@ -152,10 +153,14 @@ export const Section = styled.div`
     padding: 80px 0;
 `;
 
-export const PageWrapper = styled.div`
+interface PageWrapperProps {
+    pTop?: string;
+}
+
+export const PageWrapper = styled.div<PageWrapperProps>`
     width: 100%;
     min-height: calc(100vh - 150px);
-    padding-top: 150px;
+    padding-top: ${({ pTop }) => (pTop ? pTop : "150px")};
 `;
 
 interface ButtonProps {
@@ -194,4 +199,5 @@ export const Pill = styled.p`
     align-items: center;
     justify-content: center;
     border-radius: 8px;
+    margin: 10px 0;
 `;

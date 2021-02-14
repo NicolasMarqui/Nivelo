@@ -3,13 +3,21 @@ import styled from "styled-components";
 export const BreadcumbWrapper = styled.div`
     display: flex;
     align-self: flex-start;
+    width: 100%;
 
     h5 {
         margin-right: 8px;
         display: flex;
         align-items: center;
+        flex: initial;
+        width: auto;
+
+        &:hover {
+            text-decoration: underline;
+        }
 
         &:last-child {
+            text-decoration: none;
             svg {
                 display: none;
             }

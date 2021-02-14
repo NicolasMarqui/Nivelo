@@ -16,6 +16,7 @@ const Navbar: React.FC = ({}) => {
                                 width="150"
                                 height="80"
                                 alt="Nivelo"
+                                className="nivelo__logo"
                             />
                         </Link>
                     </h1>
