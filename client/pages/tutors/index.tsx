@@ -1,20 +1,24 @@
 import { useState, useEffect } from "react";
 import IconButton from "../../components/IconButton";
 import { Container, Flex, PageWrapper, Title } from "../../styles/helpers";
-import { TtFlex, TtFilters } from "./Tutors.styles";
-import { MdFilterList, MdList } from "react-icons/md";
+import { TtFlex, TtFilters, AreaTutors } from "./Tutors.styles";
+import { MdFilterList, MdList, MdViewWeek } from "react-icons/md";
 import Breadcumb from "../../components/Breadcumb";
 import { tutorsBreadcumb } from "../../utils/breadcumbs";
 import Filter from "../../components/Filter";
 import { useRouter } from "next/router";
 import Meta from "../../components/Meta";
 import { StickyContainer } from "react-sticky";
+import TutorCard from "../../components/TutorCard";
 
 export default function Tutors() {
     const router = useRouter();
 
     const [isLoadingData, setIsLoadingData] = useState(false);
     const [data, setData] = useState([]);
+
+    // Viewing mode
+    const [isViewColumn, setIsViewColumn] = useState(false);
 
     useEffect(() => {
         if (
@@ -23,19 +27,9 @@ export default function Tutors() {
             router.query.categoria !== "" ||
             router.query !== {}
         ) {
-            getPosts();
+            console.log("yeep");
         }
     }, [router.asPath]);
-
-    const getPosts = async () => {
-        setIsLoadingData(true);
-        await fetch("https://jsonplaceholder.typicode.com/posts")
-            .then((response) => response.json())
-            .then((json) => {
-                setData(json);
-                setIsLoadingData(false);
-            });
-    };
 
     return (
         <PageWrapper>
@@ -53,7 +47,16 @@ export default function Tutors() {
                         </Title>
                     </Flex>
                     <Flex size={4} justifyEnd>
-                        <IconButton icon={<MdList size={24} />} />
+                        <IconButton
+                            icon={
+                                isViewColumn ? (
+                                    <MdList size={24} />
+                                ) : (
+                                    <MdViewWeek size={24} />
+                                )
+                            }
+                            onClick={() => setIsViewColumn(!isViewColumn)}
+                        />
                         <IconButton
                             text="Ordenar por"
                             icon={<MdFilterList size={24} />}
@@ -69,12 +72,11 @@ export default function Tutors() {
                     {isLoadingData ? (
                         <h3>Loading this bitch</h3>
                     ) : (
-                        data.map((el) => (
-                            <div className="p__wrapper" style={{ margin: 40 }}>
-                                <h6>{el.title}</h6>
-                                <p>{el.body}</p>
-                            </div>
-                        ))
+                        <AreaTutors isColumn={isViewColumn}>
+                            <TutorCard isColumn={isViewColumn} />
+                            <TutorCard isColumn={isViewColumn} />
+                            <TutorCard isColumn={isViewColumn} />
+                        </AreaTutors>
                     )}
                 </StickyContainer>
             </Container>

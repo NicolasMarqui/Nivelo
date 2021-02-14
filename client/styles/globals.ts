@@ -20,6 +20,7 @@ export const theme = {
         lightGreen: "#57CC99",
         lightYellow: "#F4D35E",
         orangeDetail: "#F79D65",
+        lightPink: "#FF928B",
         verificadoColor: "#4895EF",
     },
     fonts: {

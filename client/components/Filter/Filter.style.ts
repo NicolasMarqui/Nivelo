@@ -15,6 +15,7 @@ export const FilterWrapper = styled.div<FilterWrapperProps>`
             border-radius: 20px;
             display: flex;
             justify-content: center;
+            z-index: 10;
         `}
 
     .filter__list {

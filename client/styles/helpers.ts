@@ -136,10 +136,11 @@ interface DescriptionProps {
     size?: string;
     marginTop?: number;
     color?: string;
+    fontSize?: string;
 }
 
 export const Description = styled.p<DescriptionProps>`
-    font-size: 17px;
+    font-size: ${({ fontSize }) => fontSize || "17px"};
     color: ${({ color }) => color || "#b1b1b1"};
     line-height: 25px;
     margin-top: ${({ marginTop }) => marginTop || "0"}px;
@@ -181,4 +182,16 @@ export const Button = styled.button<ButtonProps>`
         css`
             font-weight: 700;
         `}
+`;
+
+export const Pill = styled.p`
+    background-color: ${({ theme }) => theme.colors.purple};
+    padding: 12px 14px 10px;
+    font-weight: 700;
+    color: #fff;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
 `;
