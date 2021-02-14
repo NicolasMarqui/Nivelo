@@ -22,10 +22,16 @@ import {
     MdPlayCircleOutline,
     MdRecordVoiceOver,
 } from "react-icons/md";
+import Meta from "../components/Meta";
 
 export default function Home() {
     return (
         <>
+            <Meta
+                title="Home"
+                description="Encontre os melhores tutores para te ajudar nessa jornada"
+                keywords="home, tutor, javascript, nivelamento, aprender, algoritimos, comprar"
+            />
             <Hero>
                 <Container flex f_center>
                     <CTA>

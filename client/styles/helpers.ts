@@ -156,3 +156,29 @@ export const PageWrapper = styled.div`
     min-height: calc(100vh - 150px);
     padding-top: 150px;
 `;
+
+interface ButtonProps {
+    bgColor?: string;
+    color?: string;
+    bold?: boolean;
+}
+
+export const Button = styled.button<ButtonProps>`
+    margin: 10px 0;
+    padding: 10px 20px;
+    background-color: ${({ bgColor }) => (bgColor ? bgColor : "#f2f2f2")};
+    color: ${({ color }) => (color ? color : "#222")};
+    border-radius: 28.5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    ${({ bold }) =>
+        bold &&
+        css`
+            font-weight: 700;
+        `}
+`;
