@@ -38,14 +38,10 @@ export default function Home() {
                             alt="Pattern"
                             className="detail__dots"
                         />
-                        <Title
-                            fontSize="70px"
-                            lineHeight="60px"
-                            fontWeight="400"
-                        >
-                            Aprenda com os melhores tutores
+                        <Title fontSize="70px" fontWeight="400">
+                            Aprenda com os melhores
                         </Title>
-                        <Description size="70" marginTop={20}>
+                        <Description size="70" marginTop={30}>
                             Lorem ipsum dolor sit amet, consectetur adipiscing
                             elit, sed do eiusmod tempor incididunt ut labore et
                             dolore magna aliqua. Ut enim ad minim veniam
@@ -174,6 +170,12 @@ export default function Home() {
                         Categorias que combinam com você
                     </Title>
                 </Container>
+            </Section>
+            <Section>
+                <PreTitle center>Diferentes tipos de profissionais</PreTitle>
+                <Title fontSize="60px" fontWeight="400" size={50} center m_auto>
+                    Profissionais qualificados para te ajudar
+                </Title>
             </Section>
         </>
     );

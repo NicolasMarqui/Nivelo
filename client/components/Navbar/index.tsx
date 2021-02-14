@@ -9,12 +9,16 @@ const Navbar: React.FC = ({}) => {
         <Header>
             <Container flex>
                 <Flex>
-                    <Image
-                        src="/logo.svg"
-                        width="150"
-                        height="80"
-                        alt="Nivelo"
-                    />
+                    <h1 style={{ cursor: "pointer" }}>
+                        <Link href="/">
+                            <Image
+                                src="/logo.svg"
+                                width="150"
+                                height="80"
+                                alt="Nivelo"
+                            />
+                        </Link>
+                    </h1>
                 </Flex>
                 <Flex>
                     <Menu>

@@ -21,7 +21,7 @@ export const Menu = styled.ul`
     justify-content: flex-end;
 
     li {
-        margin: 0px 20px;
+        margin: 0px 17px;
         position: relative;
 
         &.navbar__dif {

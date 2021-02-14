@@ -36,11 +36,11 @@ export const Container = styled.div<ContainerProps>`
     }
 
     @media (min-width: 1300px) {
-        width: 1302px;
+        width: 1290px;
     }
 
     @media (min-width: 1400px) {
-        width: 1370px;
+        width: 1320px;
     }
 
     @media (min-width: 1600px) {
@@ -52,6 +52,7 @@ interface FlexProps {
     size?: number;
     col?: boolean;
     mr?: number;
+    justifyEnd?: boolean;
 }
 
 export const Flex = styled.div<FlexProps>`
@@ -65,6 +66,11 @@ export const Flex = styled.div<FlexProps>`
         css`
             flex-direction: column;
         `}
+    ${({ justifyEnd }) =>
+        justifyEnd &&
+        css`
+            justify-content: flex-end;
+        `}
 `;
 
 interface TitleProps {
@@ -72,6 +78,8 @@ interface TitleProps {
     fontWeight?: string;
     lineHeight?: string;
     size?: number;
+    center?: boolean;
+    m_auto?: boolean;
 }
 
 export const Title = styled.h2<TitleProps>`
@@ -80,13 +88,33 @@ export const Title = styled.h2<TitleProps>`
     line-height: ${({ lineHeight }) => lineHeight || "auto"};
     font-family: ${({ theme }) => theme.fonts.patua};
     width: ${({ size }) => size || "100"}%;
+    ${({ center }) =>
+        center &&
+        css`
+            text-align: center;
+        `}
+    ${({ m_auto }) =>
+        m_auto &&
+        css`
+            margin: 0 auto;
+        `}
 `;
 
-export const PreTitle = styled.h5`
+interface PreTitleProps {
+    center?: boolean;
+}
+
+export const PreTitle = styled.h5<PreTitleProps>`
     color: ${({ theme }) => theme.colors.primary};
     font-size: 16px;
     font-weight: 400;
+    width: 100%;
     margin-bottom: 4px;
+    ${({ center }) =>
+        center &&
+        css`
+            text-align: center;
+        `}
 `;
 
 interface OverlayProps {
@@ -121,4 +149,10 @@ export const Description = styled.p<DescriptionProps>`
 
 export const Section = styled.div`
     padding: 80px 0;
+`;
+
+export const PageWrapper = styled.div`
+    width: 100%;
+    min-height: calc(100vh - 150px);
+    padding-top: 150px;
 `;
