@@ -9,7 +9,7 @@ export const Banner = styled.div`
     background-position: 15% 15%;
     background-size: cover;
     background-repeat: no-repeat;
-    background-attachment: fixed;
+    /* background-attachment: fixed; */
     border-radius: 37px;
 `;
 
@@ -49,22 +49,165 @@ export const SingleTutorWrapper = styled.div`
         .second__info {
             margin-top: 50px;
         }
+
+        .second__since {
+            display: flex;
+            align-items: center;
+            margin-top: 40px;
+
+            svg {
+                margin: -4px 5px 0 0;
+            }
+
+            p {
+                color: #646464;
+                font-size: 14px;
+
+                span {
+                    font-weight: 700;
+                }
+            }
+        }
+
+        .second__section {
+            margin: 90px 0;
+        }
+
+        .second__classes {
+            position: relative;
+
+            .fbYLZD {
+                margin-bottom: 35px;
+                z-index: 2;
+            }
+
+            .classes__detail {
+                position: absolute;
+                height: 220px;
+                width: 220px;
+                background-color: rgba(247, 157, 101, 0.1);
+                border-radius: 50%;
+                z-index: -1;
+
+                &.detail__ball1 {
+                    top: -53px;
+                    left: -91px;
+                }
+
+                &.detail__ball2 {
+                    top: -53px;
+                    right: -91px;
+                }
+
+                &.detail__ball3 {
+                    bottom: -41px;
+                    right: -58px;
+                    background-color: rgba(255, 67, 56, 0.17);
+                    height: 100px;
+                    width: 100px;
+                }
+            }
+        }
     }
 
     .st__third {
-        flex: 1;
+        flex: 2;
         margin-top: -100px;
         width: 100%;
 
         .third__box {
             background-color: #fff;
-            padding: 40px 20px;
+            padding: 40px 0 20px;
             border-radius: 29px;
             box-shadow: 1px 5px 7px rgba(0, 0, 0, 0.15);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
 
             &.box__sticky {
-                max-height: 84vh;
+                max-height: 86vh;
                 overflow-y: auto;
+            }
+
+            .third__prices {
+                margin-top: 20px;
+                display: flex;
+                flex-direction: column;
+
+                h5 {
+                    font-size: 15px;
+                    font-weight: 700;
+                }
+
+                .prices__value {
+                    font-size: 25px;
+                    margin-top: 10px;
+                    color: ${({ theme }) => theme.colors.primary};
+                    font-weight: 400;
+                }
+
+                .prices__btn {
+                    display: flex;
+                    margin-top: 25px;
+
+                    .jLtcft {
+                        border-radius: 8px;
+                        padding: 10px;
+
+                        .icb__text {
+                            color: #fff;
+                            font-weight: 900;
+                            font-size: 14px;
+                        }
+
+                        .icb__icon {
+                            svg {
+                                font-size: 14px;
+                            }
+                        }
+
+                        &:first-child {
+                            background-color: ${({ theme }) =>
+                                theme.colors.lightPink};
+                        }
+
+                        &:last-child {
+                            background-color: ${({ theme }) =>
+                                theme.colors.lightBlue};
+                        }
+                    }
+                }
+            }
+
+            .third__schedule {
+                padding: 20px;
+
+                h5 {
+                    font-weight: 700;
+                    text-align: center;
+                }
+
+                .schedule__dates {
+                    height: 160px;
+                    background-color: #f5f5f5;
+                    width: 90%;
+                    margin: 15px auto 5px;
+                }
+
+                p {
+                    text-align: center;
+                }
+
+                .jLtcft {
+                    margin-top: 15px;
+                    background-color: ${({ theme }) => theme.colors.lightGreen};
+
+                    .icb__text {
+                        color: #fff;
+                        font-weight: 700;
+                    }
+                }
             }
         }
     }

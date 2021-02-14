@@ -189,6 +189,15 @@ export const Button = styled.button<ButtonProps>`
         `}
 `;
 
+export const SmallerButton = styled(Button)`
+    border-radius: 8px;
+    padding: 10px;
+    background-color: #ff928b;
+    color: #fff;
+    font-weight: 700;
+    width: 100%;
+`;
+
 export const Pill = styled.p`
     background-color: ${({ theme }) => theme.colors.purple};
     padding: 12px 14px 10px;
@@ -200,4 +209,11 @@ export const Pill = styled.p`
     justify-content: center;
     border-radius: 8px;
     margin: 10px 0;
+`;
+
+export const Divider = styled.div`
+    background-color: #f4f4f4;
+    height: 3px;
+    width: 100%;
+    margin: 20px 0;
 `;
