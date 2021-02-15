@@ -9,6 +9,7 @@ function MyApp({ Component, pageProps }) {
             <GlobalStyle />
             <ThemeProvider theme={theme}>
                 <Layout>
+                    <div className="body__overlay"></div>
                     <Component {...pageProps} />
                 </Layout>
             </ThemeProvider>

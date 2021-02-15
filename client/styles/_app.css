@@ -130,3 +130,19 @@ table {
     border-collapse: collapse;
     border-spacing: 0;
 }
+
+.accordion {
+    margin: 10px 0;
+    border: none !important;
+}
+
+.accordion .accordion__item {
+    cursor: pointer;
+    outline: none;
+}
+
+.accordion .accordion__item .accordion__button {
+    outline: none;
+    background-color: #f7f7f7 !important;
+    width: auto !important;
+}

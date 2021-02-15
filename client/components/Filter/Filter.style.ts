@@ -27,3 +27,23 @@ export const FilterWrapper = styled.div<FilterWrapperProps>`
         }
     }
 `;
+
+export const FilterSideWrapper = styled.div`
+    width: 100%;
+
+    .side__group {
+        margin: 10px 0;
+
+        .group__label {
+            h4 {
+                font-size: 17px;
+                color: #6f6f6f;
+                margin-bottom: 8px;
+            }
+        }
+
+        .group__content {
+            padding: 4px;
+        }
+    }
+`;

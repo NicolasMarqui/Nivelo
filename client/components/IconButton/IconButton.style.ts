@@ -1,6 +1,10 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
-export const IconButtonWrapper = styled.div`
+interface IconButtonWrapperProps {
+    smaller?: boolean;
+}
+
+export const IconButtonWrapper = styled.div<IconButtonWrapperProps>`
     margin: 0 8px;
     padding: 10px 20px;
     background-color: #f2f2f2;

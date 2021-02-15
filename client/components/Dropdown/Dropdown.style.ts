@@ -1,7 +1,11 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
-export const DropdownWrapper = styled.div`
-    visibility: hidden;
+interface DropdownWrapperProps {
+    isVisible?: boolean;
+}
+
+export const DropdownWrapper = styled.div<DropdownWrapperProps>`
+    display: none;
     padding: 20px;
     border-radius: 1.5px;
     background-color: #fff;
@@ -9,12 +13,17 @@ export const DropdownWrapper = styled.div`
     top: 120%;
     /* right: 0;
     left: 0; */
-    width: 500px;
-    z-index: 4;
+    width: 400px;
+    z-index: 20;
     box-shadow: 1px 6px 20px #e2e2e2;
-
+    transition: all 0.4s linear;
+    ${({ isVisible }) =>
+        isVisible &&
+        css`
+            display: block;
+        `}
     .drop__footer {
         display: flex;
-        justify-content: flex-end;
+        justify-content: center;
     }
 `;

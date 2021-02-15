@@ -1,5 +1,10 @@
 import { DropdownWrapper } from "./Dropdown.style";
 
-export default function Dropdown({ children }) {
-    return <DropdownWrapper>{children}</DropdownWrapper>;
+interface DropdownProps {
+    children: any;
+    isVisible: boolean;
+}
+
+export default function Dropdown({ children, isVisible }: DropdownProps) {
+    return <DropdownWrapper isVisible={isVisible}>{children}</DropdownWrapper>;
 }

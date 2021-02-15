@@ -149,7 +149,7 @@ export const SingleTutorWrapper = styled.div`
                 }
 
                 .prices__value {
-                    font-size: 25px;
+                    font-size: 35px;
                     margin-top: 10px;
                     color: ${({ theme }) => theme.colors.primary};
                     font-weight: 400;

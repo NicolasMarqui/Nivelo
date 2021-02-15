@@ -1982,6 +1982,11 @@ rc@^1.2.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
+react-accessible-accordion@^3.3.4:
+  version "3.3.4"
+  resolved "https://registry.yarnpkg.com/react-accessible-accordion/-/react-accessible-accordion-3.3.4.tgz#84b08015e74d6b3b225e0101b518b2ea8969e292"
+  integrity sha512-EUq+KmVRIIG5u1fR5XIbb2JU7w7NouLjuyfuPvnhuDIfNNWNYap1I8ijn2rdA6OQi1gGSRGbVzHs+3wxH/M0Sw==
+
 react-dom@17.0.1:
   version "17.0.1"
   resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-17.0.1.tgz#1de2560474ec9f0e334285662ede52dbc5426fc6"

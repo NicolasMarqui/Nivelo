@@ -1,7 +1,6 @@
-import { useState, useEffect, useRef, CSSProperties } from "react";
+import { useState, useEffect, useRef } from "react";
 import IconButton from "../IconButton";
-import { FilterWrapper } from "./Filter.style";
-import { MdPlace, MdEuroSymbol, MdEvent, MdFace } from "react-icons/md";
+import { FilterWrapper, FilterSideWrapper } from "./Filter.style";
 import { TiFilter } from "react-icons/ti";
 import { useRouter } from "next/router";
 import Dropdown from "../Dropdown";
@@ -10,6 +9,15 @@ import countries from "../../utils/countries.json";
 import makeAnimated from "react-select/animated";
 import { Button } from "../../styles/helpers";
 import { Sticky } from "react-sticky";
+import Side from "../Side";
+import {
+    Accordion,
+    AccordionItem,
+    AccordionItemButton,
+    AccordionItemHeading,
+    AccordionItemPanel,
+} from "react-accessible-accordion";
+import "react-accessible-accordion/dist/fancy-example.css";
 
 export default function Filter() {
     const router = useRouter();
@@ -19,11 +27,15 @@ export default function Filter() {
     // Filter values
     const [isFixed, setIsFixed] = useState(false);
     const [localizacao, setLocalizacao] = useState([]);
-    const [preco, setPreco] = useState("");
-    const [categoria, setCategoria] = useState("");
+    const [preco, setPreco] = useState(router.query.preco || "");
+    const [categoria, setCategoria] = useState(router.query.categoria || "");
     const [disponibilidade, setDisponibilidade] = useState("");
     const [tutor, setTutor] = useState("");
     const [hasAplicadoFilter, setHasAplicadoFilter] = useState(false);
+    const [currentPage, setCurrentPage] = useState(router.query.page || 1);
+
+    // Filter open values
+    const [isOpenSide, setIsOpenSide] = useState(false);
 
     const queryValues = {
         localizacao: localizacao ? localizacao.map((t) => t.value) : [],
@@ -33,8 +45,15 @@ export default function Filter() {
         tutor,
     };
 
+    const handleOpenSide = () => {
+        setIsOpenSide(!isOpenSide);
+        document.body.className = "";
+        document.body.classList.add("overlay", "no-scroll");
+    };
+
     useEffect(() => {
-        console.log(localizacao);
+        setIsOpenSide(false);
+
         router.push(
             {
                 pathname: `/tutors`,
@@ -47,78 +66,158 @@ export default function Filter() {
     }, [hasAplicadoFilter]);
 
     return (
-        <Sticky>
-            {({ style, isSticky }) => (
-                <FilterWrapper ref={filterRef} isFixed={isSticky} style={style}>
-                    <ul className="filter__list">
-                        <li>
-                            <h5>Filtros: </h5>
-                        </li>
-                        <li>
-                            <IconButton
-                                text="Localização"
-                                icon={<MdPlace size={24} />}
-                                hasChevron={true}
-                            />
-
-                            <Dropdown>
-                                <Select
-                                    closeMenuOnSelect={true}
-                                    components={animatedComponents}
-                                    isMulti
-                                    onChange={(e: any) => setLocalizacao(e)}
-                                    options={countries.map((c: any) => {
-                                        return {
-                                            ...c,
-                                            value: c.label.toLowerCase(),
-                                        };
-                                    })}
+        <>
+            <Sticky>
+                {({ style, isSticky }) => (
+                    <FilterWrapper
+                        ref={filterRef}
+                        isFixed={isSticky}
+                        style={style}
+                    >
+                        <ul className="filter__list">
+                            <li>
+                                <IconButton
+                                    text="Filtros"
+                                    icon={<TiFilter size={17} />}
+                                    hasChevron={true}
+                                    onClick={handleOpenSide}
                                 />
-                                <div className="drop__footer">
-                                    <Button
-                                        bgColor="#57CC99"
-                                        color="#fff"
-                                        bold
-                                        onClick={() =>
-                                            setHasAplicadoFilter(true)
-                                        }
-                                    >
-                                        Aplicar
-                                    </Button>
-                                </div>
-                            </Dropdown>
-                        </li>
-                        <li>
-                            <IconButton
-                                text="Preço"
-                                icon={<MdEuroSymbol size={24} />}
-                                hasChevron={true}
-                            />
-                        </li>
-                        <li>
-                            <IconButton
-                                text="Categoria"
-                                icon={<TiFilter size={24} />}
-                                hasChevron={true}
-                            />
-                        </li>
-                        <li>
-                            <IconButton
-                                text="Disponibilidade"
-                                icon={<MdEvent size={24} />}
-                                hasChevron={true}
-                            />
-                        </li>
-                        <li>
-                            <IconButton
-                                text="Tipo de tutor"
-                                icon={<MdFace size={24} />}
-                                hasChevron={true}
-                            />
-                        </li>
-                    </ul>
-                </FilterWrapper>
-            )}
-        </Sticky>
+                            </li>
+                        </ul>
+                    </FilterWrapper>
+                )}
+            </Sticky>
+            <Side isOpen={isOpenSide} footer>
+                <FilterSideWrapper>
+                    <Accordion allowMultipleExpanded>
+                        <div className="side__group">
+                            <AccordionItem>
+                                <AccordionItemHeading>
+                                    <AccordionItemButton>
+                                        Localização
+                                    </AccordionItemButton>
+                                </AccordionItemHeading>
+                                <AccordionItemPanel>
+                                    <Select
+                                        closeMenuOnSelect={true}
+                                        placeholder="Localização"
+                                        defaultValue={countries[31]}
+                                        components={animatedComponents}
+                                        isMulti
+                                        onChange={(e: any) => setLocalizacao(e)}
+                                        options={countries.map((c: any) => {
+                                            return {
+                                                ...c,
+                                                value: c.label.toLowerCase(),
+                                            };
+                                        })}
+                                    />
+                                </AccordionItemPanel>
+                            </AccordionItem>
+                        </div>
+                        <div className="side__group">
+                            <AccordionItem>
+                                <AccordionItemHeading>
+                                    <AccordionItemButton>
+                                        Preço
+                                    </AccordionItemButton>
+                                </AccordionItemHeading>
+                                <AccordionItemPanel>
+                                    <Select
+                                        closeMenuOnSelect={true}
+                                        placeholder="Localização"
+                                        defaultValue={countries[31]}
+                                        components={animatedComponents}
+                                        isMulti
+                                        onChange={(e: any) => setLocalizacao(e)}
+                                        options={countries.map((c: any) => {
+                                            return {
+                                                ...c,
+                                                value: c.label.toLowerCase(),
+                                            };
+                                        })}
+                                    />
+                                </AccordionItemPanel>
+                            </AccordionItem>
+                        </div>
+                        <div className="side__group">
+                            <AccordionItem>
+                                <AccordionItemHeading>
+                                    <AccordionItemButton>
+                                        Categoria
+                                    </AccordionItemButton>
+                                </AccordionItemHeading>
+                                <AccordionItemPanel>
+                                    <Select
+                                        closeMenuOnSelect={true}
+                                        placeholder="Localização"
+                                        defaultValue={countries[31]}
+                                        components={animatedComponents}
+                                        isMulti
+                                        onChange={(e: any) => setLocalizacao(e)}
+                                        options={countries.map((c: any) => {
+                                            return {
+                                                ...c,
+                                                value: c.label.toLowerCase(),
+                                            };
+                                        })}
+                                    />
+                                </AccordionItemPanel>
+                            </AccordionItem>
+                        </div>
+                        <div className="side__group">
+                            <AccordionItem>
+                                <AccordionItemHeading>
+                                    <AccordionItemButton>
+                                        Localização
+                                    </AccordionItemButton>
+                                </AccordionItemHeading>
+                                <AccordionItemPanel>
+                                    <Select
+                                        closeMenuOnSelect={true}
+                                        placeholder="Disponibilidade"
+                                        defaultValue={countries[31]}
+                                        components={animatedComponents}
+                                        isMulti
+                                        onChange={(e: any) => setLocalizacao(e)}
+                                        options={countries.map((c: any) => {
+                                            return {
+                                                ...c,
+                                                value: c.label.toLowerCase(),
+                                            };
+                                        })}
+                                    />
+                                </AccordionItemPanel>
+                            </AccordionItem>
+                        </div>
+                        <div className="side__group">
+                            <AccordionItem>
+                                <AccordionItemHeading>
+                                    <AccordionItemButton>
+                                        Tipo de Tutor
+                                    </AccordionItemButton>
+                                </AccordionItemHeading>
+                                <AccordionItemPanel>
+                                    <Select
+                                        closeMenuOnSelect={true}
+                                        placeholder="Localização"
+                                        defaultValue={countries[31]}
+                                        components={animatedComponents}
+                                        isMulti
+                                        onChange={(e: any) => setLocalizacao(e)}
+                                        options={countries.map((c: any) => {
+                                            return {
+                                                ...c,
+                                                value: c.label.toLowerCase(),
+                                            };
+                                        })}
+                                    />
+                                </AccordionItemPanel>
+                            </AccordionItem>
+                        </div>
+                    </Accordion>
+                </FilterSideWrapper>
+            </Side>
+        </>
     );
 }

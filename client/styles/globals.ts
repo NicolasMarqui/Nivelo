@@ -8,6 +8,27 @@ export const GlobalStyle = createGlobalStyle`
     font-family: 'Biryani', sans-serif;
     width: 100%;
     min-height: 100vh;
+
+    .body__overlay{
+      display: none;
+    }
+
+    &.no-scroll{
+      overflow: hidden;
+    }
+
+    &.overlay{
+      .body__overlay{
+        display: block;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 30;
+        background-color: rgba(0,0,0,0.6);
+      }
+    }
   }
 `;
 

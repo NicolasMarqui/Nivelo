@@ -4,6 +4,7 @@ import { css } from "styled-components";
 interface ContainerProps {
     flex?: boolean;
     f_center?: boolean;
+    alignEnd?: boolean;
 }
 
 export const Container = styled.div<ContainerProps>`
@@ -25,6 +26,12 @@ export const Container = styled.div<ContainerProps>`
         css`
             justify-content: center;
             align-items: center;
+        `}
+        
+    ${({ alignEnd }) =>
+        alignEnd &&
+        css`
+            align-items: flex-end;
         `}
 
     @media (min-width: 768px) {
@@ -80,6 +87,7 @@ interface TitleProps {
     size?: number;
     center?: boolean;
     m_auto?: boolean;
+    color?: string;
 }
 
 export const Title = styled.h2<TitleProps>`
@@ -88,6 +96,7 @@ export const Title = styled.h2<TitleProps>`
     line-height: ${({ lineHeight }) => lineHeight || "auto"};
     font-family: ${({ theme }) => theme.fonts.patua};
     width: ${({ size }) => size || "100"}%;
+    color: ${({ color }) => color || "#222"};
     ${({ center }) =>
         center &&
         css`
@@ -131,6 +140,11 @@ export const Overlay = styled.div<OverlayProps>`
     bottom: 0;
     background-color: rgba(0, 0, 0, 0.4);
     border-radius: ${({ border }) => border || "20px"};
+    ${({ opacity }) =>
+        opacity &&
+        css`
+            background-color: rgba(0, 0, 0, ${opacity});
+        `}
 `;
 
 interface DescriptionProps {
