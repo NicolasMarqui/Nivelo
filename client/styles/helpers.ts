@@ -182,6 +182,11 @@ export const Button = styled.button<ButtonProps>`
     cursor: pointer;
     border: none;
     outline: none;
+
+    &:hover {
+        opacity: 0.4;
+    }
+
     ${({ bold }) =>
         bold &&
         css`

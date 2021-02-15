@@ -108,11 +108,19 @@ export const SingleTutorWrapper = styled.div`
                 }
             }
         }
+
+        .second__informations {
+            .informations__wrapper {
+                margin-top: 20px;
+                display: flex;
+                flex-direction: row;
+            }
+        }
     }
 
     .st__third {
         flex: 2;
-        margin-top: -100px;
+        margin-top: -160px;
         width: 100%;
 
         .third__box {

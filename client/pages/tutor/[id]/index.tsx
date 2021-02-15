@@ -25,6 +25,8 @@ import IconButton from "../../../components/IconButton";
 import Breadcumb from "../../../components/Breadcumb";
 import { tutorBreadcumb } from "../../../utils/breadcumbs";
 import ClassItem from "../../../components/ClassItem";
+import InfoCard from "../../../components/InfoCard";
+import FeedbackItem from "../../../components/FeedbackItem";
 
 export default function Tutor() {
     return (
@@ -102,9 +104,45 @@ export default function Tutor() {
                                 <ClassItem />
                                 <ClassItem />
                             </div>
+
+                            <div className="second__informations second__section">
+                                <TutorTitle>Informações</TutorTitle>
+
+                                <div className="informations__wrapper">
+                                    <InfoCard
+                                        color="rgba(255, 67, 56, 0.72)"
+                                        number={14}
+                                        text="Aulas completadas"
+                                    />
+
+                                    <InfoCard
+                                        color="#57CC99"
+                                        number={100}
+                                        text="Alunos"
+                                    />
+
+                                    <InfoCard
+                                        color="#8390FA"
+                                        number={14}
+                                        text="Aulas completadas"
+                                    />
+                                    <InfoCard
+                                        color="#F4D35E"
+                                        number={14}
+                                        text="Aulas completadas"
+                                    />
+                                </div>
+                            </div>
+                            <div className="second__feedbacks second__section">
+                                <TutorTitle>Feedbacks</TutorTitle>
+                                <FeedbackItem content="teste" user="teste" />
+                                <FeedbackItem content="teste" user="teste" />
+                                <FeedbackItem content="teste" user="teste" />
+                                <FeedbackItem content="teste" user="teste" />
+                            </div>
                         </div>
                         <div className="st__third">
-                            <Sticky topOffset={-100}>
+                            <Sticky topOffset={-160}>
                                 {({ style, isSticky }) => (
                                     <div
                                         className={`third__box ${
