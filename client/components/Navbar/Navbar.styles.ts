@@ -38,6 +38,28 @@ export const Menu = styled.ul`
         margin: 0px 17px;
         position: relative;
 
+        &.no__hover {
+            &:hover {
+                &::before {
+                    content: none;
+                }
+            }
+        }
+
+        &.bg__icon {
+            background-color: #f2f2f2;
+            padding: 10px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin: 0 10px;
+
+            &:hover {
+                svg {
+                    transform: scale(1.19);
+                }
+            }
+        }
+
         &.navbar__dif {
             margin-left: 40px;
 

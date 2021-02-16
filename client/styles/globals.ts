@@ -43,6 +43,7 @@ export const theme = {
         orangeDetail: "#F79D65",
         lightPink: "#FF928B",
         verificadoColor: "#4895EF",
+        primaryHover: "rgba(255, 67, 56, 0.56)",
     },
     fonts: {
         patua: "Patua One",

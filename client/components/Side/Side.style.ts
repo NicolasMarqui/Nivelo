@@ -4,6 +4,7 @@ import { SideOpen, SideOpenLeft } from "../../styles/animations";
 interface SideWrapperProps {
     left?: boolean;
     open: boolean;
+    size?: string;
 }
 
 export const SideWrapper = styled.div<SideWrapperProps>`
@@ -11,7 +12,7 @@ export const SideWrapper = styled.div<SideWrapperProps>`
     top: 0;
     right: 0;
     bottom: 0;
-    width: 353px;
+    width: ${({ size }) => size || "353px"};
     background-color: #fff;
     overflow-x: hidden;
     z-index: 40;

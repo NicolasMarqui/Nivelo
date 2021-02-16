@@ -8,8 +8,13 @@ export const TutorCardWrapper = styled.div<TutorCardWrapperProps>`
     display: flex;
     background-color: #f3f3f3;
     border-radius: 55px;
-    padding: 60px 26px;
+    padding: 60px 26px 30px;
     margin: 15px 0;
+
+    &:hover {
+        transform: scale(1.01);
+        transition: all 0.4s cubic-bezier(0.075, 0.82, 0.165, 1);
+    }
 
     .tutor__fRow {
         flex: 1;
@@ -17,6 +22,7 @@ export const TutorCardWrapper = styled.div<TutorCardWrapperProps>`
         flex-direction: column;
         align-items: center;
         justify-content: flex-start;
+        cursor: pointer;
 
         .tutor__avatar {
             border-radius: 50%;
@@ -89,6 +95,10 @@ export const TutorCardWrapper = styled.div<TutorCardWrapperProps>`
         display: flex;
         justify-content: center;
         align-items: center;
+
+        .react-tabs {
+            width: 90%;
+        }
     }
 
     ${({ isColumn }) =>
@@ -98,7 +108,7 @@ export const TutorCardWrapper = styled.div<TutorCardWrapperProps>`
             width: 100%;
             overflow-x: auto;
             border-radius: 25px;
-            padding: 60px 16px;
+            padding: 40px 16px;
             margin: 15px;
 
             @media (min-width: 992px) {
@@ -121,6 +131,10 @@ export const TutorCardWrapper = styled.div<TutorCardWrapperProps>`
                     text-align: center;
                 }
 
+                .iCBTXn {
+                    margin: 14px auto 0;
+                }
+
                 .cQdqgO {
                     width: 100%;
                 }
@@ -132,11 +146,20 @@ export const TutorCardWrapper = styled.div<TutorCardWrapperProps>`
                     h5 {
                         text-align: center;
                     }
+
+                    .prices__btn {
+                        flex-direction: column;
+
+                        & > div {
+                            margin: 5px 0;
+                        }
+                    }
                 }
             }
 
             .tutor__tRow {
                 margin-top: 40px;
+                display: none;
             }
         `}
 `;

@@ -159,7 +159,7 @@ export const SingleTutorWrapper = styled.div`
                     display: flex;
                     margin-top: 25px;
 
-                    .jLtcft {
+                    & > div {
                         border-radius: 8px;
                         padding: 10px;
 
@@ -173,16 +173,6 @@ export const SingleTutorWrapper = styled.div`
                             svg {
                                 font-size: 14px;
                             }
-                        }
-
-                        &:first-child {
-                            background-color: ${({ theme }) =>
-                                theme.colors.lightPink};
-                        }
-
-                        &:last-child {
-                            background-color: ${({ theme }) =>
-                                theme.colors.lightBlue};
                         }
                     }
                 }
@@ -207,12 +197,10 @@ export const SingleTutorWrapper = styled.div`
                     text-align: center;
                 }
 
-                .jLtcft {
+                .epyeh {
                     margin-top: 15px;
-                    background-color: ${({ theme }) => theme.colors.lightGreen};
 
                     .icb__text {
-                        color: #fff;
                         font-weight: 700;
                     }
                 }

@@ -35,3 +35,14 @@ export const SideOpenLeft = keyframes`
                 transform: translateX(0px);
     }
 `;
+
+export const buttonHover = keyframes`
+    0% {
+    -webkit-transform: translateZ(0);
+            transform: translateZ(0);
+    }
+    100% {
+        -webkit-transform: translateZ(160px);
+                transform: translateZ(160px);
+    }
+`;

@@ -156,7 +156,7 @@ interface DescriptionProps {
 
 export const Description = styled.p<DescriptionProps>`
     font-size: ${({ fontSize }) => fontSize || "17px"};
-    color: ${({ color }) => color || "#b1b1b1"};
+    color: ${({ color }) => color || "#646464"};
     line-height: 25px;
     margin-top: ${({ marginTop }) => marginTop || "0"}px;
     align-self: flex-start;
@@ -258,4 +258,12 @@ export const FormInput = styled.input`
     border: 1px solid #dddddd;
     border-radius: 7px;
     outline: none;
+`;
+
+export const SampleDiv = styled.div`
+    height: 160px;
+    background-color: #2222;
+    width: 100%;
+    margin: 15px auto 5px;
+    border-radius: 10px;
 `;

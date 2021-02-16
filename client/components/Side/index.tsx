@@ -10,6 +10,7 @@ interface SideProps {
     left?: boolean;
     footer?: boolean;
     header?: { icon?: React.ReactElement; text: string };
+    width?: string;
 }
 
 // TODO add close on outside click
@@ -22,9 +23,10 @@ export default function Side({
     left,
     footer,
     header,
+    width,
 }: SideProps) {
     return (
-        <SideWrapper left={left ? left : false} open={isOpen}>
+        <SideWrapper left={left ? left : false} open={isOpen} size={width}>
             {header && (
                 <div className="side__header">
                     {header.icon && (

@@ -6,6 +6,9 @@ interface IconButtonProps {
     icon?: React.ReactElement;
     hasChevron?: boolean;
     onClick?: () => any;
+    smaller?: boolean;
+    bColor?: string;
+    color?: string;
 }
 
 export default function IconButton({
@@ -13,9 +16,17 @@ export default function IconButton({
     icon,
     hasChevron,
     onClick,
+    smaller,
+    bColor,
+    color,
 }: IconButtonProps) {
     return (
-        <IconButtonWrapper onClick={onClick}>
+        <IconButtonWrapper
+            onClick={onClick}
+            smaller={smaller ? smaller : false}
+            bColor={bColor}
+            color={color}
+        >
             {icon && <div className="icb__icon">{icon}</div>}
             {text && (
                 <div className="icb__text">

@@ -160,10 +160,14 @@ export default function Tutor() {
                                                 <IconButton
                                                     icon={<MdEvent size={20} />}
                                                     text="AGENDAR"
+                                                    bColor="#FF928B"
+                                                    color="#fff"
                                                 />
                                                 <IconButton
                                                     icon={<MdChat size={20} />}
                                                     text="CONTATO"
+                                                    bColor="#68E1FD"
+                                                    color="#fff"
                                                 />
                                             </div>
                                         </div>
@@ -180,7 +184,11 @@ export default function Tutor() {
                                                 consectetur eiusmod tempor.
                                             </Description>
 
-                                            <IconButton text="VERIFICAR DISPONIBILIDADE" />
+                                            <IconButton
+                                                text="VERIFICAR DISPONIBILIDADE"
+                                                bColor="#57CC99"
+                                                color="#fff"
+                                            />
                                         </div>
                                     </div>
                                 )}
