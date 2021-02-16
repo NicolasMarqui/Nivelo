@@ -9,11 +9,29 @@ export const TtFlex = styled.div`
     width: 100%;
 `;
 
-export const TtFilters = styled.div`
-    margin-top: 40px;
+interface TtFiltersProps {
+    isFixed?: boolean;
+}
+
+export const TtFilters = styled.div<TtFiltersProps>`
+    /* padding: 20px 0; */
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+    ${({ isFixed }) =>
+        isFixed &&
+        css`
+            background-color: #fff;
+            padding: 0 10px;
+            box-shadow: 1px 3px 9px #cecece;
+            border-radius: 15px;
+            z-index: 4;
+
+            .filters__buttons {
+                padding: 10px 0 !important;
+            }
+        `}
 
     .filters__amount {
         p {
@@ -25,6 +43,7 @@ export const TtFilters = styled.div`
     }
 
     .filters__buttons {
+        padding: 20px 0;
         display: flex;
     }
 `;
@@ -34,7 +53,6 @@ interface AreaTutorsProps {
 }
 
 export const AreaTutors = styled.div<AreaTutorsProps>`
-    margin-top: 70px;
     ${({ isColumn }) =>
         isColumn &&
         css`

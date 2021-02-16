@@ -27,10 +27,10 @@ export default function Filter() {
     // Filter values
     const [isFixed, setIsFixed] = useState(false);
     const [localizacao, setLocalizacao] = useState([]);
-    const [preco, setPreco] = useState(router.query.preco || "");
-    const [categoria, setCategoria] = useState(router.query.categoria || "");
-    const [disponibilidade, setDisponibilidade] = useState("");
-    const [tutor, setTutor] = useState("");
+    const [preco, setPreco] = useState([]);
+    const [categoria, setCategoria] = useState([]);
+    const [disponibilidade, setDisponibilidade] = useState([]);
+    const [tutor, setTutor] = useState([]);
     const [hasAplicadoFilter, setHasAplicadoFilter] = useState(false);
     const [currentPage, setCurrentPage] = useState(router.query.page || 1);
 
@@ -39,10 +39,12 @@ export default function Filter() {
 
     const queryValues = {
         localizacao: localizacao ? localizacao.map((t) => t.value) : [],
-        preco,
-        categoria,
-        disponibilidade,
-        tutor,
+        preco: preco ? preco.map((t) => t.value) : [],
+        categoria: categoria ? categoria.map((t) => t.value) : [],
+        disponibilidade: disponibilidade
+            ? disponibilidade.map((t) => t.value)
+            : [],
+        tutor: tutor ? tutor.map((t) => t.value) : [],
     };
 
     const handleOpenSide = () => {
@@ -51,8 +53,15 @@ export default function Filter() {
         document.body.classList.add("overlay", "no-scroll");
     };
 
+    const handleCloseSide = () => {
+        setIsOpenSide(!isOpenSide);
+        document.body.className = "";
+    };
+
     useEffect(() => {
+        console.log("Query", queryValues);
         setIsOpenSide(false);
+        document.body.className = "";
 
         router.push(
             {
@@ -67,12 +76,12 @@ export default function Filter() {
 
     return (
         <>
-            <Sticky>
+            <Sticky topOffset={0}>
                 {({ style, isSticky }) => (
                     <FilterWrapper
                         ref={filterRef}
-                        isFixed={isSticky}
                         style={style}
+                        isFixed={isSticky}
                     >
                         <ul className="filter__list">
                             <li>
@@ -87,11 +96,17 @@ export default function Filter() {
                     </FilterWrapper>
                 )}
             </Sticky>
-            <Side isOpen={isOpenSide} footer>
+            <Side
+                isOpen={isOpenSide}
+                footer
+                header={{ text: "Filtros" }}
+                onClickClose={handleCloseSide}
+                onClickAplicar={() => setHasAplicadoFilter(!hasAplicadoFilter)}
+            >
                 <FilterSideWrapper>
                     <Accordion allowMultipleExpanded>
                         <div className="side__group">
-                            <AccordionItem>
+                            <AccordionItem id="1">
                                 <AccordionItemHeading>
                                     <AccordionItemButton>
                                         Localização
@@ -101,7 +116,6 @@ export default function Filter() {
                                     <Select
                                         closeMenuOnSelect={true}
                                         placeholder="Localização"
-                                        defaultValue={countries[31]}
                                         components={animatedComponents}
                                         isMulti
                                         onChange={(e: any) => setLocalizacao(e)}
@@ -116,7 +130,7 @@ export default function Filter() {
                             </AccordionItem>
                         </div>
                         <div className="side__group">
-                            <AccordionItem>
+                            <AccordionItem id="2">
                                 <AccordionItemHeading>
                                     <AccordionItemButton>
                                         Preço
@@ -125,11 +139,10 @@ export default function Filter() {
                                 <AccordionItemPanel>
                                     <Select
                                         closeMenuOnSelect={true}
-                                        placeholder="Localização"
-                                        defaultValue={countries[31]}
-                                        components={animatedComponents}
+                                        placeholder="Preço"
                                         isMulti
-                                        onChange={(e: any) => setLocalizacao(e)}
+                                        components={animatedComponents}
+                                        onChange={(e: any) => setPreco(e)}
                                         options={countries.map((c: any) => {
                                             return {
                                                 ...c,
@@ -141,7 +154,7 @@ export default function Filter() {
                             </AccordionItem>
                         </div>
                         <div className="side__group">
-                            <AccordionItem>
+                            <AccordionItem id="3">
                                 <AccordionItemHeading>
                                     <AccordionItemButton>
                                         Categoria
@@ -150,11 +163,10 @@ export default function Filter() {
                                 <AccordionItemPanel>
                                     <Select
                                         closeMenuOnSelect={true}
-                                        placeholder="Localização"
-                                        defaultValue={countries[31]}
+                                        placeholder="Categoria"
                                         components={animatedComponents}
                                         isMulti
-                                        onChange={(e: any) => setLocalizacao(e)}
+                                        onChange={(e: any) => setCategoria(e)}
                                         options={countries.map((c: any) => {
                                             return {
                                                 ...c,
@@ -166,20 +178,21 @@ export default function Filter() {
                             </AccordionItem>
                         </div>
                         <div className="side__group">
-                            <AccordionItem>
+                            <AccordionItem id="4">
                                 <AccordionItemHeading>
                                     <AccordionItemButton>
-                                        Localização
+                                        Disponibilidade
                                     </AccordionItemButton>
                                 </AccordionItemHeading>
                                 <AccordionItemPanel>
                                     <Select
                                         closeMenuOnSelect={true}
                                         placeholder="Disponibilidade"
-                                        defaultValue={countries[31]}
                                         components={animatedComponents}
                                         isMulti
-                                        onChange={(e: any) => setLocalizacao(e)}
+                                        onChange={(e: any) =>
+                                            setDisponibilidade(e)
+                                        }
                                         options={countries.map((c: any) => {
                                             return {
                                                 ...c,
@@ -191,7 +204,7 @@ export default function Filter() {
                             </AccordionItem>
                         </div>
                         <div className="side__group">
-                            <AccordionItem>
+                            <AccordionItem id="5">
                                 <AccordionItemHeading>
                                     <AccordionItemButton>
                                         Tipo de Tutor
@@ -200,11 +213,10 @@ export default function Filter() {
                                 <AccordionItemPanel>
                                     <Select
                                         closeMenuOnSelect={true}
-                                        placeholder="Localização"
-                                        defaultValue={countries[31]}
+                                        placeholder="Tipo de Tutor"
                                         components={animatedComponents}
                                         isMulti
-                                        onChange={(e: any) => setLocalizacao(e)}
+                                        onChange={(e: any) => setTutor(e)}
                                         options={countries.map((c: any) => {
                                             return {
                                                 ...c,

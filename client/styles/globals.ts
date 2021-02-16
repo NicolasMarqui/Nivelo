@@ -26,7 +26,7 @@ export const GlobalStyle = createGlobalStyle`
         right: 0;
         bottom: 0;
         z-index: 30;
-        background-color: rgba(0,0,0,0.6);
+        background-color: rgba(0,0,0,0.4);
       }
     }
   }

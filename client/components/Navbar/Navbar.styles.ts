@@ -1,7 +1,11 @@
 import { navBarHover } from "./../../styles/animations";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
-export const Header = styled.div`
+interface HeaderProps {
+    whiteBg?: boolean;
+}
+
+export const Header = styled.div<HeaderProps>`
     width: 100%;
     padding-top: 20px;
     z-index: 4;
@@ -13,6 +17,12 @@ export const Header = styled.div`
     .nivelo__logo {
         margin-top: -14px !important;
     }
+
+    ${({ whiteBg }) =>
+        whiteBg &&
+        css`
+            background-color: #fff;
+        `}
 `;
 
 export const Menu = styled.ul`

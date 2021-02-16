@@ -34,13 +34,8 @@ export default function Tutors() {
     const [isViewColumn, setIsViewColumn] = useState(false);
 
     useEffect(() => {
-        if (
-            router.query.localizacao !== "" ||
-            router.query.preco !== "" ||
-            router.query.categoria !== "" ||
-            router.query !== {}
-        ) {
-            console.log("yeep");
+        if (router.query !== {}) {
+            console.log("From tutor", router.query);
         }
     }, [router.asPath]);
 

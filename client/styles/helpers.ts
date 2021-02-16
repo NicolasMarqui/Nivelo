@@ -236,3 +236,26 @@ export const Divider = styled.div`
     width: 100%;
     margin: 20px 0;
 `;
+
+export const Form = styled.form`
+    width: 100%;
+`;
+
+export const FormGroup = styled.div`
+    margin: 30px 0;
+    display: flex;
+    flex-direction: column;
+`;
+
+export const FormLabel = styled.label`
+    font-size: 16px;
+    color: #222;
+    margin-bottom: 7px;
+`;
+
+export const FormInput = styled.input`
+    padding: 10px 14px;
+    border: 1px solid #dddddd;
+    border-radius: 7px;
+    outline: none;
+`;

@@ -20,10 +20,9 @@ export const SideWrapper = styled.div<SideWrapperProps>`
     flex-direction: column;
 
     .side__header {
-        width: 100%;
-        padding: 10px;
+        padding: 10px 17px;
         display: flex;
-        justify-content: center;
+        justify-content: space-between;
         align-items: center;
         background-color: orange;
 
@@ -33,6 +32,21 @@ export const SideWrapper = styled.div<SideWrapperProps>`
 
         h4 {
             font-size: 18px;
+        }
+
+        .header__close {
+            background-color: #222;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+
+            svg {
+                padding: 10px;
+            }
+
+            &:hover {
+                background-color: rgba(0, 0, 0, 0.2);
+            }
         }
     }
 

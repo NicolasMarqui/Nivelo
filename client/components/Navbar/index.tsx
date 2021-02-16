@@ -3,10 +3,13 @@ import { Container, Flex } from "../../styles/helpers";
 import { Header, Menu } from "./Navbar.styles";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 const Navbar: React.FC = ({}) => {
+    const router = useRouter();
+
     return (
-        <Header>
+        <Header whiteBg={router.pathname === "/login" ? true : false}>
             <Container flex>
                 <Flex>
                     <h1 style={{ cursor: "pointer" }}>

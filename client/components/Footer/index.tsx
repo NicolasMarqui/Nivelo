@@ -13,10 +13,13 @@ import languages from "../../utils/languages.json";
 import Link from "next/link";
 import { FaGithub } from "react-icons/fa";
 import { AiFillHeart } from "react-icons/ai";
+import { useRouter } from "next/router";
 
 export default function Footer() {
+    const router = useRouter();
+
     return (
-        <FooterWrapper>
+        <FooterWrapper notMargin={router.pathname === "/login" ? true : false}>
             <Container flex>
                 <FooterColumn>
                     <div className="column__name">

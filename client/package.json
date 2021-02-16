@@ -8,6 +8,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "formik": "^2.2.6",
     "next": "10.0.6",
     "react": "17.0.1",
     "react-accessible-accordion": "^3.3.4",

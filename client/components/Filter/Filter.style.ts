@@ -9,13 +9,20 @@ export const FilterWrapper = styled.div<FilterWrapperProps>`
     ${({ isFixed }) =>
         isFixed &&
         css`
-            background-color: #fff;
-            padding: 10px;
+            margin-top: 20px;
             box-shadow: 1px 3px 9px #cecece;
             border-radius: 20px;
             display: flex;
             justify-content: center;
             z-index: 10;
+
+            .jLtcft {
+                background-color: ${({ theme }) => theme.colors.primary};
+
+                .icb__text {
+                    color: #fff;
+                }
+            }
         `}
 
     .filter__list {

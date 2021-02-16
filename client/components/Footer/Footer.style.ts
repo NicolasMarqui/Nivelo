@@ -1,11 +1,21 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
-export const FooterWrapper = styled.div`
+interface FooterWrapperProps {
+    notMargin?: boolean;
+}
+
+export const FooterWrapper = styled.div<FooterWrapperProps>`
     width: 100%;
     margin-top: 40px;
     padding: 60px 0 20px;
     background-color: #f9f9f9;
     border-top: 4px solid ${({ theme }) => theme.colors.primary};
+
+    ${({ notMargin }) =>
+        notMargin &&
+        css`
+            margin-top: 0;
+        `}
 `;
 
 export const LogoCurrencyWrapper = styled.div`

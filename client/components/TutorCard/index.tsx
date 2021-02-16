@@ -50,11 +50,11 @@ export default function TutorCard({ isColumn }: TutorCardProps) {
 
                     <div className="prices__btn">
                         <IconButton
-                            icon={<MdEvent size={20} />}
+                            icon={<MdEvent size={17} />}
                             text="AGENDAR"
                         />
                         <IconButton
-                            icon={<MdChat size={20} />}
+                            icon={<MdChat size={17} />}
                             text="CONTATO"
                         />
                     </div>
