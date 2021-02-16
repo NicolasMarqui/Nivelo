@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 export const ClassItemWrapper = styled.div`
-    width: 97%;
     padding: 10px 20px;
     background-color: #f2f2f2;
     border-radius: 16px;

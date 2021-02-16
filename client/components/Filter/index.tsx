@@ -99,7 +99,7 @@ export default function Filter() {
             <Side
                 isOpen={isOpenSide}
                 footer
-                header={{ text: "Filtros" }}
+                header={{}}
                 onClickClose={handleCloseSide}
                 onClickAplicar={() => setHasAplicadoFilter(!hasAplicadoFilter)}
             >

@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
     Container,
     Divider,
@@ -27,8 +28,22 @@ import { tutorBreadcumb } from "../../../utils/breadcumbs";
 import ClassItem from "../../../components/ClassItem";
 import InfoCard from "../../../components/InfoCard";
 import FeedbackItem from "../../../components/FeedbackItem";
+import Agendar from "../../../components/Agendar";
 
 export default function Tutor() {
+    const [agendarOpen, setAgendarOpen] = useState(false);
+
+    const handleOpenSide = () => {
+        setAgendarOpen(!agendarOpen);
+        document.body.className = "";
+        document.body.classList.add("overlay", "no-scroll");
+    };
+
+    const handleCloseSide = () => {
+        setAgendarOpen(!agendarOpen);
+        document.body.className = "";
+    };
+
     return (
         <PageWrapper pTop="110px">
             <Meta
@@ -162,6 +177,7 @@ export default function Tutor() {
                                                     text="AGENDAR"
                                                     bColor="#FF928B"
                                                     color="#fff"
+                                                    onClick={handleOpenSide}
                                                 />
                                                 <IconButton
                                                     icon={<MdChat size={20} />}
@@ -197,6 +213,9 @@ export default function Tutor() {
                     </SingleTutorWrapper>
                 </StickyContainer>
             </Container>
+            {agendarOpen && (
+                <Agendar isOpen={agendarOpen} closeAgendar={handleCloseSide} />
+            )}
         </PageWrapper>
     );
 }

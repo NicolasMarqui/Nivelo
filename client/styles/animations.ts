@@ -27,8 +27,8 @@ export const SideOpen = keyframes`
 
 export const SideOpenLeft = keyframes`
     0% {
-        -webkit-transform: translateX(-400px);
-            transform: translateX(-400px);
+        -webkit-transform: translateX(-800px);
+            transform: translateX(-800px);
     }
     100% {
         -webkit-transform: translateX(0px);

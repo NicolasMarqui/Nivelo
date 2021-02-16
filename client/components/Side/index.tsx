@@ -1,3 +1,4 @@
+import { useRef } from "react";
 import { Button } from "../../styles/helpers";
 import { SideWrapper } from "./Side.style";
 import { MdClose } from "react-icons/md";
@@ -9,7 +10,7 @@ interface SideProps {
     onClickAplicar?: () => any;
     left?: boolean;
     footer?: boolean;
-    header?: { icon?: React.ReactElement; text: string };
+    header?: { icon?: React.ReactElement; text?: string };
     width?: string;
 }
 
@@ -25,8 +26,26 @@ export default function Side({
     header,
     width,
 }: SideProps) {
+    const sideRef = useRef(null);
+
+    const handleCloseSide = (event: any) => {
+        document
+            .querySelector(".body__overlay")
+            .addEventListener("click", function (e) {
+                if (e.target !== sideRef.current) {
+                    onClickClose();
+                }
+            });
+    };
+
     return (
-        <SideWrapper left={left ? left : false} open={isOpen} size={width}>
+        <SideWrapper
+            left={left ? left : false}
+            open={isOpen}
+            size={width}
+            onClick={handleCloseSide}
+            ref={sideRef}
+        >
             {header && (
                 <div className="side__header">
                     {header.icon && (
@@ -41,7 +60,13 @@ export default function Side({
             <div className="side__content">{children}</div>
             {footer && (
                 <div className="side__footer">
-                    <Button onClick={onClickAplicar}>APLICAR</Button>
+                    <Button
+                        onClick={onClickAplicar}
+                        bgColor="#57CC99"
+                        color="#fff"
+                    >
+                        APLICAR
+                    </Button>
                 </div>
             )}
         </SideWrapper>
