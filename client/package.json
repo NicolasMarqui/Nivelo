@@ -9,13 +9,17 @@
     "gen": "graphql-codegen --config codegen.yml"
   },
   "dependencies": {
+    "@urql/exchange-graphcache": "^4.0.0",
     "formik": "^2.2.6",
     "graphql": "^15.5.0",
+    "isomorphic-unfetch": "^3.1.0",
     "next": "10.0.6",
+    "next-urql": "^3.0.0",
     "react": "17.0.1",
     "react-accessible-accordion": "^3.3.4",
     "react-dom": "17.0.1",
     "react-icons": "^4.2.0",
+    "react-is": "^17.0.1",
     "react-select": "^4.1.0",
     "react-step-wizard": "^5.3.5",
     "react-sticky": "^6.0.3",

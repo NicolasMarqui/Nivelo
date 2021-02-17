@@ -7,12 +7,15 @@ import { useRouter } from "next/router";
 import { BsBell } from "react-icons/bs";
 import { FaUserGraduate } from "react-icons/fa";
 import { useMeQuery } from "../../generated/graphql";
+import { isServer } from "../../utils/isServer";
 
 const Navbar: React.FC = ({}) => {
-    const [{ data, fetching }] = useMeQuery();
+    const [{ data, fetching }] = useMeQuery({
+        pause: isServer(),
+    });
     const router = useRouter();
 
-    const [isLogged, setIsLogged] = useState(true);
+    console.log(fetching);
 
     return (
         <Header whiteBg={router.pathname === "/login" ? true : false}>
@@ -54,14 +57,14 @@ const Navbar: React.FC = ({}) => {
                         </li>
                         {fetching ? (
                             <p>Carregando</p>
-                        ) : data.me ? (
+                        ) : data && data.me ? (
                             <>
                                 <li className="no__hover bg__icon">
                                     <Link href="/dashboard/notifications">
                                         <BsBell size={24} />
                                     </Link>
                                 </li>
-                                <li className="no__hover bg__icon">
+                                <li className="no__hover bg__icon ">
                                     <Link href="/dashboard">
                                         <FaUserGraduate size={24} color="red" />
                                     </Link>

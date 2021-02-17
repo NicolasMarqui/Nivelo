@@ -23,8 +23,13 @@ import {
     MdRecordVoiceOver,
 } from "react-icons/md";
 import Meta from "../components/Meta";
+import { createUrqlClient } from "../utils/createUrqlClient";
+import { withUrqlClient } from "next-urql";
+import { useCategoriesQuery } from "../generated/graphql";
 
-export default function Home() {
+const Home = () => {
+    const [{ data }] = useCategoriesQuery();
+
     return (
         <>
             <Meta
@@ -45,7 +50,8 @@ export default function Home() {
                             className="detail__dots"
                         />
                         <Title fontSize="70px" fontWeight="400">
-                            Aprenda com os melhores
+                            Aprenda com os{" "}
+                            <span className="has__border">melhores</span>
                         </Title>
                         <Description size="70" marginTop={30}>
                             Lorem ipsum dolor sit amet, consectetur adipiscing
@@ -175,6 +181,11 @@ export default function Home() {
                     <Title fontSize="60px" fontWeight="400" size={51}>
                         Categorias que combinam com você
                     </Title>
+                    {!data ? (
+                        <p>Niente</p>
+                    ) : (
+                        data.allCategories.map((cat) => cat.name)
+                    )}
                 </Container>
             </Section>
             <Section>
@@ -185,4 +196,6 @@ export default function Home() {
             </Section>
         </>
     );
-}
+};
+
+export default withUrqlClient(createUrqlClient, { ssr: true })(Home);

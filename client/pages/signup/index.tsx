@@ -8,12 +8,13 @@ import {
 import { LoginWrapper } from "../login/Login.style";
 import Meta from "../../components/Meta";
 import SignupForm from "../../components/SignupForm";
-import Image from "next/image";
 import { BorderedButton } from "../tutors/Tutors.styles";
+import { createUrqlClient } from "../../utils/createUrqlClient";
+import { withUrqlClient } from "next-urql";
 
 // TODO refactor page
 
-export default function Signup() {
+const Signup = () => {
     return (
         <PageWrapper pTop="0">
             <Meta
@@ -53,4 +54,6 @@ export default function Signup() {
             </LoginWrapper>
         </PageWrapper>
     );
-}
+};
+
+export default withUrqlClient(createUrqlClient)(Signup);

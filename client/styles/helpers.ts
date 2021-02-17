@@ -107,6 +107,10 @@ export const Title = styled.h2<TitleProps>`
         css`
             margin: 0 auto;
         `}
+
+    .has__border {
+        border-bottom: 5px solid ${({ theme }) => theme.colors.primary};
+    }
 `;
 
 interface PreTitleProps {
