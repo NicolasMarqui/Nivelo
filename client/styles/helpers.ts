@@ -258,6 +258,10 @@ export const FormInput = styled.input`
     border: 1px solid #dddddd;
     border-radius: 7px;
     outline: none;
+
+    &.has__error {
+        border: 2px solid red;
+    }
 `;
 
 export const SampleDiv = styled.div`
@@ -266,4 +270,11 @@ export const SampleDiv = styled.div`
     width: 100%;
     margin: 15px auto 5px;
     border-radius: 10px;
+`;
+
+export const FormError = styled.p`
+    padding: 10px 0;
+    margin: 5px 0;
+    color: red;
+    font-size: 14px;
 `;

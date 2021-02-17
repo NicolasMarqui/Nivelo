@@ -2,31 +2,32 @@ import { useFormik } from "formik";
 import {
     Button,
     Form,
+    FormError,
     FormGroup,
     FormInput,
-    FormError,
     FormLabel,
 } from "../../styles/helpers";
 import Link from "next/link";
-import { FormFooter } from "./LoginForm.style";
-import { useLoginMutation } from "../../generated/graphql";
+import { FormFooter } from "./SignupForm.style";
+import { useRegisterMutation } from "../../generated/graphql";
 import { toErrorMap } from "../../utils/toErrorMap";
 import { useRouter } from "next/router";
 
-export default function LoginForm() {
-    const [, login] = useLoginMutation();
+export default function SignupForm() {
     const router = useRouter();
+    const [, register] = useRegisterMutation();
 
     const formik = useFormik({
         initialValues: {
+            name: "",
             email: "",
             password: "",
         },
         onSubmit: async (values, { setErrors }) => {
-            const response = await login(values);
-            if (response.data.login.errors) {
-                setErrors(toErrorMap(response.data.login.errors));
-            } else if (response.data.login.user) {
+            const response = await register(values);
+            if (response.data.signup.errors) {
+                setErrors(toErrorMap(response.data.signup.errors));
+            } else if (response.data.signup.user) {
                 router.push("/");
             }
         },
@@ -34,6 +35,20 @@ export default function LoginForm() {
 
     return (
         <Form onSubmit={formik.handleSubmit}>
+            <FormGroup>
+                <FormLabel htmlFor="name">Nome</FormLabel>
+                <FormInput
+                    name="name"
+                    type="text"
+                    placeholder="Nome"
+                    onChange={formik.handleChange}
+                    value={formik.values.name}
+                    className={`${formik.errors.name ? "has__error" : ""}`}
+                />
+                {formik.errors.name && (
+                    <FormError>{formik.errors.name}</FormError>
+                )}
+            </FormGroup>
             <FormGroup>
                 <FormLabel htmlFor="email">Email</FormLabel>
                 <FormInput
@@ -64,10 +79,10 @@ export default function LoginForm() {
             </FormGroup>
 
             <FormFooter>
-                <Button>Login</Button>
+                <Button>Register</Button>
 
-                <Link href="/signup?ref=login">
-                    <a>Não tenho conta</a>
+                <Link href="/login?ref=signup">
+                    <a>Já tenho conta</a>
                 </Link>
             </FormFooter>
         </Form>

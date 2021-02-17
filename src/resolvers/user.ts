@@ -65,8 +65,18 @@ export class UserResolver {
             "ASIAHS986378923H2JVBJAK___0-902E212EI12EOIBJKAD"
         );
 
-        // @ts-ignore: Unreachable code error
-        const user = await User.findOne({ where: { id: userInfo.id } });
+        const user = await User.findOne({
+            // @ts-ignore: Unreachable code error
+            where: { id: userInfo.id },
+            relations: [
+                "tutor",
+                "tutor.type",
+                "platforms",
+                "userPlatformAccount",
+                "userPlatformAccount.platform",
+                "feedback",
+            ],
+        });
 
         if (!user) return null;
 

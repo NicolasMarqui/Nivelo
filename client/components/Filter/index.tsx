@@ -1,9 +1,8 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import IconButton from "../IconButton";
 import { FilterWrapper, FilterSideWrapper } from "./Filter.style";
 import { TiFilter } from "react-icons/ti";
 import { useRouter } from "next/router";
-import Dropdown from "../Dropdown";
 import Select from "react-select";
 import countries from "../../utils/countries.json";
 import makeAnimated from "react-select/animated";
@@ -22,7 +21,6 @@ import "react-accessible-accordion/dist/fancy-example.css";
 export default function Filter() {
     const router = useRouter();
     const animatedComponents = makeAnimated();
-    const filterRef = useRef(null);
 
     // Filter values
     const [isFixed, setIsFixed] = useState(false);
@@ -78,11 +76,7 @@ export default function Filter() {
         <>
             <Sticky topOffset={0}>
                 {({ style, isSticky }) => (
-                    <FilterWrapper
-                        ref={filterRef}
-                        style={style}
-                        isFixed={isSticky}
-                    >
+                    <FilterWrapper style={style} isFixed={isSticky}>
                         <ul className="filter__list">
                             <li>
                                 <IconButton

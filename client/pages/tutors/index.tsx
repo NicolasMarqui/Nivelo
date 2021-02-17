@@ -23,6 +23,7 @@ import { useRouter } from "next/router";
 import Meta from "../../components/Meta";
 import { StickyContainer } from "react-sticky";
 import TutorCard from "../../components/TutorCard";
+import { useQuery } from "urql";
 
 export default function Tutors() {
     const router = useRouter();

@@ -11,6 +11,7 @@ import redis from "redis";
 import session from "express-session";
 import connectRedis from "connect-redis";
 import mongoose from "mongoose";
+import cors from "cors";
 
 // Resolvers
 import { UserResolver } from "./resolvers/user";
@@ -96,6 +97,12 @@ const main = async () => {
         host: "localhost",
         auth_pass: "nick",
     });
+    app.use(
+        cors({
+            origin: "http://localhost:3000",
+            credentials: true,
+        })
+    );
 
     app.use(
         session({
@@ -131,7 +138,7 @@ const main = async () => {
         context: ({ req, res }): MyContext => ({ req, res }),
     });
 
-    apolloServer.applyMiddleware({ app });
+    apolloServer.applyMiddleware({ app, cors: false });
 
     app.use(express.json());
     app.use(scheduleRouter);

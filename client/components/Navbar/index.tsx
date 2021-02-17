@@ -6,8 +6,10 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { BsBell } from "react-icons/bs";
 import { FaUserGraduate } from "react-icons/fa";
+import { useMeQuery } from "../../generated/graphql";
 
 const Navbar: React.FC = ({}) => {
+    const [{ data, fetching }] = useMeQuery();
     const router = useRouter();
 
     const [isLogged, setIsLogged] = useState(true);
@@ -50,7 +52,9 @@ const Navbar: React.FC = ({}) => {
                                 <a>Como funciona?</a>
                             </Link>
                         </li>
-                        {isLogged ? (
+                        {fetching ? (
+                            <p>Carregando</p>
+                        ) : data.me ? (
                             <>
                                 <li className="no__hover bg__icon">
                                     <Link href="/dashboard/notifications">
@@ -65,7 +69,6 @@ const Navbar: React.FC = ({}) => {
                             </>
                         ) : (
                             <>
-                                {" "}
                                 <li className="navbar__dif">
                                     <Link href="/login">
                                         <a>Login</a>
