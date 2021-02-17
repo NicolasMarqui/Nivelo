@@ -23,16 +23,22 @@ import { useRouter } from "next/router";
 import Meta from "../../components/Meta";
 import { StickyContainer } from "react-sticky";
 import TutorCard from "../../components/TutorCard";
-import { useQuery } from "urql";
+import { createUrqlClient } from "../../utils/createUrqlClient";
+import { withUrqlClient } from "next-urql";
+import { useTutorsQuery } from "../../generated/graphql";
 
-export default function Tutors() {
+const Tutors = () => {
+    const [{ data, fetching }] = useTutorsQuery();
     const router = useRouter();
 
     const [isLoadingData, setIsLoadingData] = useState(false);
-    const [data, setData] = useState([]);
 
     // Viewing mode
     const [isViewColumn, setIsViewColumn] = useState(false);
+
+    useEffect(() => {
+        console.log("Tutors: ", data);
+    }, []);
 
     useEffect(() => {
         if (router.query !== {}) {
@@ -72,7 +78,11 @@ export default function Tutors() {
                     <TtFilters>
                         <div className="filters__amount">
                             <Description>
-                                Mostrando <span>800</span> tutores
+                                Mostrando{" "}
+                                <span>
+                                    {data ? data.allTutors.length : "-"}
+                                </span>{" "}
+                                tutores
                             </Description>
                         </div>
                         <div className="filters__buttons">
@@ -96,17 +106,23 @@ export default function Tutors() {
                             <Filter />
                         </div>
                     </TtFilters>
-                    {isLoadingData ? (
+                    {!data ? (
                         <h3>Loading this bitch</h3>
                     ) : (
                         <AreaTutors isColumn={isViewColumn}>
-                            <TutorCard isColumn={isViewColumn} />
-                            <TutorCard isColumn={isViewColumn} />
-                            <TutorCard isColumn={isViewColumn} />
+                            {data.allTutors.map((tut) => (
+                                <TutorCard
+                                    key={tut.id}
+                                    isColumn={isViewColumn}
+                                    tutor={tut}
+                                />
+                            ))}
                         </AreaTutors>
                     )}
                 </StickyContainer>
             </Container>
         </PageWrapper>
     );
-}
+};
+
+export default withUrqlClient(createUrqlClient, { ssr: true })(Tutors);

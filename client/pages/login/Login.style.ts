@@ -13,12 +13,12 @@ export const LoginSignupWrapper = styled.div`
         .detail__bg {
             background-image: url("/assets/student.jpg");
             position: absolute;
-            top: 22px;
+            top: 0;
             bottom: 0;
             left: 30px;
             background-size: cover;
             z-index: 3;
-            height: calc(100% - 50px);
+            height: calc(100% - 30px);
             width: 100%;
         }
     }

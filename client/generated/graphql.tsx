@@ -195,6 +195,8 @@ export type TutorResponse = {
 
 export type Mutation = {
   __typename?: 'Mutation';
+  changePassword: UserResponse;
+  forgotPassword: Scalars['Boolean'];
   signup: UserResponse;
   login: UserResponse;
   logout: Scalars['Boolean'];
@@ -222,6 +224,17 @@ export type Mutation = {
   addPlatformUser: Scalars['Boolean'];
   updatePlatformUser: UserPlatformAccount;
   newFeedback: FeedbackResponse;
+};
+
+
+export type MutationChangePasswordArgs = {
+  newPassword: Scalars['String'];
+  token: Scalars['String'];
+};
+
+
+export type MutationForgotPasswordArgs = {
+  email: Scalars['String'];
 };
 
 
@@ -481,6 +494,36 @@ export type RegularUserFragment = (
   & Pick<User, 'id' | 'name' | 'email'>
 );
 
+export type ChangePasswordMutationVariables = Exact<{
+  newPassword: Scalars['String'];
+  token: Scalars['String'];
+}>;
+
+
+export type ChangePasswordMutation = (
+  { __typename?: 'Mutation' }
+  & { changePassword: (
+    { __typename?: 'UserResponse' }
+    & { errors?: Maybe<Array<(
+      { __typename?: 'FieldError' }
+      & Pick<FieldError, 'field' | 'message'>
+    )>>, user?: Maybe<(
+      { __typename?: 'User' }
+      & Pick<User, 'id' | 'name' | 'email'>
+    )> }
+  ) }
+);
+
+export type ForgotPasswordMutationVariables = Exact<{
+  email: Scalars['String'];
+}>;
+
+
+export type ForgotPasswordMutation = (
+  { __typename?: 'Mutation' }
+  & Pick<Mutation, 'forgotPassword'>
+);
+
 export type LoginMutationVariables = Exact<{
   email: Scalars['String'];
   password: Scalars['String'];
@@ -559,6 +602,41 @@ export type MeQuery = (
   )> }
 );
 
+export type TutorsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type TutorsQuery = (
+  { __typename?: 'Query' }
+  & { allTutors: Array<(
+    { __typename?: 'Tutor' }
+    & Pick<Tutor, 'id' | 'description' | 'rating' | 'amountClasses' | 'amountStudents'>
+    & { type?: Maybe<(
+      { __typename?: 'TutorType' }
+      & Pick<TutorType, 'id' | 'name'>
+    )>, user?: Maybe<(
+      { __typename?: 'User' }
+      & Pick<User, 'id' | 'name' | 'email' | 'sex' | 'country' | 'city' | 'avatar'>
+      & { userPlatformAccount?: Maybe<Array<(
+        { __typename?: 'UserPlatformAccount' }
+        & { platform?: Maybe<(
+          { __typename?: 'Platforms' }
+          & Pick<Platforms, 'id' | 'name' | 'account'>
+        )> }
+      )>> }
+    )>, classes?: Maybe<Array<(
+      { __typename?: 'Classes' }
+      & Pick<Classes, 'id' | 'name' | 'description' | 'amountTimeTaught'>
+      & { price?: Maybe<Array<(
+        { __typename?: 'Price' }
+        & Pick<Price, 'id' | 'price' | 'time'>
+      )>> }
+    )>>, categories?: Maybe<Array<(
+      { __typename?: 'Category' }
+      & Pick<Category, 'id' | 'name' | 'icon'>
+    )>> }
+  )> }
+);
+
 export const RegularUserFragmentDoc = gql`
     fragment RegularUser on User {
   id
@@ -566,6 +644,34 @@ export const RegularUserFragmentDoc = gql`
   email
 }
     `;
+export const ChangePasswordDocument = gql`
+    mutation changePassword($newPassword: String!, $token: String!) {
+  changePassword(newPassword: $newPassword, token: $token) {
+    errors {
+      field
+      message
+    }
+    user {
+      id
+      name
+      email
+    }
+  }
+}
+    `;
+
+export function useChangePasswordMutation() {
+  return Urql.useMutation<ChangePasswordMutation, ChangePasswordMutationVariables>(ChangePasswordDocument);
+};
+export const ForgotPasswordDocument = gql`
+    mutation ForgotPassword($email: String!) {
+  forgotPassword(email: $email)
+}
+    `;
+
+export function useForgotPasswordMutation() {
+  return Urql.useMutation<ForgotPasswordMutation, ForgotPasswordMutationVariables>(ForgotPasswordDocument);
+};
 export const LoginDocument = gql`
     mutation Login($email: String!, $password: String!) {
   login(options: {email: $email, password: $password}) {
@@ -642,4 +748,55 @@ export const MeDocument = gql`
 
 export function useMeQuery(options: Omit<Urql.UseQueryArgs<MeQueryVariables>, 'query'> = {}) {
   return Urql.useQuery<MeQuery>({ query: MeDocument, ...options });
+};
+export const TutorsDocument = gql`
+    query Tutors {
+  allTutors {
+    id
+    description
+    type {
+      id
+      name
+    }
+    rating
+    amountClasses
+    amountStudents
+    user {
+      id
+      name
+      email
+      sex
+      country
+      city
+      avatar
+      userPlatformAccount {
+        platform {
+          id
+          name
+          account
+        }
+      }
+    }
+    classes {
+      id
+      name
+      description
+      amountTimeTaught
+      price {
+        id
+        price
+        time
+      }
+    }
+    categories {
+      id
+      name
+      icon
+    }
+  }
+}
+    `;
+
+export function useTutorsQuery(options: Omit<Urql.UseQueryArgs<TutorsQueryVariables>, 'query'> = {}) {
+  return Urql.useQuery<TutorsQuery>({ query: TutorsDocument, ...options });
 };

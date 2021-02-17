@@ -301,7 +301,7 @@ export const SampleDiv = styled.div`
 
 export const FormError = styled.p`
     padding: 10px 0;
-    margin: 5px 0;
+    margin: 10px 0 !important;
     color: red;
     font-size: 14px;
 `;

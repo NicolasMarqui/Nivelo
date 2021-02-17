@@ -84,6 +84,9 @@ export default function LoginForm() {
                             Não possui uma conta? <span>Crie agora mesmo</span>
                         </FormHas>
                     </Link>
+                    <FormHas>
+                        <span>Esqueci minha senha</span>
+                    </FormHas>
                     <Button bgColor="#FF4338" color="#fff" bold>
                         Login
                     </Button>

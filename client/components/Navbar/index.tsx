@@ -15,8 +15,6 @@ const Navbar: React.FC = ({}) => {
     });
     const router = useRouter();
 
-    console.log(fetching);
-
     return (
         <Header whiteBg={router.pathname === "/login2" ? true : false}>
             <Container flex>

@@ -89,6 +89,67 @@ export class UserResolver {
         return user;
     }
 
+    // Change password
+    @Mutation(() => UserResponse)
+    async changePassword(
+        @Arg("token") token: string,
+        @Arg("newPassword") newPassword: string,
+        @Ctx() { redis, req }: MyContext
+    ): Promise<UserResponse> {
+        if (newPassword.length <= 2) {
+            return {
+                errors: [
+                    {
+                        field: "newPassword",
+                        message: "Senha muito curta",
+                    },
+                ],
+            };
+        }
+
+        const key = FORGET_PASSWORD_PREFIX + token;
+        const userId = redis.get(key);
+        if (!userId) {
+            return {
+                errors: [
+                    {
+                        field: "token",
+                        message: "Token expirado",
+                    },
+                ],
+            };
+        }
+
+        const user = await User.findOne({ where: { id: userId } });
+        if (!user) {
+            return {
+                errors: [
+                    {
+                        field: "token",
+                        message: "Usuário não encontrado",
+                    },
+                ],
+            };
+        }
+
+        user.password = await argon2.hash(newPassword);
+        await user.save();
+
+        redis.del(key);
+
+        const JWT_token = jwt.sign(
+            {
+                id: user.id,
+            },
+            "ASIAHS986378923H2JVBJAK___0-902E212EI12EOIBJKAD",
+            { expiresIn: cookieDuration }
+        );
+
+        req.session.user = JWT_token;
+
+        return { user };
+    }
+
     // Forgot password
     @Mutation(() => Boolean)
     async forgotPassword(

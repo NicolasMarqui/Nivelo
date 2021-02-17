@@ -6,22 +6,47 @@ import IconButton from "../IconButton";
 import Link from "next/link";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
+import { getCategoriesFromArray } from "../../utils/getCategoriesFromArray";
 
 interface TutorCardProps {
     isColumn: boolean;
+    tutor: any;
 }
 
-export default function TutorCard({ isColumn }: TutorCardProps) {
+export default function TutorCard({ isColumn, tutor }: TutorCardProps) {
+    const {
+        id,
+        description,
+        type,
+        rating,
+        amountClasses,
+        amountStudents,
+        user,
+        classes,
+        categories,
+    } = tutor;
+
+    getCategoriesFromArray(categories);
+
     return (
         <TutorCardWrapper isColumn={isColumn}>
-            <Link href="/tutor/[id]" as="/tutor/1">
+            <Link href="/tutor/[id]" as={`/tutor/${id}`}>
                 <div className="tutor__fRow">
-                    <Image
-                        src="/assets/student.jpg"
-                        width={120}
-                        height={120}
-                        className="tutor__avatar"
-                    />
+                    {user.avatar ? (
+                        <Image
+                            src={user.avatar}
+                            width={120}
+                            height={120}
+                            className="tutor__avatar"
+                        />
+                    ) : (
+                        <img
+                            src="https://picsum.photos/200"
+                            width={120}
+                            height={120}
+                            className="tutor__avatar"
+                        />
+                    )}
                     <div className="fRow__rating">
                         <MdStar size={24} color="yellow" />
                         <MdStar size={24} color="yellow" />
@@ -30,23 +55,21 @@ export default function TutorCard({ isColumn }: TutorCardProps) {
                         <MdStarBorder size={24} />
                     </div>
                     <div className="fRow__type">
-                        <Pill>Professor</Pill>
+                        <Pill>{type.name ? type.name : "-"}</Pill>
                     </div>
                 </div>
             </Link>
             <div className="tutor__sRow">
                 <Link href="/tutor/[id]" as="/tutor/1">
                     <div>
-                        <TutorTitle>Walter White</TutorTitle>
+                        <TutorTitle>{user.name}</TutorTitle>
                         <TutorSubtitle>
                             Ensina <span>Javascript</span> e{" "}
                             <span>algoritimos</span>
                         </TutorSubtitle>
 
                         <Description fontSize="14px" marginTop={14} size="80">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing
-                            elit, sed do eiusmod tempor incididunt ut labore et
-                            dolore magna aliqua. Ut enim ad minim veniam
+                            {description}
                         </Description>
                     </div>
                 </Link>
