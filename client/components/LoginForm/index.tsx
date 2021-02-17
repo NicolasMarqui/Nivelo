@@ -6,9 +6,12 @@ import {
     FormInput,
     FormError,
     FormLabel,
+    FormHas,
+    Title,
+    Description,
+    FormFooter,
 } from "../../styles/helpers";
 import Link from "next/link";
-import { FormFooter } from "./LoginForm.style";
 import { useLoginMutation } from "../../generated/graphql";
 import { toErrorMap } from "../../utils/toErrorMap";
 import { useRouter } from "next/router";
@@ -33,43 +36,59 @@ export default function LoginForm() {
     });
 
     return (
-        <Form onSubmit={formik.handleSubmit}>
-            <FormGroup>
-                <FormLabel htmlFor="email">Email</FormLabel>
-                <FormInput
-                    name="email"
-                    type="email"
-                    placeholder="Email"
-                    onChange={formik.handleChange}
-                    value={formik.values.email}
-                    className={`${formik.errors.email ? "has__error" : ""}`}
-                />
-                {formik.errors.email && (
-                    <FormError>{formik.errors.email}</FormError>
-                )}
-            </FormGroup>
-            <FormGroup>
-                <FormLabel htmlFor="password">Senha</FormLabel>
-                <FormInput
-                    name="password"
-                    type="password"
-                    placeholder="Senha"
-                    onChange={formik.handleChange}
-                    value={formik.values.password}
-                    className={`${formik.errors.password ? "has__error" : ""}`}
-                />
-                {formik.errors.password && (
-                    <FormError>{formik.errors.password}</FormError>
-                )}
-            </FormGroup>
+        <>
+            <Title fontSize="40px" fontWeight="400" m_auto>
+                Bem vindo de volta
+            </Title>
+            <Description size="60" color="#B1B1B1">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                enim ad minim veniam
+            </Description>
 
-            <FormFooter>
-                <Button>Login</Button>
+            <Form onSubmit={formik.handleSubmit}>
+                <FormGroup>
+                    <FormLabel htmlFor="email">Email</FormLabel>
+                    <FormInput
+                        name="email"
+                        type="email"
+                        placeholder="Email"
+                        onChange={formik.handleChange}
+                        value={formik.values.email}
+                        className={`${formik.errors.email ? "has__error" : ""}`}
+                    />
+                    {formik.errors.email && (
+                        <FormError>{formik.errors.email}</FormError>
+                    )}
+                </FormGroup>
+                <FormGroup>
+                    <FormLabel htmlFor="password">Senha</FormLabel>
+                    <FormInput
+                        name="password"
+                        type="password"
+                        placeholder="Senha"
+                        onChange={formik.handleChange}
+                        value={formik.values.password}
+                        className={`${
+                            formik.errors.password ? "has__error" : ""
+                        }`}
+                    />
+                    {formik.errors.password && (
+                        <FormError>{formik.errors.password}</FormError>
+                    )}
+                </FormGroup>
 
-                <Link href="/signup?ref=login">
-                    <a>Não tenho conta</a>
-                </Link>
-            </FormFooter>
-        </Form>
+                <FormFooter>
+                    <Link href="/signup">
+                        <FormHas>
+                            Não possui uma conta? <span>Crie agora mesmo</span>
+                        </FormHas>
+                    </Link>
+                    <Button bgColor="#FF4338" color="#fff" bold>
+                        Login
+                    </Button>
+                </FormFooter>
+            </Form>
+        </>
     );
 }

@@ -1,7 +1,11 @@
 import { Platforms } from "./../entities/Platforms";
 import { validateNewInfo } from "./../utils/validateNewInfo";
 import { isAuth } from "../middleware";
-import { cookieDuration, COOKIE_NAME } from "../constants";
+import {
+    cookieDuration,
+    COOKIE_NAME,
+    FORGET_PASSWORD_PREFIX,
+} from "../constants";
 import { MyContext } from "./../types";
 import { EmailPasswordInput, MoreInfoUser } from "./inputs";
 import { validateRegister } from "./../utils/validateRegister";
@@ -22,6 +26,8 @@ import { getConnection } from "typeorm";
 import jwt from "jsonwebtoken";
 import { validateLogin } from "../utils/validateLogin";
 import { FieldError } from "./helpers";
+import { sendEmail } from "../utils/sendEmail";
+import { v4 } from "uuid";
 
 @ObjectType()
 class UserResponse {
@@ -81,6 +87,36 @@ export class UserResolver {
         if (!user) return null;
 
         return user;
+    }
+
+    // Forgot password
+    @Mutation(() => Boolean)
+    async forgotPassword(
+        @Arg("email") email: string,
+        @Ctx() { redis }: MyContext
+    ): Promise<Boolean> {
+        const user = await User.findOne({ where: { email } });
+
+        if (!user) {
+            return true;
+        }
+
+        const token = v4();
+
+        await redis.set(
+            FORGET_PASSWORD_PREFIX + token,
+            user.id,
+            "ex",
+            1000 * 60 * 60 * 24 * 3
+        ); // 3 days
+
+        await sendEmail(
+            email,
+            `<a href="http://localhost:3000/change-password/${token}">Alterar sua senha</a>`,
+            "Alterar sua senha"
+        );
+
+        return true;
     }
 
     // Register new User

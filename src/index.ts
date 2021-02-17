@@ -7,7 +7,7 @@ import path from "path";
 import express from "express";
 import { ApolloServer } from "apollo-server-express";
 import { buildSchema } from "type-graphql";
-import redis from "redis";
+import Redis from "ioredis";
 import session from "express-session";
 import connectRedis from "connect-redis";
 import mongoose from "mongoose";
@@ -93,10 +93,7 @@ const main = async () => {
 
     // Initialize Redis
     const RedisStore = connectRedis(session);
-    const redisClient = redis.createClient({
-        host: "localhost",
-        auth_pass: "nick",
-    });
+    const redis = new Redis({ host: "localhost", password: "nick" });
     app.use(
         cors({
             origin: "http://localhost:3000",
@@ -107,7 +104,7 @@ const main = async () => {
     app.use(
         session({
             name: "qid",
-            store: new RedisStore({ client: redisClient, disableTouch: true }),
+            store: new RedisStore({ client: redis as any, disableTouch: true }),
             cookie: {
                 maxAge: cookieDuration,
                 httpOnly: true,
@@ -135,7 +132,7 @@ const main = async () => {
             ],
             validate: false,
         }),
-        context: ({ req, res }): MyContext => ({ req, res }),
+        context: ({ req, res }): MyContext => ({ req, res, redis }),
     });
 
     apolloServer.applyMiddleware({ app, cors: false });

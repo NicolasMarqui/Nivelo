@@ -242,7 +242,7 @@ export const Divider = styled.div`
 `;
 
 export const Form = styled.form`
-    width: 100%;
+    width: 60%;
 `;
 
 export const FormGroup = styled.div`
@@ -257,7 +257,11 @@ export const FormLabel = styled.label`
     margin-bottom: 7px;
 `;
 
-export const FormInput = styled.input`
+interface FormInputProps {
+    icon?: boolean;
+}
+
+export const FormInput = styled.input<FormInputProps>`
     padding: 10px 14px;
     border: 1px solid #dddddd;
     border-radius: 7px;
@@ -266,6 +270,25 @@ export const FormInput = styled.input`
     &.has__error {
         border: 2px solid red;
     }
+
+    ${({ icon }) =>
+        icon &&
+        css`
+            padding-left: 20px;
+
+            .input__icon {
+                position: absolute;
+                top: 10px;
+                bottom: 10px;
+                left: 10px;
+                background-color: ${({ theme }) => theme.colors.primary};
+                border-radius: 50%;
+                height: 40px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+        `}
 `;
 
 export const SampleDiv = styled.div`
@@ -281,4 +304,33 @@ export const FormError = styled.p`
     margin: 5px 0;
     color: red;
     font-size: 14px;
+`;
+
+export const FormHas = styled.p`
+    font-size: 14px;
+    color: #222;
+    margin: 14px 0 !important;
+    cursor: pointer;
+
+    span {
+        color: ${({ theme }) => theme.colors.primary};
+    }
+`;
+
+export const FormFooter = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+
+    p {
+        margin: 14px 0 !important;
+    }
+
+    button {
+        padding: 10px 20px;
+        font-size: 20px;
+        margin-top: 20px;
+        width: 240px;
+    }
 `;

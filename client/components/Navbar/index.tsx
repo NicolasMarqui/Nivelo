@@ -18,7 +18,7 @@ const Navbar: React.FC = ({}) => {
     console.log(fetching);
 
     return (
-        <Header whiteBg={router.pathname === "/login" ? true : false}>
+        <Header whiteBg={router.pathname === "/login2" ? true : false}>
             <Container flex>
                 <Flex>
                     <h1 style={{ cursor: "pointer" }}>
