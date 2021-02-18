@@ -47,11 +47,11 @@ export class TutorResolver {
         @Arg("page", () => Int) page: number,
         @Arg("order", () => String, { nullable: true }) order: string | null,
         @Arg("category", () => [String], { nullable: true })
-        category: string[] | string | null,
-        @Arg("type", () => String, { nullable: true })
-        type: string | string | null,
+        category: string[] | null,
+        @Arg("type", () => [String], { nullable: true })
+        type: string[] | null,
         @Arg("country", () => [String], { nullable: true })
-        country: string[] | string | null
+        country: string[] | null
     ): Promise<Tutor[]> {
         const realLimit = Math.min(50, limit) || 10;
         const realOffset = (page - 1) * realLimit;
@@ -68,7 +68,6 @@ export class TutorResolver {
                 "user.userPlatformAccount",
                 "userPlatformAccount"
             )
-            .where({})
             .leftJoinAndSelect("userPlatformAccount.platform", "platform")
             .take(realLimit)
             .skip(realOffset);
@@ -78,7 +77,7 @@ export class TutorResolver {
         }
 
         if (type) {
-            result.andWhere("tutorType.name = :type", { type });
+            result.andWhere("tutorType.name IN (:...type)", { type });
         }
 
         if (country) {

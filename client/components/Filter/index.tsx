@@ -8,7 +8,6 @@ import countries from "../../utils/countries.json";
 import categories from "../../utils/categories.json";
 import tutorType from "../../utils/tutorType.json";
 import makeAnimated from "react-select/animated";
-import { Button } from "../../styles/helpers";
 import { Sticky } from "react-sticky";
 import Side from "../Side";
 import {
@@ -19,18 +18,18 @@ import {
     AccordionItemPanel,
 } from "react-accessible-accordion";
 import "react-accessible-accordion/dist/fancy-example.css";
+import { MdClose } from "react-icons/md";
 
 export default function Filter() {
     const router = useRouter();
     const animatedComponents = makeAnimated();
 
     // Filter values
-    const [isFixed, setIsFixed] = useState(false);
     const [localizacao, setLocalizacao] = useState([]);
     const [preco, setPreco] = useState([]);
     const [categoria, setCategoria] = useState([]);
     const [disponibilidade, setDisponibilidade] = useState([]);
-    const [tutor, setTutor] = useState("");
+    const [tutor, setTutor] = useState([]);
     const [hasAplicadoFilter, setHasAplicadoFilter] = useState(false);
 
     // Filter open values
@@ -43,7 +42,7 @@ export default function Filter() {
         disponibilidade: disponibilidade
             ? disponibilidade.map((t) => t.value)
             : [],
-        tutor: tutor ? tutor : "",
+        tutor: tutor ? tutor.map((t) => t.value) : [],
     };
 
     const handleOpenSide = () => {
@@ -57,6 +56,23 @@ export default function Filter() {
         document.body.className = "";
     };
 
+    const handleFilterClean = () => {
+        setLocalizacao([]);
+        setPreco([]);
+        setCategoria([]);
+        setDisponibilidade([]);
+        setTutor([]);
+
+        router.query = {};
+        router.push(
+            {
+                pathname: `/tutors`,
+            },
+            undefined,
+            { shallow: true }
+        );
+    };
+
     useEffect(() => {
         setIsOpenSide(false);
         document.body.className = "";
@@ -64,7 +80,6 @@ export default function Filter() {
         router.push(
             {
                 pathname: `/tutors`,
-                // @ts-ignore
                 query: { ...queryValues },
             },
             undefined,
@@ -86,6 +101,21 @@ export default function Filter() {
                                     onClick={handleOpenSide}
                                 />
                             </li>
+                            {router.query &&
+                                Object.keys(router.query).length > 0 && (
+                                    <li>
+                                        <IconButton
+                                            text={`Limpar filtros (${
+                                                Object.keys(router.query).length
+                                            })`}
+                                            bColor="#FB475E"
+                                            color="#fff"
+                                            icon={<MdClose size={17} />}
+                                            hasChevron={true}
+                                            onClick={handleFilterClean}
+                                        />
+                                    </li>
+                                )}
                         </ul>
                     </FilterWrapper>
                 )}
@@ -204,7 +234,8 @@ export default function Filter() {
                                         closeMenuOnSelect={true}
                                         placeholder="Tipo de Tutor"
                                         components={animatedComponents}
-                                        onChange={(e: any) => setTutor(e.value)}
+                                        isMulti
+                                        onChange={(e: any) => setTutor(e)}
                                         options={tutorType}
                                     />
                                 </AccordionItemPanel>

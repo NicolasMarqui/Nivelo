@@ -41,7 +41,7 @@ export type QuerySingleUserArgs = {
 
 export type QueryAllTutorsArgs = {
   country?: Maybe<Array<Scalars['String']>>;
-  type?: Maybe<Scalars['String']>;
+  type?: Maybe<Array<Scalars['String']>>;
   category?: Maybe<Array<Scalars['String']>>;
   order?: Maybe<Scalars['String']>;
   page: Scalars['Int'];
@@ -614,11 +614,11 @@ export type MeQuery = (
 
 export type TutorsQueryVariables = Exact<{
   limit: Scalars['Int'];
-  order: Scalars['String'];
-  type: Scalars['String'];
-  category?: Maybe<Array<Scalars['String']> | Scalars['String']>;
-  country?: Maybe<Array<Scalars['String']> | Scalars['String']>;
   page: Scalars['Int'];
+  order?: Maybe<Scalars['String']>;
+  category?: Maybe<Array<Scalars['String']> | Scalars['String']>;
+  type?: Maybe<Array<Scalars['String']> | Scalars['String']>;
+  country?: Maybe<Array<Scalars['String']> | Scalars['String']>;
 }>;
 
 
@@ -767,7 +767,7 @@ export function useMeQuery(options: Omit<Urql.UseQueryArgs<MeQueryVariables>, 'q
   return Urql.useQuery<MeQuery>({ query: MeDocument, ...options });
 };
 export const TutorsDocument = gql`
-    query Tutors($limit: Int!, $order: String!, $type: String!, $category: [String!], $country: [String!], $page: Int!) {
+    query Tutors($limit: Int!, $page: Int!, $order: String, $category: [String!], $type: [String!], $country: [String!]) {
   allTutors(
     limit: $limit
     page: $page

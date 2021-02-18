@@ -27,6 +27,7 @@ import TutorCard from "../../components/TutorCard";
 import { createUrqlClient } from "../../utils/createUrqlClient";
 import { withUrqlClient } from "next-urql";
 import { useTutorsQuery } from "../../generated/graphql";
+import NoRecords from "../../components/NoRecords";
 
 const Tutors = () => {
     const router = useRouter();
@@ -40,9 +41,9 @@ const Tutors = () => {
         variables: {
             limit,
             page,
-            order: "",
-            type: (router.query.tutor as string) || "",
-            category: router.query.categoria || [],
+            type: router.query.tutor || null,
+            category: router.query.categoria || null,
+            order: null,
         },
     });
 
@@ -50,7 +51,7 @@ const Tutors = () => {
     const [isViewColumn, setIsViewColumn] = useState(false);
 
     useEffect(() => {
-        console.log(router.query);
+        console.log(data);
     }, [router.asPath]);
 
     const handlePagination = () => {
@@ -128,8 +129,10 @@ const Tutors = () => {
                     </TtFilters>
                     {fetching ? (
                         <h3>Loading this bitch</h3>
-                    ) : !data ? (
-                        <p>Niente</p>
+                    ) : !data ||
+                      !data.allTutors ||
+                      data.allTutors.length === 0 ? (
+                        <NoRecords />
                     ) : (
                         <>
                             <AreaTutors isColumn={isViewColumn}>

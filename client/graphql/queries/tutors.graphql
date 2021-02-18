@@ -1,10 +1,10 @@
 query Tutors(
     $limit: Int!
-    $order: String!
-    $type: String!
-    $category: [String!]
-    $country: [String!]
     $page: Int!
+    $order: String
+    $category: [String!]
+    $type: [String!]
+    $country: [String!]
 ) {
     allTutors(
         limit: $limit
