@@ -20,6 +20,7 @@ export const SideWrapper = styled.div<SideWrapperProps>`
     transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
     animation: ${SideOpen} 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
     flex-direction: column;
+    border-radius: 30px 0 0 30px;
 
     .side__header {
         padding: 10px 17px;
@@ -74,6 +75,7 @@ export const SideWrapper = styled.div<SideWrapperProps>`
         css`
             right: auto;
             left: 0;
+            border-radius: 0px 30px 30px 0px;
             animation: ${SideOpenLeft} 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)
                 both;
         `}

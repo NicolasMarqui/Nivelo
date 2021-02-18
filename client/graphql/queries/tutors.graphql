@@ -1,5 +1,19 @@
-query Tutors {
-    allTutors {
+query Tutors(
+    $limit: Int!
+    $order: String!
+    $type: String!
+    $category: [String!]
+    $country: [String!]
+    $page: Int!
+) {
+    allTutors(
+        limit: $limit
+        page: $page
+        order: $order
+        type: $type
+        category: $category
+        country: $country
+    ) {
         id
         description
         type {

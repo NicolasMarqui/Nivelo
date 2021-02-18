@@ -10,6 +10,7 @@ import {
     Ctx,
     Field,
     InputType,
+    Int,
     Mutation,
     ObjectType,
     Query,
@@ -41,19 +42,54 @@ class NewTutorInput {
 export class TutorResolver {
     // GET all Tutors
     @Query(() => [Tutor])
-    async allTutors() {
-        const allTut = await Tutor.find({
-            relations: [
-                "user",
-                "type",
-                "classes",
-                "classes.price",
-                "categories",
+    async allTutors(
+        @Arg("limit", () => Int) limit: number,
+        @Arg("page", () => Int) page: number,
+        @Arg("order", () => String, { nullable: true }) order: string | null,
+        @Arg("category", () => [String], { nullable: true })
+        category: string[] | string | null,
+        @Arg("type", () => String, { nullable: true })
+        type: string | string | null,
+        @Arg("country", () => [String], { nullable: true })
+        country: string[] | string | null
+    ): Promise<Tutor[]> {
+        const realLimit = Math.min(50, limit) || 10;
+        const realOffset = (page - 1) * realLimit;
+
+        const result = getConnection()
+            .getRepository(Tutor)
+            .createQueryBuilder("tutor")
+            .leftJoinAndSelect("tutor.user", "user")
+            .leftJoinAndSelect("tutor.classes", "classes")
+            .leftJoinAndSelect("classes.price", "price")
+            .leftJoinAndSelect("tutor.categories", "categories")
+            .leftJoinAndSelect("tutor.type", "tutorType")
+            .leftJoinAndSelect(
                 "user.userPlatformAccount",
-                "user.userPlatformAccount.platform",
-            ],
-        });
-        return allTut;
+                "userPlatformAccount"
+            )
+            .where({})
+            .leftJoinAndSelect("userPlatformAccount.platform", "platform")
+            .take(realLimit)
+            .skip(realOffset);
+
+        if (category) {
+            result.andWhere("categories.name IN (:...category)", { category });
+        }
+
+        if (type) {
+            result.andWhere("tutorType.name = :type", { type });
+        }
+
+        if (country) {
+            result.andWhere("user.country IN (:...country)", { country });
+        }
+
+        if (order) {
+            result.orderBy(order);
+        }
+
+        return result.getMany();
     }
 
     // Create a new Tutor

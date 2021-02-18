@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import IconButton from "../../components/IconButton";
 import {
+    Button,
     Container,
     Description,
     Flex,
@@ -28,23 +29,42 @@ import { withUrqlClient } from "next-urql";
 import { useTutorsQuery } from "../../generated/graphql";
 
 const Tutors = () => {
-    const [{ data, fetching }] = useTutorsQuery();
     const router = useRouter();
 
-    const [isLoadingData, setIsLoadingData] = useState(false);
+    const [limit, setLimit] = useState(10);
+    const [page, setPage] = useState(
+        typeof router.query.page === "string" ? parseInt(router.query.page) : 1
+    );
+
+    const [{ data, fetching }] = useTutorsQuery({
+        variables: {
+            limit,
+            page,
+            order: "",
+            type: (router.query.tutor as string) || "",
+            category: router.query.categoria || [],
+        },
+    });
 
     // Viewing mode
     const [isViewColumn, setIsViewColumn] = useState(false);
 
     useEffect(() => {
-        console.log("Tutors: ", data);
-    }, []);
-
-    useEffect(() => {
-        if (router.query !== {}) {
-            console.log("From tutor", router.query);
-        }
+        console.log(router.query);
     }, [router.asPath]);
+
+    const handlePagination = () => {
+        router.push(
+            {
+                pathname: `/tutors`,
+                query: { ...router.query, page: page + 1 },
+            },
+            undefined,
+            { shallow: true }
+        );
+
+        setPage(page + 1);
+    };
 
     return (
         <PageWrapper pTop="108px">
@@ -106,18 +126,25 @@ const Tutors = () => {
                             <Filter />
                         </div>
                     </TtFilters>
-                    {!data ? (
+                    {fetching ? (
                         <h3>Loading this bitch</h3>
+                    ) : !data ? (
+                        <p>Niente</p>
                     ) : (
-                        <AreaTutors isColumn={isViewColumn}>
-                            {data.allTutors.map((tut) => (
-                                <TutorCard
-                                    key={tut.id}
-                                    isColumn={isViewColumn}
-                                    tutor={tut}
-                                />
-                            ))}
-                        </AreaTutors>
+                        <>
+                            <AreaTutors isColumn={isViewColumn}>
+                                {data.allTutors.map((tut) => (
+                                    <TutorCard
+                                        key={tut.id}
+                                        isColumn={isViewColumn}
+                                        tutor={tut}
+                                    />
+                                ))}
+                            </AreaTutors>
+                            <Button onClick={handlePagination}>
+                                Go to page 2
+                            </Button>
+                        </>
                     )}
                 </StickyContainer>
             </Container>

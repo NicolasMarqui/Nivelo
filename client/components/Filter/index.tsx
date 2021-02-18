@@ -5,6 +5,8 @@ import { TiFilter } from "react-icons/ti";
 import { useRouter } from "next/router";
 import Select from "react-select";
 import countries from "../../utils/countries.json";
+import categories from "../../utils/categories.json";
+import tutorType from "../../utils/tutorType.json";
 import makeAnimated from "react-select/animated";
 import { Button } from "../../styles/helpers";
 import { Sticky } from "react-sticky";
@@ -28,9 +30,8 @@ export default function Filter() {
     const [preco, setPreco] = useState([]);
     const [categoria, setCategoria] = useState([]);
     const [disponibilidade, setDisponibilidade] = useState([]);
-    const [tutor, setTutor] = useState([]);
+    const [tutor, setTutor] = useState("");
     const [hasAplicadoFilter, setHasAplicadoFilter] = useState(false);
-    const [currentPage, setCurrentPage] = useState(router.query.page || 1);
 
     // Filter open values
     const [isOpenSide, setIsOpenSide] = useState(false);
@@ -42,7 +43,7 @@ export default function Filter() {
         disponibilidade: disponibilidade
             ? disponibilidade.map((t) => t.value)
             : [],
-        tutor: tutor ? tutor.map((t) => t.value) : [],
+        tutor: tutor ? tutor : "",
     };
 
     const handleOpenSide = () => {
@@ -57,7 +58,6 @@ export default function Filter() {
     };
 
     useEffect(() => {
-        console.log("Query", queryValues);
         setIsOpenSide(false);
         document.body.className = "";
 
@@ -65,7 +65,7 @@ export default function Filter() {
             {
                 pathname: `/tutors`,
                 // @ts-ignore
-                query: { ...queryValues, page: 1 },
+                query: { ...queryValues },
             },
             undefined,
             { shallow: true }
@@ -161,12 +161,7 @@ export default function Filter() {
                                         components={animatedComponents}
                                         isMulti
                                         onChange={(e: any) => setCategoria(e)}
-                                        options={countries.map((c: any) => {
-                                            return {
-                                                ...c,
-                                                value: c.label.toLowerCase(),
-                                            };
-                                        })}
+                                        options={categories}
                                     />
                                 </AccordionItemPanel>
                             </AccordionItem>
@@ -209,14 +204,8 @@ export default function Filter() {
                                         closeMenuOnSelect={true}
                                         placeholder="Tipo de Tutor"
                                         components={animatedComponents}
-                                        isMulti
-                                        onChange={(e: any) => setTutor(e)}
-                                        options={countries.map((c: any) => {
-                                            return {
-                                                ...c,
-                                                value: c.label.toLowerCase(),
-                                            };
-                                        })}
+                                        onChange={(e: any) => setTutor(e.value)}
+                                        options={tutorType}
                                     />
                                 </AccordionItemPanel>
                             </AccordionItem>

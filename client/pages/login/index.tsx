@@ -5,8 +5,6 @@ import LoginForm from "../../components/LoginForm";
 import { createUrqlClient } from "../../utils/createUrqlClient";
 import { withUrqlClient } from "next-urql";
 
-// TODO refactor page
-
 const Login = () => {
     return (
         <PageWrapper pTop="0">

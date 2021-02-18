@@ -26,7 +26,7 @@ export default function TutorCard({ isColumn, tutor }: TutorCardProps) {
         categories,
     } = tutor;
 
-    getCategoriesFromArray(categories);
+    // getCategoriesFromArray(categories);
 
     return (
         <TutorCardWrapper isColumn={isColumn}>
@@ -55,7 +55,7 @@ export default function TutorCard({ isColumn, tutor }: TutorCardProps) {
                         <MdStarBorder size={24} />
                     </div>
                     <div className="fRow__type">
-                        <Pill>{type.name ? type.name : "-"}</Pill>
+                        <Pill>{type ? type.name : "-"}</Pill>
                     </div>
                 </div>
             </Link>
@@ -64,7 +64,7 @@ export default function TutorCard({ isColumn, tutor }: TutorCardProps) {
                     <div>
                         <TutorTitle>{user.name}</TutorTitle>
                         <TutorSubtitle>
-                            Ensina <span>Javascript</span> e{" "}
+                            Ensina <span>Javascript</span> e
                             <span>algoritimos</span>
                         </TutorSubtitle>
 

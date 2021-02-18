@@ -17,11 +17,9 @@ import { LoginSignupWrapper } from "../login/Login.style";
 import { useChangePasswordMutation } from "../../generated/graphql";
 import { toErrorMap } from "../../utils/toErrorMap";
 import { useRouter } from "next/router";
-import { withUrqlClient } from "next-urql";
-import { createUrqlClient } from "../../utils/createUrqlClient";
 import Meta from "../../components/Meta";
 
-const ChangePassword: NextPage<{ token: string }> = ({ token }) => {
+const ChangePassword: NextPage<{ token: string }> = () => {
     const router = useRouter();
     const [{ fetching }, changePassword] = useChangePasswordMutation();
 
@@ -34,7 +32,10 @@ const ChangePassword: NextPage<{ token: string }> = ({ token }) => {
         onSubmit: async (values, { setErrors }) => {
             const response = await changePassword({
                 newPassword: values.newPassword,
-                token,
+                token:
+                    typeof router.query.token === "string"
+                        ? router.query.token
+                        : "",
             });
             if (response.data.changePassword.errors) {
                 const errorMap = toErrorMap(
@@ -106,12 +107,6 @@ const ChangePassword: NextPage<{ token: string }> = ({ token }) => {
             </LoginSignupWrapper>
         </PageWrapper>
     );
-};
-
-ChangePassword.getInitialProps = ({ query }) => {
-    return {
-        token: query.token as string,
-    };
 };
 
 export default ChangePassword;
