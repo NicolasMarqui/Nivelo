@@ -1,6 +1,10 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
-export const ClassItemWrapper = styled.div`
+interface ClassItemWrapperProps {
+    smaller?: boolean;
+}
+
+export const ClassItemWrapper = styled.div<ClassItemWrapperProps>`
     padding: 10px 20px;
     background-color: #f2f2f2;
     border-radius: 16px;
@@ -9,6 +13,26 @@ export const ClassItemWrapper = styled.div`
     align-items: center;
     z-index: 2;
     cursor: pointer;
+
+    ${({ smaller }) =>
+        smaller &&
+        css`
+            padding: 0px 15px !important;
+
+            .class__icon {
+                svg {
+                    font-size: 15px !important;
+                }
+            }
+
+            .class__info {
+                flex: 3 !important;
+
+                h3 {
+                    font-size: 15px !important;
+                }
+            }
+        `}
 
     &:hover {
         transform: scale(1.02);

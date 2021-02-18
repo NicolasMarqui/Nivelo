@@ -1,12 +1,14 @@
 import { TutorCardWrapper, TutorTitle, TutorSubtitle } from "./TutorCard.style";
 import Image from "next/image";
 import { MdStar, MdStarBorder, MdEvent, MdChat } from "react-icons/md";
-import { Description, Pill, SampleDiv } from "../../styles/helpers";
+import { BsDot } from "react-icons/bs";
+import { Description, Pill, SampleDiv, PillButton } from "../../styles/helpers";
 import IconButton from "../IconButton";
 import Link from "next/link";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import { getCategoriesFromArray } from "../../utils/getCategoriesFromArray";
+import TutorCardClassesList from "../TutorCardClassesList";
 
 interface TutorCardProps {
     isColumn: boolean;
@@ -26,12 +28,17 @@ export default function TutorCard({ isColumn, tutor }: TutorCardProps) {
         categories,
     } = tutor;
 
+    console.log(tutor);
+
     // getCategoriesFromArray(categories);
 
     return (
         <TutorCardWrapper isColumn={isColumn}>
             <Link href="/tutor/[id]" as={`/tutor/${id}`}>
                 <div className="tutor__fRow">
+                    <div className="fRow__type">
+                        <Pill>{type ? type.name : "-"}</Pill>
+                    </div>
                     {user.avatar ? (
                         <Image
                             src={user.avatar}
@@ -47,15 +54,16 @@ export default function TutorCard({ isColumn, tutor }: TutorCardProps) {
                             className="tutor__avatar"
                         />
                     )}
-                    <div className="fRow__rating">
-                        <MdStar size={24} color="yellow" />
-                        <MdStar size={24} color="yellow" />
-                        <MdStar size={24} color="yellow" />
-                        <MdStar size={24} color="yellow" />
-                        <MdStarBorder size={24} />
+                    <div className="fRow__status">
+                        <BsDot color="green" size={30} />
+                        <p>Online</p>
                     </div>
-                    <div className="fRow__type">
-                        <Pill>{type ? type.name : "-"}</Pill>
+                    <div className="fRow__rating">
+                        <MdStar size={24} color="#c1c100" />
+                        <MdStar size={24} color="#c1c100" />
+                        <MdStar size={24} color="#c1c100" />
+                        <MdStar size={24} color="#c1c100" />
+                        <MdStarBorder size={24} />
                     </div>
                 </div>
             </Link>
@@ -68,8 +76,8 @@ export default function TutorCard({ isColumn, tutor }: TutorCardProps) {
                             <span>algoritimos</span>
                         </TutorSubtitle>
 
-                        <Description fontSize="14px" marginTop={14} size="80">
-                            {description}
+                        <Description fontSize="14px" marginTop={20} size="80">
+                            {description ? description : "-"}
                         </Description>
                     </div>
                 </Link>
@@ -78,21 +86,18 @@ export default function TutorCard({ isColumn, tutor }: TutorCardProps) {
                     <p className="prices__value">R$8.00</p>
 
                     <div className="prices__btn">
-                        <IconButton
-                            icon={<MdEvent size={17} />}
-                            text="AGENDAR"
-                            smaller
-                            bColor="#FF928B"
-                            color="#fff"
-                            onClick={() => alert("Hello")}
-                        />
-                        <IconButton
-                            icon={<MdChat size={17} />}
-                            text="VEJA MAIS"
-                            smaller
-                            bColor="#57CC99"
-                            color="#fff"
-                        />
+                        <PillButton
+                            bgColor="#FF928B"
+                            onClick={() => alert("Agendar")}
+                        >
+                            AGENDAR
+                        </PillButton>
+                        <PillButton
+                            bgColor="#57CC99"
+                            onClick={() => alert("Mais")}
+                        >
+                            VEJA MAIS
+                        </PillButton>
                     </div>
                 </div>
             </div>
@@ -104,7 +109,7 @@ export default function TutorCard({ isColumn, tutor }: TutorCardProps) {
                     </TabList>
 
                     <TabPanel>
-                        <SampleDiv />
+                        <TutorCardClassesList classes={classes} />
                     </TabPanel>
                     <TabPanel>
                         <SampleDiv />

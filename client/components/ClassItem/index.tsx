@@ -2,9 +2,13 @@ import { ClassItemWrapper } from "./ClassItem.style";
 import { MdSchool } from "react-icons/md";
 import { SmallerButton } from "../../styles/helpers";
 
-export default function ClassItem() {
+interface ClassItemProps {
+    smaller?: boolean;
+}
+
+export default function ClassItem({ smaller }: ClassItemProps) {
     return (
-        <ClassItemWrapper>
+        <ClassItemWrapper smaller={smaller ? smaller : false}>
             <div className="class__icon">
                 <MdSchool size={24} />
             </div>

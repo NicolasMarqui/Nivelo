@@ -15,6 +15,8 @@ const Navbar: React.FC = ({}) => {
     });
     const router = useRouter();
 
+    console.log(data);
+
     return (
         <Header whiteBg={router.pathname === "/login2" ? true : false}>
             <Container flex>
@@ -54,7 +56,9 @@ const Navbar: React.FC = ({}) => {
                             </Link>
                         </li>
                         {fetching ? (
-                            <p>Carregando</p>
+                            <li>
+                                <p>Carregando</p>
+                            </li>
                         ) : data && data.me ? (
                             <>
                                 <li className="no__hover bg__icon">

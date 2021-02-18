@@ -66,7 +66,7 @@ export const BannerTutors = styled(Banner)`
     width: 100%;
     border-radius: 0;
     background-position: center;
-    height: 230px;
+    height: 110px;
 `;
 
 export const BorderedButton = styled(Button)`

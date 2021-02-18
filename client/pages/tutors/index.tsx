@@ -75,7 +75,7 @@ const Tutors = () => {
                 keywords="tutor, javascript, nivelamento, aprender, algoritimos, comprar"
             />
             <BannerTutors>
-                <Overlay border="0" opacity={0.6} />
+                <Overlay border="0" opacity={0.7} />
                 <Container flex alignEnd>
                     <TtFlex>
                         <Flex col>

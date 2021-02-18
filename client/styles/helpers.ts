@@ -221,8 +221,12 @@ export const SmallerButton = styled(Button)`
     width: 100%;
 `;
 
-export const Pill = styled.p`
-    background-color: ${({ theme }) => theme.colors.purple};
+interface PillProps {
+    bgColor?: string;
+}
+
+export const Pill = styled.p<PillProps>`
+    background-color: ${({ bgColor, theme }) => bgColor || theme.colors.purple};
     padding: 12px 14px 10px;
     font-weight: 700;
     color: #fff;
@@ -232,6 +236,15 @@ export const Pill = styled.p`
     justify-content: center;
     border-radius: 8px;
     margin: 10px 0;
+`;
+
+export const PillButton = styled(Pill)`
+    cursor: pointer;
+
+    &:hover {
+        filter: brightness(120%);
+        transform: scale(1.02);
+    }
 `;
 
 export const Divider = styled.div`

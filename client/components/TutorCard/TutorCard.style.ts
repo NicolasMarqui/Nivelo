@@ -6,10 +6,12 @@ interface TutorCardWrapperProps {
 
 export const TutorCardWrapper = styled.div<TutorCardWrapperProps>`
     display: flex;
-    background-color: #f3f3f3;
+    background-color: #f3f3f39e;
     border-radius: 55px;
     padding: 60px 26px 30px;
-    margin: 15px 0;
+    margin: 15px 0 30px;
+    position: relative;
+    box-shadow: 5px 8px 8px #f2f2f2;
 
     &:hover {
         transform: scale(1.01);
@@ -24,12 +26,45 @@ export const TutorCardWrapper = styled.div<TutorCardWrapperProps>`
         justify-content: flex-start;
         cursor: pointer;
 
+        .fRow__type {
+            z-index: 3;
+            position: absolute;
+            top: 15px;
+            right: -14px;
+
+            &::before {
+                z-index: 1;
+                content: "";
+                position: absolute;
+                bottom: 7px;
+                right: 0;
+                height: 13px;
+                width: 23px;
+                background: #8390fa;
+                transform: rotate(327deg);
+                border-radius: 0 0 5px 0;
+            }
+        }
+
         .tutor__avatar {
             border-radius: 50%;
         }
 
+        .fRow__status {
+            margin: 20px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            p {
+                font-size: 14px;
+                font-weight: 400;
+                margin: 7px 0 0 -3px;
+            }
+        }
+
         .fRow__rating {
-            margin: 10px 0;
+            margin: 0;
         }
     }
 
@@ -40,7 +75,7 @@ export const TutorCardWrapper = styled.div<TutorCardWrapperProps>`
         cursor: pointer;
 
         .sRow__prices {
-            margin-top: 20px;
+            margin-top: 30px;
             display: flex;
             flex-direction: column;
 
@@ -60,31 +95,8 @@ export const TutorCardWrapper = styled.div<TutorCardWrapperProps>`
                 display: flex;
                 margin-top: 25px;
 
-                .jLtcft {
-                    border-radius: 8px;
-                    padding: 10px;
-
-                    .icb__text {
-                        color: #fff;
-                        font-weight: 900;
-                        font-size: 14px;
-                    }
-
-                    .icb__icon {
-                        svg {
-                            font-size: 14px;
-                        }
-                    }
-
-                    &:first-child {
-                        background-color: ${({ theme }) =>
-                            theme.colors.lightPink};
-                    }
-
-                    &:last-child {
-                        background-color: ${({ theme }) =>
-                            theme.colors.lightBlue};
-                    }
+                p {
+                    margin: 0 10px 0 0 !important;
                 }
             }
         }
@@ -166,8 +178,9 @@ export const TutorCardWrapper = styled.div<TutorCardWrapperProps>`
 
 export const TutorTitle = styled.h2`
     font-weight: 900;
-    font-size: 24px;
+    font-size: 22px;
     color: #222;
+    margin-bottom: 2px;
 `;
 
 export const TutorSubtitle = styled.h3`
