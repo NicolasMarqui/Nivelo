@@ -612,6 +612,30 @@ export type MeQuery = (
   )> }
 );
 
+export type SingleClassQueryVariables = Exact<{
+  id: Scalars['Float'];
+}>;
+
+
+export type SingleClassQuery = (
+  { __typename?: 'Query' }
+  & { singleClass: (
+    { __typename?: 'Classes' }
+    & Pick<Classes, 'id' | 'name' | 'description' | 'amountTimeTaught' | 'level'>
+    & { price?: Maybe<Array<(
+      { __typename?: 'Price' }
+      & Pick<Price, 'id' | 'price' | 'time'>
+    )>>, tutor?: Maybe<(
+      { __typename?: 'Tutor' }
+      & Pick<Tutor, 'id'>
+      & { user?: Maybe<(
+        { __typename?: 'User' }
+        & Pick<User, 'name' | 'avatar' | 'email'>
+      )> }
+    )> }
+  ) }
+);
+
 export type TutorsQueryVariables = Exact<{
   limit: Scalars['Int'];
   page: Scalars['Int'];
@@ -765,6 +789,34 @@ export const MeDocument = gql`
 
 export function useMeQuery(options: Omit<Urql.UseQueryArgs<MeQueryVariables>, 'query'> = {}) {
   return Urql.useQuery<MeQuery>({ query: MeDocument, ...options });
+};
+export const SingleClassDocument = gql`
+    query SingleClass($id: Float!) {
+  singleClass(id: $id) {
+    id
+    name
+    description
+    amountTimeTaught
+    level
+    price {
+      id
+      price
+      time
+    }
+    tutor {
+      id
+      user {
+        name
+        avatar
+        email
+      }
+    }
+  }
+}
+    `;
+
+export function useSingleClassQuery(options: Omit<Urql.UseQueryArgs<SingleClassQueryVariables>, 'query'> = {}) {
+  return Urql.useQuery<SingleClassQuery>({ query: SingleClassDocument, ...options });
 };
 export const TutorsDocument = gql`
     query Tutors($limit: Int!, $page: Int!, $order: String, $category: [String!], $type: [String!], $country: [String!]) {

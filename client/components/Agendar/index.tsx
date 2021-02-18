@@ -41,7 +41,7 @@ export default function Agendar({ isOpen, closeAgendar }: AgendarProps) {
                         />
                     }
                 >
-                    <StepOne />
+                    <StepOne onChange={() => {}} />
                     <StepTwo />
                     <StepThree />
                     <StepFour />

@@ -35,8 +35,6 @@ export default function Tutor() {
 
     const handleOpenSide = () => {
         setAgendarOpen(!agendarOpen);
-        document.body.className = "";
-        document.body.classList.add("overlay", "no-scroll");
     };
 
     const handleCloseSide = () => {
