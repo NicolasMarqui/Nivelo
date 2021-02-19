@@ -101,7 +101,11 @@ export default function Filter() {
                                     onClick={handleOpenSide}
                                 />
                             </li>
-                            {router.query &&
+                            {(router.query.localizacao ||
+                                router.query.preco ||
+                                router.query.categoria ||
+                                router.query.disponibilidade ||
+                                router.query.tutor) &&
                                 Object.keys(router.query).length > 0 && (
                                     <li>
                                         <IconButton
@@ -111,7 +115,6 @@ export default function Filter() {
                                             bColor="#FB475E"
                                             color="#fff"
                                             icon={<MdClose size={17} />}
-                                            hasChevron={true}
                                             onClick={handleFilterClean}
                                         />
                                     </li>

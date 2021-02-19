@@ -8,6 +8,10 @@ import { BsBell } from "react-icons/bs";
 import { FaUserGraduate } from "react-icons/fa";
 import { useMeQuery } from "../../generated/graphql";
 import { isServer } from "../../utils/isServer";
+import Dropdown from "../Dropdown";
+import UserDropdown from "../UserDropdown";
+
+// TODO Fix problem where mouse from underneath bugs
 
 const Navbar: React.FC = ({}) => {
     const [{ data, fetching }] = useMeQuery({
@@ -15,7 +19,9 @@ const Navbar: React.FC = ({}) => {
     });
     const router = useRouter();
 
-    console.log(data);
+    // Navbar states
+    const [hoverNotifications, setHoverNotifications] = useState(false);
+    const [hoverUser, setHoverUser] = useState(false);
 
     return (
         <Header whiteBg={router.pathname === "/login2" ? true : false}>
@@ -61,15 +67,50 @@ const Navbar: React.FC = ({}) => {
                             </li>
                         ) : data && data.me ? (
                             <>
-                                <li className="no__hover bg__icon">
+                                <li
+                                    className="hover__1 no__hover bg__icon has__dropdown"
+                                    onMouseEnter={() =>
+                                        setTimeout(
+                                            () => setHoverNotifications(true),
+                                            50
+                                        )
+                                    }
+                                    onMouseLeave={() =>
+                                        setHoverNotifications(false)
+                                    }
+                                >
                                     <Link href="/dashboard/notifications">
                                         <BsBell size={24} />
                                     </Link>
+
+                                    <Dropdown
+                                        isVisible={hoverNotifications}
+                                        mouseOut={() =>
+                                            setHoverNotifications(false)
+                                        }
+                                    >
+                                        <p>Nenhuma notificação!</p>
+                                    </Dropdown>
                                 </li>
-                                <li className="no__hover bg__icon ">
+                                <li
+                                    className="hover__2 no__hover bg__icon has__dropdown"
+                                    onMouseEnter={() =>
+                                        setTimeout(() => setHoverUser(true), 50)
+                                    }
+                                    onMouseLeave={() => setHoverUser(false)}
+                                >
                                     <Link href="/dashboard">
                                         <FaUserGraduate size={24} color="red" />
                                     </Link>
+
+                                    <Dropdown
+                                        isVisible={hoverUser}
+                                        mouseOut={() =>
+                                            setHoverUser(!hoverUser)
+                                        }
+                                    >
+                                        <UserDropdown />
+                                    </Dropdown>
                                 </li>
                             </>
                         ) : (

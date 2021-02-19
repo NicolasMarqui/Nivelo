@@ -7,15 +7,13 @@ interface DropdownWrapperProps {
 export const DropdownWrapper = styled.div<DropdownWrapperProps>`
     display: none;
     padding: 20px;
-    border-radius: 1.5px;
+    border-radius: 30px 0 30px 30px;
     background-color: #fff;
     position: absolute;
-    top: 120%;
-    /* right: 0;
-    left: 0; */
-    width: 400px;
-    z-index: 20;
-    box-shadow: 1px 6px 20px #e2e2e2;
+    top: 90%;
+    right: 0;
+    width: 200px;
+    z-index: 40;
     transition: all 0.4s linear;
     ${({ isVisible }) =>
         isVisible &&

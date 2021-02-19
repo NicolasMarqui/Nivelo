@@ -49,11 +49,6 @@ const Tutors = () => {
 
     // Viewing mode
     const [isViewColumn, setIsViewColumn] = useState(false);
-
-    useEffect(() => {
-        console.log(data);
-    }, [router.asPath]);
-
     const handlePagination = () => {
         router.push(
             {

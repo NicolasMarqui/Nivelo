@@ -34,12 +34,12 @@ function MyApp({ Component, pageProps }) {
                 header={{}}
                 onClickClose={() => router.back()}
                 ignoreCloseOutside={true}
+                width="500px"
             >
                 <ClassesInfo
                     classId={router.query.class as string}
                     pageProps={{}}
                 />
-                <p>{parseInt(router.query.class as string)}</p>
             </Side>
         </>
     );

@@ -2,7 +2,6 @@ import { useRef } from "react";
 import { Button } from "../../styles/helpers";
 import { SideWrapper } from "./Side.style";
 import { MdClose } from "react-icons/md";
-import { useRouter } from "next/router";
 
 interface SideProps {
     children: any;
@@ -16,9 +15,7 @@ interface SideProps {
     ignoreCloseOutside?: boolean;
 }
 
-// TODO add close on outside click
-
-export default function Side({
+const Side = ({
     children,
     isOpen,
     onClickClose,
@@ -28,21 +25,17 @@ export default function Side({
     header,
     width,
     ignoreCloseOutside,
-}: SideProps) {
-    const router = useRouter();
+}: SideProps) => {
     const sideRef = useRef(null);
 
     const handleCloseSide = (event: any) => {
+        if (ignoreCloseOutside) return false;
         document
             .querySelector(".body__overlay")
             .addEventListener("click", function (e) {
                 if (e.target !== sideRef.current) {
                     document.body.className = "";
-                    if (ignoreCloseOutside) {
-                        router.back();
-                    } else {
-                        onClickClose();
-                    }
+                    onClickClose();
                 }
             });
     };
@@ -90,4 +83,6 @@ export default function Side({
             )}
         </SideWrapper>
     );
-}
+};
+
+export default Side;

@@ -25,8 +25,14 @@ export const GlobalStyle = createGlobalStyle`
         left: 0;
         right: 0;
         bottom: 0;
-        z-index: 30;
+        z-index: 20;
         background-color: rgba(0,0,0,0.4);
+      }
+
+      &.ov__less{
+        .body__overlay{
+          background-color: rgba(0,0,0,0.2);
+        }
       }
     }
   }

@@ -8,7 +8,7 @@ interface HeaderProps {
 export const Header = styled.div<HeaderProps>`
     width: 100%;
     padding-top: 20px;
-    z-index: 4;
+    z-index: 31;
     position: absolute;
     top: 0;
     left: 0;
@@ -48,10 +48,13 @@ export const Menu = styled.ul`
 
         &.bg__icon {
             background-color: #f2f2f2;
-            padding: 10px 15px;
             border-radius: 8px;
             cursor: pointer;
             margin: 0 10px;
+
+            svg {
+                padding: 10px 15px;
+            }
 
             &:hover {
                 svg {

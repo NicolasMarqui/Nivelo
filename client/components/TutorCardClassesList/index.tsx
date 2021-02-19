@@ -19,7 +19,9 @@ export default function TutorCardClassesList({
     return (
         <TutorCardClassesListWrapper>
             {classes && classes.length > 0 ? (
-                classes.map((clas) => <ClassItem smaller={true} class={clas} />)
+                classes.map((clas) => (
+                    <ClassItem key={clas.id} smaller={true} class={clas} />
+                ))
             ) : (
                 <h5>Nenhuma aula disponivel!</h5>
             )}
