@@ -5,12 +5,26 @@ import {
     FaRegCalendarAlt,
     FaUserEdit,
     FaRegHeart,
+    FaChalkboardTeacher,
 } from "react-icons/fa";
 import { ImBooks } from "react-icons/im";
 import { BiChat } from "react-icons/bi";
 import { CgLogOut } from "react-icons/cg";
+import { GoMortarBoard } from "react-icons/go";
+interface UserDropdownProps {
+    user?:
+        | {
+              email: string;
+              id: number;
+              name: string;
+              platforms?: [] | null;
+              tutor?: null | any;
+          }
+        | null
+        | undefined;
+}
 
-export default function UserDropdown() {
+export default function UserDropdown({ user }: UserDropdownProps) {
     return (
         <UserDropdownWrapper>
             <div className="drop__group">
@@ -36,6 +50,25 @@ export default function UserDropdown() {
                     </Link>
                 </ul>
             </div>
+            {user && user.tutor && user.tutor !== null && (
+                <div className="drop__group">
+                    <h3 className="drop__title">Tutor</h3>
+                    <ul>
+                        <Link href="/dashboard/profile">
+                            <li>
+                                <FaChalkboardTeacher size={20} />
+                                <p>Editar</p>
+                            </li>
+                        </Link>
+                        <Link href="/dashboard/favorites">
+                            <li>
+                                <GoMortarBoard size={20} />
+                                <p>Minhas aulas</p>
+                            </li>
+                        </Link>
+                    </ul>
+                </div>
+            )}
             <div className="drop__group">
                 <h3 className="drop__title">Configurações</h3>
                 <ul>

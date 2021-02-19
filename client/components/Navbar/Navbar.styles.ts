@@ -46,6 +46,10 @@ export const Menu = styled.ul`
             }
         }
 
+        &.bt__cta {
+            background-color: ${(props) => props.theme.colors.primary};
+        }
+
         &.bg__icon {
             background-color: #f2f2f2;
             border-radius: 8px;

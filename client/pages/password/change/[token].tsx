@@ -12,12 +12,12 @@ import {
     Title,
     Description,
     FormFooter,
-} from "../../styles/helpers";
-import { LoginSignupWrapper } from "../login/Login.style";
-import { useChangePasswordMutation } from "../../generated/graphql";
-import { toErrorMap } from "../../utils/toErrorMap";
+} from "../../../styles/helpers";
+import { LoginSignupWrapper } from "../../login/Login.style";
+import { useChangePasswordMutation } from "../../../generated/graphql";
+import { toErrorMap } from "../../../utils/toErrorMap";
 import { useRouter } from "next/router";
-import Meta from "../../components/Meta";
+import Meta from "../../../components/Meta";
 
 const ChangePassword: NextPage<{ token: string }> = () => {
     const router = useRouter();

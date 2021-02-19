@@ -23,6 +23,8 @@ const Navbar: React.FC = ({}) => {
     const [hoverNotifications, setHoverNotifications] = useState(false);
     const [hoverUser, setHoverUser] = useState(false);
 
+    console.log(data.me);
+
     return (
         <Header whiteBg={router.pathname === "/login2" ? true : false}>
             <Container flex>
@@ -61,37 +63,17 @@ const Navbar: React.FC = ({}) => {
                                 <a>Como funciona?</a>
                             </Link>
                         </li>
+                        <li>
+                            <Link href="/how-it-works">
+                                <a>Seja um tutor!</a>
+                            </Link>
+                        </li>
                         {fetching ? (
                             <li>
                                 <p>Carregando</p>
                             </li>
                         ) : data && data.me ? (
                             <>
-                                <li
-                                    className="hover__1 no__hover bg__icon has__dropdown"
-                                    onMouseEnter={() =>
-                                        setTimeout(
-                                            () => setHoverNotifications(true),
-                                            50
-                                        )
-                                    }
-                                    onMouseLeave={() =>
-                                        setHoverNotifications(false)
-                                    }
-                                >
-                                    <Link href="/dashboard/notifications">
-                                        <BsBell size={24} />
-                                    </Link>
-
-                                    <Dropdown
-                                        isVisible={hoverNotifications}
-                                        mouseOut={() =>
-                                            setHoverNotifications(false)
-                                        }
-                                    >
-                                        <p>Nenhuma notificação!</p>
-                                    </Dropdown>
-                                </li>
                                 <li
                                     className="hover__2 no__hover bg__icon has__dropdown"
                                     onMouseEnter={() =>
@@ -109,7 +91,8 @@ const Navbar: React.FC = ({}) => {
                                             setHoverUser(!hoverUser)
                                         }
                                     >
-                                        <UserDropdown />
+                                        {/* @ts-ignore */}
+                                        <UserDropdown user={data.me} />
                                     </Dropdown>
                                 </li>
                             </>

@@ -11,10 +11,10 @@ import {
     FormLabel,
     Title,
     FormFooter,
-} from "../../styles/helpers";
-import { LoginSignupWrapper } from "../login/Login.style";
-import { useForgotPasswordMutation } from "../../generated/graphql";
-import Meta from "../../components/Meta";
+} from "../../../styles/helpers";
+import { LoginSignupWrapper } from "../../login/Login.style";
+import { useForgotPasswordMutation } from "../../../generated/graphql";
+import Meta from "../../../components/Meta";
 
 const ForgotPassword: NextPage<{ token: string }> = ({ token }) => {
     const [{ fetching }, forgotPassword] = useForgotPasswordMutation();
