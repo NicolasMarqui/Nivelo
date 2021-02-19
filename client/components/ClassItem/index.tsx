@@ -17,15 +17,20 @@ interface ClassItemProps {
         | undefined;
     smaller?: boolean;
     onClick?: () => any;
+    fromInside?: boolean;
 }
 
 export default function ClassItem({
     smaller,
     class: { name, id, amountTimeTaught, description, price },
-    onClick,
+    fromInside = false,
 }: ClassItemProps) {
     return (
-        <Link href={`?class=${id}`} as={`/classes/${id}`} scroll={false}>
+        <Link
+            href={!fromInside ? `?class=${id}` : "/classes/[id]"}
+            as={`/classes/${id}`}
+            scroll={fromInside}
+        >
             <ClassItemWrapper smaller={smaller ? smaller : false}>
                 <div className="class__icon">
                     <MdSchool size={24} />

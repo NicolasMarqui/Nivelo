@@ -69,7 +69,7 @@ export default function TutorCard({ isColumn, tutor }: TutorCardProps) {
                     </div>
                 </Link>
                 <div className="tutor__sRow">
-                    <Link href="/tutor/[id]" as="/tutor/1">
+                    <Link href="/tutor/[id]" as={`/tutor/${id}`}>
                         <div>
                             <TutorTitle>{user.name}</TutorTitle>
                             <TutorSubtitle>

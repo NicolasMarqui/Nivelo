@@ -636,6 +636,49 @@ export type SingleClassQuery = (
   ) }
 );
 
+export type SingleTutorQueryVariables = Exact<{
+  id: Scalars['Float'];
+}>;
+
+
+export type SingleTutorQuery = (
+  { __typename?: 'Query' }
+  & { singleTutor: (
+    { __typename?: 'TutorResponse' }
+    & { errors?: Maybe<Array<(
+      { __typename?: 'FieldError' }
+      & Pick<FieldError, 'message'>
+    )>>, tutor?: Maybe<(
+      { __typename?: 'Tutor' }
+      & Pick<Tutor, 'id' | 'description' | 'rating' | 'amountClasses' | 'amountStudents'>
+      & { type?: Maybe<(
+        { __typename?: 'TutorType' }
+        & Pick<TutorType, 'id' | 'name'>
+      )>, user?: Maybe<(
+        { __typename?: 'User' }
+        & Pick<User, 'id' | 'name' | 'email' | 'sex' | 'country' | 'city' | 'avatar'>
+        & { userPlatformAccount?: Maybe<Array<(
+          { __typename?: 'UserPlatformAccount' }
+          & { platform?: Maybe<(
+            { __typename?: 'Platforms' }
+            & Pick<Platforms, 'id' | 'name' | 'account'>
+          )> }
+        )>> }
+      )>, classes?: Maybe<Array<(
+        { __typename?: 'Classes' }
+        & Pick<Classes, 'id' | 'name' | 'description' | 'amountTimeTaught'>
+        & { price?: Maybe<Array<(
+          { __typename?: 'Price' }
+          & Pick<Price, 'id' | 'price' | 'time'>
+        )>> }
+      )>>, categories?: Maybe<Array<(
+        { __typename?: 'Category' }
+        & Pick<Category, 'id' | 'name' | 'icon'>
+      )>> }
+    )> }
+  ) }
+);
+
 export type TutorsQueryVariables = Exact<{
   limit: Scalars['Int'];
   page: Scalars['Int'];
@@ -817,6 +860,62 @@ export const SingleClassDocument = gql`
 
 export function useSingleClassQuery(options: Omit<Urql.UseQueryArgs<SingleClassQueryVariables>, 'query'> = {}) {
   return Urql.useQuery<SingleClassQuery>({ query: SingleClassDocument, ...options });
+};
+export const SingleTutorDocument = gql`
+    query SingleTutor($id: Float!) {
+  singleTutor(id: $id) {
+    errors {
+      message
+    }
+    tutor {
+      id
+      description
+      type {
+        id
+        name
+      }
+      rating
+      amountClasses
+      amountStudents
+      user {
+        id
+        name
+        email
+        sex
+        country
+        city
+        avatar
+        userPlatformAccount {
+          platform {
+            id
+            name
+            account
+          }
+        }
+      }
+      classes {
+        id
+        name
+        description
+        amountTimeTaught
+        price {
+          id
+          price
+          time
+        }
+      }
+      categories {
+        id
+        name
+        icon
+      }
+    }
+  }
+}
+    `;
+
+export function useSingleTutorQuery(options: Omit<Urql.UseQueryArgs<SingleTutorQueryVariables>, 'query'> = {}) {
+  return Urql.useQuery<SingleTutorQuery>({ query: SingleTutorDocument, ...options });
 };
 export const TutorsDocument = gql`
     query Tutors($limit: Int!, $page: Int!, $order: String, $category: [String!], $type: [String!], $country: [String!]) {

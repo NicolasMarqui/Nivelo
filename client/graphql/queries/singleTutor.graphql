@@ -1,0 +1,50 @@
+query SingleTutor($id: Float!) {
+    singleTutor(id: $id) {
+        errors {
+            message
+        }
+        tutor {
+            id
+            description
+            type {
+                id
+                name
+            }
+            rating
+            amountClasses
+            amountStudents
+            user {
+                id
+                name
+                email
+                sex
+                country
+                city
+                avatar
+                userPlatformAccount {
+                    platform {
+                        id
+                        name
+                        account
+                    }
+                }
+            }
+            classes {
+                id
+                name
+                description
+                amountTimeTaught
+                price {
+                    id
+                    price
+                    time
+                }
+            }
+            categories {
+                id
+                name
+                icon
+            }
+        }
+    }
+}

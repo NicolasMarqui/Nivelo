@@ -42,8 +42,9 @@ export const SingleTutorWrapper = styled.div`
         padding: 40px;
 
         .second__bread {
-            margin-top: -70px;
+            margin-top: -142px;
             display: flex;
+            flex-direction: column;
         }
 
         .second__info {
