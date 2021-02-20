@@ -46,8 +46,6 @@ const Tutors = () => {
         setPage(newPage);
     };
 
-    const totalResults = 100;
-
     return (
         <PageWrapper pTop="108px">
             <Meta
@@ -75,7 +73,10 @@ const Tutors = () => {
                                 nextLabel={"Próximo"}
                                 containerClassName={"pagination"}
                                 activeClassName={"active"}
-                                pageCount={getTotalPages(totalResults, limit)}
+                                pageCount={getTotalPages(
+                                    data.allTutors.length,
+                                    limit
+                                )}
                                 marginPagesDisplayed={2}
                                 pageRangeDisplayed={5}
                                 onPageChange={(e) =>

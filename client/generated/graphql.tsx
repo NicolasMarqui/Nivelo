@@ -679,6 +679,23 @@ export type SingleTutorQuery = (
   ) }
 );
 
+export type TutorFeedbackQueryVariables = Exact<{
+  id: Scalars['Float'];
+}>;
+
+
+export type TutorFeedbackQuery = (
+  { __typename?: 'Query' }
+  & { getTutorFeedbacks: Array<(
+    { __typename?: 'Feedback' }
+    & Pick<Feedback, 'id' | 'rating' | 'content' | 'createdAt'>
+    & { user: (
+      { __typename?: 'User' }
+      & Pick<User, 'id' | 'name' | 'avatar'>
+    ) }
+  )> }
+);
+
 export type TutorsQueryVariables = Exact<{
   limit: Scalars['Int'];
   page: Scalars['Int'];
@@ -917,6 +934,25 @@ export const SingleTutorDocument = gql`
 
 export function useSingleTutorQuery(options: Omit<Urql.UseQueryArgs<SingleTutorQueryVariables>, 'query'> = {}) {
   return Urql.useQuery<SingleTutorQuery>({ query: SingleTutorDocument, ...options });
+};
+export const TutorFeedbackDocument = gql`
+    query TutorFeedback($id: Float!) {
+  getTutorFeedbacks(id: $id) {
+    id
+    rating
+    content
+    createdAt
+    user {
+      id
+      name
+      avatar
+    }
+  }
+}
+    `;
+
+export function useTutorFeedbackQuery(options: Omit<Urql.UseQueryArgs<TutorFeedbackQueryVariables>, 'query'> = {}) {
+  return Urql.useQuery<TutorFeedbackQuery>({ query: TutorFeedbackDocument, ...options });
 };
 export const TutorsDocument = gql`
     query Tutors($limit: Int!, $page: Int!, $order: String, $category: [String!], $type: [String!], $country: [String!]) {
