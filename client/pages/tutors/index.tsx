@@ -29,6 +29,9 @@ import { withUrqlClient } from "next-urql";
 import { useTutorsQuery } from "../../generated/graphql";
 import NoRecords from "../../components/NoRecords";
 import LoaderTutorCard from "../../components/Skeletons/LoaderTutorCard";
+import Pagination from "../../components/Pagination";
+import { getTotalPages } from "../../utils/getTotalPages";
+import ReactPaginate from "react-paginate";
 
 const Tutors = () => {
     const router = useRouter();
@@ -50,18 +53,20 @@ const Tutors = () => {
 
     // Viewing mode
     const [isViewColumn, setIsViewColumn] = useState(false);
-    const handlePagination = () => {
+    const handlePagination = (newPage: number) => {
         router.push(
             {
                 pathname: `/tutors`,
-                query: { ...router.query, page: page + 1 },
+                query: { ...router.query, page: newPage },
             },
             undefined,
             { shallow: true }
         );
 
-        setPage(page + 1);
+        setPage(newPage);
     };
+
+    const totalResults = 100;
 
     return (
         <PageWrapper pTop="108px">
@@ -95,10 +100,10 @@ const Tutors = () => {
                     <TtFilters>
                         <div className="filters__amount">
                             <Description>
-                                Mostrando{" "}
+                                Mostrando
                                 <span>
                                     {data ? data.allTutors.length : "-"}
-                                </span>{" "}
+                                </span>
                                 tutores
                             </Description>
                         </div>
@@ -124,7 +129,11 @@ const Tutors = () => {
                         </div>
                     </TtFilters>
                     {fetching ? (
-                        Array(10).map(() => <LoaderTutorCard />)
+                        <>
+                            <LoaderTutorCard />
+                            <LoaderTutorCard />
+                            <LoaderTutorCard />
+                        </>
                     ) : !data ||
                       !data.allTutors ||
                       data.allTutors.length === 0 ? (
@@ -140,9 +149,20 @@ const Tutors = () => {
                                     />
                                 ))}
                             </AreaTutors>
-                            <Button onClick={handlePagination}>
-                                Go to page 2
-                            </Button>
+                            <ReactPaginate
+                                previousLabel={"Anterior"}
+                                nextLabel={"Próximo"}
+                                containerClassName={"pagination"}
+                                activeClassName={"active"}
+                                pageCount={getTotalPages(totalResults, limit)}
+                                marginPagesDisplayed={2}
+                                pageRangeDisplayed={5}
+                                onPageChange={(e) =>
+                                    handlePagination(
+                                        e.selected === 1 ? 2 : e.selected
+                                    )
+                                }
+                            />
                         </>
                     )}
                 </StickyContainer>

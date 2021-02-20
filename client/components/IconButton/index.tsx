@@ -9,6 +9,7 @@ interface IconButtonProps {
     smaller?: boolean;
     bColor?: string;
     color?: string;
+    isLoading?: boolean;
 }
 
 export default function IconButton({
@@ -19,6 +20,7 @@ export default function IconButton({
     smaller,
     bColor,
     color,
+    isLoading,
 }: IconButtonProps) {
     return (
         <IconButtonWrapper
@@ -26,6 +28,7 @@ export default function IconButton({
             smaller={smaller ? smaller : false}
             bColor={bColor}
             color={color}
+            isLoading={isLoading}
         >
             {icon && <div className="icb__icon">{icon}</div>}
             {text && (

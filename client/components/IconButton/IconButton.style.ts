@@ -5,6 +5,7 @@ interface IconButtonWrapperProps {
     smaller?: boolean;
     bColor?: string;
     color?: string;
+    isLoading?: boolean;
 }
 
 export const IconButtonWrapper = styled.div<IconButtonWrapperProps>`
@@ -38,6 +39,13 @@ export const IconButtonWrapper = styled.div<IconButtonWrapperProps>`
                     color: #fff;
                 }
             }
+        `}
+
+    ${({ isLoading }) =>
+        isLoading &&
+        css`
+            pointer-events: none;
+            opacity: 0.4;
         `}
 
     .icb__text {

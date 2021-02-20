@@ -38,7 +38,7 @@ const Navbar: React.FC = ({}) => {
                         </Link>
                     </h1>
                 </Flex>
-                <Flex>
+                <Flex size={2}>
                     <Menu>
                         <li>
                             <Link href="/">

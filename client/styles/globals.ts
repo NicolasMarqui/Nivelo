@@ -36,6 +36,60 @@ export const GlobalStyle = createGlobalStyle`
       }
     }
   }
+
+  .pagination{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    li{
+      margin: 0 5px;
+      padding: 10px;
+      background-color: #f2f2f2;
+      border-radius: 8px;
+      cursor: pointer;
+
+      a{
+        margin-top: 2px;
+        display: block;
+        outline: none;
+      }
+
+      &:hover{
+        background-color: #E76F51;
+        color: #fff;
+      }
+
+      &.active{
+        background-color: #FF4338;
+
+        a{
+          color: #fff;
+        }
+      }
+
+      &.previous{
+        margin-right: 30px;
+      }
+
+      &.next{
+        margin-left: 30px;
+      }
+    }
+
+  }
+
+  #nprogress .bar {
+    background: #FF4338;
+
+    position: fixed;
+    z-index: 1031;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 5px;
+  }
 `;
 
 export const theme = {
