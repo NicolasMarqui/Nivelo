@@ -29,7 +29,6 @@ import { withUrqlClient } from "next-urql";
 import { useTutorsQuery } from "../../generated/graphql";
 import NoRecords from "../../components/NoRecords";
 import LoaderTutorCard from "../../components/Skeletons/LoaderTutorCard";
-import Pagination from "../../components/Pagination";
 import { getTotalPages } from "../../utils/getTotalPages";
 import ReactPaginate from "react-paginate";
 

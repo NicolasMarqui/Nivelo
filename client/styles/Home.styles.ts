@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const Hero = styled.div`
+export const HeroWrapper = styled.div`
     height: 100vh;
     width: 100%;
 
