@@ -19,8 +19,10 @@ import {
 } from "react-accessible-accordion";
 import "react-accessible-accordion/dist/fancy-example.css";
 import { MdClose } from "react-icons/md";
+import { useLazyEffect } from "../../utils/useLazyEffect";
 
 export default function Filter() {
+    // Initial Value
     const router = useRouter();
     const animatedComponents = makeAnimated();
 
@@ -73,7 +75,7 @@ export default function Filter() {
         );
     };
 
-    useEffect(() => {
+    useLazyEffect(() => {
         setIsOpenSide(false);
         document.body.className = "";
 

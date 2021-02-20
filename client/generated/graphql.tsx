@@ -590,7 +590,7 @@ export type CategoriesQuery = (
   { __typename?: 'Query' }
   & { allCategories: Array<(
     { __typename?: 'Category' }
-    & Pick<Category, 'id' | 'name'>
+    & Pick<Category, 'id' | 'name' | 'icon'>
   )> }
 );
 
@@ -804,6 +804,7 @@ export const CategoriesDocument = gql`
   allCategories {
     id
     name
+    icon
   }
 }
     `;

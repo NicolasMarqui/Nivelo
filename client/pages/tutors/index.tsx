@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import IconButton from "../../components/IconButton";
 import {
     Button,
@@ -28,6 +28,7 @@ import { createUrqlClient } from "../../utils/createUrqlClient";
 import { withUrqlClient } from "next-urql";
 import { useTutorsQuery } from "../../generated/graphql";
 import NoRecords from "../../components/NoRecords";
+import LoaderTutorCard from "../../components/Skeletons/LoaderTutorCard";
 
 const Tutors = () => {
     const router = useRouter();
@@ -123,7 +124,7 @@ const Tutors = () => {
                         </div>
                     </TtFilters>
                     {fetching ? (
-                        <h3>Loading this bitch</h3>
+                        Array(10).map(() => <LoaderTutorCard />)
                     ) : !data ||
                       !data.allTutors ||
                       data.allTutors.length === 0 ? (

@@ -20,10 +20,7 @@ const Navbar: React.FC = ({}) => {
     const router = useRouter();
 
     // Navbar states
-    const [hoverNotifications, setHoverNotifications] = useState(false);
     const [hoverUser, setHoverUser] = useState(false);
-
-    console.log(data.me);
 
     return (
         <Header whiteBg={router.pathname === "/login2" ? true : false}>

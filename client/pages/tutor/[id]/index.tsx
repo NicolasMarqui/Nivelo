@@ -36,6 +36,7 @@ import { useRouter } from "next/router";
 import { checkIfUndefined } from "../../../utils/checkIfUndefined";
 import BackButton from "../../../components/BackButton";
 import { getCompletedClasses } from "../../../utils/getCompletedClasses";
+import LoaderTutorPage from "../../../components/Skeletons/LoaderTutorPage";
 
 const Tutor = () => {
     const router = useRouter();
@@ -56,7 +57,7 @@ const Tutor = () => {
     return (
         <>
             {fetching ? (
-                <p>loading</p>
+                <LoaderTutorPage />
             ) : !fetching &&
               data &&
               data.singleTutor.errors === null &&

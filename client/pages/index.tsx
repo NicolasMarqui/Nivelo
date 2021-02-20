@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
     Container,
     Description,
@@ -26,9 +27,12 @@ import Meta from "../components/Meta";
 import { createUrqlClient } from "../utils/createUrqlClient";
 import { withUrqlClient } from "next-urql";
 import { useCategoriesQuery } from "../generated/graphql";
+import Link from "next/link";
+import CategoriesSeach from "../components/CategoriesSearch";
 
 const Home = () => {
     const [{ data }] = useCategoriesQuery();
+    const [searchBoxOpen, setIsSearchBoxOpen] = useState(false);
 
     return (
         <>
@@ -59,14 +63,23 @@ const Home = () => {
                             dolore magna aliqua. Ut enim ad minim veniam
                         </Description>
 
-                        <SearchCategory>
+                        <SearchCategory
+                            onClick={() => setIsSearchBoxOpen(!searchBoxOpen)}
+                        >
                             <p className="category__label">
                                 Escolha a categoria que deseja aprender
                                 <MdExpandMore size={18} />
                             </p>
                             <div className="category__search">
-                                <AiOutlineSearch size={20} color="#fff" />
+                                <Link href="/tutors">
+                                    <AiOutlineSearch size={20} color="#fff" />
+                                </Link>
                             </div>
+
+                            <CategoriesSeach
+                                isVisible={searchBoxOpen}
+                                position="bottom"
+                            />
                         </SearchCategory>
                     </Flex>
                     <Flex>

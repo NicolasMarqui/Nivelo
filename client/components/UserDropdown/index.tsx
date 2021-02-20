@@ -93,7 +93,6 @@ export default function UserDropdown({ user }: UserDropdownProps) {
                 </ul>
             </div>
             <div className="drop__group">
-                <h3 className="drop__title">Sair</h3>
                 <ul>
                     <Link href="/logout">
                         <li className="group__color">
