@@ -14,7 +14,7 @@ export const SideWrapper = styled.div<SideWrapperProps>`
     bottom: 0;
     width: ${({ size }) => size || "353px"};
     background-color: #fff;
-    overflow-x: hidden;
+    overflow: hidden;
     z-index: 40;
     display: none;
     transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;

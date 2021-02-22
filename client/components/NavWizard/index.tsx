@@ -10,7 +10,7 @@ interface NavWizardProps {
     goToStep?: any;
     lastStep?: any;
     info?: {
-        className: String;
+        className: { id?: number; name: String };
         classPrice: Number;
         classSchedule: [any];
         tool: String;
@@ -29,7 +29,7 @@ export default function NavWizard({ currentStep, info }: NavWizardProps) {
                         <div className="info__opt">
                             <ul>
                                 <li>
-                                    <h5>{info.className}</h5>
+                                    <h5>{info.className.name}</h5>
                                 </li>
                                 <li>-</li>
                                 <li>

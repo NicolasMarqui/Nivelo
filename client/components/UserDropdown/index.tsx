@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { UserDropdownWrapper } from "./UserDropdown.style";
 import Link from "next/link";
 import {
@@ -11,6 +12,8 @@ import { ImBooks } from "react-icons/im";
 import { BiChat } from "react-icons/bi";
 import { CgLogOut } from "react-icons/cg";
 import { GoMortarBoard } from "react-icons/go";
+import { useLogoutMutation } from "../../generated/graphql";
+import { useRouter } from "next/router";
 interface UserDropdownProps {
     user?:
         | {
@@ -25,6 +28,17 @@ interface UserDropdownProps {
 }
 
 export default function UserDropdown({ user }: UserDropdownProps) {
+    const router = useRouter();
+    const [, logout] = useLogoutMutation();
+    const [loadingLogout, setLoadingLogout] = useState(false);
+
+    const handleLogout = async () => {
+        setLoadingLogout(true);
+        await logout();
+        document.body.className = "";
+        router.replace("/");
+    };
+
     return (
         <UserDropdownWrapper>
             <div className="drop__group">
@@ -94,12 +108,10 @@ export default function UserDropdown({ user }: UserDropdownProps) {
             </div>
             <div className="drop__group">
                 <ul>
-                    <Link href="/logout">
-                        <li className="group__color">
-                            <CgLogOut size={20} color="#fff" />
-                            <p>Desconectar</p>
-                        </li>
-                    </Link>
+                    <li className="group__color" onClick={handleLogout}>
+                        <CgLogOut size={20} color="#fff" />
+                        <p>{loadingLogout ? "Carregando..." : "Desconectar"}</p>
+                    </li>
                 </ul>
             </div>
         </UserDropdownWrapper>

@@ -23,7 +23,7 @@ const Navbar: React.FC = ({}) => {
     const [hoverUser, setHoverUser] = useState(false);
 
     return (
-        <Header whiteBg={router.pathname === "/login2" ? true : false}>
+        <Header>
             <Container flex>
                 <Flex>
                     <h1 style={{ cursor: "pointer" }}>

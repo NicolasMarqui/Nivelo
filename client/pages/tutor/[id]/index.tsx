@@ -14,10 +14,9 @@ import SecondColumn from "../../../components/TutorPageComponents/SecondColumn";
 import ThirdColumn from "../../../components/TutorPageComponents/ThirdColumn";
 import Agendar from "../../../components/Agendar";
 import Meta from "../../../components/Meta";
-import { NextPage } from "next";
 import NotFound from "../../../components/NotFound";
 
-const Tutor: NextPage = () => {
+const Tutor = () => {
     const router = useRouter();
     const [{ data, fetching }] = useSingleTutorQuery({
         variables: { id: parseInt(router.query.id as string) },
@@ -57,7 +56,7 @@ const Tutor: NextPage = () => {
                             <SingleTutorWrapper>
                                 <FirstColumn data={data} />
                                 <SecondColumn data={data} />
-                                <ThirdColumn handleAgendar={handleOpenSide} />
+                                <ThirdColumn handleAgendar={handleOpenSide} data={data}/>
                             </SingleTutorWrapper>
                         </StickyContainer>
                     </Container>
@@ -65,6 +64,7 @@ const Tutor: NextPage = () => {
                         <Agendar
                             isOpen={agendarOpen}
                             closeAgendar={handleCloseSide}
+                            tutor={data.singleTutor.tutor}
                         />
                     )}
                 </PageWrapper>

@@ -247,8 +247,12 @@ export const PillButton = styled(Pill)`
     }
 `;
 
-export const Divider = styled.div`
-    background-color: #f4f4f4;
+interface DividerProps {
+    color?: string;
+}
+
+export const Divider = styled.div<DividerProps>`
+    background-color: ${({ color }) => (color ? color : "#f4f4f4")};
     height: 3px;
     width: 100%;
     margin: 20px 0;
@@ -313,8 +317,8 @@ export const SampleDiv = styled.div`
 `;
 
 export const FormError = styled.p`
-    padding: 10px 0;
-    margin: 10px 0 !important;
+    padding: 10px 0 0;
+    margin: 0px 0 !important;
     color: red;
     font-size: 14px;
 `;

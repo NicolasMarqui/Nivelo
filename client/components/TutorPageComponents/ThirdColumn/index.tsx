@@ -2,13 +2,19 @@ import { Sticky } from "react-sticky";
 import IconButton from "../../IconButton";
 import { MdChat, MdEvent } from "react-icons/md";
 import { Divider, Description } from "../../../styles/helpers";
+import {
+    getLowestValueArray,
+    getLowestValueArrayClasses,
+} from "../../../utils/getLowestValueArray";
 
 interface ThirdColumnProps {
     handleAgendar: any;
+    data: any;
 }
 
 const ThirdColumn: React.FC<ThirdColumnProps> = ({
     handleAgendar,
+    data,
 }: ThirdColumnProps) => {
     return (
         <div className="st__third">
@@ -22,7 +28,13 @@ const ThirdColumn: React.FC<ThirdColumnProps> = ({
                     >
                         <div className="third__prices">
                             <h5>Preço por hora a partir de</h5>
-                            <p className="prices__value">R$8.00</p>
+                            <p className="prices__value">
+                                R$
+                                {getLowestValueArrayClasses(
+                                    data.singleTutor.tutor.classes
+                                )}
+                                .00
+                            </p>
 
                             <div className="prices__btn">
                                 <IconButton

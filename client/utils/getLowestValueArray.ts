@@ -1,5 +1,5 @@
 export const getLowestValueArray = (arr: any[]) => {
-    if (!arr || arr.length === 0) return [];
+    if (!arr || arr.length === 0) return 0.0;
 
     let min = arr[0];
 
@@ -10,4 +10,21 @@ export const getLowestValueArray = (arr: any[]) => {
     });
 
     return min.price;
+};
+
+export const getLowestValueArrayClasses = (arr: any[]) => {
+    if (!arr || arr.length === 0) return 0.0;
+
+    let min = arr[0].price[0];
+
+    arr.map((el, i) => {
+        el.price.map((p) => {
+            console.log(p.price, min.price);
+            if (Number(p.price) < Number(min.price)) {
+                min = p.price;
+            }
+        });
+    });
+
+    return min;
 };

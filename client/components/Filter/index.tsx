@@ -10,13 +10,8 @@ import tutorType from "../../utils/tutorType.json";
 import makeAnimated from "react-select/animated";
 import { Sticky } from "react-sticky";
 import Side from "../Side";
-import {
-    Accordion,
-    AccordionItem,
-    AccordionItemButton,
-    AccordionItemHeading,
-    AccordionItemPanel,
-} from "react-accessible-accordion";
+// prettier-ignore
+import {Accordion,AccordionItem,AccordionItemButton,AccordionItemHeading,AccordionItemPanel,} from "react-accessible-accordion";
 import "react-accessible-accordion/dist/fancy-example.css";
 import { MdClose } from "react-icons/md";
 import { useLazyEffect } from "../../utils/useLazyEffect";

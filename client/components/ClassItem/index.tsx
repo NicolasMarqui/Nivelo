@@ -42,7 +42,7 @@ export default function ClassItem({
                 <div className="class__price">
                     <SmallerButton>
                         R$ {price ? getLowestValueArray(price) : "0.00"}
-                        {price && price.length > 1 ? "+" : ""}
+                        {price && price.length > 1 ? "+" : ""}.00
                     </SmallerButton>
                 </div>
             </ClassItemWrapper>
