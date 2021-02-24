@@ -35,8 +35,8 @@ export default function UserDropdown({ user }: UserDropdownProps) {
     const handleLogout = async () => {
         setLoadingLogout(true);
         await logout();
-        document.body.className = "";
         router.replace("/");
+        document.body.className = "";
     };
 
     return (

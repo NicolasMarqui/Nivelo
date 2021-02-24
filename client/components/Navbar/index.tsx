@@ -46,11 +46,6 @@ const Navbar: React.FC = ({}) => {
                             </Link>
                         </li>
                         <li>
-                            <Link href="/categories">
-                                <a>Categorias</a>
-                            </Link>
-                        </li>
-                        <li>
                             <Link href="/tutors">
                                 <a>Tutores</a>
                             </Link>
@@ -61,7 +56,7 @@ const Navbar: React.FC = ({}) => {
                             </Link>
                         </li>
                         <li>
-                            <Link href="/how-it-works">
+                            <Link href="/become-tutor">
                                 <a>Seja um tutor!</a>
                             </Link>
                         </li>

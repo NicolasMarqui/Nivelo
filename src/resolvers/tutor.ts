@@ -36,6 +36,9 @@ class TutorResponse {
 class NewTutorInput {
     @Field()
     description: string;
+
+    @Field()
+    type: number;
 }
 
 @Resolver()
@@ -98,7 +101,7 @@ export class TutorResolver {
         @Arg("options") options: NewTutorInput,
         @Ctx() { req }: MyContext
     ) {
-        const { description } = options;
+        const { description, type } = options;
 
         const userInfo = jwt.verify(
             // @ts-ignore: Unreachable code error
@@ -124,6 +127,8 @@ export class TutorResolver {
             };
         }
 
+        const newType = await TutorType.findOne({ where: { id: type } });
+
         // Create a new tutor
         let tutor;
         try {
@@ -134,6 +139,7 @@ export class TutorResolver {
                 .values({
                     description,
                     user,
+                    type: newType,
                 })
                 .returning("*")
                 .execute();

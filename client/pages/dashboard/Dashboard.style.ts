@@ -16,13 +16,14 @@ interface DasboardColumnProps {
     size: number;
     fixedSize?: boolean;
     bgColor?: string;
+    margin?: string;
 }
 
 export const DasboardColumnWrapper = styled.div<DasboardColumnProps>`
     background-color: ${({ bgColor }) =>
         bgColor ? bgColor : "rgba(242, 242, 242, 0.4)"};
     flex: ${({ size }) => (size ? size : 1)};
-    margin: 0 20px 0 0;
+    margin: ${({ margin }) => (margin ? margin : "0 20px 0 0")};
     border-radius: 30px;
     padding: 20px;
     ${({ fixedSize }) =>

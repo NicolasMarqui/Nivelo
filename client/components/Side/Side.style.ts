@@ -1,22 +1,38 @@
 import styled, { css } from "styled-components";
-import { SideOpen, SideOpenLeft } from "../../styles/animations";
+import { fadeIn, SideOpen, SideOpenLeft } from "../../styles/animations";
 
-interface SideWrapperProps {
+interface SideInsideProps {
     left?: boolean;
-    open: boolean;
+    open?: boolean;
     size?: string;
 }
 
-export const SideWrapper = styled.div<SideWrapperProps>`
+export const SideWrapper = styled.div<SideInsideProps>`
     position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 40;
+    display: none;
+    animation: ${fadeIn} 0.8s both;
+
+    ${({ open }) =>
+        open &&
+        css`
+            display: flex;
+        `}
+`;
+
+export const SideInside = styled.div<SideInsideProps>`
+    position: absolute;
     top: 0;
     right: 0;
     bottom: 0;
     width: ${({ size }) => size || "353px"};
     background-color: #fff;
     overflow: hidden;
-    z-index: 40;
-    display: none;
     transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
     animation: ${SideOpen} 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
     flex-direction: column;
@@ -60,7 +76,7 @@ export const SideWrapper = styled.div<SideWrapperProps>`
     }
 
     .side__footer {
-        position: fixed;
+        position: absolute;
         bottom: 0px;
         left: 0;
         right: 0;
@@ -78,11 +94,5 @@ export const SideWrapper = styled.div<SideWrapperProps>`
             border-radius: 0px 30px 30px 0px;
             animation: ${SideOpenLeft} 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)
                 both;
-        `}
-
-    ${({ open }) =>
-        open &&
-        css`
-            display: flex;
         `}
 `;

@@ -44,8 +44,6 @@ export default function Filter() {
 
     const handleOpenSide = () => {
         setIsOpenSide(!isOpenSide);
-        document.body.className = "";
-        document.body.classList.add("overlay", "no-scroll");
     };
 
     const handleCloseSide = () => {

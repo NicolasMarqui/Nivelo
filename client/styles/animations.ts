@@ -46,3 +46,8 @@ export const buttonHover = keyframes`
                 transform: translateZ(160px);
     }
 `;
+
+export const fadeIn = keyframes`
+    0% {opacity: 0;}
+    100% {opacity: 1;}
+`;

@@ -8,6 +8,7 @@ export const GlobalStyle = createGlobalStyle`
     font-family: 'Biryani', sans-serif;
     width: 100%;
     min-height: 100vh;
+    background-color: #fafafc;
 
     .body__overlay{
       display: none;

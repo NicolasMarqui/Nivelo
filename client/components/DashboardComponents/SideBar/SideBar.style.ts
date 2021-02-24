@@ -18,11 +18,11 @@ export const SideBarWrapper = styled.div`
             font-size: 22px;
             font-weight: 700;
             margin-top: 20px;
-            color: #fff;
+            color: #222;
         }
 
         h4 {
-            color: #fff;
+            color: #222;
             font-size: 14px;
         }
     }

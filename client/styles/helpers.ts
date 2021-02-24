@@ -262,6 +262,10 @@ export const Form = styled.form`
     width: 60%;
 `;
 
+export const FormFull = styled.form`
+    width: 100%;
+`;
+
 export const FormGroup = styled.div`
     margin: 30px 0;
     display: flex;
@@ -306,6 +310,19 @@ export const FormInput = styled.input<FormInputProps>`
                 justify-content: center;
             }
         `}
+`;
+
+export const FormTextArea = styled.textarea`
+    padding: 10px 14px;
+    border: 1px solid #dddddd;
+    border-radius: 7px;
+    outline: none;
+    height: 70px;
+    resize: none;
+
+    &.has__error {
+        border: 2px solid red;
+    }
 `;
 
 export const SampleDiv = styled.div`

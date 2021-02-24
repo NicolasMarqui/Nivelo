@@ -738,6 +738,17 @@ export type TutorsQuery = (
   )> }
 );
 
+export type AllTypesQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type AllTypesQuery = (
+  { __typename?: 'Query' }
+  & { allTypes: Array<(
+    { __typename?: 'TutorType' }
+    & Pick<TutorType, 'id' | 'name' | 'rules'>
+  )> }
+);
+
 export const RegularUserFragmentDoc = gql`
     fragment RegularUser on User {
   id
@@ -1011,4 +1022,17 @@ export const TutorsDocument = gql`
 
 export function useTutorsQuery(options: Omit<Urql.UseQueryArgs<TutorsQueryVariables>, 'query'> = {}) {
   return Urql.useQuery<TutorsQuery>({ query: TutorsDocument, ...options });
+};
+export const AllTypesDocument = gql`
+    query AllTypes {
+  allTypes {
+    id
+    name
+    rules
+  }
+}
+    `;
+
+export function useAllTypesQuery(options: Omit<Urql.UseQueryArgs<AllTypesQueryVariables>, 'query'> = {}) {
+  return Urql.useQuery<AllTypesQuery>({ query: AllTypesDocument, ...options });
 };

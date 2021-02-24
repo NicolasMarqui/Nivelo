@@ -7,11 +7,12 @@ export const SideBarMenuWrapper = styled.div`
 `;
 
 export const SideBarMenuGroup = styled.div`
-    margin: 20px 0;
+    margin: 20px auto;
+    width: 80%;
 
     h5 {
         font-size: 12px;
-        color: #fff;
+        color: #959595;
     }
 
     ul {
@@ -20,10 +21,10 @@ export const SideBarMenuGroup = styled.div`
         margin: 0;
 
         li {
-            margin: 20px 0;
+            margin: 10px 0;
             cursor: pointer;
             background-color: #fff;
-            padding: 10px;
+            padding: 10px 0;
             border-radius: 10px;
 
             a {

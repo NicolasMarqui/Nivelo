@@ -2,18 +2,12 @@ import { NextPage } from "next";
 import { GetServerSideProps } from "next";
 import SideBar from "../../components/DashboardComponents/SideBar";
 import { useMeQuery } from "../../generated/graphql";
-import {
-    PageWrapper,
-    Container,
-    Description,
-    Title,
-} from "../../styles/helpers";
-import {
-    DasboardColumnWrapper,
-    DashboardWrapper,
-    TitleArea,
-} from "./Dashboard.style";
+// prettier-ignore
+import { PageWrapper, Container, Description, Title } from "../../styles/helpers";
+// prettier-ignore
+import { DasboardColumnWrapper, DashboardWrapper, TitleArea} from "./Dashboard.style";
 import Meta from "../../components/Meta";
+import AccountForm from "../../components/DashboardComponents/AccountForm";
 
 interface DashboardProps {
     logged: boolean;
@@ -38,11 +32,11 @@ const Dashboard: NextPage<DashboardProps> = (props) => {
                         <DasboardColumnWrapper
                             size={1}
                             fixedSize
-                            bgColor="#ff4338"
+                            bgColor="#ffff"
                         >
                             <SideBar user={data.me} />
                         </DasboardColumnWrapper>
-                        <DasboardColumnWrapper size={3}>
+                        <DasboardColumnWrapper size={3} bgColor="#ffff">
                             <TitleArea>
                                 <Title fontWeight="400">
                                     Olá, {data.me.name}
@@ -56,6 +50,7 @@ const Dashboard: NextPage<DashboardProps> = (props) => {
                                     eos commodi dolores?
                                 </Description>
                             </TitleArea>
+                            <AccountForm />
                         </DasboardColumnWrapper>
                     </DashboardWrapper>
                 )}
