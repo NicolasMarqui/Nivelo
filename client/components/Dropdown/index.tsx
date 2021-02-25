@@ -21,10 +21,6 @@ export default function Dropdown({
         }
     }, [isVisible]);
 
-    // const mouseLeaveWithDelay = () => {
-    //     return setTimeout(() => mouseOut(), 2000);
-    // };
-
     return (
         <DropdownWrapper isVisible={isVisible} onMouseLeave={mouseOut}>
             {children}

@@ -19,7 +19,6 @@ export const getLowestValueArrayClasses = (arr: any[]) => {
 
     arr.map((el, i) => {
         el.price.map((p) => {
-            console.log(p.price, min.price);
             if (Number(p.price) < Number(min.price)) {
                 min = p.price;
             }

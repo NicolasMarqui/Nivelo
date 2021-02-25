@@ -88,6 +88,7 @@ interface TitleProps {
     center?: boolean;
     m_auto?: boolean;
     color?: string;
+    margin?: string;
 }
 
 export const Title = styled.h2<TitleProps>`
@@ -97,6 +98,7 @@ export const Title = styled.h2<TitleProps>`
     font-family: ${({ theme }) => theme.fonts.patua};
     width: ${({ size }) => size || "100"}%;
     color: ${({ color }) => color || "#222"};
+    margin: ${({ margin }) => margin || ""};
     ${({ center }) =>
         center &&
         css`

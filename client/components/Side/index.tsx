@@ -1,4 +1,3 @@
-import { useRef } from "react";
 import { Button } from "../../styles/helpers";
 import { SideInside, SideWrapper } from "./Side.style";
 import { MdClose } from "react-icons/md";
@@ -17,8 +16,6 @@ interface SideProps {
 
 // prettier-ignore
 const Side = ({ children, isOpen, onClickClose, onClickAplicar, left, footer, header, width, ignoreCloseOutside }: SideProps) => {
-    const sideRef = useRef(null);
-
     const handleCloseSide = (event: any) => {
         if (ignoreCloseOutside) return false;
 
@@ -40,7 +37,7 @@ const Side = ({ children, isOpen, onClickClose, onClickAplicar, left, footer, he
 
     return (
         <SideWrapper open={isOpen} onClick={handleCloseSide}>
-            <SideInside left={left ? left : false} size={width} ref={sideRef}>
+            <SideInside left={left ? left : false} size={width}>
                 {header && (
                     <div className="side__header">
                         {header.icon && (

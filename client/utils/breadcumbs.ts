@@ -26,3 +26,15 @@ export const tutorBreadcumb = (tutorName: string) => [
         text: tutorName,
     },
 ];
+
+export const dashBoardAccountBread = [
+    {
+        id: 1,
+        text: "Dashboard",
+        linkTo: "/dashboard",
+    },
+    {
+        id: 2,
+        text: "Minha Conta",
+    },
+];

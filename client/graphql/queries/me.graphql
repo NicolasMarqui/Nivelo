@@ -2,15 +2,24 @@ query Me {
     me {
         id
         name
+        description
         email
-        platforms {
-            id
-            name
-            account
-        }
+        dateBirth
+        sex
+        country
+        city
+        avatar
         tutor {
             id
             description
         }
+        userPlatformAccount {
+            platform {
+                id
+                name
+            }
+        }
+        createdAt
+        updatedAt
     }
 }

@@ -10,6 +10,7 @@ import { useMeQuery } from "../../generated/graphql";
 import { isServer } from "../../utils/isServer";
 import Dropdown from "../Dropdown";
 import UserDropdown from "../UserDropdown";
+import Skeleton from "react-loading-skeleton";
 
 // TODO Fix problem where mouse from underneath bugs
 
@@ -28,13 +29,15 @@ const Navbar: React.FC = ({}) => {
                 <Flex>
                     <h1 style={{ cursor: "pointer" }}>
                         <Link href="/">
-                            <Image
-                                src="/logo.svg"
-                                width="150"
-                                height="80"
-                                alt="Nivelo"
-                                className="nivelo__logo"
-                            />
+                            <a>
+                                <Image
+                                    src="/logo.svg"
+                                    width="150"
+                                    height="80"
+                                    alt="Nivelo"
+                                    className="nivelo__logo"
+                                />
+                            </a>
                         </Link>
                     </h1>
                 </Flex>
@@ -62,7 +65,7 @@ const Navbar: React.FC = ({}) => {
                         </li>
                         {fetching ? (
                             <li>
-                                <p>Carregando</p>
+                                <Skeleton height={30} width={90} />
                             </li>
                         ) : data && data.me ? (
                             <>
@@ -74,7 +77,12 @@ const Navbar: React.FC = ({}) => {
                                     onMouseLeave={() => setHoverUser(false)}
                                 >
                                     <Link href="/dashboard">
-                                        <FaUserGraduate size={24} color="red" />
+                                        <a>
+                                            <FaUserGraduate
+                                                size={24}
+                                                color="red"
+                                            />
+                                        </a>
                                     </Link>
 
                                     <Dropdown

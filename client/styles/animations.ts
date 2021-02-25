@@ -51,3 +51,15 @@ export const fadeIn = keyframes`
     0% {opacity: 0;}
     100% {opacity: 1;}
 `;
+
+export const slideInDown = keyframes`
+    0% {
+        -webkit-transform: translateY(-1%);
+        transform: translateY(-1%);
+        visibility: visible;
+        }
+    100% {
+        -webkit-transform: translateY(0);
+        transform: translateY(0);
+    }
+`;

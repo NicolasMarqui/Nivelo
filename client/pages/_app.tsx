@@ -28,19 +28,21 @@ function MyApp({ Component, pageProps }) {
 
             {/* Side Pages */}
 
-            <Side
-                isOpen={!!router.query.class}
-                left
-                header={{}}
-                onClickClose={() => router.back()}
-                ignoreCloseOutside={true}
-                width="500px"
-            >
-                <ClassesInfo
-                    classId={router.query.class as string}
-                    pageProps={{}}
-                />
-            </Side>
+            {router.query.class && (
+                <Side
+                    isOpen={!!router.query.class}
+                    left
+                    header={{}}
+                    onClickClose={() => router.back()}
+                    ignoreCloseOutside={true}
+                    width="500px"
+                >
+                    <ClassesInfo
+                        classId={router.query.class as string}
+                        pageProps={{}}
+                    />
+                </Side>
+            )}
         </>
     );
 }

@@ -11,7 +11,7 @@ interface ClassesInfoProps {
 
 const ClassesInfo = ({ classId }: ClassesInfoProps) => {
     const [{ data, fetching }] = useSingleClassQuery({
-        variables: { id: parseInt(classId) },
+        variables: { id: Number(classId) },
     });
 
     return (

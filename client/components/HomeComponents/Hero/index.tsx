@@ -48,7 +48,9 @@ const Hero: React.FC<HeroProps> = ({
                         </p>
                         <div className="category__search">
                             <Link href="/tutors">
-                                <AiOutlineSearch size={20} color="#fff" />
+                                <a>
+                                    <AiOutlineSearch size={20} color="#fff" />
+                                </a>
                             </Link>
                         </div>
 

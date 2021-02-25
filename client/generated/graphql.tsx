@@ -417,6 +417,7 @@ export type MoreInfoUser = {
 
 export type NewTutorInput = {
   description: Scalars['String'];
+  type: Scalars['Float'];
 };
 
 export type TutorInput = {
@@ -562,6 +563,28 @@ export type LogoutMutation = (
   & Pick<Mutation, 'logout'>
 );
 
+export type MoreInfoUserMutationVariables = Exact<{
+  id: Scalars['Float'];
+  description?: Maybe<Scalars['String']>;
+  avatar?: Maybe<Scalars['String']>;
+  country?: Maybe<Scalars['String']>;
+}>;
+
+
+export type MoreInfoUserMutation = (
+  { __typename?: 'Mutation' }
+  & { addMoreInfo: (
+    { __typename?: 'UserResponse' }
+    & { errors?: Maybe<Array<(
+      { __typename?: 'FieldError' }
+      & Pick<FieldError, 'field' | 'message'>
+    )>>, user?: Maybe<(
+      { __typename?: 'User' }
+      & Pick<User, 'id' | 'name' | 'description'>
+    )> }
+  ) }
+);
+
 export type RegisterMutationVariables = Exact<{
   email: Scalars['String'];
   password: Scalars['String'];
@@ -601,14 +624,17 @@ export type MeQuery = (
   { __typename?: 'Query' }
   & { me?: Maybe<(
     { __typename?: 'User' }
-    & Pick<User, 'id' | 'name' | 'email'>
-    & { platforms?: Maybe<Array<(
-      { __typename?: 'Platforms' }
-      & Pick<Platforms, 'id' | 'name' | 'account'>
-    )>>, tutor?: Maybe<(
+    & Pick<User, 'id' | 'name' | 'description' | 'email' | 'dateBirth' | 'sex' | 'country' | 'city' | 'avatar' | 'createdAt' | 'updatedAt'>
+    & { tutor?: Maybe<(
       { __typename?: 'Tutor' }
       & Pick<Tutor, 'id' | 'description'>
-    )> }
+    )>, userPlatformAccount?: Maybe<Array<(
+      { __typename?: 'UserPlatformAccount' }
+      & { platform?: Maybe<(
+        { __typename?: 'Platforms' }
+        & Pick<Platforms, 'id' | 'name'>
+      )> }
+    )>> }
   )> }
 );
 
@@ -810,6 +836,28 @@ export const LogoutDocument = gql`
 export function useLogoutMutation() {
   return Urql.useMutation<LogoutMutation, LogoutMutationVariables>(LogoutDocument);
 };
+export const MoreInfoUserDocument = gql`
+    mutation MoreInfoUser($id: Float!, $description: String, $avatar: String, $country: String) {
+  addMoreInfo(
+    id: $id
+    options: {description: $description, avatar: $avatar, country: $country}
+  ) {
+    errors {
+      field
+      message
+    }
+    user {
+      id
+      name
+      description
+    }
+  }
+}
+    `;
+
+export function useMoreInfoUserMutation() {
+  return Urql.useMutation<MoreInfoUserMutation, MoreInfoUserMutationVariables>(MoreInfoUserDocument);
+};
 export const RegisterDocument = gql`
     mutation Register($email: String!, $password: String!, $name: String!) {
   signup(options: {email: $email, password: $password, name: $name}) {
@@ -845,16 +893,25 @@ export const MeDocument = gql`
   me {
     id
     name
+    description
     email
-    platforms {
-      id
-      name
-      account
-    }
+    dateBirth
+    sex
+    country
+    city
+    avatar
     tutor {
       id
       description
     }
+    userPlatformAccount {
+      platform {
+        id
+        name
+      }
+    }
+    createdAt
+    updatedAt
   }
 }
     `;

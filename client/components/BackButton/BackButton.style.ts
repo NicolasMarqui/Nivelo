@@ -1,7 +1,14 @@
 import styled from "styled-components";
 
-export const BackButtonWrapper = styled.div`
+interface BackButtonWrapperProps {
+    bgColor?: string;
+    color?: string;
+}
+
+export const BackButtonWrapper = styled.div<BackButtonWrapperProps>`
     padding: 10px 10px 10px 0;
+    background-color: ${({ bgColor }) => (bgColor ? bgColor : "")};
+    color: ${({ color }) => (color ? color : "")};
 
     .lcfCps {
         width: 40px;

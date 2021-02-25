@@ -1,16 +1,6 @@
 import { useFormik } from "formik";
-import {
-    Button,
-    Form,
-    FormGroup,
-    FormInput,
-    FormError,
-    FormLabel,
-    FormHas,
-    Title,
-    Description,
-    FormFooter,
-} from "../../styles/helpers";
+// prettier-ignore
+import { Button, Form, FormGroup, FormInput, FormError, FormLabel, FormHas, Title, Description, FormFooter} from "../../styles/helpers";
 import Link from "next/link";
 import { useLoginMutation } from "../../generated/graphql";
 import { toErrorMap } from "../../utils/toErrorMap";

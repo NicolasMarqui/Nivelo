@@ -6,7 +6,5 @@ export const getCompletedClasses = (arr: any[]): number => {
         sum += el.amountTimeTaught;
     });
 
-    console.log(sum);
-
     return sum;
 };

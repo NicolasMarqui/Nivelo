@@ -1,25 +1,29 @@
 import { NextPage } from "next";
 import { GetServerSideProps } from "next";
-import SideBar from "../../components/DashboardComponents/SideBar";
-import { useMeQuery } from "../../generated/graphql";
+import SideBar from "../../../components/DashboardComponents/SideBar";
+import { useMeQuery } from "../../../generated/graphql";
 // prettier-ignore
-import { PageWrapper, Container, Description, Title } from "../../styles/helpers";
+import { PageWrapper, Container, Description, Title } from "../../../styles/helpers";
 // prettier-ignore
-import { DasboardColumnWrapper, DashboardWrapper, TitleArea} from "./Dashboard.style";
-import Meta from "../../components/Meta";
+import { DasboardColumnWrapper, DashboardWrapper, TitleArea} from "../Dashboard.style";
+import Meta from "../../../components/Meta";
+import AccountForm from "../../../components/DashboardComponents/AccountForm";
+import BackButton from "../../../components/BackButton";
+import Breadcumb from "../../../components/Breadcumb";
+import { dashBoardAccountBread } from "../../../utils/breadcumbs";
 
-interface DashboardProps {
+interface AccountProps {
     logged: boolean;
     cookie: string;
 }
 
-const Dashboard: NextPage<DashboardProps> = (props) => {
+const Account: NextPage<AccountProps> = (props) => {
     const [{ data, fetching }] = useMeQuery();
 
     return (
         <PageWrapper>
             <Meta
-                title={`Dashboard - ${fetching ? "" : data.me.name}`}
+                title={`Minha conta - ${fetching ? "" : data.me.name}`}
                 description="Encontre os melhores tutores para te ajudar nessa jornada"
                 keywords="tutor, javascript, nivelamento, aprender, algoritimos, comprar"
             />
@@ -37,18 +41,13 @@ const Dashboard: NextPage<DashboardProps> = (props) => {
                         </DasboardColumnWrapper>
                         <DasboardColumnWrapper size={3} bgColor="#ffff">
                             <TitleArea>
-                                <Title fontWeight="400">
-                                    Olá, {data.me.name}
+                                <BackButton bgColor="#8390FA" />
+                                <Breadcumb data={dashBoardAccountBread} />
+                                <Title fontWeight="400" margin="10px 0 0 0">
+                                    Sua conta
                                 </Title>
-                                <Description marginTop={20}>
-                                    Lorem ipsum dolor sit amet consectetur
-                                    adipisicing elit. Iste praesentium debitis,
-                                    quo, aliquid alias voluptatibus repellendus
-                                    et asperiores repellat cumque consectetur?
-                                    Similique officia ad atque soluta voluptas
-                                    eos commodi dolores?
-                                </Description>
                             </TitleArea>
+                            <AccountForm user={data.me} />
                         </DasboardColumnWrapper>
                     </DashboardWrapper>
                 )}
@@ -72,4 +71,4 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     return { props: { logged: true, cookie } };
 };
 
-export default Dashboard;
+export default Account;

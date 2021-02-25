@@ -22,29 +22,35 @@ const SideBarMenu: React.FC<SideBarMenuProps> = ({
                 <ul>
                     <li>
                         <Link href="/dashboard/account">
-                            <SideBarMenuLink
-                                text="Editar minha conta"
-                                hasChevron={true}
-                                icon={<AiOutlineSetting size={17} />}
-                            />
+                            <a>
+                                <SideBarMenuLink
+                                    text="Editar minha conta"
+                                    hasChevron={true}
+                                    icon={<AiOutlineSetting size={17} />}
+                                />
+                            </a>
                         </Link>
                     </li>
                     <li>
                         <Link href="/dashboard/classes">
-                            <SideBarMenuLink
-                                text="Minha Aulas"
-                                hasChevron={true}
-                                icon={<FiBookOpen size={17} />}
-                            />
+                            <a>
+                                <SideBarMenuLink
+                                    text="Minha Aulas"
+                                    hasChevron={true}
+                                    icon={<FiBookOpen size={17} />}
+                                />
+                            </a>
                         </Link>
                     </li>
                     <li>
                         <Link href="/dashboard/classes">
-                            <SideBarMenuLink
-                                text="Meus Professores"
-                                hasChevron={true}
-                                icon={<GiTeacher size={17} />}
-                            />
+                            <a>
+                                <SideBarMenuLink
+                                    text="Meus Professores"
+                                    hasChevron={true}
+                                    icon={<GiTeacher size={17} />}
+                                />
+                            </a>
                         </Link>
                     </li>
                 </ul>
@@ -54,29 +60,35 @@ const SideBarMenu: React.FC<SideBarMenuProps> = ({
                 <ul>
                     <li>
                         <Link href="/dashboard/account">
-                            <SideBarMenuLink
-                                text="Favoritos"
-                                hasChevron={true}
-                                icon={<MdFavoriteBorder size={17} />}
-                            />
+                            <a>
+                                <SideBarMenuLink
+                                    text="Favoritos"
+                                    hasChevron={true}
+                                    icon={<MdFavoriteBorder size={17} />}
+                                />
+                            </a>
                         </Link>
                     </li>
                     <li>
                         <Link href="/dashboard/classes">
-                            <SideBarMenuLink
-                                text="Feedbacks"
-                                hasChevron={true}
-                                icon={<BiPencil size={17} />}
-                            />
+                            <a>
+                                <SideBarMenuLink
+                                    text="Feedbacks"
+                                    hasChevron={true}
+                                    icon={<BiPencil size={17} />}
+                                />
+                            </a>
                         </Link>
                     </li>
                     <li>
                         <Link href="/dashboard/calendar">
-                            <SideBarMenuLink
-                                text="Calendário"
-                                hasChevron={true}
-                                icon={<MdEventAvailable size={17} />}
-                            />
+                            <a>
+                                <SideBarMenuLink
+                                    text="Feedbacks"
+                                    hasChevron={true}
+                                    icon={<BiPencil size={17} />}
+                                />
+                            </a>
                         </Link>
                     </li>
                 </ul>

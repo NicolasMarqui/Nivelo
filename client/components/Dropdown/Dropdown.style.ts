@@ -1,4 +1,5 @@
 import styled, { css } from "styled-components";
+import { fadeIn } from "../../styles/animations";
 
 interface DropdownWrapperProps {
     isVisible?: boolean;
@@ -15,6 +16,8 @@ export const DropdownWrapper = styled.div<DropdownWrapperProps>`
     width: 200px;
     z-index: 40;
     transition: all 0.4s linear;
+    animation: ${fadeIn} 0.5s both;
+
     ${({ isVisible }) =>
         isVisible &&
         css`
