@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { NextPage } from "next";
 import { GetServerSideProps } from "next";
 import SideBar from "../../components/DashboardComponents/SideBar";
@@ -41,12 +42,7 @@ const Dashboard: NextPage<DashboardProps> = (props) => {
                                     Olá, {data.me.name}
                                 </Title>
                                 <Description marginTop={20}>
-                                    Lorem ipsum dolor sit amet consectetur
-                                    adipisicing elit. Iste praesentium debitis,
-                                    quo, aliquid alias voluptatibus repellendus
-                                    et asperiores repellat cumque consectetur?
-                                    Similique officia ad atque soluta voluptas
-                                    eos commodi dolores?
+                                    {data.me.description}
                                 </Description>
                             </TitleArea>
                         </DasboardColumnWrapper>

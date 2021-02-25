@@ -580,7 +580,17 @@ export type MoreInfoUserMutation = (
       & Pick<FieldError, 'field' | 'message'>
     )>>, user?: Maybe<(
       { __typename?: 'User' }
-      & Pick<User, 'id' | 'name' | 'description'>
+      & Pick<User, 'id' | 'name' | 'description' | 'email' | 'dateBirth' | 'sex' | 'country' | 'city' | 'avatar' | 'createdAt' | 'updatedAt'>
+      & { tutor?: Maybe<(
+        { __typename?: 'Tutor' }
+        & Pick<Tutor, 'id' | 'description'>
+      )>, userPlatformAccount?: Maybe<Array<(
+        { __typename?: 'UserPlatformAccount' }
+        & { platform?: Maybe<(
+          { __typename?: 'Platforms' }
+          & Pick<Platforms, 'id' | 'name'>
+        )> }
+      )>> }
     )> }
   ) }
 );
@@ -850,6 +860,24 @@ export const MoreInfoUserDocument = gql`
       id
       name
       description
+      email
+      dateBirth
+      sex
+      country
+      city
+      avatar
+      tutor {
+        id
+        description
+      }
+      userPlatformAccount {
+        platform {
+          id
+          name
+        }
+      }
+      createdAt
+      updatedAt
     }
   }
 }

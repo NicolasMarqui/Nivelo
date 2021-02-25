@@ -15,7 +15,7 @@ export const SideBarWrapper = styled.div`
         }
 
         h2 {
-            font-size: 22px;
+            font-size: 25px;
             font-weight: 700;
             margin-top: 20px;
             color: #222;

@@ -20,6 +20,24 @@ mutation MoreInfoUser(
             id
             name
             description
+            email
+            dateBirth
+            sex
+            country
+            city
+            avatar
+            tutor {
+                id
+                description
+            }
+            userPlatformAccount {
+                platform {
+                    id
+                    name
+                }
+            }
+            createdAt
+            updatedAt
         }
     }
 }

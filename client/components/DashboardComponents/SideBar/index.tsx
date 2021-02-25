@@ -9,15 +9,13 @@ interface SideBarProps {
 }
 
 const SideBar: React.FC<SideBarProps> = ({ user }: SideBarProps) => {
+    console.log(user);
     return (
         <SideBarWrapper>
             <div className="side__info">
                 <Avatar avatar={user.avatar} />
                 <h2>{checkIfUndefined(user.name)}</h2>
-                <h4>
-                    {checkIfUndefined(user.city)} -{" "}
-                    {checkIfUndefined(user.country)}
-                </h4>
+                <h4>{checkIfUndefined(user.country)}</h4>
                 <Divider color="#FF4338" />
             </div>
             <SideBarMenu tutor={user.tutor} />

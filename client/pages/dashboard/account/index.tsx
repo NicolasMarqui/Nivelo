@@ -40,11 +40,15 @@ const Account: NextPage<AccountProps> = (props) => {
                             <SideBar user={data.me} />
                         </DasboardColumnWrapper>
                         <DasboardColumnWrapper size={3} bgColor="#ffff">
-                            <TitleArea>
-                                <BackButton bgColor="#8390FA" />
+                            <TitleArea margin="0 30px">
+                                <BackButton
+                                    bgColor="#8390FA"
+                                    color="#fff"
+                                    jContent="flex-end"
+                                />
                                 <Breadcumb data={dashBoardAccountBread} />
                                 <Title fontWeight="400" margin="10px 0 0 0">
-                                    Sua conta
+                                    Editar sua conta
                                 </Title>
                             </TitleArea>
                             <AccountForm user={data.me} />

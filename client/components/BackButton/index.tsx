@@ -5,13 +5,22 @@ import { useRouter } from "next/router";
 interface BackButtonProps {
     bgColor?: string;
     color?: string;
+    jContent?: string;
 }
 
-export default function BackButton({ bgColor, color }: BackButtonProps) {
+export default function BackButton({
+    bgColor,
+    color,
+    jContent,
+}: BackButtonProps) {
     const router = useRouter();
 
     return (
-        <BackButtonWrapper onClick={() => router.back()}>
+        <BackButtonWrapper
+            onClick={() => router.back()}
+            color={color}
+            jPosition={jContent}
+        >
             <PillButton bgColor={bgColor ? bgColor : "#fff"}>Voltar</PillButton>
         </BackButtonWrapper>
     );

@@ -31,7 +31,7 @@ const AccountForm: React.FC<AccountFormProps> = ({
             const response = await moreInfoUser({
                 id: user.id,
                 description: values.description,
-                country: values.country,
+                country: userCountry,
             });
             if (response.data.addMoreInfo.errors) {
                 setErrors(toErrorMap(response.data.addMoreInfo.errors));
@@ -79,7 +79,14 @@ const AccountForm: React.FC<AccountFormProps> = ({
                     />
                 </FormGroup>
                 <FormGroup>
-                    <Button bgColor="#57CC99" type="submit" color="#fff">
+                    <Button
+                        bgColor="#57CC99"
+                        type="submit"
+                        color="#fff"
+                        width="200px"
+                        fSize="18px"
+                        margin="10px auto"
+                    >
                         Salvar
                     </Button>
                 </FormGroup>

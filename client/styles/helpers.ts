@@ -187,10 +187,13 @@ interface ButtonProps {
     bgColor?: string;
     color?: string;
     bold?: boolean;
+    fSize?: string;
+    width?: string;
+    margin?: string;
 }
 
 export const Button = styled.button<ButtonProps>`
-    margin: 10px 0;
+    margin: ${({ margin }) => margin || "10px 0"};
     padding: 10px 20px;
     background-color: ${({ bgColor }) => (bgColor ? bgColor : "#f2f2f2")};
     color: ${({ color }) => (color ? color : "#222")};
@@ -202,6 +205,8 @@ export const Button = styled.button<ButtonProps>`
     cursor: pointer;
     border: none;
     outline: none;
+    font-size: ${({ fSize }) => fSize || ""};
+    width: ${({ width }) => width || "auto"};
 
     &:hover {
         opacity: 0.4;

@@ -34,6 +34,10 @@ export const DasboardColumnWrapper = styled.div<DasboardColumnProps>`
         `}
 `;
 
-export const TitleArea = styled.div`
-    padding: 30px;
+interface TitleAreaProps {
+    margin?: string;
+}
+
+export const TitleArea = styled.div<TitleAreaProps>`
+    padding: ${({ margin }) => margin || "30px"};
 `;
