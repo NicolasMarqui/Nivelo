@@ -414,12 +414,9 @@ export type EmailPasswordInput = {
 };
 
 export type MoreInfoUser = {
-  dateBirth?: Maybe<Scalars['String']>;
   description?: Maybe<Scalars['String']>;
-  sex?: Maybe<Scalars['String']>;
   country?: Maybe<Scalars['String']>;
-  city?: Maybe<Scalars['String']>;
-  avatar?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
 };
 
 export type NewTutorInput = {
@@ -603,8 +600,8 @@ export type LogoutMutation = (
 export type MoreInfoUserMutationVariables = Exact<{
   id: Scalars['Float'];
   description?: Maybe<Scalars['String']>;
-  avatar?: Maybe<Scalars['String']>;
   country?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
 }>;
 
 
@@ -921,10 +918,10 @@ export function useLogoutMutation() {
   return Urql.useMutation<LogoutMutation, LogoutMutationVariables>(LogoutDocument);
 };
 export const MoreInfoUserDocument = gql`
-    mutation MoreInfoUser($id: Float!, $description: String, $avatar: String, $country: String) {
+    mutation MoreInfoUser($id: Float!, $description: String, $country: String, $name: String) {
   addMoreInfo(
     id: $id
-    options: {description: $description, avatar: $avatar, country: $country}
+    options: {description: $description, country: $country, name: $name}
   ) {
     errors {
       field

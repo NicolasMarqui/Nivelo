@@ -331,7 +331,7 @@ export class UserResolver {
             return { errors };
         }
 
-        const { description, country } = options;
+        const { description, country, name } = options;
 
         let user;
         try {
@@ -339,6 +339,7 @@ export class UserResolver {
                 .createQueryBuilder()
                 .update(User)
                 .set({
+                    name,
                     description,
                     country,
                 })

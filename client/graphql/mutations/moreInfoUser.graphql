@@ -1,16 +1,12 @@
 mutation MoreInfoUser(
     $id: Float!
     $description: String
-    $avatar: String
     $country: String
+    $name: String
 ) {
     addMoreInfo(
         id: $id
-        options: {
-            description: $description
-            avatar: $avatar
-            country: $country
-        }
+        options: { description: $description, country: $country, name: $name }
     ) {
         errors {
             field

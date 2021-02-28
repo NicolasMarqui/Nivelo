@@ -13,7 +13,9 @@ import { Toaster } from "react-hot-toast";
 
 Router.events.on("routeChangeStart", () => {
     NProgress.start();
-    Reoverlay.hideModal();
+    if (document.querySelector(".reOverlay").hasChildNodes()) {
+        Reoverlay.hideAll();
+    }
 });
 Router.events.on("routeChangeComplete", () => NProgress.done());
 Router.events.on("routeChangeError", () => NProgress.done());

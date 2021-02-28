@@ -4,7 +4,7 @@ export const ModalContainer = styled.div`
     padding: 2rem 5rem;
     display: flex;
     flex-direction: column;
-    border-radius: 15px;
+    border-radius: 25px;
 `;
 
 export const getColor = (props: any) => {

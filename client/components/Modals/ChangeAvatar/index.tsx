@@ -1,16 +1,11 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import "../../../node_modules/reoverlay/lib/ModalWrapper.css";
 import { ModalWrapper, Reoverlay } from "reoverlay";
 import { TutorTitle } from "../../TutorCard/TutorCard.style";
 // prettier-ignore
 import { DropContainer, DropFilesMessage, ModalContainer} from "../Modals.style";
-import {
-    Alert,
-    AnimationWrapper,
-    Button,
-    Description,
-    Flex,
-} from "../../../styles/helpers";
+// prettier-ignore
+import { Alert, AnimationWrapper, Button, Description, Flex} from "../../../styles/helpers";
 import { useDropzone } from "react-dropzone";
 import axios from "axios";
 import { useChangeAvatarMutation } from "../../../generated/graphql";

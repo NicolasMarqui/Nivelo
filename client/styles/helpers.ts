@@ -339,8 +339,11 @@ export const FormTextArea = styled.textarea`
     border: 1px solid #dddddd;
     border-radius: 7px;
     outline: none;
-    height: 70px;
+    height: 120px;
     resize: none;
+    font-size: 16px;
+    line-height: 22px;
+    font-family: sans-serif;
 
     &.has__error {
         border: 2px solid red;

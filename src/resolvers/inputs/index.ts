@@ -33,6 +33,9 @@ export class MoreInfoUser {
 
     @Field({ nullable: true })
     country: string;
+
+    @Field({ nullable: true })
+    name: string;
 }
 
 @InputType()
