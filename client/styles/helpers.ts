@@ -60,6 +60,7 @@ interface FlexProps {
     col?: boolean;
     mr?: number;
     justifyEnd?: boolean;
+    justifyCenter?: boolean;
 }
 
 export const Flex = styled.div<FlexProps>`
@@ -77,6 +78,11 @@ export const Flex = styled.div<FlexProps>`
         justifyEnd &&
         css`
             justify-content: flex-end;
+        `}
+    ${({ justifyCenter }) =>
+        justifyCenter &&
+        css`
+            justify-content: center;
         `}
 `;
 
@@ -190,6 +196,7 @@ interface ButtonProps {
     fSize?: string;
     width?: string;
     margin?: string;
+    notActive?: boolean;
 }
 
 export const Button = styled.button<ButtonProps>`
@@ -207,6 +214,14 @@ export const Button = styled.button<ButtonProps>`
     outline: none;
     font-size: ${({ fSize }) => fSize || ""};
     width: ${({ width }) => width || "auto"};
+
+    ${({ notActive }) =>
+        notActive &&
+        css`
+            pointer-events: none;
+            opacity: 0.5;
+            cursor: not-allowed;
+        `}
 
     &:hover {
         opacity: 0.4;
@@ -374,4 +389,23 @@ export const FormFooter = styled.div`
         margin-top: 20px;
         width: 240px;
     }
+`;
+
+interface AlertProps {
+    bgColor?: string;
+}
+
+export const Alert = styled.div<AlertProps>`
+    padding: 15px;
+    margin: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: ${({ bgColor }) => bgColor || "#57CC99"};
+    color: #fff;
+    border-radius: 10px;
+`;
+
+export const AnimationWrapper = styled.div`
+    margin: 15px 0;
 `;

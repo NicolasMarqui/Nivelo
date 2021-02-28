@@ -8,7 +8,7 @@ const Avatar: React.FC<AvatarProps> = ({ avatar }: AvatarProps) => {
     return (
         <>
             {avatar ? (
-                <Image
+                <img
                     src={avatar}
                     width={120}
                     height={120}

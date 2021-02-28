@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { NextPage } from "next";
 import { GetServerSideProps } from "next";
 import SideBar from "../../components/DashboardComponents/SideBar";

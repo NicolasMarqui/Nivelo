@@ -211,6 +211,7 @@ export type Mutation = {
   login: UserResponse;
   logout: Scalars['Boolean'];
   addMoreInfo: UserResponse;
+  changeAvatar: UserResponse;
   newTutor: TutorResponse;
   deleteTutor: Scalars['Boolean'];
   updateTutor: TutorResponse;
@@ -260,6 +261,12 @@ export type MutationLoginArgs = {
 
 export type MutationAddMoreInfoArgs = {
   options: MoreInfoUser;
+  id: Scalars['Float'];
+};
+
+
+export type MutationChangeAvatarArgs = {
+  avatar: Scalars['String'];
   id: Scalars['Float'];
 };
 
@@ -503,6 +510,36 @@ export type FeedbackInput = {
 export type RegularUserFragment = (
   { __typename?: 'User' }
   & Pick<User, 'id' | 'name' | 'email'>
+);
+
+export type ChangeAvatarMutationVariables = Exact<{
+  id: Scalars['Float'];
+  avatar: Scalars['String'];
+}>;
+
+
+export type ChangeAvatarMutation = (
+  { __typename?: 'Mutation' }
+  & { changeAvatar: (
+    { __typename?: 'UserResponse' }
+    & { errors?: Maybe<Array<(
+      { __typename?: 'FieldError' }
+      & Pick<FieldError, 'field' | 'message'>
+    )>>, user?: Maybe<(
+      { __typename?: 'User' }
+      & Pick<User, 'id' | 'name' | 'description' | 'email' | 'dateBirth' | 'sex' | 'country' | 'city' | 'avatar' | 'createdAt' | 'updatedAt'>
+      & { tutor?: Maybe<(
+        { __typename?: 'Tutor' }
+        & Pick<Tutor, 'id' | 'description'>
+      )>, userPlatformAccount?: Maybe<Array<(
+        { __typename?: 'UserPlatformAccount' }
+        & { platform?: Maybe<(
+          { __typename?: 'Platforms' }
+          & Pick<Platforms, 'id' | 'name'>
+        )> }
+      )>> }
+    )> }
+  ) }
 );
 
 export type ChangePasswordMutationVariables = Exact<{
@@ -792,6 +829,43 @@ export const RegularUserFragmentDoc = gql`
   email
 }
     `;
+export const ChangeAvatarDocument = gql`
+    mutation changeAvatar($id: Float!, $avatar: String!) {
+  changeAvatar(id: $id, avatar: $avatar) {
+    errors {
+      field
+      message
+    }
+    user {
+      id
+      name
+      description
+      email
+      dateBirth
+      sex
+      country
+      city
+      avatar
+      tutor {
+        id
+        description
+      }
+      userPlatformAccount {
+        platform {
+          id
+          name
+        }
+      }
+      createdAt
+      updatedAt
+    }
+  }
+}
+    `;
+
+export function useChangeAvatarMutation() {
+  return Urql.useMutation<ChangeAvatarMutation, ChangeAvatarMutationVariables>(ChangeAvatarDocument);
+};
 export const ChangePasswordDocument = gql`
     mutation changePassword($newPassword: String!, $token: String!) {
   changePassword(newPassword: $newPassword, token: $token) {

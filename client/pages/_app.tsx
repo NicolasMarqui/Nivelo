@@ -8,8 +8,13 @@ import "nprogress/nprogress.css";
 import Side from "../components/Side";
 import { useRouter } from "next/router";
 import ClassesInfo from "../components/ClassesInfo";
+import { ModalContainer, Reoverlay } from "reoverlay";
+import { Toaster } from "react-hot-toast";
 
-Router.events.on("routeChangeStart", () => NProgress.start());
+Router.events.on("routeChangeStart", () => {
+    NProgress.start();
+    Reoverlay.hideModal();
+});
 Router.events.on("routeChangeComplete", () => NProgress.done());
 Router.events.on("routeChangeError", () => NProgress.done());
 
@@ -25,6 +30,9 @@ function MyApp({ Component, pageProps }) {
                     <Component {...pageProps} />
                 </Layout>
             </ThemeProvider>
+
+            <ModalContainer />
+            <Toaster position="top-center" />
 
             {/* Side Pages */}
 

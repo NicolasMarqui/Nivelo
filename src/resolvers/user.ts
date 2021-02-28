@@ -331,7 +331,7 @@ export class UserResolver {
             return { errors };
         }
 
-        const { dateBirth, description, sex, country, city, avatar } = options;
+        const { description, country } = options;
 
         let user;
         try {
@@ -339,12 +339,8 @@ export class UserResolver {
                 .createQueryBuilder()
                 .update(User)
                 .set({
-                    dateBirth,
                     description,
-                    sex,
                     country,
-                    city,
-                    avatar,
                 })
                 .where("id = :id", { id })
                 .returning("*")
@@ -381,6 +377,42 @@ export class UserResolver {
                     },
                 ],
             };
+        }
+
+        return { user };
+    }
+
+    // Change user avatar
+    @Mutation(() => UserResponse)
+    async changeAvatar(
+        @Arg("id") id: number,
+        @Arg("avatar") avatar: string
+    ): Promise<UserResponse> {
+        if (!avatar) {
+            return {
+                errors: [
+                    {
+                        field: "avatar",
+                        message: "Algo deu errado!",
+                    },
+                ],
+            };
+        }
+
+        let user;
+        try {
+            const result = await getConnection()
+                .createQueryBuilder()
+                .update(User)
+                .set({
+                    avatar,
+                })
+                .where("id = :id", { id })
+                .returning("*")
+                .execute();
+            user = result.raw[0];
+        } catch (err) {
+            console.log(err);
         }
 
         return { user };
