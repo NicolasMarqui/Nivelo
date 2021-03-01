@@ -43,7 +43,7 @@ const Account: NextPage<AccountProps> = (props) => {
                             <TitleArea margin="0 30px">
                                 <BackButton bgColor="#8390FA" color="#fff" />
                                 {/* <Breadcumb data={dashBoardAccountBread} /> */}
-                                <Title fontWeight="400" margin="10px 0 0 0">
+                                <Title fontWeight="400" margin="-2px 0 47px 0">
                                     Editar sua conta
                                 </Title>
                             </TitleArea>

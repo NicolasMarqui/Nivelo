@@ -19,7 +19,7 @@ const Feedback: React.FC<FeedbackProps> = ({ tutorId }: FeedbackProps) => {
             ) : (
                 data.getTutorFeedbacks.map((feed) => {
                     // @ts-ignore
-                    return <FeedbackItem feed={feed} />;
+                    return <FeedbackItem feed={feed} key={feed.id} />;
                 })
             )}
         </>

@@ -295,8 +295,8 @@ export const FormGroup = styled.div`
 `;
 
 export const FormLabel = styled.label`
-    font-size: 16px;
-    color: #222;
+    font-size: 14px;
+    color: #a0a0a0;
     margin-bottom: 7px;
 `;
 
@@ -309,6 +309,9 @@ export const FormInput = styled.input<FormInputProps>`
     border: 1px solid #dddddd;
     border-radius: 7px;
     outline: none;
+    font-size: 16px;
+    line-height: 22px;
+    font-family: sans-serif;
 
     &.has__error {
         border: 2px solid red;

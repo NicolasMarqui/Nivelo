@@ -232,6 +232,7 @@ export type Mutation = {
   updateCategory: Category;
   deleteCategory: Scalars['Boolean'];
   newPlatform: PlatformsResponse;
+  updatePlatform: PlatformsResponse;
   addPlatformUser: Scalars['Boolean'];
   updatePlatformUser: UserPlatformAccount;
   newFeedback: FeedbackResponse;
@@ -379,6 +380,12 @@ export type MutationDeleteCategoryArgs = {
 
 export type MutationNewPlatformArgs = {
   options: PlatformsInput;
+};
+
+
+export type MutationUpdatePlatformArgs = {
+  options: PlatformsInput;
+  id: Scalars['Float'];
 };
 
 
@@ -650,6 +657,17 @@ export type RegisterMutation = (
   ) }
 );
 
+export type AllPlatformsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type AllPlatformsQuery = (
+  { __typename?: 'Query' }
+  & { allPlatforms: Array<(
+    { __typename?: 'Platforms' }
+    & Pick<Platforms, 'id' | 'name' | 'icon'>
+  )> }
+);
+
 export type CategoriesQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -674,6 +692,7 @@ export type MeQuery = (
       & Pick<Tutor, 'id' | 'description'>
     )>, userPlatformAccount?: Maybe<Array<(
       { __typename?: 'UserPlatformAccount' }
+      & Pick<UserPlatformAccount, 'account'>
       & { platform?: Maybe<(
         { __typename?: 'Platforms' }
         & Pick<Platforms, 'id' | 'name'>
@@ -974,6 +993,19 @@ export const RegisterDocument = gql`
 export function useRegisterMutation() {
   return Urql.useMutation<RegisterMutation, RegisterMutationVariables>(RegisterDocument);
 };
+export const AllPlatformsDocument = gql`
+    query AllPlatforms {
+  allPlatforms {
+    id
+    name
+    icon
+  }
+}
+    `;
+
+export function useAllPlatformsQuery(options: Omit<Urql.UseQueryArgs<AllPlatformsQueryVariables>, 'query'> = {}) {
+  return Urql.useQuery<AllPlatformsQuery>({ query: AllPlatformsDocument, ...options });
+};
 export const CategoriesDocument = gql`
     query Categories {
   allCategories {
@@ -1004,6 +1036,7 @@ export const MeDocument = gql`
       description
     }
     userPlatformAccount {
+      account
       platform {
         id
         name

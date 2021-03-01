@@ -31,9 +31,7 @@ export default function LoginForm() {
                 Bem vindo de volta
             </Title>
             <Description size="60" color="#B1B1B1">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam
+                Sentimos sua falta!
             </Description>
 
             <Form onSubmit={formik.handleSubmit}>

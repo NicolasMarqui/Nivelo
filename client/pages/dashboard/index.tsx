@@ -3,10 +3,11 @@ import { GetServerSideProps } from "next";
 import SideBar from "../../components/DashboardComponents/SideBar";
 import { useMeQuery } from "../../generated/graphql";
 // prettier-ignore
-import { PageWrapper, Container, Description, Title } from "../../styles/helpers";
+import { PageWrapper, Container, Description, Title, FormLabel } from "../../styles/helpers";
 // prettier-ignore
-import { DasboardColumnWrapper, DashboardWrapper, TitleArea} from "./Dashboard.style";
+import { DasboardColumnWrapper, DashboardWrapper, TitleArea, ColumnGroup, PlatformsWrapper} from "./Dashboard.style";
 import Meta from "../../components/Meta";
+import PlatformList from "../../components/PlatformsList";
 
 interface DashboardProps {
     logged: boolean;
@@ -35,15 +36,39 @@ const Dashboard: NextPage<DashboardProps> = (props) => {
                         >
                             <SideBar user={data.me} />
                         </DasboardColumnWrapper>
-                        <DasboardColumnWrapper size={3} bgColor="#ffff">
-                            <TitleArea>
-                                <Title fontWeight="400">
-                                    Olá, {data.me.name}
-                                </Title>
-                                <Description marginTop={20}>
-                                    {data.me.description}
-                                </Description>
-                            </TitleArea>
+                        <DasboardColumnWrapper
+                            size={3}
+                            bgColor="transparent"
+                            padding="0 20px"
+                        >
+                            <ColumnGroup margin="0">
+                                <TitleArea>
+                                    <Title fontWeight="400">
+                                        Olá, {data.me.name}
+                                    </Title>
+                                    <Description marginTop={20}>
+                                        Bem vindo a sua dashboard, aqui você
+                                        pode fazer alterações em sua conta, ver
+                                        suas aulas e seus tutor, e seu
+                                        calendário
+                                    </Description>
+                                </TitleArea>
+                                <PlatformsWrapper>
+                                    <FormLabel>
+                                        Adicione sua plataforma de preferência
+                                    </FormLabel>
+                                    <PlatformList
+                                        user={data.me.userPlatformAccount}
+                                    />
+                                </PlatformsWrapper>
+                            </ColumnGroup>
+                            <ColumnGroup>
+                                <TitleArea>
+                                    <Title fontWeight="400">
+                                        Suas próximas aulas
+                                    </Title>
+                                </TitleArea>
+                            </ColumnGroup>
                         </DasboardColumnWrapper>
                     </DashboardWrapper>
                 )}

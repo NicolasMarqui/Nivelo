@@ -1,24 +1,13 @@
-import { Platforms } from "./../entities/Platforms";
+import { UserPlatformAccount } from "./../entities/UserPlatformAccount";
 import { validateNewInfo } from "./../utils/validateNewInfo";
 import { isAuth } from "../middleware";
-import {
-    cookieDuration,
-    COOKIE_NAME,
-    FORGET_PASSWORD_PREFIX,
-} from "../constants";
+// prettier-ignore
+import { cookieDuration, COOKIE_NAME, FORGET_PASSWORD_PREFIX,} from "../constants";
 import { MyContext } from "./../types";
 import { EmailPasswordInput, MoreInfoUser } from "./inputs";
 import { validateRegister } from "./../utils/validateRegister";
-import {
-    Arg,
-    Ctx,
-    Field,
-    Mutation,
-    ObjectType,
-    Query,
-    Resolver,
-    UseMiddleware,
-} from "type-graphql";
+// prettier-ignore
+import { Arg, Ctx, Field, Mutation, ObjectType, Query, Resolver, UseMiddleware} from "type-graphql";
 import { User } from "./../entities/User";
 import argon2 from "argon2";
 import { UsernameEmailPasswordInput } from "./inputs";
@@ -417,5 +406,31 @@ export class UserResolver {
         }
 
         return { user };
+    }
+
+    @Query(() => String, { nullable: true })
+    async userHasPlatform(
+        @Arg("platformId") platformId: number,
+        @Arg("userId") userId: number
+    ): Promise<String | null> {
+        const user = await User.findOne({
+            where: { id: userId },
+            relations: ["userPlatformAccount", "userPlatformAccount.platform"],
+        });
+
+        if (!user) return null;
+
+        let platforms = null;
+
+        const hasAccount = user.userPlatformAccount.map((plat) => {
+            if (plat.platform.id === platformId) {
+                platforms = plat.account;
+            }
+        });
+
+        if (!hasAccount || hasAccount.length === 0 || hasAccount === [])
+            return null;
+
+        return platforms;
     }
 }

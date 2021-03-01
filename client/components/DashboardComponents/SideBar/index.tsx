@@ -6,6 +6,7 @@ import { SideBarWrapper } from "./SideBar.style";
 import { AiOutlineEdit } from "react-icons/ai";
 import { Reoverlay } from "reoverlay";
 import ChangeAvatarModal from "../../Modals/ChangeAvatar";
+import ReactTooltip from "react-tooltip";
 
 interface SideBarProps {
     user: any;
@@ -25,9 +26,14 @@ const SideBar: React.FC<SideBarProps> = ({
     return (
         <SideBarWrapper>
             <div className="side__info">
-                <div className="info__avatar" onClick={changeAvatar}>
+                <div
+                    className="info__avatar"
+                    onClick={changeAvatar}
+                    data-tip="Alterar seu avatar"
+                >
                     <Avatar avatar={user.avatar} />
                     <AiOutlineEdit size={44} className="avatar__edit" />
+                    <ReactTooltip />
                 </div>
                 <h2>{checkIfUndefined(user.name)}</h2>
                 <h4>{checkIfUndefined(user.country)}</h4>

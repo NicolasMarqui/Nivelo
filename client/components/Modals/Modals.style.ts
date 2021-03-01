@@ -1,10 +1,14 @@
 import styled from "styled-components";
 
 export const ModalContainer = styled.div`
-    padding: 2rem 5rem;
+    padding: 3rem 5rem;
     display: flex;
     flex-direction: column;
     border-radius: 25px;
+
+    h2 {
+        text-align: center;
+    }
 `;
 
 export const getColor = (props: any) => {

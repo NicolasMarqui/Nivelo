@@ -86,7 +86,7 @@ export default function UserDropdown({ user }: UserDropdownProps) {
             <div className="drop__group">
                 <h3 className="drop__title">Configurações</h3>
                 <ul>
-                    <Link href="/dashboard/profile">
+                    <Link href="/dashboard/account">
                         <li>
                             <FaUserEdit size={20} />
                             <p>Editar conta</p>

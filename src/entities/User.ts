@@ -87,7 +87,10 @@ export class User extends BaseEntity {
     classes: Classes[];
 
     @Field(() => [UserPlatformAccount], { nullable: true })
-    @OneToMany(() => UserPlatformAccount, (acc) => acc.user, { cascade: true })
+    @OneToMany(() => UserPlatformAccount, (acc) => acc.user, {
+        cascade: true,
+        nullable: true,
+    })
     public userPlatformAccount!: UserPlatformAccount[];
 
     @Field(() => [Feedback], { nullable: true })

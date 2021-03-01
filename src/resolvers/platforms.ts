@@ -55,4 +55,31 @@ export class PlatformsResolver {
 
         return { platforms };
     }
+
+    // Update a plataform
+    @Mutation(() => PlatformsResponse)
+    async updatePlatform(
+        @Arg("id") id: number,
+        @Arg("options") options: PlatformsInput
+    ): Promise<PlatformsResponse> {
+        const { name, icon } = options;
+
+        let platforms;
+        try {
+            const result = await getConnection()
+                .createQueryBuilder()
+                .update(Platforms)
+                .set({
+                    icon,
+                })
+                .where("id = :id", { id })
+                .returning("*")
+                .execute();
+            platforms = result.raw[0];
+        } catch (err) {
+            console.log(err);
+        }
+
+        return { platforms };
+    }
 }

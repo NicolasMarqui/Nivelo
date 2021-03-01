@@ -84,40 +84,36 @@ export default function Filter() {
 
     return (
         <>
-            <Sticky topOffset={0}>
-                {({ style, isSticky }) => (
-                    <FilterWrapper style={style} isFixed={isSticky}>
-                        <ul className="filter__list">
+            <FilterWrapper>
+                <ul className="filter__list">
+                    <li>
+                        <IconButton
+                            text="Filtros"
+                            icon={<TiFilter size={17} />}
+                            hasChevron={true}
+                            onClick={handleOpenSide}
+                        />
+                    </li>
+                    {(router.query.localizacao ||
+                        router.query.preco ||
+                        router.query.categoria ||
+                        router.query.disponibilidade ||
+                        router.query.tutor) &&
+                        Object.keys(router.query).length > 0 && (
                             <li>
                                 <IconButton
-                                    text="Filtros"
-                                    icon={<TiFilter size={17} />}
-                                    hasChevron={true}
-                                    onClick={handleOpenSide}
+                                    text={`Limpar filtros (${
+                                        Object.keys(router.query).length
+                                    })`}
+                                    bColor="#FB475E"
+                                    color="#fff"
+                                    icon={<MdClose size={17} />}
+                                    onClick={handleFilterClean}
                                 />
                             </li>
-                            {(router.query.localizacao ||
-                                router.query.preco ||
-                                router.query.categoria ||
-                                router.query.disponibilidade ||
-                                router.query.tutor) &&
-                                Object.keys(router.query).length > 0 && (
-                                    <li>
-                                        <IconButton
-                                            text={`Limpar filtros (${
-                                                Object.keys(router.query).length
-                                            })`}
-                                            bColor="#FB475E"
-                                            color="#fff"
-                                            icon={<MdClose size={17} />}
-                                            onClick={handleFilterClean}
-                                        />
-                                    </li>
-                                )}
-                        </ul>
-                    </FilterWrapper>
-                )}
-            </Sticky>
+                        )}
+                </ul>
+            </FilterWrapper>
             <Side
                 isOpen={isOpenSide}
                 footer

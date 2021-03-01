@@ -6,6 +6,7 @@ import { MdEventAvailable, MdFavoriteBorder } from "react-icons/md";
 import { FiBookOpen } from "react-icons/fi";
 import { GiTeacher } from "react-icons/gi";
 import { BiPencil } from "react-icons/bi";
+import { IoHomeOutline } from "react-icons/io5";
 import { PillButton } from "../../../styles/helpers";
 
 interface SideBarMenuProps {
@@ -17,6 +18,22 @@ const SideBarMenu: React.FC<SideBarMenuProps> = ({
 }: SideBarMenuProps) => {
     return (
         <SideBarMenuWrapper>
+            <SideBarMenuGroup>
+                <h5>Início</h5>
+                <ul>
+                    <li>
+                        <Link href="/dashboard">
+                            <a>
+                                <SideBarMenuLink
+                                    text="Home"
+                                    hasChevron={true}
+                                    icon={<IoHomeOutline size={17} />}
+                                />
+                            </a>
+                        </Link>
+                    </li>
+                </ul>
+            </SideBarMenuGroup>
             <SideBarMenuGroup>
                 <h5>Configurações</h5>
                 <ul>

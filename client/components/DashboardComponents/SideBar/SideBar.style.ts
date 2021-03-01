@@ -25,6 +25,7 @@ export const SideBarWrapper = styled.div`
         h4 {
             color: #222;
             font-size: 14px;
+            margin-top: 4px;
         }
 
         .info__avatar {
