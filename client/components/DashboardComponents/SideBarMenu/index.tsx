@@ -97,17 +97,6 @@ const SideBarMenu: React.FC<SideBarMenuProps> = ({
                             </a>
                         </Link>
                     </li>
-                    <li>
-                        <Link href="/dashboard/calendar">
-                            <a>
-                                <SideBarMenuLink
-                                    text="Feedbacks"
-                                    hasChevron={true}
-                                    icon={<BiPencil size={17} />}
-                                />
-                            </a>
-                        </Link>
-                    </li>
                 </ul>
             </SideBarMenuGroup>
             <SideBarMenuGroup>

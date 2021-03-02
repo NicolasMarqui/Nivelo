@@ -15,6 +15,7 @@ import {Accordion,AccordionItem,AccordionItemButton,AccordionItemHeading,Accordi
 import "react-accessible-accordion/dist/fancy-example.css";
 import { MdClose } from "react-icons/md";
 import { useLazyEffect } from "../../utils/useLazyEffect";
+import ReactTooltip from "react-tooltip";
 
 export default function Filter() {
     // Initial Value
@@ -86,13 +87,14 @@ export default function Filter() {
         <>
             <FilterWrapper>
                 <ul className="filter__list">
-                    <li>
+                    <li data-tip="Filtros">
                         <IconButton
                             text="Filtros"
                             icon={<TiFilter size={17} />}
                             hasChevron={true}
                             onClick={handleOpenSide}
                         />
+                        <ReactTooltip effect="solid" place="bottom" />
                     </li>
                     {(router.query.localizacao ||
                         router.query.preco ||

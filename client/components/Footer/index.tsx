@@ -19,7 +19,14 @@ export default function Footer() {
     const router = useRouter();
 
     return (
-        <FooterWrapper notMargin={router.pathname === "/login" ? true : false}>
+        <FooterWrapper
+            notMargin={
+                router.pathname === "/login" ||
+                router.pathname === "/become-tutor"
+                    ? true
+                    : false
+            }
+        >
             <Container flex>
                 <FooterColumn>
                     <div className="column__name">

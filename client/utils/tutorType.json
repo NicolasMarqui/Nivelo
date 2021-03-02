@@ -1,9 +1,4 @@
 [{
-        "label": "Teacher",
-        "value": "Teacher"
-    },
-    {
-        "label": "Community Teacher",
-        "value": "Community Teacher"
-    }
-]
+    "label": "Tutor da Comunidade",
+    "value": "Tutor da Comunidade"
+}]

@@ -150,3 +150,11 @@ table {
     background-color: #f7f7f7 !important;
     width: auto !important;
 }
+
+.select__margin {
+    margin: 20px 0 0;
+}
+
+.css-1uccc91-singleValue {
+    line-height: 46px;
+}

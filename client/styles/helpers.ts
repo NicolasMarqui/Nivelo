@@ -186,6 +186,7 @@ interface PageWrapperProps {
 export const PageWrapper = styled.div<PageWrapperProps>`
     width: 100%;
     min-height: calc(100vh - 150px);
+    position: relative;
     padding-top: ${({ pTop }) => (pTop ? pTop : "150px")};
 `;
 
@@ -280,8 +281,12 @@ export const Divider = styled.div<DividerProps>`
     margin: 20px 0;
 `;
 
-export const Form = styled.form`
-    width: 60%;
+interface FormProps {
+    width?: string;
+}
+
+export const Form = styled.form<FormProps>`
+    width: ${({ width }) => width || "60%"};
 `;
 
 export const FormFull = styled.form`

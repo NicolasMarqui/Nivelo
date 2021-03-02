@@ -1,16 +1,18 @@
-import { NextPage, GetServerSideProps } from "next";
-import BecomeExplanation from "../../components/BecomeTutorComponents/BecomeExplanation";
-import LoginForm from "../../components/LoginForm";
+import BecomeForm from "../../components/BecomeTutorComponents/BecomeForm";
 import Meta from "../../components/Meta";
-import { Container, PageWrapper } from "../../styles/helpers";
-import { DasboardColumnWrapper } from "../dashboard/Dashboard.style";
-import { Banner } from "../tutor/[id]/TutorID.style";
+import { useMeQuery } from "../../generated/graphql";
+// prettier-ignore
+import { AnimationWrapper, Description, PageWrapper, Title } from "../../styles/helpers";
+import { TitleArea } from "../dashboard/Dashboard.style";
+// prettier-ignore
+import { BecomeTutorWrapper, BecomeTutorBg, TutorLoginForm,} from "./becomeTutor.style";
+import Lottie from "react-lottie";
+import LoginForm from "../../components/LoginForm";
 
-interface BecomeTutorProps {
-    logged: boolean;
-}
+const BecomeTutor: React.FC = () => {
+    const [{ data, fetching }] = useMeQuery();
+    const LOADING__ANIMATION = require("../../public/assets/animations/loading.json");
 
-const BecomeTutor: NextPage<BecomeTutorProps> = ({ logged }) => {
     return (
         <PageWrapper pTop="113px">
             <Meta
@@ -18,31 +20,41 @@ const BecomeTutor: NextPage<BecomeTutorProps> = ({ logged }) => {
                 description="Encontre os melhores tutores para te ajudar nessa jornada"
                 keywords="tutor, javascript, nivelamento, aprender, algoritimos, comprar"
             />
-            <Banner />
-            <Container flex>
-                <DasboardColumnWrapper
-                    size={3}
-                    margin="-133px 20px 0 0"
-                    bgColor="#f2f2f2"
-                >
-                    {logged ? <BecomeExplanation /> : <LoginForm />}
-                </DasboardColumnWrapper>
-                <DasboardColumnWrapper
-                    size={1}
-                    fixedSize
-                    margin="20px 20px 0 0"
-                    bgColor="transparent"
-                >
-                    Sidebar
-                </DasboardColumnWrapper>
-            </Container>
+            <BecomeTutorBg />
+            <BecomeTutorWrapper>
+                <TitleArea>
+                    <Title fontWeight="400">
+                        Se torne um tutor <span>Nivelo</span>
+                    </Title>
+                    <Description marginTop={20} color="#b1b1b1">
+                        Venha fazer parte da nossa comunidade!
+                    </Description>
+                </TitleArea>
+                {fetching ? (
+                    <AnimationWrapper>
+                        <Lottie
+                            options={{
+                                loop: true,
+                                animationData: LOADING__ANIMATION,
+                            }}
+                            height={150}
+                            width={150}
+                        />
+                    </AnimationWrapper>
+                ) : !data || data.me === null || !data.me ? (
+                    <TutorLoginForm>
+                        <LoginForm
+                            hasTitle={false}
+                            formWidth="100%"
+                            hasAditionalText={false}
+                            hasRedirect={false}
+                        />
+                    </TutorLoginForm>
+                ) : (
+                    <BecomeForm />
+                )}
+            </BecomeTutorWrapper>
         </PageWrapper>
     );
 };
 export default BecomeTutor;
-
-export const getServerSideProps: GetServerSideProps = async (ctx) => {
-    const cookie = ctx.req.cookies.qid;
-
-    return { props: { logged: cookie ? true : false } };
-};

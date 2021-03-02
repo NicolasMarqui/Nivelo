@@ -67,6 +67,9 @@ const Dashboard: NextPage<DashboardProps> = (props) => {
                                     <Title fontWeight="400">
                                         Suas próximas aulas
                                     </Title>
+                                    <Description marginTop={20}>
+                                        Nenhuma aula disponível
+                                    </Description>
                                 </TitleArea>
                             </ColumnGroup>
                         </DasboardColumnWrapper>

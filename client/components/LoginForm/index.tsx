@@ -6,7 +6,19 @@ import { useLoginMutation } from "../../generated/graphql";
 import { toErrorMap } from "../../utils/toErrorMap";
 import { useRouter } from "next/router";
 
-export default function LoginForm() {
+interface LoginFormProps {
+    hasTitle?: boolean;
+    formWidth?: string;
+    hasAditionalText?: boolean;
+    hasRedirect?: boolean;
+}
+
+export default function LoginForm({
+    hasTitle = true,
+    hasAditionalText = true,
+    formWidth,
+    hasRedirect = true,
+}: LoginFormProps) {
     const [, login] = useLoginMutation();
     const router = useRouter();
 
@@ -20,21 +32,30 @@ export default function LoginForm() {
             if (response.data.login.errors) {
                 setErrors(toErrorMap(response.data.login.errors));
             } else if (response.data.login.user) {
-                router.push("/");
+                if (hasRedirect) {
+                    router.push("/");
+                }
             }
         },
     });
 
     return (
         <>
-            <Title fontSize="40px" fontWeight="400" m_auto>
-                Bem vindo de volta
-            </Title>
-            <Description size="60" color="#B1B1B1">
-                Sentimos sua falta!
-            </Description>
+            {hasTitle && (
+                <>
+                    <Title fontSize="40px" fontWeight="400" m_auto>
+                        Bem vindo de volta
+                    </Title>
+                    <Description size="60" color="#B1B1B1">
+                        Sentimos sua falta!
+                    </Description>
+                </>
+            )}
 
-            <Form onSubmit={formik.handleSubmit}>
+            <Form
+                onSubmit={formik.handleSubmit}
+                width={formWidth ? formWidth : ""}
+            >
                 <FormGroup>
                     <FormLabel htmlFor="email">Email</FormLabel>
                     <FormInput
@@ -67,16 +88,21 @@ export default function LoginForm() {
                 </FormGroup>
 
                 <FormFooter>
-                    <Link href="/signup">
-                        <FormHas>
-                            Não possui uma conta? <span>Crie agora mesmo</span>
-                        </FormHas>
-                    </Link>
-                    <Link href="/password/forgot">
-                        <FormHas>
-                            <span>Esqueci minha senha</span>
-                        </FormHas>
-                    </Link>
+                    {hasAditionalText && (
+                        <>
+                            <Link href="/signup">
+                                <FormHas>
+                                    Não possui uma conta?{" "}
+                                    <span>Crie agora mesmo</span>
+                                </FormHas>
+                            </Link>
+                            <Link href="/password/forgot">
+                                <FormHas>
+                                    <span>Esqueci minha senha</span>
+                                </FormHas>
+                            </Link>{" "}
+                        </>
+                    )}
                     <Button bgColor="#FF4338" color="#fff" bold>
                         Login
                     </Button>

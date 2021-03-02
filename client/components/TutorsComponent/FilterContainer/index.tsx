@@ -3,6 +3,7 @@ import IconButton from "../../IconButton";
 import Filter from "../../Filter";
 import { TtFilters } from "../../../pages/tutors/Tutors.styles";
 import { MdFilterList, MdList, MdViewWeek } from "react-icons/md";
+import ReactTooltip from "react-tooltip";
 
 interface FilterContainerProps {
     data: any;
@@ -25,22 +26,28 @@ const FilterContainer: React.FC<FilterContainerProps> = ({
                 </Description>
             </div>
             <div className="filters__buttons">
-                <IconButton
-                    icon={
-                        isColumn ? (
-                            <MdList size={17} />
-                        ) : (
-                            <MdViewWeek size={17} />
-                        )
-                    }
-                    onClick={() => changeViewMode(!isColumn)}
-                />
-                <IconButton
-                    text="Ordenar por"
-                    icon={<MdFilterList size={17} />}
-                    hasChevron={true}
-                    onClick={() => alert("Hello")}
-                />
+                <div data-tip="Modo de Visualização" data-for="visu">
+                    <IconButton
+                        icon={
+                            isColumn ? (
+                                <MdList size={17} />
+                            ) : (
+                                <MdViewWeek size={17} />
+                            )
+                        }
+                        onClick={() => changeViewMode(!isColumn)}
+                    />
+                    <ReactTooltip id="visu" effect="solid" place="bottom" />
+                </div>
+                <div data-tip="Ordenar por" data-for="ordenar">
+                    <IconButton
+                        text="Ordenar por"
+                        icon={<MdFilterList size={17} />}
+                        hasChevron={true}
+                        onClick={() => alert("Hello")}
+                    />
+                    <ReactTooltip id="ordenar" effect="solid" place="bottom" />
+                </div>
 
                 <Filter />
             </div>

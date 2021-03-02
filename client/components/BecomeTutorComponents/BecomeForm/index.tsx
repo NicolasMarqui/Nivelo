@@ -1,32 +1,42 @@
 import Select from "react-select";
 import { useAllTypesQuery } from "../../../generated/graphql";
 // prettier-ignore
-import { Description, FormGroup, FormInput, FormLabel, FormTextArea} from "../../../styles/helpers";
-import tutorType from "../../../utils/tutorType.json";
+import { Button, Description, FormGroup, FormInput, FormLabel, FormTextArea} from "../../../styles/helpers";
 import { BecomeFormArea } from "./BecomeForm.style";
+import { useFormik } from "formik";
 
 interface BecomeFormProps {}
 
 const BecomeForm: React.FC<BecomeFormProps> = ({}) => {
     const [{ data, fetching }] = useAllTypesQuery();
 
+    const formik = useFormik({
+        initialValues: {
+            tipoTutor: "",
+        },
+        onSubmit: async (values, { setErrors }) => {
+            console.log(values);
+        },
+    });
+
     return (
-        <BecomeFormArea>
-            <FormGroup>
-                <FormLabel>Descrição</FormLabel>
-                <FormTextArea placeholder="Escreva aqui um pouco de você como um tutor" />
-            </FormGroup>
+        <BecomeFormArea onSubmit={formik.handleSubmit}>
             <FormGroup>
                 <FormLabel>Tipo de Tutor</FormLabel>
-                <Description fontSize="14px" marginTop={10} color="#bbbbb">
-                    Aqui você Lorem ipsum dolor sit amet consectetur adipisicing
-                    elit. Vitae ipsa, reprehenderit repellendus quia consequatur
-                    quaerat illum praesentium iste itaque quisquam ipsum saepe
-                    provident impedit tempora, corrupti a nihil ut autem?
+                <Description fontSize="14px" marginTop={5} color="#a0a0a0">
+                    Escolha o tipo de tutor que vc deseja ser...
                 </Description>
                 <Select
+                    className="select__margin"
                     closeMenuOnSelect={true}
                     placeholder="Tipo de Tutor"
+                    value={{
+                        label: formik.values.tipoTutor,
+                        value: formik.values.tipoTutor,
+                    }}
+                    onChange={(e) => {
+                        formik.setFieldValue("tipoTutor", e.label);
+                    }}
                     options={
                         data &&
                         data.allTypes.map((dt) => {
@@ -38,6 +48,16 @@ const BecomeForm: React.FC<BecomeFormProps> = ({}) => {
                     }
                     isLoading={fetching}
                 />
+            </FormGroup>
+            <FormGroup>
+                <Button
+                    bgColor="#57CC99"
+                    color="#fff"
+                    fSize="20px"
+                    type="submit"
+                >
+                    Salvar
+                </Button>
             </FormGroup>
         </BecomeFormArea>
     );
