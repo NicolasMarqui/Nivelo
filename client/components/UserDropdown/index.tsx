@@ -14,6 +14,7 @@ import { CgLogOut } from "react-icons/cg";
 import { GoMortarBoard } from "react-icons/go";
 import { useLogoutMutation } from "../../generated/graphql";
 import { useRouter } from "next/router";
+import cookieCutter from "cookie-cutter";
 interface UserDropdownProps {
     user?:
         | {
@@ -35,6 +36,7 @@ export default function UserDropdown({ user }: UserDropdownProps) {
     const handleLogout = async () => {
         setLoadingLogout(true);
         await logout();
+        cookieCutter.set("tid", "");
         router.replace("/");
         document.body.className = "";
     };

@@ -10,13 +10,9 @@ import ReactTooltip from "react-tooltip";
 
 interface SideBarProps {
     user: any;
-    handleAvatar?: () => any;
 }
 
-const SideBar: React.FC<SideBarProps> = ({
-    user,
-    handleAvatar,
-}: SideBarProps) => {
+const SideBar: React.FC<SideBarProps> = ({ user }: SideBarProps) => {
     const changeAvatar = () => {
         Reoverlay.showModal(ChangeAvatarModal, {
             userId: user.id,

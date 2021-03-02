@@ -10,6 +10,7 @@ import { useRouter } from "next/router";
 import ClassesInfo from "../components/ClassesInfo";
 import { ModalContainer, Reoverlay } from "reoverlay";
 import { Toaster } from "react-hot-toast";
+import DashboardLayout from "../components/Layout/DashboardLayout";
 
 Router.events.on("routeChangeStart", () => {
     NProgress.start();
@@ -25,18 +26,21 @@ function MyApp({ Component, pageProps }) {
     return (
         <>
             <GlobalStyle />
-            <ThemeProvider theme={theme}>
-                {/* @ts-ignore */}
-                <Layout>
-                    <div className="body__overlay"></div>
-                    <Component {...pageProps} />
-                </Layout>
-            </ThemeProvider>
-
             <ModalContainer />
             <Toaster position="top-center" />
-
-            {/* Side Pages */}
+            <ThemeProvider theme={theme}>
+                {router.pathname.startsWith("/dashboard") ? (
+                    // @ts-ignore
+                    <DashboardLayout>
+                        <Component {...pageProps} />
+                    </DashboardLayout>
+                ) : (
+                    // @ts-ignore
+                    <Layout>
+                        <Component {...pageProps} />
+                    </Layout>
+                )}
+            </ThemeProvider>
 
             {router.query.class && (
                 <Side

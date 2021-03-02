@@ -251,7 +251,10 @@ export class UserResolver {
             return { errors };
         }
 
-        const user = await User.findOne({ where: { email: options.email } });
+        const user = await User.findOne({
+            where: { email: options.email },
+            relations: ["tutor"],
+        });
         if (!user) {
             return {
                 errors: [

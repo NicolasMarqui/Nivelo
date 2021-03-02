@@ -1,6 +1,5 @@
 import { GetServerSideProps, NextPage } from "next";
 import BackButton from "../../../components/BackButton";
-import AccountForm from "../../../components/DashboardComponents/AccountForm";
 import { useMeQuery } from "../../../generated/graphql";
 // prettier-ignore
 import { Title } from "../../../styles/helpers";
@@ -12,7 +11,7 @@ interface AccountProps {
     cookie: string;
 }
 
-const Account: NextPage<AccountProps> = (props) => {
+const Classes: NextPage<AccountProps> = (props) => {
     const [{ data, fetching }] = useMeQuery();
 
     return (
@@ -20,12 +19,10 @@ const Account: NextPage<AccountProps> = (props) => {
             <ColumnGroup margin="0">
                 <TitleArea margin="0 30px">
                     <BackButton bgColor="#8390FA" color="#fff" />
-                    {/* <Breadcumb data={dashBoardAccountBread} /> */}
                     <Title fontWeight="400" margin="-2px 0 47px 0">
-                        Editar sua conta
+                        Suas Aulas
                     </Title>
                 </TitleArea>
-                <AccountForm user={data.me} />
             </ColumnGroup>
         </>
     );
@@ -46,4 +43,4 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     return { props: { logged: true, cookie } };
 };
 
-export default Account;
+export default Classes;

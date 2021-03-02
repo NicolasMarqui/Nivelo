@@ -19,6 +19,7 @@ export type Query = {
   allUsers: Array<User>;
   me?: Maybe<User>;
   singleUser: UserResponse;
+  userHasPlatform?: Maybe<Scalars['String']>;
   allTutors: Array<Tutor>;
   allTutorsByCategory: Array<Category>;
   singleTutor: TutorResponse;
@@ -36,6 +37,12 @@ export type Query = {
 
 export type QuerySingleUserArgs = {
   id: Scalars['Float'];
+};
+
+
+export type QueryUserHasPlatformArgs = {
+  userId: Scalars['Float'];
+  platformId: Scalars['Float'];
 };
 
 
@@ -219,6 +226,8 @@ export type Mutation = {
   typeToTutor: TutorResponse;
   addAvailableDate: TutorResponse;
   addType: TypeResponse;
+  updateType: TypeResponse;
+  deleteType: Scalars['Boolean'];
   newClass: ClassesResponse;
   updateClass: ClassesResponse;
   deleteClass: Scalars['Boolean'];
@@ -307,6 +316,17 @@ export type MutationAddAvailableDateArgs = {
 
 export type MutationAddTypeArgs = {
   options: TypeInput;
+};
+
+
+export type MutationUpdateTypeArgs = {
+  options: TypeInput;
+  id: Scalars['Float'];
+};
+
+
+export type MutationDeleteTypeArgs = {
+  id: Scalars['Float'];
 };
 
 
@@ -514,6 +534,10 @@ export type FeedbackInput = {
 export type RegularUserFragment = (
   { __typename?: 'User' }
   & Pick<User, 'id' | 'name' | 'email'>
+  & { tutor?: Maybe<(
+    { __typename?: 'Tutor' }
+    & Pick<Tutor, 'id'>
+  )> }
 );
 
 export type ChangeAvatarMutationVariables = Exact<{
@@ -632,6 +656,30 @@ export type MoreInfoUserMutation = (
           & Pick<Platforms, 'id' | 'name'>
         )> }
       )>> }
+    )> }
+  ) }
+);
+
+export type NewTutorMutationVariables = Exact<{ [key: string]: never; }>;
+
+
+export type NewTutorMutation = (
+  { __typename?: 'Mutation' }
+  & { newTutor: (
+    { __typename?: 'TutorResponse' }
+    & { errors?: Maybe<Array<(
+      { __typename?: 'FieldError' }
+      & Pick<FieldError, 'message'>
+    )>>, tutor?: Maybe<(
+      { __typename?: 'Tutor' }
+      & Pick<Tutor, 'id' | 'description'>
+      & { user?: Maybe<(
+        { __typename?: 'User' }
+        & Pick<User, 'id' | 'name'>
+      )>, type?: Maybe<(
+        { __typename?: 'TutorType' }
+        & Pick<TutorType, 'id' | 'name'>
+      )> }
     )> }
   ) }
 );
@@ -843,6 +891,9 @@ export const RegularUserFragmentDoc = gql`
   id
   name
   email
+  tutor {
+    id
+  }
 }
     `;
 export const ChangeAvatarDocument = gql`
@@ -975,6 +1026,31 @@ export const MoreInfoUserDocument = gql`
 
 export function useMoreInfoUserMutation() {
   return Urql.useMutation<MoreInfoUserMutation, MoreInfoUserMutationVariables>(MoreInfoUserDocument);
+};
+export const NewTutorDocument = gql`
+    mutation newTutor {
+  newTutor(options: {description: "", type: 1}) {
+    errors {
+      message
+    }
+    tutor {
+      id
+      description
+      user {
+        id
+        name
+      }
+      type {
+        id
+        name
+      }
+    }
+  }
+}
+    `;
+
+export function useNewTutorMutation() {
+  return Urql.useMutation<NewTutorMutation, NewTutorMutationVariables>(NewTutorDocument);
 };
 export const RegisterDocument = gql`
     mutation Register($email: String!, $password: String!, $name: String!) {

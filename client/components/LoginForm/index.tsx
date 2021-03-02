@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useLoginMutation } from "../../generated/graphql";
 import { toErrorMap } from "../../utils/toErrorMap";
 import { useRouter } from "next/router";
+import cookieCutter from "cookie-cutter";
 
 interface LoginFormProps {
     hasTitle?: boolean;
@@ -32,6 +33,11 @@ export default function LoginForm({
             if (response.data.login.errors) {
                 setErrors(toErrorMap(response.data.login.errors));
             } else if (response.data.login.user) {
+                const tutor = response.data.login.user.tutor;
+
+                cookieCutter.set("tid", tutor ? tutor.id : "", {
+                    expires: 1000 * 60 * 60 * 24 * 365 * 10,
+                });
                 if (hasRedirect) {
                     router.push("/");
                 }
