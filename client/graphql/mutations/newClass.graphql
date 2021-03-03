@@ -9,6 +9,7 @@ mutation NewClass(
         options: { name: $name, description: $description, level: $level }
     ) {
         errors {
+            field
             message
         }
         classes {

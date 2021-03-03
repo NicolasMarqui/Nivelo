@@ -48,6 +48,7 @@ export const TutorCardWrapper = styled.div<TutorCardWrapperProps>`
 
         .tutor__avatar {
             border-radius: 50%;
+            object-fit: cover;
         }
 
         .fRow__status {

@@ -19,5 +19,23 @@ export const validateClasses = (options: ClassesInput) => {
         ];
     }
 
+    if (options.name === "") {
+        return [
+            {
+                field: "name",
+                message: "Nome não pode ser vazio!",
+            },
+        ];
+    }
+
+    if (options.level === "") {
+        return [
+            {
+                field: "level",
+                message: "Por favor selecione um nível",
+            },
+        ];
+    }
+
     return null;
 };

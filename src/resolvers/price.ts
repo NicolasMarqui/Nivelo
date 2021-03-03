@@ -33,11 +33,11 @@ export class PriceResolver {
     }
 
     // Add new price
-    @Mutation(() => Price)
+    @Mutation(() => PriceResponse)
     async newPrice(
         @Arg("options") options: PriceInput,
         @Arg("classID") classID: number
-    ): Promise<Price> {
+    ): Promise<PriceResponse> {
         const classes = await Classes.findOne({ where: { id: classID } });
 
         let price;
@@ -57,7 +57,7 @@ export class PriceResolver {
             console.log(err);
         }
 
-        return price;
+        return { price };
     }
 
     // Update Price

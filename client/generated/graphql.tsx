@@ -233,7 +233,7 @@ export type Mutation = {
   deleteClass: Scalars['Boolean'];
   priceToClasses: Classes;
   userToClass: ClassesResponse;
-  newPrice: Price;
+  newPrice: PriceResponse;
   updatePrice: PriceResponse;
   deletePrice: Scalars['Boolean'];
   newCategory: CategoryResponse;
@@ -484,17 +484,17 @@ export type ClassesInput = {
   description?: Maybe<Scalars['String']>;
 };
 
+export type PriceResponse = {
+  __typename?: 'PriceResponse';
+  errors?: Maybe<Array<FieldError>>;
+  price?: Maybe<Price>;
+};
+
 export type PriceInput = {
   time?: Maybe<Scalars['Int']>;
   price?: Maybe<Scalars['Float']>;
   isPromotionalCode: Scalars['Boolean'];
   discountAmount?: Maybe<Scalars['Int']>;
-};
-
-export type PriceResponse = {
-  __typename?: 'PriceResponse';
-  errors?: Maybe<Array<FieldError>>;
-  price?: Maybe<Price>;
 };
 
 export type CategoryResponse = {
@@ -674,7 +674,7 @@ export type NewClassMutation = (
     { __typename?: 'ClassesResponse' }
     & { errors?: Maybe<Array<(
       { __typename?: 'FieldError' }
-      & Pick<FieldError, 'message'>
+      & Pick<FieldError, 'field' | 'message'>
     )>>, classes?: Maybe<(
       { __typename?: 'Classes' }
       & Pick<Classes, 'id' | 'name' | 'amountTimeTaught' | 'description'>
@@ -682,6 +682,31 @@ export type NewClassMutation = (
         { __typename?: 'Price' }
         & Pick<Price, 'id' | 'time' | 'price'>
       )>> }
+    )> }
+  ) }
+);
+
+export type NewPriceMutationVariables = Exact<{
+  classID: Scalars['Float'];
+  time: Scalars['Int'];
+  price: Scalars['Float'];
+}>;
+
+
+export type NewPriceMutation = (
+  { __typename?: 'Mutation' }
+  & { newPrice: (
+    { __typename?: 'PriceResponse' }
+    & { errors?: Maybe<Array<(
+      { __typename?: 'FieldError' }
+      & Pick<FieldError, 'field' | 'message'>
+    )>>, price?: Maybe<(
+      { __typename?: 'Price' }
+      & Pick<Price, 'id' | 'time'>
+      & { classes?: Maybe<(
+        { __typename?: 'Classes' }
+        & Pick<Classes, 'id' | 'name'>
+      )> }
     )> }
   ) }
 );
@@ -1060,6 +1085,7 @@ export const NewClassDocument = gql`
     options: {name: $name, description: $description, level: $level}
   ) {
     errors {
+      field
       message
     }
     classes {
@@ -1079,6 +1105,31 @@ export const NewClassDocument = gql`
 
 export function useNewClassMutation() {
   return Urql.useMutation<NewClassMutation, NewClassMutationVariables>(NewClassDocument);
+};
+export const NewPriceDocument = gql`
+    mutation NewPrice($classID: Float!, $time: Int!, $price: Float!) {
+  newPrice(
+    classID: $classID
+    options: {time: $time, price: $price, isPromotionalCode: false, discountAmount: 0}
+  ) {
+    errors {
+      field
+      message
+    }
+    price {
+      id
+      time
+      classes {
+        id
+        name
+      }
+    }
+  }
+}
+    `;
+
+export function useNewPriceMutation() {
+  return Urql.useMutation<NewPriceMutation, NewPriceMutationVariables>(NewPriceDocument);
 };
 export const NewTutorDocument = gql`
     mutation newTutor {
