@@ -27,11 +27,7 @@ const DashboardLayout: React.FC = ({ children }) => {
                         <p>Carregando</p>
                     ) : (
                         <DashboardWrapper>
-                            <DasboardColumnWrapper
-                                size={1}
-                                fixedSize
-                                bgColor="#ffff"
-                            >
+                            <DasboardColumnWrapper size={1} bgColor="#ffff">
                                 <SideBar user={data.me} />
                             </DasboardColumnWrapper>
                             <DasboardColumnWrapper

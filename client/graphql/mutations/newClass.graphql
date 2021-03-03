@@ -1,0 +1,26 @@
+mutation NewClass(
+    $tutorId: Float!
+    $name: String!
+    $description: String
+    $level: String
+) {
+    newClass(
+        tutorID: $tutorId
+        options: { name: $name, description: $description, level: $level }
+    ) {
+        errors {
+            message
+        }
+        classes {
+            id
+            price {
+                id
+                time
+                price
+            }
+            name
+            amountTimeTaught
+            description
+        }
+    }
+}

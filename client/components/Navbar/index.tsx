@@ -4,7 +4,6 @@ import { Header, Menu } from "./Navbar.styles";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { BsBell } from "react-icons/bs";
 import { FaUserGraduate } from "react-icons/fa";
 import { useMeQuery } from "../../generated/graphql";
 import { isServer } from "../../utils/isServer";

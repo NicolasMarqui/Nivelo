@@ -5,6 +5,9 @@ export const ModalContainer = styled.div`
     display: flex;
     flex-direction: column;
     border-radius: 25px;
+    overflow-y: auto;
+    max-height: 77vh;
+    max-width: 69vw;
 
     h2 {
         text-align: center;

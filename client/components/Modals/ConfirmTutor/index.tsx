@@ -1,18 +1,18 @@
+import cookieCutter from "cookie-cutter";
 import { withUrqlClient } from "next-urql";
-import { useState, useEffect } from "react";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
+import toast from "react-hot-toast";
 import Lottie from "react-lottie";
 import { ModalWrapper, Reoverlay } from "reoverlay";
+import { useNewTutorMutation } from "../../../generated/graphql";
 import "../../../node_modules/reoverlay/lib/ModalWrapper.css";
 // prettier-ignore
-import { AnimationWrapper, Button, Description, Flex } from "../../../styles/helpers";
+import { AnimationWrapper } from "../../../styles/helpers";
 import { createUrqlClient } from "../../../utils/createUrqlClient";
 import { TutorTitle } from "../../TutorCard/TutorCard.style";
 // prettier-ignore
 import { ModalContainer } from "../Modals.style";
-import { useNewTutorMutation } from "../../../generated/graphql";
-import toast from "react-hot-toast";
-import { useRouter } from "next/router";
-import cookieCutter from "cookie-cutter";
 
 interface ConfirmTutorProps {
     user: any;

@@ -7,6 +7,7 @@ import { FiBookOpen } from "react-icons/fi";
 import { GiTeacher } from "react-icons/gi";
 import { BiPencil } from "react-icons/bi";
 import { IoHomeOutline } from "react-icons/io5";
+import { FaUserGraduate } from "react-icons/fa";
 import { PillButton } from "../../../styles/helpers";
 
 interface SideBarMenuProps {
@@ -34,6 +35,24 @@ const SideBarMenu: React.FC<SideBarMenuProps> = ({
                     </li>
                 </ul>
             </SideBarMenuGroup>
+            {tutor && (
+                <SideBarMenuGroup>
+                    <h5>Sua área</h5>
+                    <ul>
+                        <li>
+                            <Link href="/dashboard/tutor">
+                                <a>
+                                    <SideBarMenuLink
+                                        text="Tutor"
+                                        hasChevron={true}
+                                        icon={<FaUserGraduate size={17} />}
+                                    />
+                                </a>
+                            </Link>
+                        </li>
+                    </ul>
+                </SideBarMenuGroup>
+            )}
             <SideBarMenuGroup>
                 <h5>Configurações</h5>
                 <ul>

@@ -660,6 +660,32 @@ export type MoreInfoUserMutation = (
   ) }
 );
 
+export type NewClassMutationVariables = Exact<{
+  tutorId: Scalars['Float'];
+  name: Scalars['String'];
+  description?: Maybe<Scalars['String']>;
+  level?: Maybe<Scalars['String']>;
+}>;
+
+
+export type NewClassMutation = (
+  { __typename?: 'Mutation' }
+  & { newClass: (
+    { __typename?: 'ClassesResponse' }
+    & { errors?: Maybe<Array<(
+      { __typename?: 'FieldError' }
+      & Pick<FieldError, 'message'>
+    )>>, classes?: Maybe<(
+      { __typename?: 'Classes' }
+      & Pick<Classes, 'id' | 'name' | 'amountTimeTaught' | 'description'>
+      & { price?: Maybe<Array<(
+        { __typename?: 'Price' }
+        & Pick<Price, 'id' | 'time' | 'price'>
+      )>> }
+    )> }
+  ) }
+);
+
 export type NewTutorMutationVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -1026,6 +1052,33 @@ export const MoreInfoUserDocument = gql`
 
 export function useMoreInfoUserMutation() {
   return Urql.useMutation<MoreInfoUserMutation, MoreInfoUserMutationVariables>(MoreInfoUserDocument);
+};
+export const NewClassDocument = gql`
+    mutation NewClass($tutorId: Float!, $name: String!, $description: String, $level: String) {
+  newClass(
+    tutorID: $tutorId
+    options: {name: $name, description: $description, level: $level}
+  ) {
+    errors {
+      message
+    }
+    classes {
+      id
+      price {
+        id
+        time
+        price
+      }
+      name
+      amountTimeTaught
+      description
+    }
+  }
+}
+    `;
+
+export function useNewClassMutation() {
+  return Urql.useMutation<NewClassMutation, NewClassMutationVariables>(NewClassDocument);
 };
 export const NewTutorDocument = gql`
     mutation newTutor {
