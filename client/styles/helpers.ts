@@ -61,13 +61,14 @@ interface FlexProps {
     mr?: number;
     justifyEnd?: boolean;
     justifyCenter?: boolean;
+    align?: "center" | "flex-start" | "flex-end";
 }
 
 export const Flex = styled.div<FlexProps>`
     display: flex;
     flex: ${({ size }) => size || 1};
     margin-right: ${({ mr }) => mr || 0}px;
-    align-items: center;
+    align-items: ${({ align }) => align || "center"};
     position: relative;
     ${({ col }) =>
         col &&
@@ -419,4 +420,50 @@ export const Alert = styled.div<AlertProps>`
 
 export const AnimationWrapper = styled.div`
     margin: 15px 0;
+`;
+
+export const Detail = styled.div`
+    z-index: 3;
+    position: absolute;
+    top: 0px;
+    right: -14px;
+
+    &::before {
+        z-index: 1;
+        content: "";
+        position: absolute;
+        bottom: 7px;
+        right: 0;
+        height: 13px;
+        width: 23px;
+        background: #8390fa;
+        transform: rotate(327deg);
+        border-radius: 0 0 5px 0;
+    }
+`;
+
+interface BoxIconProps {
+    bColor?: string;
+    hasCursor?: boolean;
+}
+
+export const BoxIcon = styled.div<BoxIconProps>`
+    padding: 8px 5px;
+    width: 30px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: ${({ bColor }) => bColor || "#e76f51"};
+
+    &:hover {
+        filter: brightness(120%);
+        transform: scale(1.02);
+    }
+
+    ${({ hasCursor }) =>
+        hasCursor &&
+        css`
+            cursor: pointer;
+        `}
 `;

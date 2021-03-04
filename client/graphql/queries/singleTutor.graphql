@@ -34,11 +34,15 @@ query SingleTutor($id: Float!) {
                 name
                 description
                 amountTimeTaught
+                level
+                active
                 price {
                     id
                     price
                     time
                 }
+                createdAt
+                updatedAt
             }
             categories {
                 id

@@ -203,4 +203,27 @@ export class ClassesResolver {
 
         return { classes: oneClass };
     }
+
+    // Get all classes from tutor
+    @Query(() => [Classes])
+    async allTutorClasses(
+        @Arg("tutorId") tutorId: number
+    ): Promise<Classes[] | undefined> {
+        const tutor = await Tutor.findOne({ where: { id: tutorId } });
+        const classes = await Classes.find({
+            where: { tutor },
+            relations: [
+                "tutor",
+                "price",
+                "tutor.user",
+                "price.classes",
+                "tutor.type",
+                "users",
+            ],
+        });
+
+        return classes;
+    }
+
+    // Make classes not active
 }

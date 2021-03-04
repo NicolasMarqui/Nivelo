@@ -14,7 +14,7 @@ const ShortcutList: React.FC<ShortcutListProps> = ({}) => {
     return (
         <ShortcutListWrapper>
             <ul>
-                <li>
+                <li data-tip="Adicionar aula" data-for="add-aula">
                     <IconButton
                         text="Adicionar aula"
                         smaller
@@ -23,19 +23,9 @@ const ShortcutList: React.FC<ShortcutListProps> = ({}) => {
                         icon={<BsPencil size={17} />}
                         onClick={openAddClassModal}
                     />
-                    <ReactTooltip effect="solid" />
+                    <ReactTooltip effect="solid" id="add-aula" />
                 </li>
-                <li data-tip="Editar aulas">
-                    <IconButton
-                        text="Editar aulas"
-                        smaller
-                        bColor="#57CC99"
-                        color="#fff"
-                        icon={<BiEditAlt size={17} />}
-                    />
-                    <ReactTooltip effect="solid" />
-                </li>
-                <li data-tip="Editar minhas informações">
+                <li data-tip="Editar minhas informações" data-for="editarInfo">
                     <IconButton
                         text="Editar minhas informações"
                         smaller
@@ -43,7 +33,7 @@ const ShortcutList: React.FC<ShortcutListProps> = ({}) => {
                         color="#fff"
                         icon={<BiEditAlt size={17} />}
                     />
-                    <ReactTooltip effect="solid" />
+                    <ReactTooltip effect="solid" id="editarInfo" />
                 </li>
             </ul>
         </ShortcutListWrapper>

@@ -10,6 +10,7 @@ import LoadingAnimation from "../LoadingAnimation";
 import { useNewClassMutation } from "../../generated/graphql";
 import cookieCutter from "cookie-cutter";
 import { toErrorMap } from "../../utils/toErrorMap";
+import toast from "react-hot-toast";
 
 interface AddClassFormProps {
     nextStep?: any;
@@ -23,6 +24,7 @@ const AddClassForm: React.FC<AddClassFormProps> = ({ nextStep, handleClassIDChan
     const [, newClass] = useNewClassMutation();
     const closeModal = () => {
         Reoverlay.hideModal();
+        window.location.reload();
     };
 
     const formik = useFormik({
@@ -42,6 +44,7 @@ const AddClassForm: React.FC<AddClassFormProps> = ({ nextStep, handleClassIDChan
                 setIsLoading(false)
             } else if(response.data.newClass.classes){
                 handleClassIDChange(response.data.newClass.classes.id);
+                toast.success('Aula adicionada')
                 window.setTimeout(nextStep, 2000);
             }
 

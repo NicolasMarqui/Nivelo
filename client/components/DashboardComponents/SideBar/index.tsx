@@ -26,10 +26,11 @@ const SideBar: React.FC<SideBarProps> = ({ user }: SideBarProps) => {
                     className="info__avatar"
                     onClick={changeAvatar}
                     data-tip="Alterar seu avatar"
+                    data-for="avatar"
                 >
-                    <Avatar avatar={user.avatar} />
                     <AiOutlineEdit size={44} className="avatar__edit" />
-                    <ReactTooltip />
+                    <Avatar avatar={user.avatar} />
+                    <ReactTooltip id="avatar" effect="float" place="right" />
                 </div>
                 <h2>{checkIfUndefined(user.name)}</h2>
                 <h4>{checkIfUndefined(user.country)}</h4>

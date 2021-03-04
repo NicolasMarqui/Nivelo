@@ -26,6 +26,7 @@ export type Query = {
   allTypes: Array<TutorType>;
   allClasses: Array<Classes>;
   singleClass: Classes;
+  allTutorClasses: Array<Classes>;
   allPrices: Array<Price>;
   allCategories: Array<Category>;
   allPlatforms: Array<Platforms>;
@@ -68,6 +69,11 @@ export type QuerySingleTutorArgs = {
 
 export type QuerySingleClassArgs = {
   id: Scalars['Float'];
+};
+
+
+export type QueryAllTutorClassesArgs = {
+  tutorId: Scalars['Float'];
 };
 
 
@@ -767,6 +773,23 @@ export type AllPlatformsQuery = (
   )> }
 );
 
+export type AllTutorClassesQueryVariables = Exact<{
+  tutorId: Scalars['Float'];
+}>;
+
+
+export type AllTutorClassesQuery = (
+  { __typename?: 'Query' }
+  & { allTutorClasses: Array<(
+    { __typename?: 'Classes' }
+    & Pick<Classes, 'id' | 'name' | 'description' | 'amountTimeTaught' | 'level' | 'active' | 'createdAt' | 'updatedAt'>
+    & { price?: Maybe<Array<(
+      { __typename?: 'Price' }
+      & Pick<Price, 'id' | 'price' | 'time'>
+    )>> }
+  )> }
+);
+
 export type CategoriesQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -854,7 +877,7 @@ export type SingleTutorQuery = (
         )>> }
       )>, classes?: Maybe<Array<(
         { __typename?: 'Classes' }
-        & Pick<Classes, 'id' | 'name' | 'description' | 'amountTimeTaught'>
+        & Pick<Classes, 'id' | 'name' | 'description' | 'amountTimeTaught' | 'level' | 'active' | 'createdAt' | 'updatedAt'>
         & { price?: Maybe<Array<(
           { __typename?: 'Price' }
           & Pick<Price, 'id' | 'price' | 'time'>
@@ -1186,6 +1209,29 @@ export const AllPlatformsDocument = gql`
 export function useAllPlatformsQuery(options: Omit<Urql.UseQueryArgs<AllPlatformsQueryVariables>, 'query'> = {}) {
   return Urql.useQuery<AllPlatformsQuery>({ query: AllPlatformsDocument, ...options });
 };
+export const AllTutorClassesDocument = gql`
+    query AllTutorClasses($tutorId: Float!) {
+  allTutorClasses(tutorId: $tutorId) {
+    id
+    name
+    description
+    amountTimeTaught
+    level
+    active
+    price {
+      id
+      price
+      time
+    }
+    createdAt
+    updatedAt
+  }
+}
+    `;
+
+export function useAllTutorClassesQuery(options: Omit<Urql.UseQueryArgs<AllTutorClassesQueryVariables>, 'query'> = {}) {
+  return Urql.useQuery<AllTutorClassesQuery>({ query: AllTutorClassesDocument, ...options });
+};
 export const CategoriesDocument = gql`
     query Categories {
   allCategories {
@@ -1296,11 +1342,15 @@ export const SingleTutorDocument = gql`
         name
         description
         amountTimeTaught
+        level
+        active
         price {
           id
           price
           time
         }
+        createdAt
+        updatedAt
       }
       categories {
         id
