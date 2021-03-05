@@ -39,6 +39,8 @@ import ScheduleSchema from "./models/Schedule";
 import scheduleRouter from "./routes/schedule";
 
 const main = async () => {
+    process.env.TZ = "America/Sao_Paulo";
+
     await createConnection({
         type: "postgres",
         host: "localhost",

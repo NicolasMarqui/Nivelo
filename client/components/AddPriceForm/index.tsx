@@ -56,6 +56,7 @@ const AddPriceForm: React.FC<AddPriceFormProps> = ({ classID }) => {
                         <FormLabel>
                             Tempo de duração da aula - em minutos
                         </FormLabel>
+                        {/* TODO -- add icon to inputs */}
                         <FormInput
                             placeholder="Tempo de duração da aula"
                             name="time"
@@ -84,6 +85,7 @@ const AddPriceForm: React.FC<AddPriceFormProps> = ({ classID }) => {
                             type="submit"
                             bold
                             fSize="18px"
+                            notActive={isLoading}
                         >
                             Salvar
                         </Button>

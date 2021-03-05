@@ -47,7 +47,7 @@ const ConfirmActive: React.FC<ConfirmActiveProps> = ({ classID, active }) => {
                 {!isLoading ? <></> : <LoadingAnimation />}
                 {/* prettier-ignore */}
                 <Flex justifyCenter>
-                    <Button onClick={handleAction} width="100px" margin="10px" bgColor="#57CC99" color="#fff" bold fSize="18px">
+                    <Button onClick={handleAction} width="100px" margin="10px" bgColor="#57CC99" color="#fff" bold fSize="18px" notActive={isLoading}>
                         Confirmar
                     </Button>
                     {/* prettier-ignore */}

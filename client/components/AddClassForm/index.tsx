@@ -35,8 +35,7 @@ const AddClassForm: React.FC<AddClassFormProps> = ({ nextStep, handleClassIDChan
         onSubmit: async (values, { setErrors }) => {
             setIsLoading(true);
             const { name, description, level  } = values;
-            console.log(values)
-
+            
             const response = await newClass({ tutorId: Number(tutorId), name, description, level})
             if (response.data.newClass.errors) {
                 setErrors(toErrorMap(response.data.newClass.errors as any));
@@ -46,8 +45,6 @@ const AddClassForm: React.FC<AddClassFormProps> = ({ nextStep, handleClassIDChan
                 toast.success('Aula adicionada')
                 window.setTimeout(nextStep, 2000);
             }
-
-
         },
     });
 
@@ -87,10 +84,15 @@ const AddClassForm: React.FC<AddClassFormProps> = ({ nextStep, handleClassIDChan
                             onChange={(e: any) => formik.setFieldValue('level', e.value)}
                             options={classLevels}
                         />
+                        {
+                            formik.errors.level && <FormError>
+                                {formik.errors.level}
+                            </FormError>
+                        }
                     </FormGroup>
                     <Flex justifyCenter>
                         {/* prettier-ignore */}
-                        <Button width="100px" margin="10px" bgColor="#57CC99" color="#fff" type="submit" bold fSize="18px">
+                        <Button width="100px" margin="10px" bgColor="#57CC99" color="#fff" type="submit" bold fSize="18px" notActive={isLoading}>
                             Salvar
                         </Button>
                         {/* prettier-ignore */}

@@ -63,6 +63,6 @@ export class Classes extends BaseEntity {
     createdAt: Date;
 
     @Field(() => String, { nullable: true })
-    @UpdateDateColumn()
+    @UpdateDateColumn({ type: "timestamptz" })
     updatedAt: Date;
 }

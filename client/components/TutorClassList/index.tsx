@@ -1,5 +1,6 @@
+import TimeAgo from "react-timeago";
 import { Description, Detail, Flex, Pill } from "../../styles/helpers";
-import { TutorTitle } from "../TutorCard/TutorCard.style";
+import { formatter } from "../../utils/agoPtFormat";
 import TutorClassAction from "../TutorClassAction";
 import { TutorClass, TutorClassListWrapper } from "./TutorClassList.style";
 
@@ -39,8 +40,26 @@ const TutorClassList: React.FC<TutorClassListProps> = ({ classes }) => {
                                 </Detail>
                                 <Flex col align="flex-start" justifyCenter>
                                     <h2>{cl.name}</h2>
-                                    <Description color="#a0a0a0;">
+                                    <Description
+                                        color="#a0a0a0;"
+                                        fontSize="14px"
+                                    >
                                         Ensinada {cl.amountTimeTaught} vezes
+                                    </Description>
+                                    <Description fontSize="12px">
+                                        Última atualização
+                                        <span
+                                            style={{
+                                                marginLeft: 3,
+                                                fontWeight: 700,
+                                            }}
+                                        >
+                                            <TimeAgo
+                                                date={Number(cl.updatedAt)}
+                                                live={false}
+                                                formatter={formatter}
+                                            />
+                                        </span>
                                     </Description>
                                 </Flex>
                                 <Flex justifyCenter>

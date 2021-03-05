@@ -20,3 +20,12 @@ export const renderTitleAgendar = (i: number) => {
             return "Metódo de comunicação";
     }
 };
+
+export function ToLocalDate(inDate: any) {
+    var utcSeconds = Number(inDate);
+    var d = new Date(utcSeconds * 1000);
+
+    const finalDate = d.toISOString();
+
+    return finalDate;
+}

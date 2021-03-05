@@ -45,7 +45,7 @@ const ConfirmDeleteClass: React.FC<ConfirmDeleteClassProps> = ({ classID }) => {
                 {!isLoading ? <></> : <LoadingAnimation />}
                 {/* prettier-ignore */}
                 <Flex justifyCenter>
-                    <Button onClick={handleDelete} width="100px" margin="10px" bgColor="#57CC99" color="#fff" bold fSize="18px">
+                    <Button onClick={handleDelete} width="100px" margin="10px" bgColor="#57CC99" color="#fff" bold fSize="18px" notActive={isLoading}>
                         Confirmar
                     </Button>
                     {/* prettier-ignore */}

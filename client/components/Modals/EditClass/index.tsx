@@ -1,54 +1,39 @@
-import { withUrqlClient } from "next-urql";
-import { useState } from "react";
-import Lottie from "react-lottie";
-import { ModalWrapper, Reoverlay } from "reoverlay";
-import "../../../node_modules/reoverlay/lib/ModalWrapper.css";
-// prettier-ignore
-import { AnimationWrapper, Button, Description, Flex } from "../../../styles/helpers";
-import { createUrqlClient } from "../../../utils/createUrqlClient";
-import LoadingAnimation from "../../LoadingAnimation";
+import { ModalWrapper } from "reoverlay";
+import EditClassForm from "../../EditClassForm";
 import { TutorTitle } from "../../TutorCard/TutorCard.style";
-// prettier-ignore
 import { ModalContainer } from "../Modals.style";
+import { EditClassWrapper } from "./EditClass.style";
 
-interface EditClassProps {
-    platform: { id: number; name: string; icon: string };
-    userPlatforms: any;
+export interface EditClassProps {
+    singleClass: {
+        id: number;
+        name: string;
+        description: string;
+        amountTimeTaught: number;
+        level: string;
+        active: boolean;
+        price: {
+            id: number;
+            price: number;
+            time: number;
+        };
+        createdAt: string;
+        updatedAt: string;
+    };
 }
 
-const EditClass: React.FC<EditClassProps> = ({ platform }) => {
-    const [account, setAccount] = useState("");
-    const [isLoading, setIsLoading] = useState(false);
-
-    const closeModal = () => {
-        Reoverlay.hideModal();
-    };
-
-    const handleSalvar = () => {
-        console.log("oi");
-    };
-
+const EditClass: React.FC<EditClassProps> = ({ singleClass }) => {
     return (
         <ModalWrapper>
             <ModalContainer>
-                <TutorTitle>Editar aula</TutorTitle>
-                <Description>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Consequatur, saepe.
-                </Description>
-                {!isLoading ? <></> : <LoadingAnimation />}
-                {/* prettier-ignore */}
-                <Flex justifyCenter>
-                    <Button onClick={handleSalvar} width="100px" margin="10px" bgColor="#57CC99" color="#fff" notActive={!account}>
-                        Salvar
-                    </Button>
-                    {/* prettier-ignore */}
-                    <Button onClick={closeModal} width="100px" margin="10px" bgColor="#fb475e" color="#fff">
-                        Cancelar
-                    </Button>
-                </Flex>
+                <TutorTitle>
+                    Editar aula - <span>{singleClass.name}</span>
+                </TutorTitle>
+                <EditClassWrapper>
+                    <EditClassForm singleClass={singleClass} pageProps />
+                </EditClassWrapper>
             </ModalContainer>
         </ModalWrapper>
     );
 };
-export default withUrqlClient(createUrqlClient)(EditClass as any);
+export default EditClass;

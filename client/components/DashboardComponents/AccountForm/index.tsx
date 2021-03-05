@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { AccountFormWrapper } from "./AccountForm.style";
 // prettier-ignore
-import { FormFull, FormGroup, FormLabel, FormInput, FormTextArea, Button, AnimationWrapper } from "../../../styles/helpers";
+import { FormFull, FormGroup, FormLabel, FormInput, FormTextArea, Button } from "../../../styles/helpers";
 import Select from "react-select";
 import countries from "../../../utils/countries.json";
 import { useFormik } from "formik";
@@ -9,7 +9,7 @@ import { useMoreInfoUserMutation } from "../../../generated/graphql";
 import { toErrorMap } from "../../../utils/toErrorMap";
 import { useRouter } from "next/router";
 import toast from "react-hot-toast";
-import Lottie from "react-lottie";
+import LoadingAnimation from "../../LoadingAnimation";
 interface AccountFormProps {
     user?: any;
 }
@@ -17,7 +17,6 @@ interface AccountFormProps {
 const AccountForm: React.FC<AccountFormProps> = ({
     user,
 }: AccountFormProps) => {
-    const LOADING__ANIMATION = require("../../../public/assets/animations/loading.json");
     const [, moreInfoUser] = useMoreInfoUserMutation();
     const router = useRouter();
     //prettier-ignore
@@ -88,16 +87,7 @@ const AccountForm: React.FC<AccountFormProps> = ({
                 </FormGroup>
                 <FormGroup>
                     {isLoading ? (
-                        <AnimationWrapper>
-                            <Lottie
-                                options={{
-                                    loop: true,
-                                    animationData: LOADING__ANIMATION,
-                                }}
-                                height={150}
-                                width={150}
-                            />
-                        </AnimationWrapper>
+                        <LoadingAnimation />
                     ) : (
                         <Button
                             bgColor="#57CC99"

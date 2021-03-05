@@ -806,6 +806,32 @@ export type RegisterMutation = (
   ) }
 );
 
+export type UpdateClassMutationVariables = Exact<{
+  id: Scalars['Float'];
+  name?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+  level?: Maybe<Scalars['String']>;
+}>;
+
+
+export type UpdateClassMutation = (
+  { __typename?: 'Mutation' }
+  & { updateClass: (
+    { __typename?: 'ClassesResponse' }
+    & { errors?: Maybe<Array<(
+      { __typename?: 'FieldError' }
+      & Pick<FieldError, 'field' | 'message'>
+    )>>, classes?: Maybe<(
+      { __typename?: 'Classes' }
+      & Pick<Classes, 'id' | 'name' | 'description' | 'amountTimeTaught' | 'active' | 'createdAt' | 'updatedAt'>
+      & { price?: Maybe<Array<(
+        { __typename?: 'Price' }
+        & Pick<Price, 'id' | 'time' | 'price'>
+      )>> }
+    )> }
+  ) }
+);
+
 export type AllPlatformsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -1285,6 +1311,37 @@ export const RegisterDocument = gql`
 
 export function useRegisterMutation() {
   return Urql.useMutation<RegisterMutation, RegisterMutationVariables>(RegisterDocument);
+};
+export const UpdateClassDocument = gql`
+    mutation UpdateClass($id: Float!, $name: String, $description: String, $level: String) {
+  updateClass(
+    classID: $id
+    options: {name: $name, description: $description, level: $level}
+  ) {
+    errors {
+      field
+      message
+    }
+    classes {
+      id
+      name
+      description
+      amountTimeTaught
+      active
+      price {
+        id
+        time
+        price
+      }
+      createdAt
+      updatedAt
+    }
+  }
+}
+    `;
+
+export function useUpdateClassMutation() {
+  return Urql.useMutation<UpdateClassMutation, UpdateClassMutationVariables>(UpdateClassDocument);
 };
 export const AllPlatformsDocument = gql`
     query AllPlatforms {
