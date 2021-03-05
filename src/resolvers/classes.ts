@@ -122,10 +122,11 @@ export class ClassesResolver {
             .delete()
             .from(Classes)
             .where("id = :id", { id })
+            .returning("*")
             .execute();
 
         if (classToDelete.affected) {
-            return classToDelete.affected > 0 ? true : false;
+            return true;
         }
 
         return false;
@@ -226,4 +227,28 @@ export class ClassesResolver {
     }
 
     // Make classes not active
+    @Mutation(() => ClassesResponse)
+    async changeClassStatus(
+        @Arg("classID") classID: number,
+        @Arg("active") active: boolean
+    ): Promise<ClassesResponse> {
+        let classes;
+        try {
+            const result = await getConnection()
+                .createQueryBuilder()
+                .update(Classes)
+                .set({
+                    active,
+                })
+                .where("id = :id", { id: classID })
+                .returning("*")
+                .execute();
+
+            classes = result.raw[0];
+        } catch (err) {
+            console.log(err);
+        }
+
+        return { classes };
+    }
 }

@@ -26,7 +26,10 @@ export class Price extends BaseEntity {
     price: number;
 
     @Field(() => Classes, { nullable: true })
-    @ManyToOne(() => Classes, (classes) => classes.price, { nullable: true })
+    @ManyToOne(() => Classes, (classes) => classes.price, {
+        nullable: true,
+        onDelete: "CASCADE",
+    })
     classes: Classes;
 
     @Field(() => Boolean, { nullable: true })

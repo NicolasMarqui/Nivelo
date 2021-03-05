@@ -12,6 +12,17 @@ query Me {
         tutor {
             id
             description
+            classes {
+                id
+                name
+                amountTimeTaught
+                level
+                price {
+                    id
+                    time
+                    price
+                }
+            }
         }
         userPlatformAccount {
             account

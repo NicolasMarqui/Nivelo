@@ -239,6 +239,7 @@ export type Mutation = {
   deleteClass: Scalars['Boolean'];
   priceToClasses: Classes;
   userToClass: ClassesResponse;
+  changeClassStatus: ClassesResponse;
   newPrice: PriceResponse;
   updatePrice: PriceResponse;
   deletePrice: Scalars['Boolean'];
@@ -362,6 +363,12 @@ export type MutationPriceToClassesArgs = {
 export type MutationUserToClassArgs = {
   classID: Scalars['Float'];
   userID: Scalars['Float'];
+};
+
+
+export type MutationChangeClassStatusArgs = {
+  active: Scalars['Boolean'];
+  classID: Scalars['Float'];
 };
 
 
@@ -576,6 +583,33 @@ export type ChangeAvatarMutation = (
   ) }
 );
 
+export type ChangeClassStatusMutationVariables = Exact<{
+  id: Scalars['Float'];
+  active: Scalars['Boolean'];
+}>;
+
+
+export type ChangeClassStatusMutation = (
+  { __typename?: 'Mutation' }
+  & { changeClassStatus: (
+    { __typename?: 'ClassesResponse' }
+    & { errors?: Maybe<Array<(
+      { __typename?: 'FieldError' }
+      & Pick<FieldError, 'message'>
+    )>>, classes?: Maybe<(
+      { __typename?: 'Classes' }
+      & Pick<Classes, 'id' | 'name' | 'amountTimeTaught' | 'level' | 'active'>
+      & { price?: Maybe<Array<(
+        { __typename?: 'Price' }
+        & Pick<Price, 'id' | 'time' | 'price'>
+      )>>, users?: Maybe<Array<(
+        { __typename?: 'User' }
+        & Pick<User, 'id' | 'name'>
+      )>> }
+    )> }
+  ) }
+);
+
 export type ChangePasswordMutationVariables = Exact<{
   newPassword: Scalars['String'];
   token: Scalars['String'];
@@ -594,6 +628,16 @@ export type ChangePasswordMutation = (
       & Pick<User, 'id' | 'name' | 'email'>
     )> }
   ) }
+);
+
+export type DeleteClassMutationVariables = Exact<{
+  id: Scalars['Float'];
+}>;
+
+
+export type DeleteClassMutation = (
+  { __typename?: 'Mutation' }
+  & Pick<Mutation, 'deleteClass'>
 );
 
 export type ForgotPasswordMutationVariables = Exact<{
@@ -812,6 +856,14 @@ export type MeQuery = (
     & { tutor?: Maybe<(
       { __typename?: 'Tutor' }
       & Pick<Tutor, 'id' | 'description'>
+      & { classes?: Maybe<Array<(
+        { __typename?: 'Classes' }
+        & Pick<Classes, 'id' | 'name' | 'amountTimeTaught' | 'level'>
+        & { price?: Maybe<Array<(
+          { __typename?: 'Price' }
+          & Pick<Price, 'id' | 'time' | 'price'>
+        )>> }
+      )>> }
     )>, userPlatformAccount?: Maybe<Array<(
       { __typename?: 'UserPlatformAccount' }
       & Pick<UserPlatformAccount, 'account'>
@@ -1007,6 +1059,35 @@ export const ChangeAvatarDocument = gql`
 export function useChangeAvatarMutation() {
   return Urql.useMutation<ChangeAvatarMutation, ChangeAvatarMutationVariables>(ChangeAvatarDocument);
 };
+export const ChangeClassStatusDocument = gql`
+    mutation changeClassStatus($id: Float!, $active: Boolean!) {
+  changeClassStatus(classID: $id, active: $active) {
+    errors {
+      message
+    }
+    classes {
+      id
+      name
+      amountTimeTaught
+      level
+      active
+      price {
+        id
+        time
+        price
+      }
+      users {
+        id
+        name
+      }
+    }
+  }
+}
+    `;
+
+export function useChangeClassStatusMutation() {
+  return Urql.useMutation<ChangeClassStatusMutation, ChangeClassStatusMutationVariables>(ChangeClassStatusDocument);
+};
 export const ChangePasswordDocument = gql`
     mutation changePassword($newPassword: String!, $token: String!) {
   changePassword(newPassword: $newPassword, token: $token) {
@@ -1025,6 +1106,15 @@ export const ChangePasswordDocument = gql`
 
 export function useChangePasswordMutation() {
   return Urql.useMutation<ChangePasswordMutation, ChangePasswordMutationVariables>(ChangePasswordDocument);
+};
+export const DeleteClassDocument = gql`
+    mutation DeleteClass($id: Float!) {
+  deleteClass(id: $id)
+}
+    `;
+
+export function useDeleteClassMutation() {
+  return Urql.useMutation<DeleteClassMutation, DeleteClassMutationVariables>(DeleteClassDocument);
 };
 export const ForgotPasswordDocument = gql`
     mutation ForgotPassword($email: String!) {
@@ -1260,6 +1350,17 @@ export const MeDocument = gql`
     tutor {
       id
       description
+      classes {
+        id
+        name
+        amountTimeTaught
+        level
+        price {
+          id
+          time
+          price
+        }
+      }
     }
     userPlatformAccount {
       account

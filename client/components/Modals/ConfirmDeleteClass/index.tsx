@@ -1,10 +1,11 @@
 import { withUrqlClient } from "next-urql";
 import { useState } from "react";
-import Lottie from "react-lottie";
+import toast from "react-hot-toast";
 import { ModalWrapper, Reoverlay } from "reoverlay";
+import { useDeleteClassMutation } from "../../../generated/graphql";
 import "../../../node_modules/reoverlay/lib/ModalWrapper.css";
 // prettier-ignore
-import { AnimationWrapper, Button, Description, Flex } from "../../../styles/helpers";
+import { Button, Description, Flex } from "../../../styles/helpers";
 import { createUrqlClient } from "../../../utils/createUrqlClient";
 import LoadingAnimation from "../../LoadingAnimation";
 import { TutorTitle } from "../../TutorCard/TutorCard.style";
@@ -12,36 +13,43 @@ import { TutorTitle } from "../../TutorCard/TutorCard.style";
 import { ModalContainer } from "../Modals.style";
 
 interface ConfirmDeleteClassProps {
-    platform: { id: number; name: string; icon: string };
-    userPlatforms: any;
+    classID: number;
 }
 
-const ConfirmDeleteClass: React.FC<ConfirmDeleteClassProps> = ({
-    platform,
-}) => {
-    const [account, setAccount] = useState("");
+const ConfirmDeleteClass: React.FC<ConfirmDeleteClassProps> = ({ classID }) => {
+    const [, deleteClass] = useDeleteClassMutation();
     const [isLoading, setIsLoading] = useState(false);
 
     const closeModal = () => {
         Reoverlay.hideModal();
     };
 
-    const handleSalvar = () => {
-        console.log("oi");
+    const handleDelete = async () => {
+        setIsLoading(true);
+        const response = await deleteClass({ id: classID });
+        console.log(response);
+        if (!response.data.deleteClass) {
+            toast.error("Tente novamente");
+            Reoverlay.hideModal();
+        } else {
+            toast.success("Aula deletada!");
+            Reoverlay.hideModal();
+        }
     };
 
     return (
         <ModalWrapper>
             <ModalContainer>
                 <TutorTitle>Deseja excluir aula?</TutorTitle>
+                <Description>Essa ação não pode ser desfeita</Description>
                 {!isLoading ? <></> : <LoadingAnimation />}
                 {/* prettier-ignore */}
                 <Flex justifyCenter>
-                    <Button onClick={handleSalvar} width="100px" margin="10px" bgColor="#57CC99" color="#fff" notActive={!account}>
+                    <Button onClick={handleDelete} width="100px" margin="10px" bgColor="#57CC99" color="#fff" bold fSize="18px">
                         Confirmar
                     </Button>
                     {/* prettier-ignore */}
-                    <Button onClick={closeModal} width="100px" margin="10px" bgColor="#fb475e" color="#fff">
+                    <Button onClick={closeModal} width="100px" margin="10px" bgColor="#fb475e" color="#fff" bold fSize="18px">
                         Cancelar
                     </Button>
                 </Flex>

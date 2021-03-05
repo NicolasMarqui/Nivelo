@@ -19,7 +19,6 @@ const AddPriceForm: React.FC<AddPriceFormProps> = ({ classID }) => {
 
     const closeModal = () => {
         Reoverlay.hideModal();
-        window.location.reload();
     };
 
     const formik = useFormik({

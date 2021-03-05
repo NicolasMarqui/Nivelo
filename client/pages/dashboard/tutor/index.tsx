@@ -1,20 +1,16 @@
-import { useEffect } from "react";
 import { GetServerSideProps, NextPage } from "next";
+import Lottie from "react-lottie";
 import BackButton from "../../../components/BackButton";
+import LoadingAnimation from "../../../components/LoadingAnimation";
+import NoClasses from "../../../components/NoClasses";
 import ShortcutList from "../../../components/ShortcutList";
-import {
-    useAllTutorClassesQuery,
-    useMeQuery,
-    useSingleTutorQuery,
-} from "../../../generated/graphql";
+import TutorClassList from "../../../components/TutorClassList";
+// prettier-ignore
+import { useSingleTutorQuery } from "../../../generated/graphql";
 // prettier-ignore
 import { Description, Title } from "../../../styles/helpers";
 // prettier-ignore
 import { ColumnGroup, TitleArea } from "../Dashboard.style";
-import Lottie from "react-lottie";
-import NoClasses from "../../../components/NoClasses";
-import ClassItem from "../../../components/ClassItem";
-import TutorClassList from "../../../components/TutorClassList";
 
 interface AccountProps {
     tutorID: number;
@@ -24,8 +20,6 @@ const Tutor: NextPage<AccountProps> = (props) => {
     const [{ data, fetching }] = useSingleTutorQuery({
         variables: { id: Number(props.tutorID) },
     });
-
-    const LOADING__ANIMATION = require("../../../public/assets/animations/loading.json");
 
     return (
         <>
@@ -44,14 +38,7 @@ const Tutor: NextPage<AccountProps> = (props) => {
                 <TitleArea margin="0 30px">
                     <Title fontWeight="400">Suas Aulas</Title>
                     {fetching ? (
-                        <Lottie
-                            options={{
-                                loop: true,
-                                animationData: LOADING__ANIMATION,
-                            }}
-                            height={150}
-                            width={150}
-                        />
+                        <LoadingAnimation />
                     ) : !data.singleTutor ||
                       data.singleTutor.tutor.classes.length === 0 ? (
                         <NoClasses />

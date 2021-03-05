@@ -16,7 +16,7 @@ interface DashboardProps {
 }
 
 const Dashboard: NextPage<DashboardProps> = (props) => {
-    const [{ data, fetching }] = useMeQuery();
+    const [{ data, fetching, error }] = useMeQuery();
     const router = useRouter();
 
     useEffect(() => {
@@ -28,6 +28,8 @@ const Dashboard: NextPage<DashboardProps> = (props) => {
             toast.error(router.query.message as string);
         }
     };
+
+    if (error) router.push("/login");
 
     return (
         <>

@@ -21,10 +21,9 @@ interface AddClassFormProps {
 const AddClassForm: React.FC<AddClassFormProps> = ({ nextStep, handleClassIDChange,}) => {
     const [isLoading, setIsLoading] = useState(false);
     const [ tutorId, setTutorId ] = useState(cookieCutter.get('tid'))
-    const [, newClass] = useNewClassMutation();
+    const [ , newClass] = useNewClassMutation();
     const closeModal = () => {
         Reoverlay.hideModal();
-        window.location.reload();
     };
 
     const formik = useFormik({

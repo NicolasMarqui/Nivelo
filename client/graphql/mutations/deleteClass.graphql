@@ -1,0 +1,3 @@
+mutation DeleteClass($id: Float!) {
+    deleteClass(id: $id)
+}

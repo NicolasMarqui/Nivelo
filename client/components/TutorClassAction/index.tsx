@@ -9,26 +9,33 @@ import ConfirmActive from "../Modals/ConfirmActive";
 import ConfirmDeleteClass from "../Modals/ConfirmDeleteClass";
 
 interface TutorClassActionProps {
-    id: number;
-    name: string;
-    description: string;
-    amountTimeTaught: number;
-    level: string;
-    active: boolean;
-    price: {
+    classDetail: {
         id: number;
-        price: number;
-        time: number;
+        name: string;
+        description: string;
+        amountTimeTaught: number;
+        level: string;
+        active: boolean;
+        price: {
+            id: number;
+            price: number;
+            time: number;
+        };
+        createdAt: string;
+        updatedAt: string;
     };
-    createdAt: string;
-    updatedAt: string;
 }
 
-const TutorClassAction: React.FC<TutorClassActionProps> = ({ active }) => {
-    const openEditModal = () => Reoverlay.showModal(EditClass, {});
-    const openConfirmActiveModal = () => Reoverlay.showModal(ConfirmActive, {});
+const TutorClassAction: React.FC<TutorClassActionProps> = ({ classDetail }) => {
+    const openEditModal = () =>
+        Reoverlay.showModal(EditClass, { singleClass: classDetail });
+    const openConfirmActiveModal = () =>
+        Reoverlay.showModal(ConfirmActive, {
+            active: classDetail.active,
+            classID: classDetail.id,
+        });
     const openConfirmDeleteModal = () =>
-        Reoverlay.showModal(ConfirmDeleteClass, {});
+        Reoverlay.showModal(ConfirmDeleteClass, { classID: classDetail.id });
 
     return (
         <TutorClassActionWrapper>
@@ -39,12 +46,15 @@ const TutorClassAction: React.FC<TutorClassActionProps> = ({ active }) => {
                 <ReactTooltip effect="solid" id="editar" />
             </li>
             <li
-                data-tip={active ? "Ativar" : "Desativar"}
+                data-tip={!classDetail.active ? "Ativar" : "Desativar"}
                 data-for="desativar"
                 onClick={openConfirmActiveModal}
             >
-                <BoxIcon bColor="#F79D65" hasCursor>
-                    {active ? (
+                <BoxIcon
+                    bColor={!classDetail.active ? "#F79D65" : "#FF928B"}
+                    hasCursor
+                >
+                    {!classDetail.active ? (
                         <BsFillEyeFill size={22} color="#fff" />
                     ) : (
                         <BsFillEyeSlashFill size={22} color="#fff" />

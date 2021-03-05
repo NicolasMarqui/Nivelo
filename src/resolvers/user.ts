@@ -66,6 +66,7 @@ export class UserResolver {
             relations: [
                 "tutor",
                 "tutor.type",
+                "tutor.classes",
                 "platforms",
                 "userPlatformAccount",
                 "userPlatformAccount.platform",
@@ -326,6 +327,8 @@ export class UserResolver {
         const { description, country, name } = options;
 
         let user;
+        let updatedUser;
+
         try {
             const result = await getConnection()
                 .createQueryBuilder()
@@ -339,11 +342,25 @@ export class UserResolver {
                 .returning("*")
                 .execute();
             user = result.raw[0];
+
+            updatedUser = await User.findOne({
+                // @ts-ignore: Unreachable code error
+                where: { id: user.id },
+                relations: [
+                    "tutor",
+                    "tutor.type",
+                    "tutor.classes",
+                    "platforms",
+                    "userPlatformAccount",
+                    "userPlatformAccount.platform",
+                    "feedback",
+                ],
+            });
         } catch (err) {
             console.log(err);
         }
 
-        return { user };
+        return { user: updatedUser };
     }
 
     // Get a single User

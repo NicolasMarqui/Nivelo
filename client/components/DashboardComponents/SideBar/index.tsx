@@ -19,6 +19,8 @@ const SideBar: React.FC<SideBarProps> = ({ user }: SideBarProps) => {
         });
     };
 
+    console.log(user);
+
     return (
         <SideBarWrapper>
             <div className="side__info">
