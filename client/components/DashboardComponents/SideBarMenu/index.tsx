@@ -50,6 +50,17 @@ const SideBarMenu: React.FC<SideBarMenuProps> = ({
                                 </a>
                             </Link>
                         </li>
+                        <li>
+                            <Link href="/dashboard/tutor/calendar">
+                                <a>
+                                    <SideBarMenuLink
+                                        text="Seu calendário"
+                                        hasChevron={true}
+                                        icon={<MdEventAvailable size={17} />}
+                                    />
+                                </a>
+                            </Link>
+                        </li>
                     </ul>
                 </SideBarMenuGroup>
             )}

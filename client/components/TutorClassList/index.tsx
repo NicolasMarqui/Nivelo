@@ -56,8 +56,8 @@ const TutorClassList: React.FC<TutorClassListProps> = ({ classes }) => {
                                         >
                                             <TimeAgo
                                                 date={Number(cl.updatedAt)}
-                                                live={false}
                                                 formatter={formatter}
+                                                live={true}
                                             />
                                         </span>
                                     </Description>

@@ -13,6 +13,7 @@ import toast from "react-hot-toast";
 import { withUrqlClient } from "next-urql";
 import { createUrqlClient } from "../../../utils/createUrqlClient";
 import Lottie from "react-lottie";
+import LoadingAnimation from "../../LoadingAnimation";
 
 interface ChangeAvatarModalProps {
     userId: number;
@@ -114,16 +115,7 @@ const ChangeAvatarModal: React.FC<ChangeAvatarModalProps> = ({ userId }) => {
                         </DropFilesMessage>
                     </>
                 ) : (
-                    <AnimationWrapper>
-                        <Lottie
-                            options={{
-                                loop: true,
-                                animationData: LOADING__ANIMATION,
-                            }}
-                            height={150}
-                            width={150}
-                        />
-                    </AnimationWrapper>
+                    <LoadingAnimation />
                 )}
                 {hasError && (
                     <Alert bgColor="#fb475e">Algo não está certo.....</Alert>

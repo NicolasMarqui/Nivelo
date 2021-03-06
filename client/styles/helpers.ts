@@ -467,3 +467,28 @@ export const BoxIcon = styled.div<BoxIconProps>`
             cursor: pointer;
         `}
 `;
+
+export const PriceInfoWrapper = styled.ul`
+    margin-top: 4px;
+    display: flex;
+    align-items: center;
+`;
+
+interface PriceInfoProps {
+    hasCursor?: boolean;
+}
+
+export const PriceInfo = styled.li<PriceInfoProps>`
+    margin: 0 5px;
+    padding: 10px;
+    background-color: #f2f2f2;
+    ${({ hasCursor }) =>
+        hasCursor &&
+        css`
+            cursor: pointer;
+        `}
+`;
+
+export const PriceInfoTime = styled.p`
+    font-size: 14px;
+`;

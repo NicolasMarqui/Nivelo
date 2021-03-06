@@ -10,6 +10,7 @@ import { Button, Flex, Form, FormError, FormGroup, FormInput, FormLabel, FormTex
 import classLevels from "../../utils/classesLevels.json";
 import { createUrqlClient } from "../../utils/createUrqlClient";
 import { toErrorMap } from "../../utils/toErrorMap";
+import ChangePriceList from "../ChangePriceList";
 import { EditClassProps } from "../Modals/EditClass";
 import { EditClassWrapper } from "../Modals/EditClass/EditClass.style";
 
@@ -91,6 +92,12 @@ const EditClassForm: React.FC<EditClassProps> = ({ singleClass }) => {
                         <FormError>{formik.errors.level}</FormError>
                     )}
                 </FormGroup>
+                {singleClass.price && singleClass.price.length > 0 && (
+                    <FormGroup>
+                        <FormLabel>Horários</FormLabel>
+                        <ChangePriceList price={singleClass.price} />
+                    </FormGroup>
+                )}
                 <Flex justifyCenter>
                     {/* prettier-ignore */}
                     <Button width="100px" margin="10px" bgColor="#57CC99" color="#fff" type="submit" bold fSize="18px" notActive={isLoading}>

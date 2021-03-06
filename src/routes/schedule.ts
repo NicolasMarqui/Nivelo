@@ -11,6 +11,24 @@ scheduleRouter.get("/api/schedule/:id", async (req: Request, res: Response) => {
     res.status(200).send({ data: allSchedule });
 });
 
+// Retrieve schedule for single tutor by month
+scheduleRouter.get(
+    "/api/schedule/single/:id",
+    async (req: Request, res: Response) => {
+        const tutorID = req.params.id;
+        const month = req.query.month?.toString();
+
+        const allSchedule = await Schedule.findOne({
+            tutorID,
+            dates: { $elemMatch: { month } },
+        });
+
+        console.log(allSchedule);
+
+        res.status(200).send({ data: allSchedule });
+    }
+);
+
 // Make day available
 scheduleRouter.post(
     "/api/schedule/available/:id",

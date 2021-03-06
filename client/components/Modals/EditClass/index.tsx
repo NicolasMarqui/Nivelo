@@ -12,11 +12,13 @@ export interface EditClassProps {
         amountTimeTaught: number;
         level: string;
         active: boolean;
-        price: {
-            id: number;
-            price: number;
-            time: number;
-        };
+        price: [
+            {
+                id: number;
+                price: number;
+                time: number;
+            }
+        ];
         createdAt: string;
         updatedAt: string;
     };

@@ -1,4 +1,5 @@
 import "../styles/_app.css";
+import "react-big-calendar/lib/css/react-big-calendar.css";
 import { ThemeProvider } from "styled-components";
 import { GlobalStyle, theme } from "../styles/globals";
 import Layout from "../components/Layout";
