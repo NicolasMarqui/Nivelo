@@ -1,8 +1,6 @@
 import { GetServerSideProps, NextPage } from "next";
 import BackButton from "../../../../components/BackButton";
-import CustomCalendar from "../../../../components/Calendar";
-import TutorCalendar from "../../../../components/TutorCalendar";
-import { useSingleTutorQuery } from "../../../../generated/graphql";
+import CustomCalendarTutor from "../../../../components/CalendarTutor";
 import { Description, Title } from "../../../../styles/helpers";
 import { ColumnGroup, TitleArea } from "../../Dashboard.style";
 
@@ -11,10 +9,6 @@ interface CalendarProps {
 }
 
 const Calendar: NextPage<CalendarProps> = (props) => {
-    const [{ data, fetching }] = useSingleTutorQuery({
-        variables: { id: Number(props.tutorID) },
-    });
-
     return (
         <>
             <ColumnGroup margin="0">
@@ -27,7 +21,10 @@ const Calendar: NextPage<CalendarProps> = (props) => {
                         aulas!
                     </Description>
                 </TitleArea>
-                <CustomCalendar />
+                <CustomCalendarTutor
+                    tutorId={Number(props.tutorID)}
+                    isTutorDashView={true}
+                />
             </ColumnGroup>
         </>
     );

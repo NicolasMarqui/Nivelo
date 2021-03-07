@@ -127,6 +127,14 @@ export const CalendarWrapper = styled.div`
         pointer-events: none;
     }
 
+    .calendar .body .has__event {
+        background-color: #57cc99;
+    }
+
+    .calendar .body .has__event:hover {
+        background-color: #57cc9973 !important;
+    }
+
     .calendar .body .cell .bg {
         font-weight: 700;
         line-height: 1;

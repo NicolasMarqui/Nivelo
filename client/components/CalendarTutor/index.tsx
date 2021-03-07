@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { CalendarWrapper } from "./Calendar.style";
 import { MdChevronLeft, MdChevronRight } from "react-icons/md";
 import * as dateFns from "date-fns";
@@ -6,12 +6,31 @@ import ptBr from "date-fns/locale/pt-BR";
 import ReactTooltip from "react-tooltip";
 import { Reoverlay } from "reoverlay";
 import AvailableDayHours from "../Modals/AvailableDayHours";
+import useAxios from "axios-hooks";
+import LoadingAnimation from "../LoadingAnimation";
+import { Title } from "../../styles/helpers";
+import { getMonth } from "../../utils/getMonth";
 
-interface CustomCalendarProps {}
+interface CustomCalendarTutorProps {
+    isTutorDashView?: Boolean;
+    tutorId: number;
+}
 
-const CustomCalendar: React.FC<CustomCalendarProps> = ({}) => {
+const CustomCalendarTutor: React.FC<CustomCalendarTutorProps> = ({
+    isTutorDashView,
+    tutorId,
+}) => {
     const [currentMonth, setCurrentMonth] = useState(new Date());
     const [selectedDate, setSelectedDate] = useState(new Date());
+
+    const [{ data, loading, error }, refetch] = useAxios({
+        method: "GET",
+        url: `http://localhost:4000/api/schedule/single/${tutorId}?month=${
+            getMonth(currentMonth) < 10
+                ? `0${getMonth(currentMonth)}`
+                : getMonth(currentMonth)
+        }`,
+    });
 
     const renderHeader = () => {
         const dateFormat = "MMMM yyyy";
@@ -66,7 +85,6 @@ const CustomCalendar: React.FC<CustomCalendarProps> = ({}) => {
         const monthEnd = dateFns.endOfMonth(monthStart);
         const startDate = dateFns.startOfWeek(monthStart);
         const endDate = dateFns.endOfWeek(monthEnd);
-
         const dateFormat = "d";
         const rows = [];
         let days = [];
@@ -78,22 +96,34 @@ const CustomCalendar: React.FC<CustomCalendarProps> = ({}) => {
                 formattedDate = dateFns.format(day, dateFormat);
                 const cloneDay = day;
 
+                const hasTrue = handleEvent(day) as boolean[];
+
                 days.push(
                     <div
                         className={`col cell ${
                             !dateFns.isSameMonth(day, monthStart)
                                 ? "disabled"
                                 : ""
+                        } ${
+                            hasTrue.includes(true) ? "has__event" : "no__event"
                         }`}
                         key={day as any}
                         onClick={() =>
                             onDateClick(dateFns.parse("", "", cloneDay))
                         }
-                        data-tip="Clique para marcar como disponível"
+                        data-tip={
+                            isTutorDashView
+                                ? `${
+                                      hasTrue.includes(true)
+                                          ? "Clique para editar disponibilidade"
+                                          : "Clique para marcar como disponível"
+                                  }`
+                                : ""
+                        }
                     >
                         <span className="number">{formattedDate}</span>
                         <span className="bg">{formattedDate}</span>
-                        <ReactTooltip effect="solid" />
+                        {isTutorDashView && <ReactTooltip effect="solid" />}
                     </div>
                 );
                 day = dateFns.addDays(day, 1);
@@ -109,9 +139,31 @@ const CustomCalendar: React.FC<CustomCalendarProps> = ({}) => {
         return <div className="body">{rows}</div>;
     };
 
+    const handleEvent = (day: Date) => {
+        if (loading) {
+            return [false];
+        }
+
+        if (!data || data.data === null || data.data.dates.length === 0) {
+            return [false];
+        }
+
+        return data.data.dates.map((ev) => {
+            if (dateFns.format(day, "dd/MM/yyyy") === ev.date) {
+                return true;
+            }
+        });
+    };
+
     const onDateClick = (day: Date) => {
-        Reoverlay.showModal(AvailableDayHours, { day });
         setSelectedDate(day);
+        {
+            isTutorDashView &&
+                Reoverlay.showModal(AvailableDayHours, {
+                    day,
+                    isCurrentAvailable: handleEvent(day).includes(true),
+                });
+        }
     };
 
     const nextMonth = () => {
@@ -121,6 +173,14 @@ const CustomCalendar: React.FC<CustomCalendarProps> = ({}) => {
     const prevMonth = () => {
         setCurrentMonth(dateFns.subMonths(currentMonth, 1));
     };
+
+    if (loading) {
+        return <LoadingAnimation />;
+    }
+
+    if (error) {
+        return <Title>Algo deu errado...</Title>;
+    }
 
     return (
         <CalendarWrapper>
@@ -132,4 +192,4 @@ const CustomCalendar: React.FC<CustomCalendarProps> = ({}) => {
         </CalendarWrapper>
     );
 };
-export default CustomCalendar;
+export default CustomCalendarTutor;

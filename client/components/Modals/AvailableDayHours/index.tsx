@@ -11,9 +11,13 @@ import format from "date-fns/format";
 
 interface AvailableDayHoursProps {
     day: Date;
+    isCurrentAvailable: boolean;
 }
 
-const AvailableDayHours: React.FC<AvailableDayHoursProps> = ({ day }) => {
+const AvailableDayHours: React.FC<AvailableDayHoursProps> = ({
+    day,
+    isCurrentAvailable,
+}) => {
     const [isLoading, setIsLoading] = useState(false);
     const [horarios, setHorarios] = useState([]);
 
@@ -35,6 +39,7 @@ const AvailableDayHours: React.FC<AvailableDayHoursProps> = ({ day }) => {
                     Escolha os horários que você está disponivel no dia
                     {formattedDay}
                 </Description>
+                {isCurrentAvailable && <p>Tirar disponivel</p>}
                 <Flex justifyCenter>
                     <Button
                         onClick={handleAvail}

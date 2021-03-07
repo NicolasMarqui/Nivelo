@@ -29,6 +29,34 @@ export default function Footer() {
         >
             <Container flex>
                 <FooterColumn>
+                    <LogoCurrencyWrapper>
+                        <div className="lc__logo">
+                            <Image
+                                src="/logo.svg"
+                                width="150"
+                                height="80"
+                                alt="Nivelo"
+                            />
+                        </div>
+                        {/* <div className="lc__selects">
+                            <Select
+                                closeMenuOnSelect={true}
+                                defaultValue={currencies[0]}
+                                options={currencies}
+                            />
+
+                            <Select
+                                closeMenuOnSelect={true}
+                                defaultValue={languages[0]}
+                                options={languages}
+                                label="Idioma"
+                            />
+
+                            <ul className="lc__languages"></ul>
+                        </div> */}
+                    </LogoCurrencyWrapper>
+                </FooterColumn>
+                <FooterColumn>
                     <div className="column__name">
                         <h5>Categorias</h5>
                     </div>
@@ -143,34 +171,6 @@ export default function Footer() {
                             </Link>
                         </li>
                     </ColumnList>
-                </FooterColumn>
-                <FooterColumn>
-                    <LogoCurrencyWrapper>
-                        <div className="lc__logo">
-                            <Image
-                                src="/logo.svg"
-                                width="150"
-                                height="80"
-                                alt="Nivelo"
-                            />
-                        </div>
-                        <div className="lc__selects">
-                            <Select
-                                closeMenuOnSelect={true}
-                                defaultValue={currencies[0]}
-                                options={currencies}
-                            />
-
-                            <Select
-                                closeMenuOnSelect={true}
-                                defaultValue={languages[0]}
-                                options={languages}
-                                label="Idioma"
-                            />
-
-                            <ul className="lc__languages"></ul>
-                        </div>
-                    </LogoCurrencyWrapper>
                 </FooterColumn>
             </Container>
             <FooterBottom>
