@@ -6,6 +6,7 @@ import {
     getLowestValueArray,
     getLowestValueArrayClasses,
 } from "../../../utils/getLowestValueArray";
+import CustomCalendarTutor from "../../CalendarTutor";
 
 interface ThirdColumnProps {
     handleAgendar: any;
@@ -16,6 +17,7 @@ const ThirdColumn: React.FC<ThirdColumnProps> = ({
     handleAgendar,
     data,
 }: ThirdColumnProps) => {
+    console.log(data.singleTutor.tutor.classes);
     return (
         <div className="st__third">
             <Sticky topOffset={-160}>
@@ -30,9 +32,11 @@ const ThirdColumn: React.FC<ThirdColumnProps> = ({
                             <h5>Preço por hora a partir de</h5>
                             <p className="prices__value">
                                 R$
-                                {getLowestValueArrayClasses(
-                                    data.singleTutor.tutor.classes
-                                )}
+                                {
+                                    getLowestValueArrayClasses(
+                                        data.singleTutor.tutor.classes
+                                    ).price
+                                }
                                 .00
                             </p>
 
@@ -58,12 +62,13 @@ const ThirdColumn: React.FC<ThirdColumnProps> = ({
                         <div className="third__schedule">
                             <h5>Disponibilidade</h5>
 
-                            <div className="schedule__dates"></div>
-
-                            <Description fontSize="14px">
-                                Lorem ipsum dolor sit amet, consectetur eiusmod
-                                tempor.
-                            </Description>
+                            <div className="schedule__dates">
+                                <CustomCalendarTutor
+                                    tutorId={data.singleTutor.tutor.id}
+                                    smaller={true}
+                                    isTutorDashView={false}
+                                />
+                            </div>
 
                             <IconButton
                                 text="VERIFICAR DISPONIBILIDADE"

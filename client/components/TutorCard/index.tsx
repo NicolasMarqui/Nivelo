@@ -10,6 +10,7 @@ import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import { getCategoriesFromArray } from "../../utils/getCategoriesFromArray";
 import TutorCardClassesList from "../TutorCardClassesList";
+import CustomCalendarTutor from "../CalendarTutor";
 
 interface TutorCardProps {
     isColumn: boolean;
@@ -117,7 +118,11 @@ export default function TutorCard({ isColumn, tutor }: TutorCardProps) {
                             <TutorCardClassesList classes={classes} />
                         </TabPanel>
                         <TabPanel>
-                            <SampleDiv />
+                            <CustomCalendarTutor
+                                tutorId={id}
+                                smaller
+                                isTutorDashView={false}
+                            />
                         </TabPanel>
                     </Tabs>
                 </div>

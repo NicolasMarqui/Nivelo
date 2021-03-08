@@ -1,6 +1,10 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
-export const CalendarWrapper = styled.div`
+interface CalendarWrapperProps {
+    smaller: boolean;
+}
+
+export const CalendarWrapper = styled.div<CalendarWrapperProps>`
     margin-top: 40px;
 
     .row {
@@ -159,4 +163,34 @@ export const CalendarWrapper = styled.div`
         flex-basis: calc(100% / 7);
         width: calc(100% / 7);
     }
+
+    .header__span {
+        margin: 4px 0 0;
+        display: block;
+    }
+
+    ${({ smaller }) =>
+        smaller &&
+        css`
+            margin-top: 0;
+
+            .calendar {
+                background: transparent;
+            }
+
+            .calendar .header {
+                padding: 0.2em 0;
+            }
+
+            .cell {
+                height: 2em !important;
+                background: transparent;
+            }
+
+            .header__span {
+                font-size: 14px;
+                margin: 10px 0 0;
+                display: block;
+            }
+        `}
 `;

@@ -6,49 +6,36 @@ query SingleTutor($id: Float!) {
         tutor {
             id
             description
-            type {
-                id
-                name
-            }
             rating
-            amountClasses
-            amountStudents
-            user {
-                id
-                name
-                email
-                sex
-                country
-                city
-                avatar
-                userPlatformAccount {
-                    platform {
-                        id
-                        name
-                        account
-                    }
-                }
-            }
-            classes {
-                id
-                name
-                description
-                amountTimeTaught
-                level
-                active
-                price {
-                    id
-                    price
-                    time
-                }
-                createdAt
-                updatedAt
-            }
             categories {
                 id
                 name
                 icon
             }
+            user {
+                id
+            }
+            type {
+                id
+                name
+            }
+            classes {
+                id
+                name
+                amountTimeTaught
+                level
+                price {
+                    id
+                    time
+                    price
+                }
+                users {
+                    id
+                    name
+                }
+            }
+            createdAt
+            updatedAt
         }
     }
 }

@@ -15,11 +15,13 @@ import toast from "react-hot-toast";
 interface CustomCalendarTutorProps {
     isTutorDashView?: Boolean;
     tutorId: number;
+    smaller?: boolean;
 }
 
 const CustomCalendarTutor: React.FC<CustomCalendarTutorProps> = ({
     isTutorDashView,
     tutorId,
+    smaller = false,
 }) => {
     const [currentMonth, setCurrentMonth] = useState(new Date());
     const [selectedDate, setSelectedDate] = useState(new Date());
@@ -52,10 +54,14 @@ const CustomCalendarTutor: React.FC<CustomCalendarTutorProps> = ({
                     data-for="prev"
                 >
                     <MdChevronLeft size={24} onClick={prevMonth} />
-                    <ReactTooltip effect="solid" place="left" id="prev" />
+                    <ReactTooltip
+                        effect="solid"
+                        place={smaller ? "top" : "left"}
+                        id="prev"
+                    />
                 </div>
                 <div className="col col-center">
-                    <span>
+                    <span className="header__span">
                         {dateFns.format(currentMonth, dateFormat, {
                             locale: ptBr,
                         })}
@@ -67,7 +73,11 @@ const CustomCalendarTutor: React.FC<CustomCalendarTutorProps> = ({
                     data-for="next"
                 >
                     <MdChevronRight size={24} onClick={nextMonth} />
-                    <ReactTooltip id="next" effect="solid" place="right" />
+                    <ReactTooltip
+                        id="next"
+                        effect="solid"
+                        place={smaller ? "top" : "right"}
+                    />
                 </div>
             </div>
         );
@@ -167,6 +177,8 @@ const CustomCalendarTutor: React.FC<CustomCalendarTutorProps> = ({
     const onDateClick = async (day: Date) => {
         setSelectedDate(day);
 
+        if (!isTutorDashView) return false;
+
         if (handleEvent(day).includes(true)) {
             Reoverlay.showModal(AvailableDayHours, {
                 day,
@@ -207,10 +219,10 @@ const CustomCalendarTutor: React.FC<CustomCalendarTutorProps> = ({
     }
 
     return (
-        <CalendarWrapper>
+        <CalendarWrapper smaller={smaller}>
             <div className="calendar">
                 {renderHeader()}
-                {renderDays()}
+                {!smaller && renderDays()}
                 {renderCells()}
             </div>
         </CalendarWrapper>

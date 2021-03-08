@@ -30,6 +30,7 @@ export const SingleTutorWrapper = styled.div`
         .tutor__avatar {
             border-radius: 50%;
             border: 6px solid ${({ theme }) => theme.colors.primary}!important;
+            object-fit: cover;
         }
 
         .first__rating {
@@ -133,6 +134,7 @@ export const SingleTutorWrapper = styled.div`
             flex-direction: column;
             align-items: center;
             justify-content: center;
+            overflow-x: hidden;
 
             &.box__sticky {
                 max-height: 86vh;
@@ -188,10 +190,7 @@ export const SingleTutorWrapper = styled.div`
                 }
 
                 .schedule__dates {
-                    height: 160px;
-                    background-color: #f5f5f5;
-                    width: 90%;
-                    margin: 15px auto 5px;
+                    margin: 15px auto 40px;
                 }
 
                 p {

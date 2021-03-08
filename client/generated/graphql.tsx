@@ -939,30 +939,26 @@ export type SingleTutorQuery = (
       & Pick<FieldError, 'message'>
     )>>, tutor?: Maybe<(
       { __typename?: 'Tutor' }
-      & Pick<Tutor, 'id' | 'description' | 'rating' | 'amountClasses' | 'amountStudents'>
-      & { type?: Maybe<(
-        { __typename?: 'TutorType' }
-        & Pick<TutorType, 'id' | 'name'>
-      )>, user?: Maybe<(
-        { __typename?: 'User' }
-        & Pick<User, 'id' | 'name' | 'email' | 'sex' | 'country' | 'city' | 'avatar'>
-        & { userPlatformAccount?: Maybe<Array<(
-          { __typename?: 'UserPlatformAccount' }
-          & { platform?: Maybe<(
-            { __typename?: 'Platforms' }
-            & Pick<Platforms, 'id' | 'name' | 'account'>
-          )> }
-        )>> }
-      )>, classes?: Maybe<Array<(
-        { __typename?: 'Classes' }
-        & Pick<Classes, 'id' | 'name' | 'description' | 'amountTimeTaught' | 'level' | 'active' | 'createdAt' | 'updatedAt'>
-        & { price?: Maybe<Array<(
-          { __typename?: 'Price' }
-          & Pick<Price, 'id' | 'price' | 'time'>
-        )>> }
-      )>>, categories?: Maybe<Array<(
+      & Pick<Tutor, 'id' | 'description' | 'rating' | 'createdAt' | 'updatedAt'>
+      & { categories?: Maybe<Array<(
         { __typename?: 'Category' }
         & Pick<Category, 'id' | 'name' | 'icon'>
+      )>>, user?: Maybe<(
+        { __typename?: 'User' }
+        & Pick<User, 'id'>
+      )>, type?: Maybe<(
+        { __typename?: 'TutorType' }
+        & Pick<TutorType, 'id' | 'name'>
+      )>, classes?: Maybe<Array<(
+        { __typename?: 'Classes' }
+        & Pick<Classes, 'id' | 'name' | 'amountTimeTaught' | 'level'>
+        & { price?: Maybe<Array<(
+          { __typename?: 'Price' }
+          & Pick<Price, 'id' | 'time' | 'price'>
+        )>>, users?: Maybe<Array<(
+          { __typename?: 'User' }
+          & Pick<User, 'id' | 'name'>
+        )>> }
       )>> }
     )> }
   ) }
@@ -1472,49 +1468,36 @@ export const SingleTutorDocument = gql`
     tutor {
       id
       description
-      type {
-        id
-        name
-      }
       rating
-      amountClasses
-      amountStudents
-      user {
-        id
-        name
-        email
-        sex
-        country
-        city
-        avatar
-        userPlatformAccount {
-          platform {
-            id
-            name
-            account
-          }
-        }
-      }
-      classes {
-        id
-        name
-        description
-        amountTimeTaught
-        level
-        active
-        price {
-          id
-          price
-          time
-        }
-        createdAt
-        updatedAt
-      }
       categories {
         id
         name
         icon
       }
+      user {
+        id
+      }
+      type {
+        id
+        name
+      }
+      classes {
+        id
+        name
+        amountTimeTaught
+        level
+        price {
+          id
+          time
+          price
+        }
+        users {
+          id
+          name
+        }
+      }
+      createdAt
+      updatedAt
     }
   }
 }
