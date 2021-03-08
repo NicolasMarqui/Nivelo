@@ -10,6 +10,7 @@ import useAxios from "axios-hooks";
 import LoadingAnimation from "../LoadingAnimation";
 import { Title } from "../../styles/helpers";
 import { getMonth } from "../../utils/getMonth";
+import toast from "react-hot-toast";
 
 interface CustomCalendarTutorProps {
     isTutorDashView?: Boolean;
@@ -30,6 +31,14 @@ const CustomCalendarTutor: React.FC<CustomCalendarTutorProps> = ({
                 ? `0${getMonth(currentMonth)}`
                 : getMonth(currentMonth)
         }`,
+    });
+
+    const [
+        { data: saveAvalData, loading: saveAvalLoad, error: saveAvalError },
+        executePost,
+    ] = useAxios({
+        method: "POST",
+        url: `http://localhost:4000/api/schedule/available/${tutorId}`,
     });
 
     const renderHeader = () => {
@@ -155,14 +164,29 @@ const CustomCalendarTutor: React.FC<CustomCalendarTutorProps> = ({
         });
     };
 
-    const onDateClick = (day: Date) => {
+    const onDateClick = async (day: Date) => {
         setSelectedDate(day);
-        {
-            isTutorDashView &&
-                Reoverlay.showModal(AvailableDayHours, {
-                    day,
-                    isCurrentAvailable: handleEvent(day).includes(true),
-                });
+
+        if (handleEvent(day).includes(true)) {
+            Reoverlay.showModal(AvailableDayHours, {
+                day,
+                isCurrentAvailable: handleEvent(day).includes(true),
+            });
+        } else {
+            await executePost({
+                data: {
+                    month:
+                        getMonth(currentMonth) < 10
+                            ? `0${getMonth(currentMonth)}`
+                            : getMonth(currentMonth),
+                    date: dateFns.format(day, "dd/MM/yyyy").toString(),
+                },
+            });
+
+            if (!saveAvalLoad && saveAvalData) {
+                await refetch();
+                toast.success("Dia adicionado como disponível");
+            }
         }
     };
 
