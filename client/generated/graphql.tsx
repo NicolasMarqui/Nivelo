@@ -832,6 +832,50 @@ export type UpdateClassMutation = (
   ) }
 );
 
+export type UpdateTutorMutationVariables = Exact<{
+  id: Scalars['Float'];
+  description?: Maybe<Scalars['String']>;
+}>;
+
+
+export type UpdateTutorMutation = (
+  { __typename?: 'Mutation' }
+  & { updateTutor: (
+    { __typename?: 'TutorResponse' }
+    & { errors?: Maybe<Array<(
+      { __typename?: 'FieldError' }
+      & Pick<FieldError, 'field' | 'message'>
+    )>>, tutor?: Maybe<(
+      { __typename?: 'Tutor' }
+      & Pick<Tutor, 'id' | 'description' | 'rating' | 'createdAt' | 'updatedAt'>
+      & { categories?: Maybe<Array<(
+        { __typename?: 'Category' }
+        & Pick<Category, 'id' | 'name' | 'icon'>
+      )>>, user?: Maybe<(
+        { __typename?: 'User' }
+        & Pick<User, 'id' | 'name' | 'email' | 'sex' | 'country' | 'city' | 'avatar'>
+        & { userPlatformAccount?: Maybe<Array<(
+          { __typename?: 'UserPlatformAccount' }
+          & { platform?: Maybe<(
+            { __typename?: 'Platforms' }
+            & Pick<Platforms, 'id' | 'name' | 'account'>
+          )> }
+        )>> }
+      )>, type?: Maybe<(
+        { __typename?: 'TutorType' }
+        & Pick<TutorType, 'id' | 'name'>
+      )>, classes?: Maybe<Array<(
+        { __typename?: 'Classes' }
+        & Pick<Classes, 'id' | 'name' | 'description' | 'amountTimeTaught' | 'level' | 'active' | 'createdAt' | 'updatedAt'>
+        & { price?: Maybe<Array<(
+          { __typename?: 'Price' }
+          & Pick<Price, 'id' | 'price' | 'time'>
+        )>> }
+      )>> }
+    )> }
+  ) }
+);
+
 export type AllPlatformsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -945,19 +989,23 @@ export type SingleTutorQuery = (
         & Pick<Category, 'id' | 'name' | 'icon'>
       )>>, user?: Maybe<(
         { __typename?: 'User' }
-        & Pick<User, 'id'>
+        & Pick<User, 'id' | 'name' | 'email' | 'sex' | 'country' | 'city' | 'avatar'>
+        & { userPlatformAccount?: Maybe<Array<(
+          { __typename?: 'UserPlatformAccount' }
+          & { platform?: Maybe<(
+            { __typename?: 'Platforms' }
+            & Pick<Platforms, 'id' | 'name' | 'account'>
+          )> }
+        )>> }
       )>, type?: Maybe<(
         { __typename?: 'TutorType' }
         & Pick<TutorType, 'id' | 'name'>
       )>, classes?: Maybe<Array<(
         { __typename?: 'Classes' }
-        & Pick<Classes, 'id' | 'name' | 'amountTimeTaught' | 'level'>
+        & Pick<Classes, 'id' | 'name' | 'description' | 'amountTimeTaught' | 'level' | 'active' | 'createdAt' | 'updatedAt'>
         & { price?: Maybe<Array<(
           { __typename?: 'Price' }
-          & Pick<Price, 'id' | 'time' | 'price'>
-        )>>, users?: Maybe<Array<(
-          { __typename?: 'User' }
-          & Pick<User, 'id' | 'name'>
+          & Pick<Price, 'id' | 'price' | 'time'>
         )>> }
       )>> }
     )> }
@@ -1339,6 +1387,67 @@ export const UpdateClassDocument = gql`
 export function useUpdateClassMutation() {
   return Urql.useMutation<UpdateClassMutation, UpdateClassMutationVariables>(UpdateClassDocument);
 };
+export const UpdateTutorDocument = gql`
+    mutation UpdateTutor($id: Float!, $description: String) {
+  updateTutor(id: $id, options: {description: $description}) {
+    errors {
+      field
+      message
+    }
+    tutor {
+      id
+      description
+      rating
+      categories {
+        id
+        name
+        icon
+      }
+      user {
+        id
+        name
+        email
+        sex
+        country
+        city
+        avatar
+        userPlatformAccount {
+          platform {
+            id
+            name
+            account
+          }
+        }
+      }
+      type {
+        id
+        name
+      }
+      classes {
+        id
+        name
+        description
+        amountTimeTaught
+        level
+        active
+        price {
+          id
+          price
+          time
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+}
+    `;
+
+export function useUpdateTutorMutation() {
+  return Urql.useMutation<UpdateTutorMutation, UpdateTutorMutationVariables>(UpdateTutorDocument);
+};
 export const AllPlatformsDocument = gql`
     query AllPlatforms {
   allPlatforms {
@@ -1476,6 +1585,19 @@ export const SingleTutorDocument = gql`
       }
       user {
         id
+        name
+        email
+        sex
+        country
+        city
+        avatar
+        userPlatformAccount {
+          platform {
+            id
+            name
+            account
+          }
+        }
       }
       type {
         id
@@ -1484,17 +1606,17 @@ export const SingleTutorDocument = gql`
       classes {
         id
         name
+        description
         amountTimeTaught
         level
+        active
         price {
           id
-          time
           price
+          time
         }
-        users {
-          id
-          name
-        }
+        createdAt
+        updatedAt
       }
       createdAt
       updatedAt

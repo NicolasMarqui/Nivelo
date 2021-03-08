@@ -1,10 +1,11 @@
 import IconButton from "../IconButton";
 import { ShortcutListWrapper } from "./ShortcutList.style";
 import { BsPencil } from "react-icons/bs";
-import { BiEditAlt } from "react-icons/bi";
 import ReactTooltip from "react-tooltip";
 import { Reoverlay } from "reoverlay";
 import AddClass from "../Modals/AddClass";
+import { MdEventAvailable } from "react-icons/md";
+import Link from "next/link";
 
 interface ShortcutListProps {}
 
@@ -25,16 +26,18 @@ const ShortcutList: React.FC<ShortcutListProps> = ({}) => {
                     />
                     <ReactTooltip effect="solid" id="add-aula" />
                 </li>
-                <li data-tip="Editar minhas informações" data-for="editarInfo">
-                    <IconButton
-                        text="Editar minhas informações"
-                        smaller
-                        bColor="#4895EF"
-                        color="#fff"
-                        icon={<BiEditAlt size={17} />}
-                    />
-                    <ReactTooltip effect="solid" id="editarInfo" />
-                </li>
+                <Link href="/dashboard/tutor/calendar">
+                    <li data-tip="Editar meu calendário" data-for="editarInfo">
+                        <IconButton
+                            text="Editar meu calendário"
+                            smaller
+                            bColor="#4895EF"
+                            color="#fff"
+                            icon={<MdEventAvailable size={17} />}
+                        />
+                        <ReactTooltip effect="solid" id="editarInfo" />
+                    </li>
+                </Link>
             </ul>
         </ShortcutListWrapper>
     );

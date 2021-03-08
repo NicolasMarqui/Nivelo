@@ -61,6 +61,28 @@ const SideBarMenu: React.FC<SideBarMenuProps> = ({
                                 </a>
                             </Link>
                         </li>
+                        <li>
+                            <Link href="/dashboard/tutor#info">
+                                <a>
+                                    <SideBarMenuLink
+                                        text="Suas informações"
+                                        hasChevron={true}
+                                        icon={<FaUserGraduate size={17} />}
+                                    />
+                                </a>
+                            </Link>
+                        </li>
+                        <li>
+                            <Link href="/dashboard/tutor#classes">
+                                <a>
+                                    <SideBarMenuLink
+                                        text="Suas aulas"
+                                        hasChevron={true}
+                                        icon={<FaUserGraduate size={17} />}
+                                    />
+                                </a>
+                            </Link>
+                        </li>
                     </ul>
                 </SideBarMenuGroup>
             )}

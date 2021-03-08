@@ -1,7 +1,7 @@
 import { TutorInput } from "./../resolvers/inputs/index";
 
 export const validateTutorInfo = (options: TutorInput) => {
-    if (options.description.length > 1000) {
+    if (options.description && options.description.length > 1000) {
         return [
             {
                 field: "description",
@@ -10,7 +10,7 @@ export const validateTutorInfo = (options: TutorInput) => {
         ];
     }
 
-    if (options.rating < 0 || options.rating > 5) {
+    if (options.rating && (options.rating < 0 || options.rating > 5)) {
         return [
             {
                 field: "rating",

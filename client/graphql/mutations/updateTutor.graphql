@@ -1,6 +1,7 @@
-query SingleTutor($id: Float!) {
-    singleTutor(id: $id) {
+mutation UpdateTutor($id: Float!, $description: String) {
+    updateTutor(id: $id, options: { description: $description }) {
         errors {
+            field
             message
         }
         tutor {

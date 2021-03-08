@@ -177,20 +177,24 @@ export class TutorResolver {
             return { errors };
         }
 
-        let tutor;
-        try {
-            const result = await getConnection()
-                .createQueryBuilder()
-                .update(Tutor)
-                .set({
-                    ...options,
-                })
-                .where("id = :id", { id })
-                .returning("*")
-                .execute();
-            tutor = result.raw[0];
-        } catch (err) {
-            console.log(err);
+        const { description } = options;
+
+        const tutor = await Tutor.findOne({
+            where: { id },
+            relations: [
+                "user",
+                "type",
+                "classes",
+                "classes.price",
+                "categories",
+                "user.userPlatformAccount",
+                "user.userPlatformAccount.platform",
+            ],
+        });
+
+        if (tutor) {
+            tutor.description = description;
+            tutor.save();
         }
 
         return { tutor };

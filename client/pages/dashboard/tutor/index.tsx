@@ -5,10 +5,11 @@ import LoadingAnimation from "../../../components/LoadingAnimation";
 import NoClasses from "../../../components/NoClasses";
 import ShortcutList from "../../../components/ShortcutList";
 import TutorClassList from "../../../components/TutorClassList";
+import TutorMoreInfo from "../../../components/TutorMoreInfo";
 // prettier-ignore
 import { useSingleTutorQuery } from "../../../generated/graphql";
 // prettier-ignore
-import { Description, Title } from "../../../styles/helpers";
+import { Description, FormLabel, Title } from "../../../styles/helpers";
 // prettier-ignore
 import { ColumnGroup, TitleArea } from "../Dashboard.style";
 
@@ -34,7 +35,17 @@ const Tutor: NextPage<AccountProps> = (props) => {
                     <ShortcutList />
                 </TitleArea>
             </ColumnGroup>
-            <ColumnGroup>
+            <ColumnGroup id="info">
+                <TitleArea>
+                    <Title fontWeight="400">Suas Informações</Title>
+                    <Description marginTop={20}>
+                        Bem vindo a sua área de tutor, aqui você pode gerenciar
+                        suas aulas, seus alunos, suas datas e muito mais!
+                    </Description>
+                    <TutorMoreInfo loading={fetching} data={data} />
+                </TitleArea>
+            </ColumnGroup>
+            <ColumnGroup id="classes">
                 <TitleArea margin="0 30px">
                     <Title fontWeight="400">Suas Aulas</Title>
                     {fetching ? (

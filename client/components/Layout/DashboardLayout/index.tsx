@@ -8,8 +8,13 @@ import Meta from "../../Meta";
 // prettier-ignore
 import { DasboardColumnWrapper, DashboardWrapper,} from "../../../pages/dashboard/Dashboard.style";
 import SideBar from "../../DashboardComponents/SideBar";
+import { GetServerSideProps } from "next";
 
-const DashboardLayout: React.FC = ({ children }) => {
+interface DashboardLayoutProps {
+    tutorID?: number;
+}
+
+const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
     const [{ data, fetching }] = useMeQuery();
 
     return (
@@ -18,7 +23,13 @@ const DashboardLayout: React.FC = ({ children }) => {
             <div className="body__overlay"></div>
             <PageWrapper>
                 <Meta
-                    title={`Dashboard - ${fetching ? "" : data.me.name}`}
+                    title={`Dashboard - ${
+                        fetching
+                            ? ""
+                            : !data || data === undefined
+                            ? ""
+                            : data.me.name
+                    }`}
                     description="Encontre os melhores tutores para te ajudar nessa jornada"
                     keywords="tutor, javascript, nivelamento, aprender, algoritimos, comprar"
                 />
@@ -44,6 +55,23 @@ const DashboardLayout: React.FC = ({ children }) => {
             <Footer />
         </>
     );
+};
+
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+    const cookie = ctx.req.cookies.qid;
+    const tutorCookie = ctx.req.cookies.tid;
+
+    if (!cookie) {
+        return {
+            redirect: {
+                permanent: false,
+                destination:
+                    "/login?message=Você precisa estar logado para acessar essa página",
+            },
+        };
+    }
+
+    return { props: { tutorID: Number(tutorCookie) } };
 };
 
 export default withUrqlClient(createUrqlClient)(DashboardLayout as any);
