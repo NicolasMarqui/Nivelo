@@ -1,10 +1,16 @@
 import styled, { css } from "styled-components";
-import { fadeIn, SideOpen, SideOpenLeft } from "../../styles/animations";
+import {
+    fadeIn,
+    SideOpen,
+    SideOpenBottom,
+    SideOpenLeft,
+} from "../../styles/animations";
 
 interface SideInsideProps {
     left?: boolean;
     open?: boolean;
     size?: string;
+    bottom?: boolean;
 }
 
 export const SideWrapper = styled.div<SideInsideProps>`
@@ -94,5 +100,18 @@ export const SideInside = styled.div<SideInsideProps>`
             border-radius: 0px 30px 30px 0px;
             animation: ${SideOpenLeft} 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)
                 both;
+        `}
+
+    ${({ bottom }) =>
+        bottom &&
+        css`
+            right: auto;
+            left: auto;
+            bottom: 0 !important;
+            top: 100px !important;
+            margin: 0 auto;
+            border-radius: 30px 30px 0px 0px;
+            animation: ${SideOpenBottom} 0.5s
+                cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
         `}
 `;

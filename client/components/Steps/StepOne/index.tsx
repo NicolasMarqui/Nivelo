@@ -1,44 +1,47 @@
-import { StepWrapper, StepButtons } from "../Steps.style";
-import IconButton from "../../IconButton";
+import { useState } from "react";
 import SelectClasses from "../../Selectables/SelectClasses";
+import { StepWrapper } from "../Steps.style";
+import { PriceProps } from "../StepTwo";
 
 interface StepOneProps {
     goToStep?: any;
     totalSteps?: any;
     currentStep?: any;
-    onChange: () => any;
+    handleFuckingChange: (i: any) => any;
     classes: [
         {
             id: number;
             name: string;
             description: string;
             amountTimeTaught: number;
-            price: any | null;
+            price: PriceProps[] | [];
         }
     ];
 }
 
-export default function StepOne({ goToStep, onChange, classes }: StepOneProps) {
-    console.log(onChange);
+export default function StepOne({
+    goToStep,
+    handleFuckingChange,
+    classes,
+}: StepOneProps) {
+    const [selected, setSelected] = useState({});
+
+    const handleSelected = (cl: any) => {
+        setSelected(cl);
+        handleFuckingChange(cl);
+    };
+
     return (
         <StepWrapper>
             {classes.map((cl) => {
                 return (
                     <SelectClasses
                         singleClass={cl}
-                        handleSelectedClasss={onChange}
+                        active={cl === selected}
+                        handleSelectedClasss={() => handleSelected(cl)}
                     />
                 );
             })}
-
-            <StepButtons>
-                <IconButton
-                    color="#fff"
-                    bColor="#E76F51"
-                    text="PRÓXIMO"
-                    onClick={() => goToStep(2)}
-                />
-            </StepButtons>
         </StepWrapper>
     );
 }

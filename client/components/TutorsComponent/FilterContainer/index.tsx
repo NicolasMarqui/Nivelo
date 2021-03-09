@@ -21,7 +21,9 @@ const FilterContainer: React.FC<FilterContainerProps> = ({
             <div className="filters__amount">
                 <Description>
                     Mostrando
-                    <span>{data ? data.allTutors.length : "-"}</span>
+                    <span style={{ margin: "0 5px" }}>
+                        {data ? data.allTutors.length : "-"}
+                    </span>
                     tutores
                 </Description>
             </div>

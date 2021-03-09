@@ -43,6 +43,7 @@ query Tutors(
             id
             name
             description
+            active
             amountTimeTaught
             price {
                 id

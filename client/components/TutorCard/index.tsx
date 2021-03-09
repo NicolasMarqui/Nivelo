@@ -11,6 +11,7 @@ import "react-tabs/style/react-tabs.css";
 import { getCategoriesFromArray } from "../../utils/getCategoriesFromArray";
 import TutorCardClassesList from "../TutorCardClassesList";
 import CustomCalendarTutor from "../CalendarTutor";
+import { shortTutorDescription } from "../../utils/shortTutorDescription";
 
 interface TutorCardProps {
     isColumn: boolean;
@@ -83,7 +84,9 @@ export default function TutorCard({ isColumn, tutor }: TutorCardProps) {
                                 marginTop={20}
                                 size="80"
                             >
-                                {description ? description : "-"}
+                                {description
+                                    ? shortTutorDescription(description, 500)
+                                    : "-"}
                             </Description>
                         </div>
                     </Link>

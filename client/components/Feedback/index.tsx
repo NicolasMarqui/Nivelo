@@ -1,5 +1,6 @@
 import { useTutorFeedbackQuery } from "../../generated/graphql";
 import FeedbackItem from "../FeedbackItem";
+import LoadingAnimation from "../LoadingAnimation";
 
 interface FeedbackProps {
     tutorId: number;
@@ -10,11 +11,13 @@ const Feedback: React.FC<FeedbackProps> = ({ tutorId }: FeedbackProps) => {
         variables: { id: tutorId },
     });
 
+    if (fetching) {
+        return <LoadingAnimation />;
+    }
+
     return (
         <>
-            {fetching ? (
-                <p>Loading</p>
-            ) : !data && data.getTutorFeedbacks.length === 0 ? (
+            {!data || data.getTutorFeedbacks.length === 0 ? (
                 <p>Esse tutor não possui feedbacks!</p>
             ) : (
                 data.getTutorFeedbacks.map((feed) => {

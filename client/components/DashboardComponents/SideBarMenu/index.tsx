@@ -1,11 +1,11 @@
 import { SideBarMenuGroup, SideBarMenuWrapper } from "./SideBarSMenu.style";
 import Link from "next/link";
 import SideBarMenuLink from "../SideBarMenuLink";
-import { AiOutlineSetting } from "react-icons/ai";
+import { AiOutlineSetting, AiOutlineInfoCircle } from "react-icons/ai";
 import { MdEventAvailable, MdFavoriteBorder } from "react-icons/md";
 import { FiBookOpen } from "react-icons/fi";
 import { GiTeacher } from "react-icons/gi";
-import { BiPencil } from "react-icons/bi";
+import { BiPencil, BiBookAdd } from "react-icons/bi";
 import { IoHomeOutline } from "react-icons/io5";
 import { FaUserGraduate } from "react-icons/fa";
 import { PillButton } from "../../../styles/helpers";
@@ -67,7 +67,7 @@ const SideBarMenu: React.FC<SideBarMenuProps> = ({
                                     <SideBarMenuLink
                                         text="Suas informações"
                                         hasChevron={true}
-                                        icon={<FaUserGraduate size={17} />}
+                                        icon={<AiOutlineInfoCircle size={17} />}
                                     />
                                 </a>
                             </Link>
@@ -78,7 +78,7 @@ const SideBarMenu: React.FC<SideBarMenuProps> = ({
                                     <SideBarMenuLink
                                         text="Suas aulas"
                                         hasChevron={true}
-                                        icon={<FaUserGraduate size={17} />}
+                                        icon={<BiBookAdd size={17} />}
                                     />
                                 </a>
                             </Link>

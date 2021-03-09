@@ -24,18 +24,11 @@ export const SelectClassWrapper = styled.div`
         }
 
         &.classes__active {
-            background-color: ${({ theme }) => theme.colors.lightGreen};
-            /* border: 3px solid ${({ theme }) => theme.colors.lightGreen}; */
-            .box__info {
-                h3,
-                p {
-                    color: #fff;
-                }
-            }
+            border: 3px solid ${({ theme }) => theme.colors.lightGreen};
         }
 
         &:hover {
-            background-color: ${({ theme }) => theme.colors.lightGreen};
+            border: 3px solid ${({ theme }) => theme.colors.lightGreen};
         }
     }
 `;

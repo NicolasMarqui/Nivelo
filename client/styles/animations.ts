@@ -36,6 +36,17 @@ export const SideOpenLeft = keyframes`
     }
 `;
 
+export const SideOpenBottom = keyframes`
+    0% {
+        -webkit-transform: translateY(800px);
+            transform: translateY(800px);
+    }
+    100% {
+        -webkit-transform: translateY(0px);
+                transform: translateY(0px);
+    }
+`;
+
 export const buttonHover = keyframes`
     0% {
     -webkit-transform: translateZ(0);

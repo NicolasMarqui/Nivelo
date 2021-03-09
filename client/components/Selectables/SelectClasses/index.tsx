@@ -14,36 +14,22 @@ interface ClassInside {
 
 interface SelectClassesProps {
     singleClass: ClassInside;
-    handleSelectedClasss: any;
+    handleSelectedClasss: () => any;
+    active?: boolean;
 }
 
 const SelectClasses: React.FC<SelectClassesProps> = ({
     singleClass,
     handleSelectedClasss,
+    active,
 }: SelectClassesProps) => {
-    const [selectedIndex, setSelectedIndex] = useState(0);
-    const [hasClass, setHasClass] = useState(false);
-
-    const handleClassClick = () => {
-        handleSelectedClasss({
-            id: singleClass.id,
-            name: singleClass.name,
-        });
-
-        setHasClass(!hasClass);
-    };
-
-    useEffect(() => {
-        console.log(selectedIndex);
-    }, [selectedIndex]);
-
     return (
         <SelectClassWrapper>
             <div
                 className={`classes__box ${
-                    hasClass ? "classes__active" : "base__classes"
+                    active ? "classes__active" : "base__classes"
                 }`}
-                onClick={handleClassClick}
+                onClick={handleSelectedClasss}
             >
                 <div className="box__info">
                     <h3>{singleClass.name}</h3>

@@ -70,13 +70,13 @@ export default function UserDropdown({ user }: UserDropdownProps) {
                 <div className="drop__group">
                     <h3 className="drop__title">Tutor</h3>
                     <ul>
-                        <Link href="/dashboard/profile">
+                        <Link href="/dashboard/tutor">
                             <li>
                                 <FaChalkboardTeacher size={20} />
                                 <p>Editar</p>
                             </li>
                         </Link>
-                        <Link href="/dashboard/favorites">
+                        <Link href="/dashboard/tutor#classes">
                             <li>
                                 <GoMortarBoard size={20} />
                                 <p>Minhas aulas</p>

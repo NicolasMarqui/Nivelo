@@ -3,11 +3,21 @@ import styled from "styled-components";
 export const NavTitle = styled.div`
     display: flex;
     justify-content: center;
+    flex-direction: column;
     align-items: center;
     margin: 5px 0 30px;
 
     h2 {
         text-align: center;
+    }
+
+    p {
+        margin-top: 4px;
+        text-align: center;
+
+        span {
+            color: ${({ theme }) => theme.colors.primary};
+        }
     }
 `;
 

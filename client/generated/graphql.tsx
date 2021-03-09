@@ -1059,7 +1059,7 @@ export type TutorsQuery = (
       )>> }
     )>, classes?: Maybe<Array<(
       { __typename?: 'Classes' }
-      & Pick<Classes, 'id' | 'name' | 'description' | 'amountTimeTaught'>
+      & Pick<Classes, 'id' | 'name' | 'description' | 'active' | 'amountTimeTaught'>
       & { price?: Maybe<Array<(
         { __typename?: 'Price' }
         & Pick<Price, 'id' | 'price' | 'time'>
@@ -1686,6 +1686,7 @@ export const TutorsDocument = gql`
       id
       name
       description
+      active
       amountTimeTaught
       price {
         id

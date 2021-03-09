@@ -9,6 +9,7 @@ import ClassItem from "../../ClassItem";
 import InfoCard from "../../InfoCard";
 import { getCompletedClasses } from "../../../utils/getCompletedClasses";
 import Feedback from "../../Feedback";
+import { timeConverter } from "../../../functions";
 
 interface SecondColumnProps {
     data: any;
@@ -43,7 +44,9 @@ const SecondColumn: React.FC<SecondColumnProps> = ({
                     <MdRecordVoiceOver size={24} />
                     <p>
                         Tutor Nivelo desde
-                        <span>09/10/2022</span>
+                        <span style={{ marginLeft: "5px" }}>
+                            {timeConverter(data.singleTutor.tutor.createdAt)}
+                        </span>
                     </p>
                 </div>
             </div>
@@ -55,14 +58,16 @@ const SecondColumn: React.FC<SecondColumnProps> = ({
                 <div className="classes__detail detail__ball3"></div>
                 {data.singleTutor.tutor.classes &&
                 data.singleTutor.tutor.classes.length > 0 ? (
-                    data.singleTutor.tutor.classes.map((aula) => (
-                        <ClassItem
-                            key={aula.id}
-                            fromInside
-                            // @ts-ignore
-                            class={aula}
-                        />
-                    ))
+                    data.singleTutor.tutor.classes
+                        .filter((aula) => aula.active)
+                        .map((aulaFil) => (
+                            <ClassItem
+                                key={aulaFil.id}
+                                fromInside
+                                // @ts-ignore
+                                class={aulaFil}
+                            />
+                        ))
                 ) : (
                     <p>Esse tutor ainda não possui nenhuma aula!</p>
                 )}

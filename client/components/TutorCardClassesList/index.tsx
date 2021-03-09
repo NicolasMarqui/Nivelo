@@ -6,6 +6,7 @@ interface ClassesContent {
     amountTimeTaught: number;
     description: string;
     name: string;
+    active: boolean;
     price: [{ id: number; price: number; time: number }] | null;
 }
 
@@ -19,9 +20,15 @@ export default function TutorCardClassesList({
     return (
         <TutorCardClassesListWrapper>
             {classes && classes.length > 0 ? (
-                classes.map((clas) => (
-                    <ClassItem key={clas.id} smaller={true} class={clas} />
-                ))
+                classes
+                    .filter((clas) => clas.active)
+                    .map((clasF) => (
+                        <ClassItem
+                            key={clasF.id}
+                            smaller={true}
+                            class={clasF}
+                        />
+                    ))
             ) : (
                 <h5>Nenhuma aula disponivel!</h5>
             )}

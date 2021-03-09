@@ -25,6 +25,11 @@ export const AgendarWrapper = styled.div`
 
     .agendar__group {
         margin: 40px 0;
+        width: 60%;
+        margin: 0 auto;
+        /* max-height: 500px; */
+        overflow-y: auto;
+
         h4 {
             color: #222;
             font-size: 18px;
@@ -37,23 +42,18 @@ export const AgendarWrapper = styled.div`
     }
 
     .agenda__footer {
-        position: absolute;
-        bottom: 0;
-        padding: 10px 20px;
-        background: ${({ theme }) => theme.colors.primary};
-        left: 0;
-        right: 0;
-        border-radius: 20px 0px 0px 0;
         display: flex;
         justify-content: space-between;
         align-items: center;
+        width: 60%;
+        margin: 20px auto 0;
 
         .footer__price {
             flex: 3;
 
             h6 {
                 font-size: 27px;
-                color: #fff;
+                color: #222;
                 font-weight: 700;
             }
         }

@@ -8,6 +8,7 @@ interface SideProps {
     onClickClose?: () => any;
     onClickAplicar?: () => any;
     left?: boolean;
+    bottom?: boolean;
     footer?: boolean;
     header?: { icon?: React.ReactElement; text?: string };
     width?: string;
@@ -15,7 +16,7 @@ interface SideProps {
 }
 
 // prettier-ignore
-const Side = ({ children, isOpen, onClickClose, onClickAplicar, left, footer, header, width, ignoreCloseOutside }: SideProps) => {
+const Side = ({ children, isOpen, onClickClose, onClickAplicar, left, footer, header, width, ignoreCloseOutside, bottom}: SideProps) => {
     const handleCloseSide = (event: any) => {
         if (ignoreCloseOutside) return false;
 
@@ -37,7 +38,7 @@ const Side = ({ children, isOpen, onClickClose, onClickAplicar, left, footer, he
 
     return (
         <SideWrapper open={isOpen} onClick={handleCloseSide}>
-            <SideInside left={left ? left : false} size={width}>
+            <SideInside left={left ? left : false} size={width} bottom={bottom ? bottom : false}>
                 {header && (
                     <div className="side__header">
                         {header.icon && (

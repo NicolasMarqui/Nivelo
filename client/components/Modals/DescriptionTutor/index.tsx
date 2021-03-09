@@ -57,8 +57,7 @@ const DescriptionTutor: React.FC<DescriptionTutorProps> = ({
                 <TutorTitle>Descrição</TutorTitle>
                 <Description>
                     A descrição é importante para os alunos conhecerem um pouco
-                    mais de você como tutor, o que você ensina e os resultados
-                    esperados!
+                    mais de você como tutor.
                 </Description>
                 {!isLoading ? (
                     <>

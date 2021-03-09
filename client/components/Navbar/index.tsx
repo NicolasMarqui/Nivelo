@@ -75,7 +75,13 @@ const Navbar: React.FC = ({}) => {
                                     }
                                     onMouseLeave={() => setHoverUser(false)}
                                 >
-                                    <Link href="/dashboard">
+                                    <Link
+                                        href={
+                                            data.me.tutor
+                                                ? "/dashboard/tutor"
+                                                : "/dashboard"
+                                        }
+                                    >
                                         <a>
                                             <FaUserGraduate
                                                 size={24}

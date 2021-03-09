@@ -91,6 +91,15 @@ export const GlobalStyle = createGlobalStyle`
     width: 100%;
     height: 5px;
   }
+
+  .rsw_2Y{
+    overflow-x: hidden;
+    min-height: 300px;
+  }
+
+  .rsw_2f{
+    height: 100%;
+  }
 `;
 
 export const theme = {

@@ -10,6 +10,8 @@ export const ClassesInfoWrapper = styled.div`
 `;
 
 export const ClassesDetails = styled.div`
+    flex: 1;
+
     .details__header {
         text-align: center;
         margin-bottom: 30px;

@@ -1,32 +1,31 @@
-import ClassItem from "../../ClassItem";
-import { StepWrapper, StepButtons } from "../Steps.style";
-import IconButton from "../../IconButton";
+import LoadingAnimation from "../../LoadingAnimation";
+import { StepWrapper } from "../Steps.style";
 
+export interface PriceProps {
+    id: number;
+    time: number;
+    price: number;
+}
 interface StepTwoProps {
-    goToStep?: any;
-    totalSteps?: any;
-    currentStep?: any;
+    selected: {
+        id: number;
+        name: string;
+        description: string;
+        amountTimeTaught: number;
+        price: PriceProps[];
+    };
 }
 
-export default function StepTwo({ goToStep }: StepTwoProps) {
+export default function StepTwo({ selected }: StepTwoProps) {
     return (
         <StepWrapper>
-            <ClassItem />
-
-            <StepButtons>
-                <IconButton
-                    color="#fff"
-                    text="ANTERIOR"
-                    bColor="#4895EF"
-                    onClick={() => goToStep(1)}
-                />
-                <IconButton
-                    color="#fff"
-                    bColor="#E76F51"
-                    text="PRÓXIMO"
-                    onClick={() => goToStep(3)}
-                />
-            </StepButtons>
+            {Object.keys(selected).length === 0 ? (
+                <LoadingAnimation />
+            ) : !selected.price || selected.price.length === 0 ? (
+                <p>No price Homie</p>
+            ) : (
+                selected.price.map((pr) => <p>{pr.price}</p>)
+            )}
         </StepWrapper>
     );
 }
