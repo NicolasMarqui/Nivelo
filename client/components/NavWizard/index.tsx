@@ -13,7 +13,11 @@ interface NavWizardProps {
     lastStep?: any;
     info?: {
         selectedClass: any;
-        classPrice: Number;
+        classPrice: {
+            id: number;
+            price: number;
+            time: number;
+        };
         classSchedule?: [any];
         tool?: String;
         tutorName: string;
@@ -25,8 +29,22 @@ export default function NavWizard({
     info,
     nextStep,
     previousStep,
+    totalSteps,
 }: NavWizardProps) {
-    const { tutorName, selectedClass } = info;
+    const { tutorName, selectedClass, classPrice } = info;
+
+    const dots = [];
+    for (let i = 1; i <= totalSteps; i += 1) {
+        const isActive = currentStep === i;
+        dots.push(
+            <span
+                key={`step-${i}`}
+                className={`dot ${isActive ? "dot__active" : ""}`}
+            >
+                &bull;
+            </span>
+        );
+    }
 
     return (
         <>
@@ -35,6 +53,7 @@ export default function NavWizard({
                 <p>
                     Tutor: <span>{tutorName}</span>
                 </p>
+                <div className="dot__wrapper">{dots}</div>
             </NavTitle>
             <Nav>
                 <Flex size={1}>
@@ -51,7 +70,7 @@ export default function NavWizard({
                     </Button>
                 </Flex>
                 <Flex size={3} justifyCenter>
-                    <TutorTitle>R$,00</TutorTitle>
+                    <TutorTitle>R${classPrice.price || 0},00</TutorTitle>
                 </Flex>
                 <Flex size={1} justifyEnd>
                     {currentStep === 4 ? (

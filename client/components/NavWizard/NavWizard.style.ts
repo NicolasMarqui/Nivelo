@@ -19,19 +19,40 @@ export const NavTitle = styled.div`
             color: ${({ theme }) => theme.colors.primary};
         }
     }
+
+    .dot__wrapper {
+    }
+
+    .dot {
+        color: black;
+        font-size: 17px;
+        line-height: 1;
+        margin: 0 15px;
+        opacity: 0.4;
+        text-shadow: none;
+        transition: opacity 1s ease, text-shadow 1s ease;
+        will-change: opacity, text-shadow;
+    }
+
+    .dot__active {
+        color: ${({ theme }) => theme.colors.primary};
+        opacity: 1;
+        text-shadow: 0 0px 8px;
+    }
 `;
 
 export const Nav = styled.div`
     text-align: center;
     position: absolute;
-    bottom: 10px;
+    bottom: 0;
     left: 0;
     right: 0;
     margin: 0 auto;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 0 20px 20px;
+    padding: 20px;
+    border-top: 2px solid #f2f2f2;
 
     .nav__info {
         width: 100%;

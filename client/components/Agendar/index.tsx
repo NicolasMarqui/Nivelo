@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import StepWizard from "react-step-wizard";
 import NavWizard from "../NavWizard";
 import Side from "../Side";
+import StepFour from "../Steps/StepFour";
 import StepOne from "../Steps/StepOne";
 import StepThree from "../Steps/StepThree";
 import StepTwo from "../Steps/StepTwo";
@@ -19,18 +20,19 @@ interface ClassnameProps {
 
 export default function Agendar({ isOpen, closeAgendar, tutor }: AgendarProps) {
     const [selectedClass, setSelectedClass] = useState({});
-    const [classPrice, setClassPrice] = useState(0);
+    const [classPrice, setClassPrice] = useState({});
     const [schedule, setSchedule] = useState(null);
     const [tool, setTool] = useState("");
 
     const { classes, user } = tutor;
 
     const handleClassName = (value: any) => setSelectedClass(value);
+    const handleChangePrice = (value: any) => setClassPrice(value);
 
     const info = {
         tutorName: user.name,
         selectedClass,
-        classPrice: classPrice,
+        classPrice,
         schedule,
         tool,
     };
@@ -45,14 +47,19 @@ export default function Agendar({ isOpen, closeAgendar, tutor }: AgendarProps) {
         >
             <AgendarWrapper>
                 <div className="agendar__group">
+                    {/* @ts-ignore */}
                     <StepWizard nav={<NavWizard info={info} />}>
                         <StepOne
                             classes={classes}
                             handleFuckingChange={handleClassName}
                         />
-                        {/* @ts-ignore */}
-                        <StepTwo selected={selectedClass} />
+                        <StepTwo
+                            // @ts-ignore
+                            selected={selectedClass}
+                            handleChangePrice={handleChangePrice}
+                        />
                         <StepThree />
+                        <StepFour />
                     </StepWizard>
                 </div>
             </AgendarWrapper>

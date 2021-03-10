@@ -1,5 +1,7 @@
+import { useState } from "react";
 import LoadingAnimation from "../../LoadingAnimation";
-import { StepWrapper } from "../Steps.style";
+import SelectPrice from "../../Selectables/SelectPrice";
+import { StepWrapper, StepPriceWrapper } from "../Steps.style";
 
 export interface PriceProps {
     id: number;
@@ -14,9 +16,17 @@ interface StepTwoProps {
         amountTimeTaught: number;
         price: PriceProps[];
     };
+    handleChangePrice: (i: any) => any;
 }
 
-export default function StepTwo({ selected }: StepTwoProps) {
+export default function StepTwo({ selected, handleChangePrice }: StepTwoProps) {
+    const [selectedPrice, setSelectedPrice] = useState({});
+
+    const handleSelected = (cl: any) => {
+        setSelectedPrice(cl);
+        handleChangePrice(cl);
+    };
+
     return (
         <StepWrapper>
             {Object.keys(selected).length === 0 ? (
@@ -24,7 +34,15 @@ export default function StepTwo({ selected }: StepTwoProps) {
             ) : !selected.price || selected.price.length === 0 ? (
                 <p>No price Homie</p>
             ) : (
-                selected.price.map((pr) => <p>{pr.price}</p>)
+                <StepPriceWrapper>
+                    {selected.price.map((pr) => (
+                        <SelectPrice
+                            price={pr}
+                            active={selectedPrice === pr}
+                            handleSelectedPrice={() => handleSelected(pr)}
+                        />
+                    ))}
+                </StepPriceWrapper>
             )}
         </StepWrapper>
     );

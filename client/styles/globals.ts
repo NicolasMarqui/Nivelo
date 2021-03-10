@@ -96,7 +96,7 @@ export const GlobalStyle = createGlobalStyle`
     overflow-x: hidden;
     min-height: 300px;
   }
-
+  
   .rsw_2f{
     height: 100%;
   }

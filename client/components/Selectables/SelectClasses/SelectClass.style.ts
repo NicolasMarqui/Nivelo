@@ -10,6 +10,7 @@ export const SelectClassWrapper = styled.div`
         display: flex;
         align-items: center;
         justify-content: space-between;
+        border: 3px solid transparent;
 
         .box__info {
             h3 {
@@ -23,8 +24,23 @@ export const SelectClassWrapper = styled.div`
             }
         }
 
+        .box__price {
+            p {
+                font-size: 19px;
+                span {
+                    margin: 0 5px;
+                }
+            }
+        }
+
         &.classes__active {
             border: 3px solid ${({ theme }) => theme.colors.lightGreen};
+            background: ${({ theme }) => theme.colors.lightGreen};
+
+            h3,
+            p {
+                color: #fff;
+            }
         }
 
         &:hover {

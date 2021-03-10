@@ -1,6 +1,7 @@
 import { useState } from "react";
+import { Description } from "../../../styles/helpers";
 import SelectClasses from "../../Selectables/SelectClasses";
-import { StepWrapper } from "../Steps.style";
+import { StepDesc, StepWrapper } from "../Steps.style";
 import { PriceProps } from "../StepTwo";
 
 interface StepOneProps {
@@ -42,6 +43,13 @@ export default function StepOne({
                     />
                 );
             })}
+
+            <StepDesc>
+                <Description color="#696969" fontSize="15px">
+                    Não achou a aula que gostaria? Mande mensagem para o tutor
+                    para descobrir se ele resolve seu problema!
+                </Description>
+            </StepDesc>
         </StepWrapper>
     );
 }
