@@ -12,6 +12,7 @@ interface LoginFormProps {
     formWidth?: string;
     hasAditionalText?: boolean;
     hasRedirect?: boolean;
+    nextStep?: any;
 }
 
 export default function LoginForm({
@@ -19,6 +20,7 @@ export default function LoginForm({
     hasAditionalText = true,
     formWidth,
     hasRedirect = true,
+    nextStep,
 }: LoginFormProps) {
     const [, login] = useLoginMutation();
     const router = useRouter();
@@ -40,6 +42,10 @@ export default function LoginForm({
                 });
                 if (hasRedirect) {
                     router.push("/");
+                }
+
+                if (nextStep) {
+                    nextStep();
                 }
             }
         },

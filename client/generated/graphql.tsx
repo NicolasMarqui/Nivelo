@@ -33,6 +33,7 @@ export type Query = {
   allPlatformAccount: Array<UserPlatformAccount>;
   getSingleAccount: Array<UserPlatformAccount>;
   getTutorFeedbacks: Array<Feedback>;
+  getUserOrders: Array<Order>;
 };
 
 
@@ -86,6 +87,11 @@ export type QueryGetTutorFeedbacksArgs = {
   id: Scalars['Float'];
 };
 
+
+export type QueryGetUserOrdersArgs = {
+  userID: Scalars['Float'];
+};
+
 export type User = {
   __typename?: 'User';
   id: Scalars['Int'];
@@ -101,6 +107,7 @@ export type User = {
   tutor?: Maybe<Tutor>;
   platforms?: Maybe<Array<Platforms>>;
   classes?: Maybe<Array<Classes>>;
+  orders?: Maybe<Array<Order>>;
   userPlatformAccount?: Maybe<Array<UserPlatformAccount>>;
   feedback?: Maybe<Array<Feedback>>;
   createdAt: Scalars['String'];
@@ -188,6 +195,25 @@ export type UserPlatformAccount = {
   platform?: Maybe<Platforms>;
 };
 
+export type Order = {
+  __typename?: 'Order';
+  id?: Maybe<Scalars['String']>;
+  user: User;
+  classID?: Maybe<Scalars['Int']>;
+  date: Scalars['String'];
+  platformId?: Maybe<Scalars['Int']>;
+  classDuration: Scalars['String'];
+  userAccount: Scalars['String'];
+  classPrice?: Maybe<Scalars['Float']>;
+  isOrderAproved?: Maybe<Scalars['Boolean']>;
+  hasTutorConfirmedClassDone?: Maybe<Scalars['Boolean']>;
+  hasUserConfirmedClassDone?: Maybe<Scalars['Boolean']>;
+  isPaid?: Maybe<Scalars['Boolean']>;
+  paymentDetails?: Maybe<Scalars['String']>;
+  createdAt: Scalars['String'];
+  updatedAt: Scalars['String'];
+};
+
 export type Feedback = {
   __typename?: 'Feedback';
   id?: Maybe<Scalars['Int']>;
@@ -252,6 +278,7 @@ export type Mutation = {
   addPlatformUser: Scalars['Boolean'];
   updatePlatformUser: UserPlatformAccount;
   newFeedback: FeedbackResponse;
+  createNewOrder: OrderResponse;
 };
 
 
@@ -442,6 +469,12 @@ export type MutationNewFeedbackArgs = {
   userID: Scalars['Float'];
 };
 
+
+export type MutationCreateNewOrderArgs = {
+  options: OrderInput;
+  userID: Scalars['Float'];
+};
+
 export type UsernameEmailPasswordInput = {
   name: Scalars['String'];
   email: Scalars['String'];
@@ -542,6 +575,21 @@ export type FeedbackInput = {
   name?: Maybe<Scalars['String']>;
   content?: Maybe<Scalars['String']>;
   rating?: Maybe<Scalars['Int']>;
+};
+
+export type OrderResponse = {
+  __typename?: 'OrderResponse';
+  errors?: Maybe<Array<FieldError>>;
+  order?: Maybe<Order>;
+};
+
+export type OrderInput = {
+  classID?: Maybe<Scalars['Int']>;
+  date: Scalars['String'];
+  classDuration: Scalars['String'];
+  classPrice?: Maybe<Scalars['Float']>;
+  platformId?: Maybe<Scalars['Int']>;
+  userAccount: Scalars['String'];
 };
 
 export type RegularUserFragment = (
@@ -732,6 +780,30 @@ export type NewClassMutation = (
         { __typename?: 'Price' }
         & Pick<Price, 'id' | 'time' | 'price'>
       )>> }
+    )> }
+  ) }
+);
+
+export type NewOrderMutationVariables = Exact<{
+  userID: Scalars['Float'];
+  classID: Scalars['Int'];
+  date: Scalars['String'];
+  classDuration: Scalars['String'];
+  classPrice: Scalars['Float'];
+  platformId: Scalars['Int'];
+}>;
+
+
+export type NewOrderMutation = (
+  { __typename?: 'Mutation' }
+  & { createNewOrder: (
+    { __typename?: 'OrderResponse' }
+    & { errors?: Maybe<Array<(
+      { __typename?: 'FieldError' }
+      & Pick<FieldError, 'field' | 'message'>
+    )>>, order?: Maybe<(
+      { __typename?: 'Order' }
+      & Pick<Order, 'id' | 'classID' | 'date' | 'platformId' | 'classDuration' | 'userAccount' | 'classPrice' | 'isOrderAproved' | 'hasTutorConfirmedClassDone' | 'hasUserConfirmedClassDone' | 'isPaid' | 'paymentDetails' | 'createdAt' | 'updatedAt'>
     )> }
   ) }
 );
@@ -1288,6 +1360,39 @@ export const NewClassDocument = gql`
 
 export function useNewClassMutation() {
   return Urql.useMutation<NewClassMutation, NewClassMutationVariables>(NewClassDocument);
+};
+export const NewOrderDocument = gql`
+    mutation NewOrder($userID: Float!, $classID: Int!, $date: String!, $classDuration: String!, $classPrice: Float!, $platformId: Int!) {
+  createNewOrder(
+    userID: $userID
+    options: {classID: $classID, date: $date, classDuration: $classDuration, classPrice: $classPrice, platformId: $platformId, userAccount: ""}
+  ) {
+    errors {
+      field
+      message
+    }
+    order {
+      id
+      classID
+      date
+      platformId
+      classDuration
+      userAccount
+      classPrice
+      isOrderAproved
+      hasTutorConfirmedClassDone
+      hasUserConfirmedClassDone
+      isPaid
+      paymentDetails
+      createdAt
+      updatedAt
+    }
+  }
+}
+    `;
+
+export function useNewOrderMutation() {
+  return Urql.useMutation<NewOrderMutation, NewOrderMutationVariables>(NewOrderDocument);
 };
 export const NewPriceDocument = gql`
     mutation NewPrice($classID: Float!, $time: Int!, $price: Float!) {

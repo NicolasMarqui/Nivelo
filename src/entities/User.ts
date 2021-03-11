@@ -16,6 +16,7 @@ import { Tutor } from "./Tutor";
 import { Platforms } from "./Platforms";
 import { UserPlatformAccount } from "./UserPlatformAccount";
 import { Feedback } from "./Feedback";
+import { Order } from "./Order";
 
 @ObjectType()
 @Entity()
@@ -85,6 +86,10 @@ export class User extends BaseEntity {
     })
     @JoinTable()
     classes: Classes[];
+
+    @Field(() => [Order], { nullable: true })
+    @OneToMany(() => Order, (order) => order.user)
+    orders: Order[];
 
     @Field(() => [UserPlatformAccount], { nullable: true })
     @OneToMany(() => UserPlatformAccount, (acc) => acc.user, {

@@ -1,0 +1,41 @@
+mutation NewOrder(
+    $userID: Float!
+    $classID: Int!
+    $date: String!
+    $classDuration: String!
+    $classPrice: Float!
+    $platformId: Int!
+) {
+    createNewOrder(
+        userID: $userID
+        options: {
+            classID: $classID
+            date: $date
+            classDuration: $classDuration
+            classPrice: $classPrice
+            platformId: $platformId
+            userAccount: ""
+        }
+    ) {
+        errors {
+            field
+            message
+        }
+        order {
+            id
+            classID
+            date
+            platformId
+            classDuration
+            userAccount
+            classPrice
+            isOrderAproved
+            hasTutorConfirmedClassDone
+            hasUserConfirmedClassDone
+            isPaid
+            paymentDetails
+            createdAt
+            updatedAt
+        }
+    }
+}

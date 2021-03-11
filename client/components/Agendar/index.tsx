@@ -1,6 +1,10 @@
 import { useState, useEffect } from "react";
 import StepWizard from "react-step-wizard";
+import { useMeQuery } from "../../generated/graphql";
+import LoadingAnimation from "../LoadingAnimation";
+import LoginForm from "../LoginForm";
 import NavWizard from "../NavWizard";
+import NoClasses from "../NoClasses";
 import Side from "../Side";
 import StepFour from "../Steps/StepFour";
 import StepOne from "../Steps/StepOne";
@@ -15,6 +19,8 @@ interface AgendarProps {
 }
 
 export default function Agendar({ isOpen, closeAgendar, tutor }: AgendarProps) {
+    const [{ data, fetching, error }] = useMeQuery();
+
     const [selectedClass, setSelectedClass] = useState({});
     const [classPrice, setClassPrice] = useState({});
     const [schedule, setSchedule] = useState("");
@@ -35,6 +41,14 @@ export default function Agendar({ isOpen, closeAgendar, tutor }: AgendarProps) {
         tool,
     };
 
+    if (fetching) {
+        return <LoadingAnimation />;
+    }
+
+    if (error) {
+        return <NoClasses />;
+    }
+
     return (
         <Side
             isOpen={isOpen}
@@ -47,7 +61,15 @@ export default function Agendar({ isOpen, closeAgendar, tutor }: AgendarProps) {
             <AgendarWrapper>
                 <div className="agendar__group">
                     {/* @ts-ignore */}
-                    <StepWizard nav={<NavWizard info={info} />}>
+                    <StepWizard
+                        nav={
+                            <NavWizard
+                                // @ts-ignore
+                                info={info}
+                                userBuyingID={data.me ? data.me.id : null}
+                            />
+                        }
+                    >
                         <StepOne
                             classes={classes}
                             handleFuckingChange={handleClassName}
@@ -61,6 +83,14 @@ export default function Agendar({ isOpen, closeAgendar, tutor }: AgendarProps) {
                             handleScheduleChange={handleSchedule}
                             tutorID={id}
                         />
+                        {!data.me && (
+                            <LoginForm
+                                formWidth="100%"
+                                hasAditionalText={false}
+                                hasRedirect={false}
+                                hasTitle={false}
+                            />
+                        )}
                         <StepFour
                             platforms={user.userPlatformAccount}
                             handlePlat={handlePlatform}

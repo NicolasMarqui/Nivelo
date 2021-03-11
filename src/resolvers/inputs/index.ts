@@ -127,3 +127,24 @@ export class FeedbackInput implements Partial<Feedback> {
     @Field(() => Int, { nullable: true })
     rating!: number;
 }
+
+@InputType()
+export class OrderInput {
+    @Field(() => Int, { nullable: true })
+    classID: number;
+
+    @Field(() => String)
+    date: String;
+
+    @Field(() => String)
+    classDuration: String;
+
+    @Field(() => Float, { nullable: true })
+    classPrice: number;
+
+    @Field(() => Int, { nullable: true })
+    platformId: number;
+
+    @Field(() => String)
+    userAccount: String;
+}

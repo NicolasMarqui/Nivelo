@@ -23,6 +23,7 @@ import { CategoryResolver } from "./resolvers/category";
 import { PlatformsResolver } from "./resolvers/platforms";
 import { UserPlatformAccountResolver } from "./resolvers/userPlatformAccount";
 import { FeedbackResolver } from "./resolvers/feedback";
+import { OrderResolver } from "./resolvers/order";
 
 // Entities
 import { User } from "./entities/User";
@@ -34,6 +35,7 @@ import { Category } from "./entities/Category";
 import { Platforms } from "./entities/Platforms";
 import { UserPlatformAccount } from "./entities/UserPlatformAccount";
 import { Feedback } from "./entities/Feedback";
+import { Order } from "./entities/Order";
 
 import ScheduleSchema from "./models/Schedule";
 import scheduleRouter from "./routes/schedule";
@@ -59,6 +61,7 @@ const main = async () => {
             Platforms,
             UserPlatformAccount,
             Feedback,
+            Order,
         ],
         synchronize: true,
     }).then(() => {
@@ -155,6 +158,7 @@ const main = async () => {
                 PlatformsResolver,
                 UserPlatformAccountResolver,
                 FeedbackResolver,
+                OrderResolver,
             ],
             validate: false,
         }),

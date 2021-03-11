@@ -1,6 +1,8 @@
+import { useRouter } from "next/router";
 import toast from "react-hot-toast";
 import ReactTooltip from "react-tooltip";
 import { renderTitleAgendar } from "../../functions";
+import { useMeQuery, useNewOrderMutation } from "../../generated/graphql";
 import { Button, Flex } from "../../styles/helpers";
 import { TutorTitle } from "../TutorCard/TutorCard.style";
 import { Nav, NavTitle } from "./NavWizard.style";
@@ -13,13 +15,23 @@ interface NavWizardProps {
     previousStep?: any;
     lastStep?: any;
     info?: {
-        selectedClass: any;
+        selectedClass: {
+            active: boolean;
+            amountTimeTaught: number;
+            createdAt: string;
+            description: string;
+            id: number;
+            level: string;
+            name: string;
+            price: any[];
+            updatedAt: string;
+        };
         classPrice: {
             id: number;
             price: number;
             time: number;
         };
-        classSchedule?: [any];
+        classSchedule?: string;
         tool?: {
             id: number;
             name: string;
@@ -27,6 +39,7 @@ interface NavWizardProps {
         };
         tutorName: string;
     };
+    userBuyingID: number | null;
 }
 
 export default function NavWizard({
@@ -35,7 +48,10 @@ export default function NavWizard({
     nextStep,
     previousStep,
     totalSteps,
+    userBuyingID,
 }: NavWizardProps) {
+    const router = useRouter();
+    const [, newOrder] = useNewOrderMutation();
     const { tutorName, selectedClass, classPrice, classSchedule, tool } = info;
 
     const dots = [];
@@ -51,17 +67,29 @@ export default function NavWizard({
         );
     }
 
-    const handleFinalizar = () => {
-        if (
-            !selectedClass ||
-            Object.keys(classPrice).length === 0 ||
-            !classSchedule ||
-            !tool
-        ) {
+    const handleFinalizar = async () => {
+        // prettier-ignore
+        if ( !selectedClass || Object.keys(classPrice).length === 0 || !classSchedule || !tool) {
             toast.error(
                 "Verifique se todas as informações foram preenchidas corretamente!"
             );
             return false;
+        }
+
+        const response = await newOrder({
+            userID: userBuyingID,
+            classID: selectedClass.id,
+            date: classSchedule,
+            classPrice: classPrice.price,
+            classDuration: `${classPrice.time}min`,
+            platformId: tool.id,
+        });
+
+        if (response.data.createNewOrder.errors) {
+            toast.error("Algo deu errado! Tente Novamente");
+        } else if (response.data.createNewOrder.order) {
+            toast.loading("Por favor aguarde...", { duration: 4000 });
+            router.push(`/order/${response.data.createNewOrder.order.id}`);
         }
     };
 
@@ -92,7 +120,7 @@ export default function NavWizard({
                     <TutorTitle>R${classPrice.price || 0},00</TutorTitle>
                 </Flex>
                 <Flex size={1} justifyEnd>
-                    {currentStep === 4 ? (
+                    {currentStep === (userBuyingID ? 4 : 5) ? (
                         <Button
                             bgColor="#57CC99"
                             color="#fff"
@@ -120,7 +148,8 @@ export default function NavWizard({
                             bold
                             margin="0"
                             notActive={
-                                Object.keys(selectedClass).length === 0
+                                Object.keys(selectedClass).length === 0 ||
+                                (userBuyingID === null && currentStep === 4)
                                     ? true
                                     : false
                             }
