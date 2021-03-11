@@ -51,6 +51,12 @@ export const SideInside = styled.div<SideInsideProps>`
         align-items: center;
         background-color: #fff;
 
+        &.header__absolute {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+
         .header__icon {
             margin-top: -4px;
         }
@@ -79,6 +85,10 @@ export const SideInside = styled.div<SideInsideProps>`
         height: calc(100% - 113px);
         overflow-y: auto;
         padding: 20px;
+
+        &.morePdd {
+            padding: 40px 20px;
+        }
     }
 
     .side__footer {

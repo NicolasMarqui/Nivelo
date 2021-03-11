@@ -23,4 +23,5 @@ export const StepButtons = styled.div`
 export const StepPriceWrapper = styled.div`
     display: flex;
     align-items: center;
+    justify-content: center;
 `;

@@ -14,26 +14,24 @@ interface AgendarProps {
     tutor: any;
 }
 
-interface ClassnameProps {
-    price: {} | {};
-}
-
 export default function Agendar({ isOpen, closeAgendar, tutor }: AgendarProps) {
     const [selectedClass, setSelectedClass] = useState({});
     const [classPrice, setClassPrice] = useState({});
-    const [schedule, setSchedule] = useState(null);
+    const [schedule, setSchedule] = useState("");
     const [tool, setTool] = useState("");
 
     const { classes, user } = tutor;
 
     const handleClassName = (value: any) => setSelectedClass(value);
     const handleChangePrice = (value: any) => setClassPrice(value);
+    const handleSchedule = (value: any) => setSchedule(value);
+    const handlePlatform = (value: any) => setTool(value);
 
     const info = {
         tutorName: user.name,
         selectedClass,
         classPrice,
-        schedule,
+        classSchedule: schedule,
         tool,
     };
 
@@ -44,6 +42,7 @@ export default function Agendar({ isOpen, closeAgendar, tutor }: AgendarProps) {
             width="100%"
             header={{}}
             onClickClose={closeAgendar}
+            headerAbsolute
         >
             <AgendarWrapper>
                 <div className="agendar__group">
@@ -58,8 +57,11 @@ export default function Agendar({ isOpen, closeAgendar, tutor }: AgendarProps) {
                             selected={selectedClass}
                             handleChangePrice={handleChangePrice}
                         />
-                        <StepThree />
-                        <StepFour />
+                        <StepThree handleScheduleChange={handleSchedule} />
+                        <StepFour
+                            platforms={user.userPlatformAccount}
+                            handlePlat={handlePlatform}
+                        />
                     </StepWizard>
                 </div>
             </AgendarWrapper>

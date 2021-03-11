@@ -37,6 +37,7 @@ export default function StepOne({
             {classes.map((cl) => {
                 return (
                     <SelectClasses
+                        key={cl.id}
                         singleClass={cl}
                         active={cl === selected}
                         handleSelectedClasss={() => handleSelected(cl)}

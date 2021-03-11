@@ -1,19 +1,40 @@
-import ClassItem from "../../ClassItem";
-import { StepWrapper, StepButtons, StepDesc } from "../Steps.style";
-import IconButton from "../../IconButton";
-import CustomCalendarTutor from "../../CalendarTutor";
+import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 import { Description } from "../../../styles/helpers";
+import CustomCalendarTutor from "../../CalendarTutor";
+import { StepDesc, StepWrapper } from "../Steps.style";
 
 interface StepThreeProps {
-    goToStep?: any;
-    totalSteps?: any;
-    currentStep?: any;
+    nextStep?: any;
+    handleScheduleChange?: (i: any) => any;
 }
 
-export default function StepThree({ goToStep }: StepThreeProps) {
+export default function StepThree({
+    nextStep,
+    handleScheduleChange,
+}: StepThreeProps) {
+    const [selectedDay, setSelectedDay] = useState("");
+
+    const handleDay = (value: any) => setSelectedDay(value);
+
+    useEffect(() => {
+        if (selectedDay.includes("not")) {
+            toast.error("Tutor não está disponível nesse dia!");
+        } else if (selectedDay !== "") {
+            toast.success(`${selectedDay} selecionado!`);
+            handleScheduleChange(selectedDay);
+            nextStep();
+        }
+    }, [selectedDay]);
+
     return (
         <StepWrapper>
-            <CustomCalendarTutor tutorId={24} isTutorDashView={false} />
+            <CustomCalendarTutor
+                tutorId={24}
+                isTutorDashView={false}
+                isAgendando
+                handleAgendado={handleDay}
+            />
             <StepDesc>
                 <Description color="#696969" fontSize="15px">
                     Lorem ipsum dolor sit amet consectetur adipisicing elit.

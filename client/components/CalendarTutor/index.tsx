@@ -16,12 +16,16 @@ interface CustomCalendarTutorProps {
     isTutorDashView?: Boolean;
     tutorId: number;
     smaller?: boolean;
+    isAgendando?: boolean;
+    handleAgendado?: (i: any) => any;
 }
 
 const CustomCalendarTutor: React.FC<CustomCalendarTutorProps> = ({
     isTutorDashView,
     tutorId,
     smaller = false,
+    isAgendando = false,
+    handleAgendado,
 }) => {
     const [currentMonth, setCurrentMonth] = useState(new Date());
     const [selectedDate, setSelectedDate] = useState(new Date());
@@ -176,6 +180,14 @@ const CustomCalendarTutor: React.FC<CustomCalendarTutorProps> = ({
 
     const onDateClick = async (day: Date) => {
         setSelectedDate(day);
+
+        if (isAgendando) {
+            if (handleEvent(day).includes(true)) {
+                handleAgendado(dateFns.format(day, "dd/MM/yyyy"));
+            } else {
+                return handleAgendado("not");
+            }
+        }
 
         if (!isTutorDashView) return false;
 

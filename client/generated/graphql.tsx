@@ -994,7 +994,7 @@ export type SingleTutorQuery = (
           { __typename?: 'UserPlatformAccount' }
           & { platform?: Maybe<(
             { __typename?: 'Platforms' }
-            & Pick<Platforms, 'id' | 'name' | 'account'>
+            & Pick<Platforms, 'id' | 'name' | 'account' | 'icon'>
           )> }
         )>> }
       )>, type?: Maybe<(
@@ -1596,6 +1596,7 @@ export const SingleTutorDocument = gql`
             id
             name
             account
+            icon
           }
         }
       }

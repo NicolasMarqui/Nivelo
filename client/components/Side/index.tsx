@@ -13,10 +13,11 @@ interface SideProps {
     header?: { icon?: React.ReactElement; text?: string };
     width?: string;
     ignoreCloseOutside?: boolean;
+    headerAbsolute?: boolean;
 }
 
 // prettier-ignore
-const Side = ({ children, isOpen, onClickClose, onClickAplicar, left, footer, header, width, ignoreCloseOutside, bottom}: SideProps) => {
+const Side = ({ children, isOpen, onClickClose, onClickAplicar, left, footer, header, width, ignoreCloseOutside, bottom, headerAbsolute = false}: SideProps) => {
     const handleCloseSide = (event: any) => {
         if (ignoreCloseOutside) return false;
 
@@ -40,7 +41,7 @@ const Side = ({ children, isOpen, onClickClose, onClickAplicar, left, footer, he
         <SideWrapper open={isOpen} onClick={handleCloseSide}>
             <SideInside left={left ? left : false} size={width} bottom={bottom ? bottom : false}>
                 {header && (
-                    <div className="side__header">
+                    <div className={`side__header ${headerAbsolute ? 'header__absolute' : ''}`}>
                         {header.icon && (
                             <div className="header__icon">{header.icon}</div>
                         )}
@@ -53,7 +54,7 @@ const Side = ({ children, isOpen, onClickClose, onClickAplicar, left, footer, he
                         </div>
                     </div>
                 )}
-                <div className="side__content">{children}</div>
+                <div className={`side__content ${headerAbsolute ? 'morePdd' : ''}`}>{children}</div>
                 {footer && (
                     <div className="side__footer">
                         <Button

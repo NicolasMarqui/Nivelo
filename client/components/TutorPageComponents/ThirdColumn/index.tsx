@@ -17,7 +17,6 @@ const ThirdColumn: React.FC<ThirdColumnProps> = ({
     handleAgendar,
     data,
 }: ThirdColumnProps) => {
-    console.log(data.singleTutor.tutor.classes);
     return (
         <div className="st__third">
             <Sticky topOffset={-160}>

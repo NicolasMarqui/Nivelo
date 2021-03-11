@@ -25,6 +25,7 @@ query SingleTutor($id: Float!) {
                         id
                         name
                         account
+                        icon
                     }
                 }
             }

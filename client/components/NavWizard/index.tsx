@@ -1,8 +1,8 @@
+import ReactTooltip from "react-tooltip";
 import { renderTitleAgendar } from "../../functions";
-import { Button, Flex, Title } from "../../styles/helpers";
-import IconButton from "../IconButton";
+import { Button, Flex } from "../../styles/helpers";
 import { TutorTitle } from "../TutorCard/TutorCard.style";
-import { Nav, Dot, NavTitle } from "./NavWizard.style";
+import { Nav, NavTitle } from "./NavWizard.style";
 
 interface NavWizardProps {
     totalSteps?: any;
@@ -19,7 +19,11 @@ interface NavWizardProps {
             time: number;
         };
         classSchedule?: [any];
-        tool?: String;
+        tool?: {
+            id: number;
+            name: string;
+            icon: string;
+        };
         tutorName: string;
     };
 }
@@ -31,7 +35,7 @@ export default function NavWizard({
     previousStep,
     totalSteps,
 }: NavWizardProps) {
-    const { tutorName, selectedClass, classPrice } = info;
+    const { tutorName, selectedClass, classPrice, classSchedule, tool } = info;
 
     const dots = [];
     for (let i = 1; i <= totalSteps; i += 1) {
@@ -80,8 +84,17 @@ export default function NavWizard({
                             fSize="20px"
                             bold
                             margin="0"
+                            data-tip
+                            data-for="final"
+                            notActive={!classPrice}
                         >
                             Finalizar
+                            <ReactTooltip effect="solid" id="final">
+                                <p>Aula: {selectedClass.name}</p>
+                                <p>Valor: R${classPrice.price || 0},00</p>
+                                <p>Dias: {classSchedule}</p>
+                                <p>Meio: {tool.name} </p>
+                            </ReactTooltip>
                         </Button>
                     ) : (
                         <Button

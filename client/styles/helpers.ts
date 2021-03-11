@@ -165,6 +165,8 @@ interface DescriptionProps {
     marginTop?: number;
     color?: string;
     fontSize?: string;
+    txtAlign?: boolean;
+    lHeight?: string;
 }
 
 export const Description = styled.p<DescriptionProps>`
@@ -174,6 +176,12 @@ export const Description = styled.p<DescriptionProps>`
     margin-top: ${({ marginTop }) => marginTop || "0"}px;
     align-self: flex-start;
     width: ${({ size }) => size || "100"}%;
+    line-height: ${({ lHeight }) => lHeight || "auto"};
+    ${({ txtAlign }) =>
+        txtAlign &&
+        css`
+            text-align: center;
+        `}
 `;
 
 export const Section = styled.div`
