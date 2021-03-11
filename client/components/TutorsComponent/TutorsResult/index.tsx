@@ -12,9 +12,11 @@ const TutorsResult: React.FC<TutorsResultProps> = ({
 }: TutorsResultProps) => {
     return (
         <AreaTutors isColumn={isColumn}>
-            {data.allTutors.map((tut) => (
-                <TutorCard key={tut.id} isColumn={isColumn} tutor={tut} />
-            ))}
+            {data.allTutors.map((tut) => {
+                return (
+                    <TutorCard key={tut.id} isColumn={isColumn} tutor={tut} />
+                );
+            })}
         </AreaTutors>
     );
 };

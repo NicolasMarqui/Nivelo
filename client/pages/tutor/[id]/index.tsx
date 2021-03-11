@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { withUrqlClient } from "next-urql";
 import { StickyContainer } from "react-sticky";
 import LoaderTutorPage from "../../../components/Skeletons/LoaderTutorPage";
@@ -21,6 +21,7 @@ const Tutor = () => {
     const [{ data, fetching }] = useSingleTutorQuery({
         variables: { id: parseInt(router.query.id as string) },
     });
+
     const [agendarOpen, setAgendarOpen] = useState(false);
 
     const handleOpenSide = () => {
@@ -31,6 +32,12 @@ const Tutor = () => {
         setAgendarOpen(!agendarOpen);
         document.body.className = "";
     };
+
+    useEffect(() => {
+        if (router.query.agendar) {
+            setAgendarOpen(true);
+        }
+    }, []);
 
     return (
         <>

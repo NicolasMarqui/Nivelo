@@ -7,14 +7,15 @@ import { StepDesc, StepWrapper } from "../Steps.style";
 interface StepThreeProps {
     nextStep?: any;
     handleScheduleChange?: (i: any) => any;
+    tutorID: number;
 }
 
 export default function StepThree({
     nextStep,
     handleScheduleChange,
+    tutorID,
 }: StepThreeProps) {
     const [selectedDay, setSelectedDay] = useState("");
-
     const handleDay = (value: any) => setSelectedDay(value);
 
     useEffect(() => {
@@ -30,7 +31,7 @@ export default function StepThree({
     return (
         <StepWrapper>
             <CustomCalendarTutor
-                tutorId={24}
+                tutorId={tutorID}
                 isTutorDashView={false}
                 isAgendando
                 handleAgendado={handleDay}

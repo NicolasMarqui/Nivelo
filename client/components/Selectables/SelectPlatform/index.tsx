@@ -21,7 +21,11 @@ const SelectPlatform: React.FC<SelectPlatformProps> = ({
             className={`${active ? "active" : ""}`}
             onClick={handleSelectedPlatform}
         >
-            <Image src={platform.icon} height={75} width={75} />
+            <Image
+                src={platform.icon ? platform.icon : "/logo.svg"}
+                height={75}
+                width={75}
+            />
             <h3>{platform.name}</h3>
         </SelectPlatformWrapper>
     );

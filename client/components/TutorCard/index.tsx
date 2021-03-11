@@ -1,17 +1,15 @@
-import { useState } from "react";
-import { TutorCardWrapper, TutorTitle, TutorSubtitle } from "./TutorCard.style";
 import Image from "next/image";
-import { MdStar, MdStarBorder, MdEvent, MdChat } from "react-icons/md";
-import { BsDot } from "react-icons/bs";
-import { Description, Pill, SampleDiv, PillButton } from "../../styles/helpers";
-import IconButton from "../IconButton";
 import Link from "next/link";
-import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
+import { useRouter } from "next/router";
+import { BsDot } from "react-icons/bs";
+import { MdStar, MdStarBorder } from "react-icons/md";
+import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
-import { getCategoriesFromArray } from "../../utils/getCategoriesFromArray";
-import TutorCardClassesList from "../TutorCardClassesList";
-import CustomCalendarTutor from "../CalendarTutor";
+import { Description, Pill, PillButton } from "../../styles/helpers";
 import { shortTutorDescription } from "../../utils/shortTutorDescription";
+import CustomCalendarTutor from "../CalendarTutor";
+import TutorCardClassesList from "../TutorCardClassesList";
+import { TutorCardWrapper, TutorSubtitle, TutorTitle } from "./TutorCard.style";
 
 interface TutorCardProps {
     isColumn: boolean;
@@ -19,6 +17,7 @@ interface TutorCardProps {
 }
 
 export default function TutorCard({ isColumn, tutor }: TutorCardProps) {
+    const router = useRouter();
     const {
         id,
         description,
@@ -31,8 +30,8 @@ export default function TutorCard({ isColumn, tutor }: TutorCardProps) {
         categories,
     } = tutor;
 
-    const [sideClassesOpen, setSideClassesOpen] = useState(true);
-    // getCategoriesFromArray(categories);
+    const handleAgendarClick = () => router.push(`/tutor/${id}?agendar=true`);
+    const handleSeeMore = () => router.push(`/tutor/${id}`);
 
     return (
         <>
@@ -97,13 +96,13 @@ export default function TutorCard({ isColumn, tutor }: TutorCardProps) {
                         <div className="prices__btn">
                             <PillButton
                                 bgColor="#FF928B"
-                                onClick={() => alert("Agendar")}
+                                onClick={handleAgendarClick}
                             >
                                 AGENDAR
                             </PillButton>
                             <PillButton
                                 bgColor="#57CC99"
-                                onClick={() => alert("Mais")}
+                                onClick={handleSeeMore}
                             >
                                 VEJA MAIS
                             </PillButton>

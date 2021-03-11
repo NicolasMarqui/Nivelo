@@ -20,7 +20,7 @@ export default function Agendar({ isOpen, closeAgendar, tutor }: AgendarProps) {
     const [schedule, setSchedule] = useState("");
     const [tool, setTool] = useState("");
 
-    const { classes, user } = tutor;
+    const { classes, user, id } = tutor;
 
     const handleClassName = (value: any) => setSelectedClass(value);
     const handleChangePrice = (value: any) => setClassPrice(value);
@@ -57,7 +57,10 @@ export default function Agendar({ isOpen, closeAgendar, tutor }: AgendarProps) {
                             selected={selectedClass}
                             handleChangePrice={handleChangePrice}
                         />
-                        <StepThree handleScheduleChange={handleSchedule} />
+                        <StepThree
+                            handleScheduleChange={handleSchedule}
+                            tutorID={id}
+                        />
                         <StepFour
                             platforms={user.userPlatformAccount}
                             handlePlat={handlePlatform}

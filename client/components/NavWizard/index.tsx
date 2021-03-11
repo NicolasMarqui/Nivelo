@@ -1,3 +1,4 @@
+import toast from "react-hot-toast";
 import ReactTooltip from "react-tooltip";
 import { renderTitleAgendar } from "../../functions";
 import { Button, Flex } from "../../styles/helpers";
@@ -50,6 +51,20 @@ export default function NavWizard({
         );
     }
 
+    const handleFinalizar = () => {
+        if (
+            !selectedClass ||
+            Object.keys(classPrice).length === 0 ||
+            !classSchedule ||
+            !tool
+        ) {
+            toast.error(
+                "Verifique se todas as informações foram preenchidas corretamente!"
+            );
+            return false;
+        }
+    };
+
     return (
         <>
             <NavTitle>
@@ -87,6 +102,7 @@ export default function NavWizard({
                             data-tip
                             data-for="final"
                             notActive={!classPrice}
+                            onClick={handleFinalizar}
                         >
                             Finalizar
                             <ReactTooltip effect="solid" id="final">
