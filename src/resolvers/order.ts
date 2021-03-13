@@ -9,6 +9,7 @@ import {
     Arg,
     Query,
     Mutation,
+    Int,
 } from "type-graphql";
 import { FieldError } from "./helpers";
 import { getConnection } from "typeorm";
@@ -24,25 +25,46 @@ class OrderResponse {
 }
 
 @ObjectType()
-class OrderDetailsResponse {
-    @Field(() => Order, { nullable: true })
-    order?: Order;
+class OrderDetailsAmount {
+    @Field(() => [Order], { nullable: true })
+    order?: Order[] | [];
+
+    @Field(() => Int, { defaultValue: 0 })
+    amount?: Number;
 }
 
 @Resolver()
 export class OrderResolver {
     // Get all orders by user
-    @Query(() => [Order])
+    @Query(() => OrderDetailsAmount)
     @UseMiddleware(isAuth)
-    async getUserOrders(@Arg("userID") userId: number): Promise<Order[] | []> {
+    async getUserOrders(
+        @Arg("userID") userId: number,
+        @Arg("page", () => Int) page: number
+    ): Promise<OrderDetailsAmount | []> {
+        const realLimit = 5;
+        let realOffset = 0;
+
+        if (page > 0) {
+            realOffset = (page - 1) * realLimit;
+        }
+
         const user = await User.findOne({ where: { id: userId } });
+        const totalOrders = await Order.find({ where: { user } });
 
-        const order = await Order.find({
-            where: { user },
-            relations: ["user"],
-        });
+        const result = await getConnection()
+            .getRepository(Order)
+            .createQueryBuilder("order")
+            .leftJoinAndSelect("order.user", "user")
+            .where("user.id = :user", { user: user?.id })
+            .take(realLimit)
+            .skip(realOffset)
+            .getMany();
 
-        return order;
+        return {
+            order: result,
+            amount: totalOrders.length,
+        };
     }
 
     // Create a new order

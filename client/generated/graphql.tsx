@@ -33,7 +33,7 @@ export type Query = {
   allPlatformAccount: Array<UserPlatformAccount>;
   getSingleAccount: Array<UserPlatformAccount>;
   getTutorFeedbacks: Array<Feedback>;
-  getUserOrders: Array<Order>;
+  getUserOrders: OrderDetailsAmount;
   orderDetail: Order;
 };
 
@@ -90,6 +90,7 @@ export type QueryGetTutorFeedbacksArgs = {
 
 
 export type QueryGetUserOrdersArgs = {
+  page: Scalars['Int'];
   userID: Scalars['Float'];
 };
 
@@ -246,6 +247,12 @@ export type TutorResponse = {
   __typename?: 'TutorResponse';
   errors?: Maybe<Array<FieldError>>;
   tutor?: Maybe<Tutor>;
+};
+
+export type OrderDetailsAmount = {
+  __typename?: 'OrderDetailsAmount';
+  order?: Maybe<Array<Order>>;
+  amount?: Maybe<Scalars['Int']>;
 };
 
 export type Mutation = {
@@ -1179,19 +1186,24 @@ export type AllTypesQuery = (
 
 export type UserOrdersQueryVariables = Exact<{
   id: Scalars['Float'];
+  page: Scalars['Int'];
 }>;
 
 
 export type UserOrdersQuery = (
   { __typename?: 'Query' }
-  & { getUserOrders: Array<(
-    { __typename?: 'Order' }
-    & Pick<Order, 'id' | 'classID' | 'date' | 'platformId' | 'classDuration' | 'userAccount' | 'classPrice' | 'isOrderAproved' | 'hasTutorConfirmedClassDone' | 'hasUserConfirmedClassDone' | 'isPaid' | 'paymentDetails' | 'createdAt' | 'updatedAt'>
-    & { user: (
-      { __typename?: 'User' }
-      & Pick<User, 'id' | 'name'>
-    ) }
-  )> }
+  & { getUserOrders: (
+    { __typename?: 'OrderDetailsAmount' }
+    & Pick<OrderDetailsAmount, 'amount'>
+    & { order?: Maybe<Array<(
+      { __typename?: 'Order' }
+      & Pick<Order, 'id' | 'classID' | 'date' | 'platformId' | 'classDuration' | 'userAccount' | 'classPrice' | 'isOrderAproved' | 'hasTutorConfirmedClassDone' | 'hasUserConfirmedClassDone' | 'isPaid' | 'paymentDetails' | 'createdAt' | 'updatedAt'>
+      & { user: (
+        { __typename?: 'User' }
+        & Pick<User, 'id' | 'name'>
+      ) }
+    )>> }
+  ) }
 );
 
 export const RegularUserFragmentDoc = gql`
@@ -1894,26 +1906,29 @@ export function useAllTypesQuery(options: Omit<Urql.UseQueryArgs<AllTypesQueryVa
   return Urql.useQuery<AllTypesQuery>({ query: AllTypesDocument, ...options });
 };
 export const UserOrdersDocument = gql`
-    query UserOrders($id: Float!) {
-  getUserOrders(userID: $id) {
-    id
-    user {
+    query UserOrders($id: Float!, $page: Int!) {
+  getUserOrders(userID: $id, page: $page) {
+    amount
+    order {
       id
-      name
+      user {
+        id
+        name
+      }
+      classID
+      date
+      platformId
+      classDuration
+      userAccount
+      classPrice
+      isOrderAproved
+      hasTutorConfirmedClassDone
+      hasUserConfirmedClassDone
+      isPaid
+      paymentDetails
+      createdAt
+      updatedAt
     }
-    classID
-    date
-    platformId
-    classDuration
-    userAccount
-    classPrice
-    isOrderAproved
-    hasTutorConfirmedClassDone
-    hasUserConfirmedClassDone
-    isPaid
-    paymentDetails
-    createdAt
-    updatedAt
   }
 }
     `;

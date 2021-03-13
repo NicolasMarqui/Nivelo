@@ -45,12 +45,12 @@ export const GlobalStyle = createGlobalStyle`
 
     li{
       margin: 0 5px;
-      padding: 10px;
       background-color: #f2f2f2;
       border-radius: 8px;
       cursor: pointer;
 
       a{
+        padding: 10px;
         margin-top: 2px;
         display: block;
         outline: none;
@@ -71,10 +71,20 @@ export const GlobalStyle = createGlobalStyle`
 
       &.previous{
         margin-right: 30px;
+
+        &.disabled{
+          opacity: .4;
+          pointer-events: none;
+        }
       }
 
       &.next{
         margin-left: 30px;
+
+        &.disabled{
+          opacity: .4;
+          pointer-events: none;
+        }
       }
     }
 

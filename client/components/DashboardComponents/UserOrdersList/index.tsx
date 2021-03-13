@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useSingleClassQuery } from "../../../generated/graphql";
 import { Detail, Pill, Flex, FormLabel } from "../../../styles/helpers";
 import { formatter } from "../../../utils/agoPtFormat";
@@ -6,6 +7,8 @@ import { UserOrdersListWrapper } from "./UserOrdersList.style";
 import TimeAgo from "react-timeago";
 import UserOrdersAction from "../UserOrdersAction";
 import { TutorTitle } from "../../TutorCard/TutorCard.style";
+import { MdExpandMore } from "react-icons/md";
+import UserOrdersDetails from "../UserOrdersDetails";
 
 interface UserOrdersListProps {
     order: {
@@ -36,51 +39,48 @@ const UserOrdersList: React.FC<UserOrdersListProps> = ({ order }) => {
         variables: { id: order.classID },
     });
 
+    const [isDetailOpen, setIsDetailOpen] = useState(false);
+
     if (fetching) {
         return <LoadingAnimation />;
     }
 
     return (
-        <UserOrdersListWrapper>
-            {/* <Detail>
-                <Pill>{order.isPaid ? "Pago" : "Não Pago"}</Pill>
-            </Detail> */}
+        <>
+            <UserOrdersListWrapper>
+                <Flex col align="flex-start" justifyCenter size={2}>
+                    <div className="order__title">
+                        <p>{order.id}</p>
+                        <h2>{data.singleClass.name}</h2>
+                    </div>
+                    <FormLabel>
+                        Agendamento feito
+                        <TimeAgo
+                            date={Number(order.createdAt)}
+                            formatter={formatter}
+                            live={true}
+                            style={{ marginLeft: 5 }}
+                        />
+                    </FormLabel>
 
-            <Flex col align="flex-start" justifyCenter size={2}>
-                <div className="order__title">
-                    <p>{order.id}</p>
-                    <h2>{data.singleClass.name}</h2>
-                </div>
-                <FormLabel>
-                    Agendamento feito
-                    <TimeAgo
-                        date={Number(order.createdAt)}
-                        formatter={formatter}
-                        live={true}
-                        style={{ marginLeft: 5 }}
+                    <h4 onClick={() => setIsDetailOpen(!isDetailOpen)}>
+                        + Detalhes <MdExpandMore size={17} />{" "}
+                    </h4>
+                </Flex>
+                <Flex justifyCenter size={3}>
+                    <UserOrdersAction
+                        isPaid={order.isPaid}
+                        isConfirmed={order.isOrderAproved}
+                        hasAlunoConfirmed={order.hasUserConfirmedClassDone}
                     />
-                </FormLabel>
-
-                <Pill
-                    bgColor="#FF4338"
-                    style={{ cursor: "pointer" }}
-                    onClick={() => console.log("oi")}
-                >
-                    Mais Detalhes
-                </Pill>
-            </Flex>
-            <Flex justifyCenter size={3}>
-                <UserOrdersAction
-                    isPaid={order.isPaid}
-                    isConfirmed={order.isOrderAproved}
-                    hasAlunoConfirmed={order.hasUserConfirmedClassDone}
-                />
-            </Flex>
-            <Flex justifyCenter col align="center" size={1}>
-                <FormLabel>Valor total: </FormLabel>
-                <TutorTitle>R${order.classPrice}</TutorTitle>
-            </Flex>
-        </UserOrdersListWrapper>
+                </Flex>
+                <Flex justifyCenter col align="center" size={1}>
+                    <FormLabel>Valor total: </FormLabel>
+                    <TutorTitle>R${order.classPrice}</TutorTitle>
+                </Flex>
+            </UserOrdersListWrapper>
+            <UserOrdersDetails isVisible={isDetailOpen}></UserOrdersDetails>
+        </>
     );
 };
 export default UserOrdersList;
