@@ -9,6 +9,7 @@ import { Description, FormLabel, Title } from "../../styles/helpers";
 // prettier-ignore
 import { ColumnGroup, PlatformsWrapper, TitleArea } from "./Dashboard.style";
 import toast from "react-hot-toast";
+import UserOrders from "../../components/DashboardComponents/UserOrders";
 
 interface DashboardProps {
     logged: boolean;
@@ -51,6 +52,17 @@ const Dashboard: NextPage<DashboardProps> = (props) => {
             </ColumnGroup>
             <ColumnGroup>
                 {data.me.tutor !== null ? "Is tutor" : <UserClasses />}
+            </ColumnGroup>
+            <ColumnGroup>
+                <TitleArea>
+                    <Title fontWeight="400">Seus Pedidos</Title>
+                    <Description marginTop={20}>
+                        Aqui você pode ver o status de seus agendamentos
+                    </Description>
+                </TitleArea>
+                <PlatformsWrapper>
+                    <UserOrders id={data.me.id} />
+                </PlatformsWrapper>
             </ColumnGroup>
         </>
     );

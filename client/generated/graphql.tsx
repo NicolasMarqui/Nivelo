@@ -34,6 +34,7 @@ export type Query = {
   getSingleAccount: Array<UserPlatformAccount>;
   getTutorFeedbacks: Array<Feedback>;
   getUserOrders: Array<Order>;
+  orderDetail: Order;
 };
 
 
@@ -90,6 +91,11 @@ export type QueryGetTutorFeedbacksArgs = {
 
 export type QueryGetUserOrdersArgs = {
   userID: Scalars['Float'];
+};
+
+
+export type QueryOrderDetailArgs = {
+  id: Scalars['String'];
 };
 
 export type User = {
@@ -1017,6 +1023,23 @@ export type MeQuery = (
   )> }
 );
 
+export type OrderDetailQueryVariables = Exact<{
+  id: Scalars['String'];
+}>;
+
+
+export type OrderDetailQuery = (
+  { __typename?: 'Query' }
+  & { orderDetail: (
+    { __typename?: 'Order' }
+    & Pick<Order, 'id' | 'classID' | 'date' | 'platformId' | 'classDuration' | 'userAccount' | 'classPrice' | 'isOrderAproved' | 'hasTutorConfirmedClassDone' | 'hasUserConfirmedClassDone' | 'isPaid' | 'paymentDetails' | 'createdAt' | 'updatedAt'>
+    & { user: (
+      { __typename?: 'User' }
+      & Pick<User, 'id' | 'name'>
+    ) }
+  ) }
+);
+
 export type SingleClassQueryVariables = Exact<{
   id: Scalars['Float'];
 }>;
@@ -1151,6 +1174,23 @@ export type AllTypesQuery = (
   & { allTypes: Array<(
     { __typename?: 'TutorType' }
     & Pick<TutorType, 'id' | 'name' | 'rules'>
+  )> }
+);
+
+export type UserOrdersQueryVariables = Exact<{
+  id: Scalars['Float'];
+}>;
+
+
+export type UserOrdersQuery = (
+  { __typename?: 'Query' }
+  & { getUserOrders: Array<(
+    { __typename?: 'Order' }
+    & Pick<Order, 'id' | 'classID' | 'date' | 'platformId' | 'classDuration' | 'userAccount' | 'classPrice' | 'isOrderAproved' | 'hasTutorConfirmedClassDone' | 'hasUserConfirmedClassDone' | 'isPaid' | 'paymentDetails' | 'createdAt' | 'updatedAt'>
+    & { user: (
+      { __typename?: 'User' }
+      & Pick<User, 'id' | 'name'>
+    ) }
   )> }
 );
 
@@ -1645,6 +1685,34 @@ export const MeDocument = gql`
 export function useMeQuery(options: Omit<Urql.UseQueryArgs<MeQueryVariables>, 'query'> = {}) {
   return Urql.useQuery<MeQuery>({ query: MeDocument, ...options });
 };
+export const OrderDetailDocument = gql`
+    query OrderDetail($id: String!) {
+  orderDetail(id: $id) {
+    id
+    user {
+      id
+      name
+    }
+    classID
+    date
+    platformId
+    classDuration
+    userAccount
+    classPrice
+    isOrderAproved
+    hasTutorConfirmedClassDone
+    hasUserConfirmedClassDone
+    isPaid
+    paymentDetails
+    createdAt
+    updatedAt
+  }
+}
+    `;
+
+export function useOrderDetailQuery(options: Omit<Urql.UseQueryArgs<OrderDetailQueryVariables>, 'query'> = {}) {
+  return Urql.useQuery<OrderDetailQuery>({ query: OrderDetailDocument, ...options });
+};
 export const SingleClassDocument = gql`
     query SingleClass($id: Float!) {
   singleClass(id: $id) {
@@ -1824,4 +1892,32 @@ export const AllTypesDocument = gql`
 
 export function useAllTypesQuery(options: Omit<Urql.UseQueryArgs<AllTypesQueryVariables>, 'query'> = {}) {
   return Urql.useQuery<AllTypesQuery>({ query: AllTypesDocument, ...options });
+};
+export const UserOrdersDocument = gql`
+    query UserOrders($id: Float!) {
+  getUserOrders(userID: $id) {
+    id
+    user {
+      id
+      name
+    }
+    classID
+    date
+    platformId
+    classDuration
+    userAccount
+    classPrice
+    isOrderAproved
+    hasTutorConfirmedClassDone
+    hasUserConfirmedClassDone
+    isPaid
+    paymentDetails
+    createdAt
+    updatedAt
+  }
+}
+    `;
+
+export function useUserOrdersQuery(options: Omit<Urql.UseQueryArgs<UserOrdersQueryVariables>, 'query'> = {}) {
+  return Urql.useQuery<UserOrdersQuery>({ query: UserOrdersDocument, ...options });
 };

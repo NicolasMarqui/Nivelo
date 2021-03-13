@@ -23,6 +23,12 @@ class OrderResponse {
     order?: Order;
 }
 
+@ObjectType()
+class OrderDetailsResponse {
+    @Field(() => Order, { nullable: true })
+    order?: Order;
+}
+
 @Resolver()
 export class OrderResolver {
     // Get all orders by user
@@ -75,5 +81,18 @@ export class OrderResolver {
         }
 
         return { order };
+    }
+
+    // Get order details
+    @Query(() => Order)
+    async orderDetail(@Arg("id") id: string): Promise<Order | undefined> {
+        const order = await getConnection()
+            .getRepository(Order)
+            .createQueryBuilder("order")
+            .leftJoinAndSelect("order.user", "user")
+            .where("order.id = :id", { id })
+            .getOne();
+
+        return order;
     }
 }
