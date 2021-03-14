@@ -10,7 +10,7 @@ import { TutorTitle } from "../../TutorCard/TutorCard.style";
 import { MdExpandMore } from "react-icons/md";
 import UserOrdersDetails from "../UserOrdersDetails";
 
-interface UserOrdersListProps {
+export interface UserOrdersListProps {
     order: {
         __typename?: string;
         id?: string;
@@ -79,7 +79,11 @@ const UserOrdersList: React.FC<UserOrdersListProps> = ({ order }) => {
                     <TutorTitle>R${order.classPrice}</TutorTitle>
                 </Flex>
             </UserOrdersListWrapper>
-            <UserOrdersDetails isVisible={isDetailOpen}></UserOrdersDetails>
+            <UserOrdersDetails
+                isVisible={isDetailOpen}
+                classData={data.singleClass}
+                allData={order}
+            />
         </>
     );
 };

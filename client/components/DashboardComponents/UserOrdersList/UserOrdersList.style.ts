@@ -25,4 +25,9 @@ export const UserOrdersListWrapper = styled.div`
             color: ${({ theme }) => theme.colors.primary};
         }
     }
+
+    h4 {
+        text-decoration: underline;
+        cursor: pointer;
+    }
 `;

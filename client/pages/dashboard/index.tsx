@@ -5,11 +5,13 @@ import UserClasses from "../../components/DashboardComponents/UserClasses";
 import PlatformList from "../../components/PlatformsList";
 import { useMeQuery } from "../../generated/graphql";
 // prettier-ignore
-import { Description, FormLabel, Title } from "../../styles/helpers";
+import { Description, FormLabel, Pill, PillButton, Title } from "../../styles/helpers";
 // prettier-ignore
 import { ColumnGroup, PlatformsWrapper, TitleArea } from "./Dashboard.style";
 import toast from "react-hot-toast";
 import UserOrders from "../../components/DashboardComponents/UserOrders";
+import IconButton from "../../components/IconButton";
+import UserShortcutList from "../../components/UserShortcutList";
 
 interface DashboardProps {
     logged: boolean;
@@ -43,17 +45,29 @@ const Dashboard: NextPage<DashboardProps> = (props) => {
                         seu calendário
                     </Description>
                 </TitleArea>
-                <PlatformsWrapper>
+                {/* <PlatformsWrapper>
                     <FormLabel>
                         Adicione sua plataforma de preferência
                     </FormLabel>
                     <PlatformList user={data.me.userPlatformAccount} />
+                </PlatformsWrapper> */}
+                <PlatformsWrapper>
+                    <FormLabel>Ações rápidas</FormLabel>
+                    <UserShortcutList isTutor={!!data.me.tutor} />
                 </PlatformsWrapper>
             </ColumnGroup>
             <ColumnGroup>
-                {data.me.tutor !== null ? "Is tutor" : <UserClasses />}
+                <TitleArea>
+                    <Title fontWeight="400">Suas próximas aulas!</Title>
+                    <Description marginTop={20}>
+                        Bem vindo a sua dashboard, aqui você pode fazer
+                        alterações em sua conta, ver suas aulas e seus tutor, e
+                        seu calendário
+                    </Description>
+                    <UserClasses />
+                </TitleArea>
             </ColumnGroup>
-            <ColumnGroup>
+            <ColumnGroup id="pedidos">
                 <TitleArea>
                     <Title fontWeight="400">Seus Pedidos</Title>
                     <Description marginTop={20}>

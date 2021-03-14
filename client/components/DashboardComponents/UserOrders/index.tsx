@@ -6,12 +6,15 @@ import { UserOrdersWrapper } from "./UserOrders.style";
 import ReactPaginate from "react-paginate";
 import { getTotalPages } from "../../../utils/getTotalPages";
 import useSmoothScroll from "react-smooth-scroll-hook";
+import { useRouter } from "next/router";
 interface UserOrdersProps {
     id: number;
 }
 
 const UserOrders: React.FC<UserOrdersProps> = ({ id }) => {
-    const [page, setPage] = useState(1);
+    const router = useRouter();
+    // prettier-ignore
+    const [page, setPage] = useState(typeof router.query.page === "string" ? parseInt(router.query.page) : 1);
     const ref = useRef<HTMLElement>(document.documentElement);
     const { scrollTo } = useSmoothScroll({
         ref,
@@ -32,8 +35,17 @@ const UserOrders: React.FC<UserOrdersProps> = ({ id }) => {
     }
 
     const handlePagination = (e: number) => {
+        router.push(
+            {
+                pathname: `/dashboard`,
+                query: { ...router.query, page: e },
+            },
+            undefined,
+            { shallow: true }
+        );
+
         setPage(e);
-        scrollTo("#orderBeg");
+        scrollTo("#orderBeg", -100);
     };
 
     return (
@@ -50,11 +62,12 @@ const UserOrders: React.FC<UserOrdersProps> = ({ id }) => {
                 nextLabel={"Próximo"}
                 containerClassName={"pagination"}
                 activeClassName={"active"}
-                initialPage={1}
                 pageCount={getTotalPages(data.getUserOrders.amount, 5)}
                 marginPagesDisplayed={2}
                 pageRangeDisplayed={5}
-                onPageChange={(e) => handlePagination(e.selected)}
+                onPageChange={(e) =>
+                    handlePagination(e.selected === 0 ? 1 : e.selected + 1)
+                }
             />
         </UserOrdersWrapper>
     );

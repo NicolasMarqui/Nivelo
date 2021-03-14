@@ -9,7 +9,6 @@ export const UserOrdersActionWrapper = styled.div`
 
             &.not__active {
                 opacity: 0.4;
-                pointer-events: none;
             }
         }
     }

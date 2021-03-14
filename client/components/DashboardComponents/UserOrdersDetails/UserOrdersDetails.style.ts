@@ -27,4 +27,33 @@ export const UserOrderDetailsWrapper = styled.div<UserOrderDetailsWrapperProps>`
         height: 20px;
         background: ${({ theme }) => theme.colors.primary};
     }
+
+    ul {
+        width: 100%;
+
+        li {
+            margin: 15px 0;
+        }
+
+        .details__order {
+            display: flex;
+
+            .ord {
+                display: flex;
+                align-items: center;
+                margin: 5px 0;
+
+                strong {
+                    font-weight: 700;
+                    font-size: 15px;
+                    margin-right: 5px;
+                }
+
+                h3 {
+                    font-size: 18px;
+                    color: #696969;
+                }
+            }
+        }
+    }
 `;
