@@ -6,6 +6,7 @@ import { useCategoriesQuery } from "../generated/graphql";
 import Categories from "../components/HomeComponents/Categorias";
 import Hero from "../components/HomeComponents/Hero/index";
 import Vantagens from "../components/HomeComponents/Vantagens";
+import ScrollToTop from "../components/ScrollToTop";
 
 const Home = () => {
     const [{ data }] = useCategoriesQuery();

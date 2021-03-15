@@ -7,7 +7,7 @@ import { MdRecordVoiceOver } from "react-icons/md";
 const Vantagens: React.FC = ({}) => {
     return (
         <Section>
-            <Container flex>
+            <Container flex id="vantagens">
                 <Flex>
                     <ImageInfo>
                         <div className="info__detail detail_1"></div>

@@ -23,7 +23,7 @@ const Navbar: React.FC = ({}) => {
     const [hoverUser, setHoverUser] = useState(false);
 
     return (
-        <Header>
+        <Header id="navbar">
             <Container flex>
                 <Flex>
                     <h1 style={{ cursor: "pointer" }}>

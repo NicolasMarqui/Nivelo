@@ -15,6 +15,7 @@ import LoaderTutorCard from "../../components/Skeletons/LoaderTutorCard";
 import FilterContainer from "../../components/TutorsComponent/FilterContainer";
 import InternalBanner from "../../components/TutorsComponent/InternalBanner";
 import TutorsResult from "../../components/TutorsComponent/TutorsResult";
+import ScrollToTop from "../../components/ScrollToTop";
 
 const Tutors = () => {
     const router = useRouter();
@@ -53,6 +54,7 @@ const Tutors = () => {
                 description="Encontre os melhores tutores para te ajudar nessa jornada"
                 keywords="tutor, javascript, nivelamento, aprender, algoritimos, comprar"
             />
+            <ScrollToTop />
             <InternalBanner />
             <Container>
                 <StickyContainer>

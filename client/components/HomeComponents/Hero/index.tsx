@@ -1,6 +1,9 @@
 import Link from "next/link";
+import { useRouter } from "next/router";
+import { useRef } from "react";
 import { AiOutlineSearch } from "react-icons/ai";
 import { MdExpandMore, MdPlayCircleOutline } from "react-icons/md";
+import useSmoothScroll from "react-smooth-scroll-hook";
 // prettier-ignore
 import {Container,Description,Flex,Overlay,Title,} from "../../../styles/helpers";
 // prettier-ignore
@@ -16,10 +19,12 @@ const Hero: React.FC<HeroProps> = ({
     isCategoryVisible,
     categoryVisible,
 }: HeroProps) => {
+    const router = useRouter();
+
     return (
         <HeroWrapper>
             <Container flex f_center>
-                <CTA>
+                <CTA onClick={() => router.push("#vantagens")}>
                     <MdExpandMore size={22} />
                     <p>Saiba mais</p>
                 </CTA>
