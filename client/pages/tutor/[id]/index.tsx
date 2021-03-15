@@ -15,9 +15,12 @@ import ThirdColumn from "../../../components/TutorPageComponents/ThirdColumn";
 import Agendar from "../../../components/Agendar";
 import Meta from "../../../components/Meta";
 import NotFound from "../../../components/NotFound";
+import useWindowSize from "../../../hooks/useWindowSize";
+import ThirdColumnMobile from "../../../components/TutorPageComponents/ThirdColumnMobile";
 
 const Tutor = () => {
     const router = useRouter();
+    const { width } = useWindowSize();
     const [{ data, fetching }] = useSingleTutorQuery({
         variables: { id: parseInt(router.query.id as string) },
     });
@@ -45,7 +48,7 @@ const Tutor = () => {
                 <LoaderTutorPage />
             ) : // prettier-ignore
             !fetching && data && data.singleTutor.errors === null && data.singleTutor.tutor ? (
-                <PageWrapper pTop="110px">
+                <PageWrapper pTop={width > 1024 ? '110px' : '0px'}>
                     <Meta
                         title={`Tutor - ${checkIfUndefined(
                             data.singleTutor.tutor.user.name
@@ -63,7 +66,7 @@ const Tutor = () => {
                             <SingleTutorWrapper>
                                 <FirstColumn data={data} />
                                 <SecondColumn data={data} />
-                                <ThirdColumn handleAgendar={handleOpenSide} data={data}/>
+                                {width > 1024 ? <ThirdColumn handleAgendar={handleOpenSide} data={data}/> : <ThirdColumnMobile handleAgendar={handleOpenSide} data={data}/>}
                             </SingleTutorWrapper>
                         </StickyContainer>
                     </Container>

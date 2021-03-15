@@ -1,19 +1,11 @@
-import { Container } from "../../styles/helpers";
-import {
-    FooterWrapper,
-    LogoCurrencyWrapper,
-    FooterColumn,
-    FooterBottom,
-    ColumnList,
-} from "./Footer.style";
 import Image from "next/image";
-import Select from "react-select";
-import currencies from "../../utils/currencies.json";
-import languages from "../../utils/languages.json";
 import Link from "next/link";
-import { FaGithub } from "react-icons/fa";
-import { AiFillHeart } from "react-icons/ai";
 import { useRouter } from "next/router";
+import { AiFillHeart } from "react-icons/ai";
+import { FaGithub } from "react-icons/fa";
+import { Container } from "../../styles/helpers";
+// prettier-ignore
+import {ColumnList, FooterBottom, FooterColumn, FooterWrapper,LogoCurrencyWrapper } from "./Footer.style";
 
 export default function Footer() {
     const router = useRouter();
@@ -27,7 +19,7 @@ export default function Footer() {
                     : false
             }
         >
-            <Container flex>
+            <Container flex changeToCol>
                 <FooterColumn>
                     <LogoCurrencyWrapper>
                         <div className="lc__logo">
@@ -174,7 +166,7 @@ export default function Footer() {
                 </FooterColumn>
             </Container>
             <FooterBottom>
-                <Container flex>
+                <Container flex changeToCol>
                     <div className="bottom__info">
                         <ul>
                             <li>

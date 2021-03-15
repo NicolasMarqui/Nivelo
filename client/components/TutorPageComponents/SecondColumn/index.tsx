@@ -10,6 +10,7 @@ import InfoCard from "../../InfoCard";
 import { getCompletedClasses } from "../../../utils/getCompletedClasses";
 import Feedback from "../../Feedback";
 import { timeConverter } from "../../../functions";
+import useWindowSize from "../../../hooks/useWindowSize";
 
 interface SecondColumnProps {
     data: any;
@@ -18,17 +19,21 @@ interface SecondColumnProps {
 const SecondColumn: React.FC<SecondColumnProps> = ({
     data,
 }: SecondColumnProps) => {
+    const { width } = useWindowSize();
+
     return (
         <div className="st__second">
-            <div className="second__bread">
-                <BackButton />
-                <Breadcumb
-                    color="#fff"
-                    data={tutorBreadcumb(
-                        checkIfUndefined(data.singleTutor.tutor.user.name)
-                    )}
-                />
-            </div>
+            {width > 1024 && (
+                <div className="second__bread">
+                    <BackButton />
+                    <Breadcumb
+                        color="#fff"
+                        data={tutorBreadcumb(
+                            checkIfUndefined(data.singleTutor.tutor.user.name)
+                        )}
+                    />
+                </div>
+            )}
             <div className="second__info">
                 <TutorTitle>
                     {checkIfUndefined(data.singleTutor.tutor.user.name)}
@@ -36,7 +41,11 @@ const SecondColumn: React.FC<SecondColumnProps> = ({
                 <TutorSubtitle>
                     Ensina <span>Javascript</span> e<span>algoritimos</span>
                 </TutorSubtitle>
-                <Description fontSize="14px" marginTop={14} size="70">
+                <Description
+                    fontSize="14px"
+                    marginTop={14}
+                    size={width > 1024 ? "70" : "100"}
+                >
                     {checkIfUndefined(data.singleTutor.tutor.description)}
                 </Description>
 

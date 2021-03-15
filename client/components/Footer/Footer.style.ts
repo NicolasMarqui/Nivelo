@@ -1,4 +1,7 @@
 import styled, { css } from "styled-components";
+import { device } from "../../utils/devices";
+
+const { laptop } = device;
 
 interface FooterWrapperProps {
     notMargin?: boolean;
@@ -25,6 +28,7 @@ export const LogoCurrencyWrapper = styled.div`
 
     .lc__logo {
         margin-top: -20px;
+        text-align: center;
     }
 
     .lc__selects {
@@ -40,6 +44,12 @@ export const LogoCurrencyWrapper = styled.div`
                     }
                 }
             }
+        }
+    }
+
+    @media ${laptop} {
+        .lc__logo {
+            text-align: left;
         }
     }
 `;
@@ -65,6 +75,16 @@ export const FooterColumn = styled.div`
             font-size: 18px;
             font-weight: 700;
             text-decoration: underline;
+            text-align: center;
+            width: 100%;
+        }
+    }
+
+    @media ${laptop} {
+        .column__name {
+            h5 {
+                text-align: left;
+            }
         }
     }
 `;
@@ -74,6 +94,7 @@ export const ColumnList = styled.div`
     margin: 11px 0;
     padding: 0;
     width: 100%;
+    text-align: center;
 
     li {
         margin: 15px 0;
@@ -90,6 +111,10 @@ export const ColumnList = styled.div`
             }
         }
     }
+
+    @media ${laptop} {
+        text-align: left;
+    }
 `;
 
 export const FooterBottom = styled.div`
@@ -104,6 +129,7 @@ export const FooterBottom = styled.div`
         ul {
             display: flex;
             align-items: center;
+            justify-content: center;
 
             li {
                 margin: 0 10px;
@@ -113,6 +139,14 @@ export const FooterBottom = styled.div`
                     text-decoration: none;
                     color: #222;
                 }
+            }
+        }
+    }
+
+    @media ${laptop} {
+        .bottom__info {
+            ul {
+                justify-content: flex-start;
             }
         }
     }

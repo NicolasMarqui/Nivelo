@@ -17,7 +17,7 @@ const InternalBanner: React.FC = ({}) => {
                             Tutores
                         </Title>
                     </Flex>
-                    <Flex size={4} justifyEnd>
+                    <Flex size={4} justifyEnd align="flex-end">
                         <BorderedButton>Se torne um tutor</BorderedButton>
                     </Flex>
                 </TtFlex>

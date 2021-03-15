@@ -1,5 +1,8 @@
 import styled, { css } from "styled-components";
 import { buttonHover } from "../../styles/animations";
+import { device } from "../../utils/devices";
+
+const { laptop } = device;
 
 interface IconButtonWrapperProps {
     smaller?: boolean;
@@ -52,7 +55,11 @@ export const IconButtonWrapper = styled.div<IconButtonWrapperProps>`
         margin: 5px 10px 0;
         color: ${({ color }) => color || "#a6a6a6"};
         font-weight: 400;
-        font-size: 16px;
+        font-size: 12px;
+
+        @media ${laptop} {
+            font-size: 16px;
+        }
     }
 
     &:hover {

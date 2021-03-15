@@ -5,6 +5,7 @@ import { BsDot } from "react-icons/bs";
 import { MdStar, MdStarBorder } from "react-icons/md";
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
+import useWindowSize from "../../hooks/useWindowSize";
 import { Description, Pill, PillButton } from "../../styles/helpers";
 import { shortTutorDescription } from "../../utils/shortTutorDescription";
 import CustomCalendarTutor from "../CalendarTutor";
@@ -18,17 +19,10 @@ interface TutorCardProps {
 
 export default function TutorCard({ isColumn, tutor }: TutorCardProps) {
     const router = useRouter();
-    const {
-        id,
-        description,
-        type,
-        rating,
-        amountClasses,
-        amountStudents,
-        user,
-        classes,
-        categories,
-    } = tutor;
+    // prettier-ignore
+    const { id, description, type, rating, amountClasses, amountStudents, user, classes, categories,} = tutor;
+
+    const { width } = useWindowSize();
 
     const handleAgendarClick = () => router.push(`/tutor/${id}?agendar=true`);
     const handleSeeMore = () => router.push(`/tutor/${id}`);
@@ -56,10 +50,6 @@ export default function TutorCard({ isColumn, tutor }: TutorCardProps) {
                                 className="tutor__avatar"
                             />
                         )}
-                        <div className="fRow__status">
-                            <BsDot color="green" size={30} />
-                            <p>Online</p>
-                        </div>
                         <div className="fRow__rating">
                             <MdStar size={24} color="#c1c100" />
                             <MdStar size={24} color="#c1c100" />
@@ -81,7 +71,7 @@ export default function TutorCard({ isColumn, tutor }: TutorCardProps) {
                             <Description
                                 fontSize="14px"
                                 marginTop={20}
-                                size="80"
+                                size={width > 1024 ? "80" : "100"}
                             >
                                 {description
                                     ? shortTutorDescription(description, 500)

@@ -1,4 +1,7 @@
 import styled from "styled-components";
+import { device } from "../../../utils/devices";
+
+const { laptop } = device;
 
 export const Banner = styled.div`
     width: 95%;
@@ -16,6 +19,7 @@ export const Banner = styled.div`
 export const SingleTutorWrapper = styled.div`
     width: 100%;
     display: flex;
+    flex-direction: column;
     position: relative;
 
     .st__first {
@@ -40,7 +44,7 @@ export const SingleTutorWrapper = styled.div`
 
     .st__second {
         flex: 3;
-        padding: 40px;
+        padding: 0 40px;
 
         .second__bread {
             margin-top: -142px;
@@ -49,13 +53,14 @@ export const SingleTutorWrapper = styled.div`
         }
 
         .second__info {
-            margin-top: 50px;
+            margin-top: 20px;
         }
 
         .second__since {
             display: flex;
             align-items: center;
             margin-top: 40px;
+            justify-content: center;
 
             svg {
                 margin: -4px 5px 0 0;
@@ -92,18 +97,18 @@ export const SingleTutorWrapper = styled.div`
                 z-index: -1;
 
                 &.detail__ball1 {
-                    top: -53px;
-                    left: -91px;
+                    top: 44px;
+                    left: -21px;
                 }
 
                 &.detail__ball2 {
                     top: -53px;
-                    right: -91px;
+                    right: -6px;
                 }
 
                 &.detail__ball3 {
                     bottom: -41px;
-                    right: -58px;
+                    right: 38px;
                     background-color: rgba(255, 67, 56, 0.17);
                     height: 100px;
                     width: 100px;
@@ -113,9 +118,9 @@ export const SingleTutorWrapper = styled.div`
 
         .second__informations {
             .informations__wrapper {
-                margin-top: 20px;
+                margin-top: 10px;
                 display: flex;
-                flex-direction: row;
+                flex-direction: column;
             }
         }
     }
@@ -203,6 +208,79 @@ export const SingleTutorWrapper = styled.div`
                     .icb__text {
                         font-weight: 700;
                     }
+                }
+            }
+        }
+    }
+
+    .st__third__mobile {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: #fff;
+        padding: 10px;
+        z-index: 20;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+
+        .third__prices__mobile {
+            p {
+                font-weight: 700;
+                color: ${({ theme }) => theme.colors.primary};
+                font-size: 20px;
+                margin-top: 4px;
+            }
+        }
+
+        .prices__btn__mobile {
+            display: flex;
+            flex-direction: row;
+
+            & > div {
+                flex-basis: calc(100% / 3);
+                margin: 0 2px;
+            }
+        }
+    }
+
+    @media ${laptop} {
+        flex-direction: row;
+
+        .st__second {
+            padding: 40px;
+
+            .second__info {
+                margin-top: 50px;
+            }
+
+            .second__since {
+                justify-content: flex-start;
+            }
+
+            .classes__detail {
+                &.detail__ball1 {
+                    top: -53px;
+                    left: -91px;
+                }
+
+                &.detail__ball2 {
+                    top: -53px;
+                    right: -91px;
+                }
+
+                &.detail__ball3 {
+                    bottom: -41px;
+                    right: -58px;
+                }
+            }
+
+            .second__informations {
+                .informations__wrapper {
+                    margin-top: 20px;
+                    flex-direction: row;
                 }
             }
         }

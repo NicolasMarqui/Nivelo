@@ -1,6 +1,9 @@
 import styled, { css } from "styled-components";
 import { Button } from "../../styles/helpers";
 import { Banner } from "../tutor/[id]/TutorID.style";
+import { device } from "../../utils/devices";
+
+const { tablet, laptop, laptopL, desktop, desktopL } = device;
 
 export const TtFlex = styled.div`
     display: flex;
@@ -14,24 +17,11 @@ interface TtFiltersProps {
 }
 
 export const TtFilters = styled.div<TtFiltersProps>`
-    /* padding: 20px 0; */
+    padding: 20px 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
-
-    ${({ isFixed }) =>
-        isFixed &&
-        css`
-            background-color: #fff;
-            padding: 0 10px;
-            box-shadow: 1px 3px 9px #cecece;
-            border-radius: 15px;
-            z-index: 4;
-
-            .filters__buttons {
-                padding: 10px 0 !important;
-            }
-        `}
+    flex-direction: column;
 
     .filters__amount {
         p {
@@ -45,6 +35,11 @@ export const TtFilters = styled.div<TtFiltersProps>`
     .filters__buttons {
         padding: 20px 0;
         display: flex;
+    }
+
+    @media ${laptop} {
+        padding: 0 0;
+        flex-direction: row;
     }
 `;
 

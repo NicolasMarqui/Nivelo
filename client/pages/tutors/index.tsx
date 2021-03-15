@@ -16,6 +16,7 @@ import FilterContainer from "../../components/TutorsComponent/FilterContainer";
 import InternalBanner from "../../components/TutorsComponent/InternalBanner";
 import TutorsResult from "../../components/TutorsComponent/TutorsResult";
 import ScrollToTop from "../../components/ScrollToTop";
+import useWindowSize from "../../hooks/useWindowSize";
 
 const Tutors = () => {
     const router = useRouter();
@@ -33,6 +34,7 @@ const Tutors = () => {
         },
     });
 
+    const { width } = useWindowSize();
     const handleViewMode = () => setIsViewColumn(!isViewColumn);
     const handlePagination = (newPage: number) => {
         router.push(
@@ -48,7 +50,7 @@ const Tutors = () => {
     };
 
     return (
-        <PageWrapper pTop="108px">
+        <PageWrapper pTop={width > 1024 ? "108px" : "0px"}>
             <Meta
                 title="Tutores"
                 description="Encontre os melhores tutores para te ajudar nessa jornada"
