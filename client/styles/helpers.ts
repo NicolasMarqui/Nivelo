@@ -1,10 +1,13 @@
-import styled from "styled-components";
-import { css } from "styled-components";
+import styled, { css } from "styled-components";
+import { device } from "../utils/devices";
+
+const { tablet, laptop, laptopL, desktop, desktopL } = device;
 
 interface ContainerProps {
     flex?: boolean;
     f_center?: boolean;
     alignEnd?: boolean;
+    changeToCol?: boolean;
 }
 
 export const Container = styled.div<ContainerProps>`
@@ -19,6 +22,16 @@ export const Container = styled.div<ContainerProps>`
         flex &&
         css`
             display: flex;
+        `}
+
+    ${({ changeToCol }) =>
+        changeToCol &&
+        css`
+            flex-direction: column;
+
+            @media ${laptop} {
+                flex-direction: row;
+            }
         `}
 
     ${({ f_center }) =>
@@ -67,13 +80,19 @@ interface FlexProps {
 export const Flex = styled.div<FlexProps>`
     display: flex;
     flex: ${({ size }) => size || 1};
-    margin-right: ${({ mr }) => mr || 0}px;
+    flex-direction: column;
     align-items: ${({ align }) => align || "center"};
     position: relative;
+
+    @media ${laptop} {
+        flex-direction: row;
+        margin-right: ${({ mr }) => mr || 0}px;
+    }
+
     ${({ col }) =>
         col &&
         css`
-            flex-direction: column;
+            flex-direction: column !important;
         `}
     ${({ justifyEnd }) =>
         justifyEnd &&
@@ -99,13 +118,15 @@ interface TitleProps {
 }
 
 export const Title = styled.h2<TitleProps>`
-    font-size: ${({ fontSize }) => fontSize || "30px"};
+    font-size: 53px;
     font-weight: ${({ fontWeight }) => fontWeight || "700"};
     line-height: ${({ lineHeight }) => lineHeight || "auto"};
     font-family: ${({ theme }) => theme.fonts.patua || "sans-serif"};
     width: ${({ size }) => size || "100"}%;
     color: ${({ color }) => color || "#222"};
     margin: ${({ margin }) => margin || ""};
+    text-align: center;
+
     ${({ center }) =>
         center &&
         css`
@@ -119,6 +140,12 @@ export const Title = styled.h2<TitleProps>`
 
     .has__border {
         border-bottom: 5px solid ${({ theme }) => theme.colors.primary};
+        margin: 0 4px;
+    }
+
+    @media ${laptop} {
+        font-size: ${({ fontSize }) => fontSize || "30px"};
+        text-align: left;
     }
 `;
 
@@ -133,11 +160,17 @@ export const PreTitle = styled.h5<PreTitleProps>`
     font-weight: 400;
     width: 100%;
     margin-bottom: 4px;
+    text-align: center;
+
     ${({ center }) =>
         center &&
         css`
             text-align: center;
         `}
+
+    @media ${laptop} {
+        text-align: left;
+    }
 `;
 
 interface OverlayProps {
@@ -177,11 +210,17 @@ export const Description = styled.p<DescriptionProps>`
     align-self: flex-start;
     width: ${({ size }) => size || "100"}%;
     line-height: ${({ lHeight }) => lHeight || "auto"};
+    text-align: center;
+
     ${({ txtAlign }) =>
         txtAlign &&
         css`
             text-align: center;
         `}
+
+    @media ${laptop} {
+        text-align: left;
+    }
 `;
 
 export const Section = styled.div`

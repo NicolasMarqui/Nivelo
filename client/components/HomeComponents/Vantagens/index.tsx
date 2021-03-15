@@ -3,17 +3,22 @@ import { Container, Description, Flex , Title, Section, PreTitle} from "../../..
 // prettier-ignore
 import {ImageInfo, Parte, Box } from "../../../styles/Home.styles";
 import { MdRecordVoiceOver } from "react-icons/md";
+import useWindowSize from "../../../hooks/useWindowSize";
 
 const Vantagens: React.FC = ({}) => {
+    const { width } = useWindowSize();
+
     return (
         <Section>
-            <Container flex id="vantagens">
-                <Flex>
-                    <ImageInfo>
-                        <div className="info__detail detail_1"></div>
-                        <div className="info__detail detail_2"></div>
-                    </ImageInfo>
-                </Flex>
+            <Container flex id="vantagens" changeToCol>
+                {width > 1024 && (
+                    <Flex>
+                        <ImageInfo>
+                            <div className="info__detail detail_1"></div>
+                            <div className="info__detail detail_2"></div>
+                        </ImageInfo>
+                    </Flex>
+                )}
                 <Flex size={2}>
                     <Parte>
                         <PreTitle>O melhor do ensino</PreTitle>

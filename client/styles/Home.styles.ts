@@ -1,8 +1,12 @@
 import styled from "styled-components";
+import { device } from "../utils/devices";
+
+const { tablet, laptop, laptopL, desktop, desktopL } = device;
 
 export const HeroWrapper = styled.div`
-    height: 100vh;
     width: 100%;
+    margin-top: 50px;
+    height: 50vh;
 
     .detail__dots {
         width: 110px;
@@ -11,6 +15,11 @@ export const HeroWrapper = styled.div`
         top: -91px;
         right: 81px;
         transform: rotate(45deg);
+    }
+
+    @media ${laptop} {
+        margin-top: 0;
+        height: 100vh;
     }
 `;
 
@@ -86,15 +95,15 @@ export const HeroImage = styled.div`
 `;
 
 export const SearchCategory = styled.div`
-    width: 68%;
+    width: 90%;
     background-color: #f5f5f5;
-    padding: 20px;
     border: none;
     outline: none;
-    margin: 40px 0;
+    margin: 40px auto;
     align-self: flex-start;
     cursor: pointer;
     position: relative;
+    padding: 20px;
 
     .category__label {
         color: #d4d4d4;
@@ -123,12 +132,15 @@ export const SearchCategory = styled.div`
             opacity: 0.7;
         }
     }
+
+    @media ${laptop} {
+        width: 68%;
+        margin: 40px 0;
+    }
 `;
 
 export const CTA = styled.div`
     margin-top: 40px;
-    position: absolute;
-    bottom: 100px;
     left: 0;
     display: flex;
     align-items: center;
@@ -141,6 +153,11 @@ export const CTA = styled.div`
     p {
         font-weight: 700;
         font-size: 16px;
+    }
+
+    @media ${laptop} {
+        position: absolute;
+        bottom: 100px;
     }
 `;
 
@@ -172,7 +189,6 @@ export const ImageInfo = styled.div`
 `;
 
 export const Parte = styled.div`
-    padding: 40px 0px 40px 100px;
     align-self: flex-start;
 
     .parte__boxes {
@@ -180,25 +196,31 @@ export const Parte = styled.div`
         flex-wrap: wrap;
         margin-top: 40px;
     }
+
+    @media ${laptop} {
+        padding: 40px 0px 40px 100px;
+    }
 `;
 
 export const Box = styled.div`
     /* flex: 1; */
     margin: 10px 0 30px 0;
     /* border: 2px solid red; */
-    width: 50%;
+    width: 100%;
 
     .box__icon {
         padding: 8px 5px;
         width: 30px;
         border-radius: 8px;
-        margin-bottom: 20px;
+        margin: 0 auto 20px;
         display: flex;
         align-items: center;
         justify-content: center;
     }
 
     .box__info {
+        text-align: center;
+
         h6 {
             font-family: ${({ theme }) => theme.fonts.patua};
             font-weight: 400;
@@ -208,8 +230,24 @@ export const Box = styled.div`
 
         p {
             font-size: 14px;
-            width: 70%;
+            width: 100%;
             margin-top: 12px;
+        }
+    }
+
+    @media ${laptop} {
+        width: 50%;
+
+        .box__icon {
+            margin: 0 0 20px 0;
+        }
+
+        .box__info {
+            text-align: left;
+
+            p {
+                width: 70%;
+            }
         }
     }
 
