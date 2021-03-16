@@ -23,8 +23,6 @@ scheduleRouter.get(
             dates: { $elemMatch: { month } },
         });
 
-        console.log(allSchedule);
-
         res.status(200).send({ data: allSchedule });
     }
 );

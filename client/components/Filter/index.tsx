@@ -16,11 +16,13 @@ import "react-accessible-accordion/dist/fancy-example.css";
 import { MdClose } from "react-icons/md";
 import { useLazyEffect } from "../../utils/useLazyEffect";
 import ReactTooltip from "react-tooltip";
+import { useCategoriesQuery } from "../../generated/graphql";
 
 export default function Filter() {
     // Initial Value
     const router = useRouter();
     const animatedComponents = makeAnimated();
+    // const [{ data, fetching, error }] = useCategoriesQuery();
 
     // Filter values
     const [localizacao, setLocalizacao] = useState([]);
@@ -102,7 +104,7 @@ export default function Filter() {
                         router.query.disponibilidade ||
                         router.query.tutor) &&
                         Object.keys(router.query).length > 0 && (
-                            <li>
+                            <li className="filter__clear">
                                 <IconButton
                                     text={`Limpar filtros (${
                                         Object.keys(router.query).length

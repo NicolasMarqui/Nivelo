@@ -153,11 +153,24 @@ export const FooterBottom = styled.div`
 
     .bottom__copyright {
         flex: 3;
-        text-align: right;
+        text-align: center;
 
-        p {
+        p,
+        span {
             color: #9c9c9c;
             font-size: 15px;
+        }
+
+        span {
+            display: block;
+        }
+
+        @media ${laptop} {
+            text-align: right;
+
+            span {
+                display: inline-block;
+            }
         }
     }
 `;

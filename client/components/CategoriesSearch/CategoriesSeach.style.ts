@@ -1,4 +1,7 @@
 import styled, { css } from "styled-components";
+import { device } from "../../utils/devices";
+
+const { laptop } = device;
 
 interface CategoriesSeachWrapperProps {
     isVisible?: boolean;
@@ -17,6 +20,7 @@ export const CategoriesSeachWrapper = styled.div<CategoriesSeachWrapperProps>`
     overflow-y: auto;
     display: none;
     transition: all 0.4s cubic-bezier(0.075, 0.82, 0.165, 1);
+    z-index: 30;
 
     ${({ position }) =>
         position === "bottom" &&
@@ -37,15 +41,25 @@ export const CategoriesSeachWrapper = styled.div<CategoriesSeachWrapperProps>`
             flex-wrap: wrap;
 
             li {
-                flex: 1;
                 padding: 10px;
                 background-color: #fff;
                 margin: 10px 10px 10px 0;
                 border-radius: 10px;
                 cursor: pointer;
+                width: 100%;
 
                 &:hover {
                     transform: scale(1.02);
+                }
+            }
+        }
+    }
+
+    @media ${laptop} {
+        .cat__all {
+            ul {
+                li {
+                    width: 42%;
                 }
             }
         }

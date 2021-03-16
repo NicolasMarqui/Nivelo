@@ -230,7 +230,11 @@ export const Description = styled.p<DescriptionProps>`
 `;
 
 export const Section = styled.div`
-    padding: 80px 0;
+    padding: 40px 0;
+
+    @media ${laptop} {
+        padding: 80px 0;
+    }
 `;
 
 interface PageWrapperProps {

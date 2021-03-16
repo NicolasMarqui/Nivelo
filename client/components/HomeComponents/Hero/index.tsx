@@ -66,26 +66,28 @@ const Hero: React.FC<HeroProps> = ({
                         />
                     </SearchCategory>
                 </Flex>
-                <Flex>
-                    {width > 1024 && (
-                        <HeroImage>
-                            <img
-                                src="/assets/hat.svg"
-                                className="detail__hat"
-                                alt="hat"
-                            />
-                            <Overlay border="34px" />
-                            <MdPlayCircleOutline size={70} color="#fff" />
-                            <div className="detail__img img_1"></div>
-                            <div className="detail__img img_2"></div>
-                            <div className="detail__img img_3"></div>
-                            <img
-                                src="/assets/pattern.png"
-                                alt="Pattern"
-                                className="detail__dots"
-                            />
-                        </HeroImage>
-                    )}
+                <Flex size={1} style={{ width: "100%" }}>
+                    <HeroImage>
+                        <img
+                            src="/assets/hat.svg"
+                            className="detail__hat"
+                            alt="hat"
+                        />
+                        <Overlay border="34px" />
+                        <MdPlayCircleOutline size={70} color="#fff" />
+                        {width > 1024 && (
+                            <>
+                                <div className="detail__img img_1"></div>
+                                <div className="detail__img img_2"></div>
+                                <div className="detail__img img_3"></div>
+                                <img
+                                    src="/assets/pattern.png"
+                                    alt="Pattern"
+                                    className="detail__dots"
+                                />
+                            </>
+                        )}
+                    </HeroImage>
                 </Flex>
                 <CTA onClick={() => router.push("#vantagens")}>
                     <MdExpandMore size={22} />

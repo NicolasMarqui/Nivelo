@@ -1,5 +1,7 @@
 import styled, { css } from "styled-components";
+import { device } from "../../utils/devices";
 
+const { laptop } = device;
 interface FilterWrapperProps {
     isFixed?: boolean;
 }
@@ -31,6 +33,19 @@ export const FilterWrapper = styled.div<FilterWrapperProps>`
 
         li {
             position: relative;
+
+            &.filter__clear {
+                position: fixed;
+                bottom: 10px;
+                left: 10px;
+                z-index: 20;
+
+                @media ${laptop} {
+                    position: relative;
+                    bottom: auto;
+                    left: auto;
+                }
+            }
         }
     }
 `;

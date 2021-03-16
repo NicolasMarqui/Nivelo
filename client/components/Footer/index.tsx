@@ -194,8 +194,8 @@ export default function Footer() {
                     </div>
                     <div className="bottom__copyright">
                         <p>
-                            Made with <AiFillHeart size={24} color="red" /> by
-                            Nicolas Marqui and Juarez Junior
+                            Made with <AiFillHeart size={24} color="red" />{" "}
+                            <span> by Nicolas Marqui and Juarez Junior</span>
                         </p>
                     </div>
                 </Container>

@@ -59,6 +59,7 @@ export class OrderResolver {
             .where("user.id = :user", { user: user?.id })
             .take(realLimit)
             .skip(realOffset)
+            .orderBy("order.createdAt", "DESC")
             .getMany();
 
         return {

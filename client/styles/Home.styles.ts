@@ -6,7 +6,6 @@ const { tablet, laptop, laptopL, desktop, desktopL } = device;
 export const HeroWrapper = styled.div`
     width: 100%;
     margin-top: 50px;
-    height: 50vh;
 
     .detail__dots {
         width: 110px;
@@ -24,7 +23,7 @@ export const HeroWrapper = styled.div`
 `;
 
 export const HeroImage = styled.div`
-    width: 80%;
+    width: 100%;
     margin: 0 auto;
     height: 297px;
     position: relative;
@@ -49,9 +48,9 @@ export const HeroImage = styled.div`
 
     .detail__hat {
         position: absolute;
-        top: -91px;
-        left: -83px;
-        width: 200px;
+        top: -46px;
+        left: -27px;
+        width: 116px;
         transform: rotate(344deg);
     }
 
@@ -91,6 +90,15 @@ export const HeroImage = styled.div`
         top: auto;
         bottom: -88px;
         right: 212px;
+    }
+
+    @media ${laptop} {
+        width: 80%;
+        .detail__hat {
+            top: -91px;
+            left: -83px;
+            width: 200px;
+        }
     }
 `;
 
@@ -274,4 +282,10 @@ export const Box = styled.div`
             background-color: rgba(244, 211, 94, 0.31);
         }
     }
+`;
+
+export const SeeAllTutorsWrapper = styled.div`
+    position: absolute;
+    top: 27%;
+    right: 20px;
 `;
