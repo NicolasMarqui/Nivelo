@@ -1,4 +1,7 @@
 import styled from "styled-components";
+import { device } from "../../utils/devices";
+
+const { laptop } = device;
 
 export const UserShortcutListWrapper = styled.div`
     margin: 10px 0;
@@ -6,6 +9,7 @@ export const UserShortcutListWrapper = styled.div`
     ul {
         display: flex;
         align-items: center;
+        justify-content: center;
 
         li {
             margin: 0 5px;
@@ -27,6 +31,12 @@ export const UserShortcutListWrapper = styled.div`
                     width: 50px;
                 }
             }
+        }
+    }
+
+    @media ${laptop} {
+        ul {
+            justify-content: flex-start;
         }
     }
 `;

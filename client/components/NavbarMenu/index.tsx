@@ -5,6 +5,7 @@ import Dropdown from "../Dropdown";
 import UserDropdown from "../UserDropdown";
 import Skeleton from "react-loading-skeleton";
 import { FaUserGraduate } from "react-icons/fa";
+import useWindowSize from "../../hooks/useWindowSize";
 
 interface NavBarMenuProps {
     data: any;
@@ -13,6 +14,7 @@ interface NavBarMenuProps {
 
 const NavBarMenu: React.FC<NavBarMenuProps> = ({ data, fetching }) => {
     const [hoverUser, setHoverUser] = useState(false);
+    const { width } = useWindowSize();
 
     return (
         <Menu>
@@ -61,13 +63,14 @@ const NavBarMenu: React.FC<NavBarMenuProps> = ({ data, fetching }) => {
                             </a>
                         </Link>
 
-                        <Dropdown
-                            isVisible={hoverUser}
-                            mouseOut={() => setHoverUser(!hoverUser)}
-                        >
-                            {/* @ts-ignore */}
-                            <UserDropdown user={data.me} />
-                        </Dropdown>
+                        {width > 1024 && (
+                            <Dropdown
+                                isVisible={hoverUser}
+                                mouseOut={() => setHoverUser(!hoverUser)}
+                            >
+                                <UserDropdown user={data.me} />
+                            </Dropdown>
+                        )}
                     </li>
                 </>
             ) : (

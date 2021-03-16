@@ -1,4 +1,7 @@
 import styled from "styled-components";
+import { device } from "../../utils/devices";
+
+const { laptop } = device;
 
 export const PlatformListWrapper = styled.div`
     margin: 10px 0;
@@ -6,6 +9,7 @@ export const PlatformListWrapper = styled.div`
     ul {
         display: flex;
         align-items: center;
+        justify-content: center;
 
         li {
             margin: 0 -11px;
@@ -30,6 +34,12 @@ export const PlatformListWrapper = styled.div`
             &:last-child {
                 margin: 0 15px;
             }
+        }
+    }
+
+    @media ${laptop} {
+        ul {
+            justify-content: flex-start;
         }
     }
 `;

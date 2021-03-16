@@ -1,4 +1,7 @@
 import styled from "styled-components";
+import { device } from "../../../utils/devices";
+
+const { laptop } = device;
 
 export const UserOrdersListWrapper = styled.div`
     margin: 21px 0;
@@ -10,6 +13,11 @@ export const UserOrdersListWrapper = styled.div`
     box-shadow: 1px 5px 7px #ececec;
     position: relative;
     transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    flex-direction: column;
+
+    & > div {
+        margin: 10px 0;
+    }
 
     .order__title {
         h2 {
@@ -29,5 +37,13 @@ export const UserOrdersListWrapper = styled.div`
     h4 {
         text-decoration: underline;
         cursor: pointer;
+    }
+
+    @media ${laptop} {
+        flex-direction: row;
+
+        & > div {
+            margin: 0;
+        }
     }
 `;

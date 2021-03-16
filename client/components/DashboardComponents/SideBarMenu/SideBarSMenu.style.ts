@@ -1,6 +1,10 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
-export const SideBarMenuWrapper = styled.div`
+interface SideBarMenuWrapperProps {
+    isVisible?: boolean;
+}
+
+export const SideBarMenuWrapper = styled.div<SideBarMenuWrapperProps>`
     width: 100%;
     overflow-y: auto;
     height: 100%;

@@ -1,4 +1,7 @@
 import styled from "styled-components";
+import { device } from "../../utils/devices";
+
+const { laptop } = device;
 
 export const AgendarWrapper = styled.div`
     overflow-y: auto;
@@ -25,7 +28,7 @@ export const AgendarWrapper = styled.div`
 
     .agendar__group {
         margin: 40px 0;
-        width: 60%;
+        width: 100%;
         margin: 0 auto;
         /* max-height: 500px; */
         overflow-y: auto;
@@ -60,6 +63,12 @@ export const AgendarWrapper = styled.div`
 
         .footer__done {
             flex: 1;
+        }
+    }
+
+    @media ${laptop} {
+        .agendar__group {
+            width: 60%;
         }
     }
 `;

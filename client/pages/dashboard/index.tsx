@@ -12,6 +12,7 @@ import toast from "react-hot-toast";
 import UserOrders from "../../components/DashboardComponents/UserOrders";
 import IconButton from "../../components/IconButton";
 import UserShortcutList from "../../components/UserShortcutList";
+import LoadingAnimation from "../../components/LoadingAnimation";
 
 interface DashboardProps {
     logged: boolean;
@@ -32,6 +33,9 @@ const Dashboard: NextPage<DashboardProps> = (props) => {
         }
     };
 
+    if (fetching) {
+        return <LoadingAnimation />;
+    }
     if (error) router.push("/login");
 
     return (

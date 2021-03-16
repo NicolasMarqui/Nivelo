@@ -9,6 +9,7 @@ import Meta from "../../Meta";
 import { DasboardColumnWrapper, DashboardWrapper,} from "../../../pages/dashboard/Dashboard.style";
 import SideBar from "../../DashboardComponents/SideBar";
 import { GetServerSideProps } from "next";
+import useWindowSize from "../../../hooks/useWindowSize";
 
 interface DashboardLayoutProps {
     tutorID?: number;
@@ -16,12 +17,14 @@ interface DashboardLayoutProps {
 
 const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
     const [{ data, fetching }] = useMeQuery();
+    const { width } = useWindowSize();
+    const isMobile = width < 1024;
 
     return (
         <>
             <Navbar />
             <div className="body__overlay"></div>
-            <PageWrapper>
+            <PageWrapper pTop={!isMobile ? "" : "0"}>
                 <Meta
                     title={`Dashboard - ${
                         fetching
@@ -45,6 +48,7 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
                                 size={3}
                                 bgColor="transparent"
                                 padding="0 20px"
+                                margin={isMobile ? "10px 0 " : ""}
                             >
                                 {children}
                             </DasboardColumnWrapper>

@@ -200,6 +200,7 @@ interface DescriptionProps {
     fontSize?: string;
     txtAlign?: boolean;
     lHeight?: string;
+    txtLeft?: boolean;
 }
 
 export const Description = styled.p<DescriptionProps>`
@@ -218,6 +219,11 @@ export const Description = styled.p<DescriptionProps>`
             text-align: center;
         `}
 
+    ${({ txtLeft }) =>
+        txtLeft &&
+        css`
+            text-align: left !important;
+        `}
     @media ${laptop} {
         text-align: left;
     }
@@ -471,21 +477,27 @@ export const AnimationWrapper = styled.div`
 
 export const Detail = styled.div`
     z-index: 3;
-    position: absolute;
-    top: 0px;
-    right: -14px;
+    position: relative;
+    margin: 0 0 20px 0;
 
-    &::before {
-        z-index: 1;
-        content: "";
+    @media ${laptop} {
         position: absolute;
-        bottom: 7px;
-        right: 0;
-        height: 13px;
-        width: 23px;
-        background: #8390fa;
-        transform: rotate(327deg);
-        border-radius: 0 0 5px 0;
+        top: 0px;
+        right: -14px;
+        margin: 0;
+
+        &::before {
+            z-index: 1;
+            content: "";
+            position: absolute;
+            bottom: 7px;
+            right: 0;
+            height: 13px;
+            width: 23px;
+            background: #8390fa;
+            transform: rotate(327deg);
+            border-radius: 0 0 5px 0;
+        }
     }
 `;
 

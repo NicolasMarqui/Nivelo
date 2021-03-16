@@ -31,7 +31,7 @@ const TutorMoreInfo: React.FC<TutorMoreInfoProps> = ({ loading, data }) => {
             <MoreInfoThingy>
                 <div className="thingy__side">
                     <FormLabel>Descrição</FormLabel>
-                    <Description>
+                    <Description txtLeft>
                         {description
                             ? shortTutorDescription(description, 39)
                             : "Você ainda não possui uma descrição!"}
@@ -52,7 +52,7 @@ const TutorMoreInfo: React.FC<TutorMoreInfoProps> = ({ loading, data }) => {
                     {!categories ||
                     categories.length === 0 ||
                     categories === null ? (
-                        <Description>
+                        <Description txtLeft>
                             Você ainda não possui nenhuma categoria!
                         </Description>
                     ) : (

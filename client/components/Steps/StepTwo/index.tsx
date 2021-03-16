@@ -37,6 +37,7 @@ export default function StepTwo({ selected, handleChangePrice }: StepTwoProps) {
                 <StepPriceWrapper>
                     {selected.price.map((pr) => (
                         <SelectPrice
+                            key={pr.id}
                             price={pr}
                             active={selectedPrice === pr}
                             handleSelectedPrice={() => handleSelected(pr)}

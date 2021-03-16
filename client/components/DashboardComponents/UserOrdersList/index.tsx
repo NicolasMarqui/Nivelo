@@ -9,6 +9,7 @@ import UserOrdersAction from "../UserOrdersAction";
 import { TutorTitle } from "../../TutorCard/TutorCard.style";
 import { MdExpandMore } from "react-icons/md";
 import UserOrdersDetails from "../UserOrdersDetails";
+import useWindowSize from "../../../hooks/useWindowSize";
 
 export interface UserOrdersListProps {
     order: {
@@ -38,8 +39,10 @@ const UserOrdersList: React.FC<UserOrdersListProps> = ({ order }) => {
     const [{ data, fetching, error }] = useSingleClassQuery({
         variables: { id: order.classID },
     });
-
+    const { width } = useWindowSize();
     const [isDetailOpen, setIsDetailOpen] = useState(false);
+
+    const isMobile = width < 1024;
 
     if (fetching) {
         return <LoadingAnimation />;
@@ -48,7 +51,12 @@ const UserOrdersList: React.FC<UserOrdersListProps> = ({ order }) => {
     return (
         <>
             <UserOrdersListWrapper>
-                <Flex col align="flex-start" justifyCenter size={2}>
+                <Flex
+                    col
+                    align={isMobile ? "center" : "flex-start"}
+                    justifyCenter
+                    size={2}
+                >
                     <div className="order__title">
                         <p>{order.id}</p>
                         <h2>{data.singleClass.name}</h2>

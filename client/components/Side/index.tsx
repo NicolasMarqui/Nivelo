@@ -38,7 +38,7 @@ const Side = ({ children, isOpen, onClickClose, onClickAplicar, left, footer, he
     };
 
     return (
-        <SideWrapper open={isOpen} onClick={handleCloseSide}>
+        <SideWrapper open={isOpen} onClick={handleCloseSide} id="id__side">
             <SideInside left={left ? left : false} size={width} bottom={bottom ? bottom : false}>
                 {header && (
                     <div className={`side__header ${headerAbsolute ? 'header__absolute' : ''}`}>

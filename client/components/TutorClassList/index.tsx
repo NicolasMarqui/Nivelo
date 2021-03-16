@@ -1,4 +1,5 @@
 import TimeAgo from "react-timeago";
+import useWindowSize from "../../hooks/useWindowSize";
 import { Description, Detail, Flex, Pill } from "../../styles/helpers";
 import { formatter } from "../../utils/agoPtFormat";
 import TutorClassAction from "../TutorClassAction";
@@ -25,6 +26,8 @@ interface TutorClassListProps {
 }
 
 const TutorClassList: React.FC<TutorClassListProps> = ({ classes }) => {
+    const { width } = useWindowSize();
+
     return (
         <TutorClassListWrapper>
             <ul className="class__list">
@@ -38,7 +41,13 @@ const TutorClassList: React.FC<TutorClassListProps> = ({ classes }) => {
                                 <Detail>
                                     <Pill>{cl.level}</Pill>
                                 </Detail>
-                                <Flex col align="flex-start" justifyCenter>
+                                <Flex
+                                    col
+                                    align={
+                                        width > 1024 ? "flex-start" : "center"
+                                    }
+                                    justifyCenter
+                                >
                                     <h2>{cl.name}</h2>
                                     <Description
                                         color="#a0a0a0;"

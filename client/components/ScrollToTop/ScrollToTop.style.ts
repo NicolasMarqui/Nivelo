@@ -12,6 +12,7 @@ export const ScrollToTopWrapper = styled.div<ScrollToTopWrapperProps>`
     border-radius: 50%;
     background: ${({ theme }) => theme.colors.primary};
     cursor: pointer;
+    z-index: 30;
 
     ${({ isVisible }) =>
         isVisible &&

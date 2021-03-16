@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
+import useWindowSize from "../../../hooks/useWindowSize";
 import { Description } from "../../../styles/helpers";
 import CustomCalendarTutor from "../../CalendarTutor";
 import { StepDesc, StepWrapper } from "../Steps.style";
@@ -17,6 +18,7 @@ export default function StepThree({
 }: StepThreeProps) {
     const [selectedDay, setSelectedDay] = useState("");
     const handleDay = (value: any) => setSelectedDay(value);
+    const { width } = useWindowSize();
 
     useEffect(() => {
         if (selectedDay.includes("not")) {
@@ -34,17 +36,14 @@ export default function StepThree({
                 tutorId={tutorID}
                 isTutorDashView={false}
                 isAgendando
+                smaller={width > 1024 ? false : true}
                 handleAgendado={handleDay}
             />
             <StepDesc>
                 <Description color="#696969" fontSize="15px">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Magnam quae nam, quisquam rerum molestiae eius nobis
-                    nesciunt, excepturi maxime consequatur officiis adipisci
-                    nisi. Eligendi voluptas iure libero repellendus officiis
-                    sequi nulla laudantium laboriosam, itaque ex, eveniet cumque
-                    nemo. Id, aliquid. Quis, illum quam fugit fugiat blanditiis
-                    commodi architecto magnam expedita!
+                    Caso o tutor não tenha marcado nenhum dia como disponível,
+                    ou, você não achou nenhum dia que dê certo, entre em contato
+                    com o tutor!
                 </Description>
             </StepDesc>
         </StepWrapper>

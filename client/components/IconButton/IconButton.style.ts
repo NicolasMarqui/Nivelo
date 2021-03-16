@@ -56,9 +56,11 @@ export const IconButtonWrapper = styled.div<IconButtonWrapperProps>`
         color: ${({ color }) => color || "#a6a6a6"};
         font-weight: 400;
         font-size: 12px;
+        text-align: center;
 
         @media ${laptop} {
             font-size: 16px;
+            text-align: left;
         }
     }
 
