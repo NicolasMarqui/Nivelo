@@ -36,7 +36,7 @@ const Dashboard: NextPage<DashboardProps> = (props) => {
     if (fetching) {
         return <LoadingAnimation />;
     }
-    if (error) router.push("/login");
+    if (error || data === null) router.push("/login");
 
     return (
         <>

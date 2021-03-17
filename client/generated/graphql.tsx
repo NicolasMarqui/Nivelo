@@ -29,6 +29,7 @@ export type Query = {
   allTutorClasses: Array<Classes>;
   allPrices: Array<Price>;
   allCategories: Array<Category>;
+  allCategoriesTutor: Array<Category>;
   allPlatforms: Array<Platforms>;
   allPlatformAccount: Array<UserPlatformAccount>;
   getSingleAccount: Array<UserPlatformAccount>;
@@ -76,6 +77,11 @@ export type QuerySingleClassArgs = {
 
 export type QueryAllTutorClassesArgs = {
   tutorId: Scalars['Float'];
+};
+
+
+export type QueryAllCategoriesTutorArgs = {
+  tutorID: Scalars['Float'];
 };
 
 
@@ -618,6 +624,19 @@ export type RegularUserFragment = (
   & { tutor?: Maybe<(
     { __typename?: 'Tutor' }
     & Pick<Tutor, 'id'>
+  )> }
+);
+
+export type AllCategoriesTutorQueryVariables = Exact<{
+  id: Scalars['Float'];
+}>;
+
+
+export type AllCategoriesTutorQuery = (
+  { __typename?: 'Query' }
+  & { allCategoriesTutor: Array<(
+    { __typename?: 'Category' }
+    & Pick<Category, 'id' | 'name' | 'icon'>
   )> }
 );
 
@@ -1256,6 +1275,19 @@ export const RegularUserFragmentDoc = gql`
   }
 }
     `;
+export const AllCategoriesTutorDocument = gql`
+    query AllCategoriesTutor($id: Float!) {
+  allCategoriesTutor(tutorID: $id) {
+    id
+    name
+    icon
+  }
+}
+    `;
+
+export function useAllCategoriesTutorQuery(options: Omit<Urql.UseQueryArgs<AllCategoriesTutorQueryVariables>, 'query'> = {}) {
+  return Urql.useQuery<AllCategoriesTutorQuery>({ query: AllCategoriesTutorDocument, ...options });
+};
 export const CategoryToTutorDocument = gql`
     mutation CategoryToTutor($tutorID: Float!, $categoryID: Float!) {
   categoryToTutor(tutorID: $tutorID, categoryID: $categoryID) {

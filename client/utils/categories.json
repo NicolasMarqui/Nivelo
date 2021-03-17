@@ -3,7 +3,31 @@
         "value": "Inglês"
     },
     {
-        "label": "Algoritimos Avançados",
-        "value": "Algoritimos Avançados"
+        "label": "Algoritimos",
+        "value": "Algoritimos"
+    },
+    {
+        "label": "Geral",
+        "value": "Geral"
+    },
+    {
+        "label": "Javascript",
+        "value": "Javascript"
+    },
+    {
+        "label": "Java",
+        "value": "Java"
+    },
+    {
+        "label": "Python",
+        "value": "Python"
+    },
+    {
+        "label": "Matemática",
+        "value": "Matemática"
+    },
+    {
+        "label": "Informática",
+        "value": "Informática"
     }
 ]

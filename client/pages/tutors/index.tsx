@@ -56,8 +56,8 @@ const Tutors = () => {
                 description="Encontre os melhores tutores para te ajudar nessa jornada"
                 keywords="tutor, javascript, nivelamento, aprender, algoritimos, comprar"
             />
-            <ScrollToTop />
             <InternalBanner />
+            <ScrollToTop />
             <Container>
                 <StickyContainer>
                     <FilterContainer
@@ -67,7 +67,9 @@ const Tutors = () => {
                     />
                     {fetching ? (
                         <LoaderTutorCard />
-                    ) : !data || !data.allTutors ? (
+                    ) : !data ||
+                      !data.allTutors ||
+                      data.allTutors.length === 0 ? (
                         <NoRecords />
                     ) : (
                         <>

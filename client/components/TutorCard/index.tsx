@@ -9,6 +9,7 @@ import useWindowSize from "../../hooks/useWindowSize";
 import { Description, Pill, PillButton } from "../../styles/helpers";
 import { shortTutorDescription } from "../../utils/shortTutorDescription";
 import CustomCalendarTutor from "../CalendarTutor";
+import CategoriesFromTutor from "../CategoriesFromTutor";
 import TutorCardClassesList from "../TutorCardClassesList";
 import { TutorCardWrapper, TutorSubtitle, TutorTitle } from "./TutorCard.style";
 
@@ -64,8 +65,7 @@ export default function TutorCard({ isColumn, tutor }: TutorCardProps) {
                         <div>
                             <TutorTitle>{user.name}</TutorTitle>
                             <TutorSubtitle>
-                                Ensina <span>Javascript</span> e
-                                <span>algoritimos</span>
+                                <CategoriesFromTutor tutorId={id} />
                             </TutorSubtitle>
 
                             <Description
@@ -74,7 +74,7 @@ export default function TutorCard({ isColumn, tutor }: TutorCardProps) {
                                 size={width > 1024 ? "80" : "100"}
                             >
                                 {description
-                                    ? shortTutorDescription(description, 500)
+                                    ? shortTutorDescription(description, 200)
                                     : "-"}
                             </Description>
                         </div>

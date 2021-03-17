@@ -1,5 +1,10 @@
 // prettier-ignore
-import { BannerTutors, BorderedButton, TtFlex } from "../../../pages/tutors/Tutors.styles";
+import Link from "next/link";
+import {
+    BannerTutors,
+    BorderedButton,
+    TtFlex,
+} from "../../../pages/tutors/Tutors.styles";
 // prettier-ignore
 import { Container, Flex, Overlay, Title } from "../../../styles/helpers";
 import { tutorsBreadcumb } from "../../../utils/breadcumbs";
@@ -18,7 +23,9 @@ const InternalBanner: React.FC = ({}) => {
                         </Title>
                     </Flex>
                     <Flex size={4} justifyEnd align="flex-end">
-                        <BorderedButton>Se torne um tutor</BorderedButton>
+                        <Link href="/become-tutor">
+                            <BorderedButton>Se torne um tutor</BorderedButton>
+                        </Link>
                     </Flex>
                 </TtFlex>
             </Container>

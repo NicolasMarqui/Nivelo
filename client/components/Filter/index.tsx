@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import IconButton from "../IconButton";
 import { FilterWrapper, FilterSideWrapper } from "./Filter.style";
 import { TiFilter } from "react-icons/ti";
@@ -8,7 +8,6 @@ import countries from "../../utils/countries.json";
 import categories from "../../utils/categories.json";
 import tutorType from "../../utils/tutorType.json";
 import makeAnimated from "react-select/animated";
-import { Sticky } from "react-sticky";
 import Side from "../Side";
 // prettier-ignore
 import {Accordion,AccordionItem,AccordionItemButton,AccordionItemHeading,AccordionItemPanel,} from "react-accessible-accordion";
@@ -16,13 +15,11 @@ import "react-accessible-accordion/dist/fancy-example.css";
 import { MdClose } from "react-icons/md";
 import { useLazyEffect } from "../../utils/useLazyEffect";
 import ReactTooltip from "react-tooltip";
-import { useCategoriesQuery } from "../../generated/graphql";
 
 export default function Filter() {
     // Initial Value
     const router = useRouter();
     const animatedComponents = makeAnimated();
-    // const [{ data, fetching, error }] = useCategoriesQuery();
 
     // Filter values
     const [localizacao, setLocalizacao] = useState([]);

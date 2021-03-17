@@ -62,6 +62,7 @@ export const BannerTutors = styled(Banner)`
     border-radius: 0;
     background-position: center;
     height: 110px;
+    position: relative;
 `;
 
 export const BorderedButton = styled(Button)`

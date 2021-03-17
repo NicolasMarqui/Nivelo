@@ -35,6 +35,21 @@ export class CategoryResolver {
         return allCat;
     }
 
+    // Get all categories from tutor
+    @Query(() => [Category])
+    async allCategoriesTutor(
+        @Arg("tutorID") tutorID: number
+    ): Promise<Category[]> {
+        const allCat = await getConnection()
+            .getRepository(Category)
+            .createQueryBuilder("category")
+            .leftJoinAndSelect("category.tutors", "tutor")
+            .where("tutor.id = :id", { id: tutorID })
+            .getMany();
+
+        return allCat;
+    }
+
     // Add new category
     @Mutation(() => CategoryResponse)
     async newCategory(

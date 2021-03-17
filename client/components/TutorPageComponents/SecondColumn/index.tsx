@@ -11,6 +11,7 @@ import { getCompletedClasses } from "../../../utils/getCompletedClasses";
 import Feedback from "../../Feedback";
 import { timeConverter } from "../../../functions";
 import useWindowSize from "../../../hooks/useWindowSize";
+import CategoriesFromTutor from "../../CategoriesFromTutor";
 
 interface SecondColumnProps {
     data: any;
@@ -39,7 +40,7 @@ const SecondColumn: React.FC<SecondColumnProps> = ({
                     {checkIfUndefined(data.singleTutor.tutor.user.name)}
                 </TutorTitle>
                 <TutorSubtitle>
-                    Ensina <span>Javascript</span> e<span>algoritimos</span>
+                    <CategoriesFromTutor tutorId={data.singleTutor.tutor.id} />
                 </TutorSubtitle>
                 <Description
                     fontSize="14px"
