@@ -1,17 +1,19 @@
 import { GetServerSideProps, NextPage } from "next";
 import Lottie from "react-lottie";
 import BackButton from "../../../components/BackButton";
+import IconButton from "../../../components/IconButton";
 import LoadingAnimation from "../../../components/LoadingAnimation";
 import NoClasses from "../../../components/NoClasses";
 import ShortcutList from "../../../components/ShortcutList";
+import { TutorTitle } from "../../../components/TutorCard/TutorCard.style";
 import TutorClassList from "../../../components/TutorClassList";
 import TutorMoreInfo from "../../../components/TutorMoreInfo";
 // prettier-ignore
-import { useSingleTutorQuery } from "../../../generated/graphql";
+import { useSingleTutorQuery, useTutorOrdersAwaitingApprovalQuery } from "../../../generated/graphql";
 // prettier-ignore
-import { Description, FormLabel, Title } from "../../../styles/helpers";
+import { Description, Flex, FormLabel, Title } from "../../../styles/helpers";
 // prettier-ignore
-import { ColumnGroup, TitleArea } from "../Dashboard.style";
+import { AlertText, ColumnGroup, TitleArea } from "../Dashboard.style";
 
 interface AccountProps {
     tutorID: number;
@@ -22,9 +24,35 @@ const Tutor: NextPage<AccountProps> = (props) => {
         variables: { id: Number(props.tutorID) },
     });
 
+    const [
+        { data: tutorsOrderData, fetching: tutorsOrderFetc },
+    ] = useTutorOrdersAwaitingApprovalQuery({
+        variables: { id: props.tutorID },
+    });
+
     return (
         <>
-            <ColumnGroup margin="0">
+            {!tutorsOrderFetc &&
+            tutorsOrderData.ordersTutorAwaitingApproval.length > 0 ? (
+                <ColumnGroup margin="0" bColor="#fb475e">
+                    <Flex align="center" justifySpaceBtw>
+                        <AlertText>
+                            Você possui
+                            <span>
+                                {
+                                    tutorsOrderData.ordersTutorAwaitingApproval
+                                        .length
+                                }
+                            </span>
+                            pedidos de aula para aprovar!
+                        </AlertText>
+                        <IconButton text="Acessar" smaller color="#222" />
+                    </Flex>
+                </ColumnGroup>
+            ) : (
+                ""
+            )}
+            <ColumnGroup>
                 <TitleArea margin="0 30px">
                     <BackButton bgColor="#8390FA" color="#fff" />
                     <Title fontWeight="400">Tutor - Sua área</Title>

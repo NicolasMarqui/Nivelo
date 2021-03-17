@@ -69,8 +69,11 @@ const TutorMoreInfo: React.FC<TutorMoreInfoProps> = ({ loading, data }) => {
                         </Description>
                     ) : (
                         <TutorCategories>
-                            {categories.map((cat) => (
-                                <TutorCategoriesList categories={cat} />
+                            {categories.map((cat, idx) => (
+                                <TutorCategoriesList
+                                    categories={cat}
+                                    key={idx}
+                                />
                             ))}
                         </TutorCategories>
                     )}

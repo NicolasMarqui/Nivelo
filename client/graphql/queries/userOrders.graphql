@@ -7,7 +7,28 @@ query UserOrders($id: Float!, $page: Int!) {
                 id
                 name
             }
-            classID
+            classes {
+                id
+                name
+                description
+                active
+                level
+                price {
+                    id
+                    time
+                    price
+                }
+                tutor {
+                    id
+                    description
+                    user {
+                        id
+                        name
+                    }
+                }
+                createdAt
+                updatedAt
+            }
             date
             platformId
             classDuration

@@ -9,7 +9,7 @@ import { BiPencil, BiBookAdd } from "react-icons/bi";
 import { IoHomeOutline } from "react-icons/io5";
 import { FaUserGraduate } from "react-icons/fa";
 import { PillButton } from "../../../styles/helpers";
-
+import { RiMoneyEuroCircleLine } from "react-icons/ri";
 interface SideBarMenuProps {
     tutor: any | null;
 }
@@ -79,6 +79,19 @@ const SideBarMenu: React.FC<SideBarMenuProps> = ({
                                         text="Suas aulas"
                                         hasChevron={true}
                                         icon={<BiBookAdd size={17} />}
+                                    />
+                                </a>
+                            </Link>
+                        </li>
+                        <li>
+                            <Link href="/dashboard/tutor/orders">
+                                <a>
+                                    <SideBarMenuLink
+                                        text="Seus pedidos"
+                                        hasChevron={true}
+                                        icon={
+                                            <RiMoneyEuroCircleLine size={17} />
+                                        }
                                     />
                                 </a>
                             </Link>

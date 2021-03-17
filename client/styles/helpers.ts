@@ -74,6 +74,7 @@ interface FlexProps {
     mr?: number;
     justifyEnd?: boolean;
     justifyCenter?: boolean;
+    justifySpaceBtw?: boolean;
     align?: "center" | "flex-start" | "flex-end";
 }
 
@@ -103,6 +104,12 @@ export const Flex = styled.div<FlexProps>`
         justifyCenter &&
         css`
             justify-content: center;
+        `}
+
+    ${({ justifySpaceBtw }) =>
+        justifySpaceBtw &&
+        css`
+            justify-content: space-between;
         `}
 `;
 

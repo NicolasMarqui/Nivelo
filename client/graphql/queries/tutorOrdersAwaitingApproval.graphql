@@ -1,16 +1,10 @@
-query OrderDetail($id: String!) {
-    orderDetail(id: $id) {
+query TutorOrdersAwaitingApproval($id: Float!) {
+    ordersTutorAwaitingApproval(tutorId: $id) {
         id
         user {
             id
             name
         }
-        date
-        platformId
-        classDuration
-        userAccount
-        classPrice
-        isOrderAproved
         classes {
             id
             name
@@ -33,6 +27,12 @@ query OrderDetail($id: String!) {
             createdAt
             updatedAt
         }
+        date
+        platformId
+        classDuration
+        userAccount
+        classPrice
+        isOrderAproved
         hasTutorConfirmedClassDone
         hasUserConfirmedClassDone
         isPaid

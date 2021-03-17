@@ -19,7 +19,7 @@ export interface UserOrdersListProps {
             id?: number;
             name: string;
         };
-        classID?: number;
+        classes?: any;
         date?: string;
         platformId?: number;
         classDuration?: string;
@@ -36,17 +36,10 @@ export interface UserOrdersListProps {
 }
 
 const UserOrdersList: React.FC<UserOrdersListProps> = ({ order }) => {
-    const [{ data, fetching, error }] = useSingleClassQuery({
-        variables: { id: order.classID },
-    });
     const { width } = useWindowSize();
     const [isDetailOpen, setIsDetailOpen] = useState(false);
 
     const isMobile = width < 1024;
-
-    if (fetching) {
-        return <LoadingAnimation />;
-    }
 
     return (
         <>
@@ -59,7 +52,7 @@ const UserOrdersList: React.FC<UserOrdersListProps> = ({ order }) => {
                 >
                     <div className="order__title">
                         <p>{order.id}</p>
-                        <h2>{data.singleClass.name}</h2>
+                        <h2>{order.classes.name}</h2>
                     </div>
                     <FormLabel>
                         Agendamento feito
@@ -87,11 +80,11 @@ const UserOrdersList: React.FC<UserOrdersListProps> = ({ order }) => {
                     <TutorTitle>R${order.classPrice}</TutorTitle>
                 </Flex>
             </UserOrdersListWrapper>
-            <UserOrdersDetails
+            {/* <UserOrdersDetails
                 isVisible={isDetailOpen}
                 classData={data.singleClass}
                 allData={order}
-            />
+            /> */}
         </>
     );
 };

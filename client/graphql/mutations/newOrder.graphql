@@ -23,12 +23,33 @@ mutation NewOrder(
         }
         order {
             id
-            classID
             date
             platformId
             classDuration
             userAccount
             classPrice
+            classes {
+                id
+                name
+                description
+                active
+                level
+                price {
+                    id
+                    time
+                    price
+                }
+                tutor {
+                    id
+                    description
+                    user {
+                        id
+                        name
+                    }
+                }
+                createdAt
+                updatedAt
+            }
             isOrderAproved
             hasTutorConfirmedClassDone
             hasUserConfirmedClassDone

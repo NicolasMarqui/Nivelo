@@ -1,3 +1,4 @@
+import { Classes } from "../entities/Classes";
 import { OrderInput } from "./inputs/index";
 import { isAuth } from "./../middleware/index";
 import { Order } from "../entities/Order";
@@ -56,6 +57,10 @@ export class OrderResolver {
             .getRepository(Order)
             .createQueryBuilder("order")
             .leftJoinAndSelect("order.user", "user")
+            .leftJoinAndSelect("order.classes", "classes")
+            .leftJoinAndSelect("classes.price", "price")
+            .leftJoinAndSelect("classes.tutor", "tutor")
+            .leftJoinAndSelect("tutor.user", "")
             .where("user.id = :user", { user: user?.id })
             .take(realLimit)
             .skip(realOffset)
@@ -86,6 +91,29 @@ export class OrderResolver {
             };
         }
 
+        const classObj = await Classes.findOne({
+            where: { id: options.classID },
+        });
+
+        if (!classObj) {
+            return {
+                errors: [
+                    {
+                        field: "general",
+                        message: "Aula não encontrada",
+                    },
+                ],
+            };
+        }
+
+        const {
+            classDuration,
+            classPrice,
+            platformId,
+            date,
+            userAccount,
+        } = options;
+
         let order;
         try {
             const result = await getConnection()
@@ -93,8 +121,13 @@ export class OrderResolver {
                 .insert()
                 .into(Order)
                 .values({
-                    ...options,
                     user,
+                    classes: classObj,
+                    classDuration,
+                    classPrice,
+                    platformId,
+                    date,
+                    userAccount,
                 })
                 .returning("*")
                 .execute();
@@ -113,9 +146,34 @@ export class OrderResolver {
             .getRepository(Order)
             .createQueryBuilder("order")
             .leftJoinAndSelect("order.user", "user")
+            .leftJoinAndSelect("order.classes", "classes")
+            .leftJoinAndSelect("classes.price", "price")
+            .leftJoinAndSelect("classes.tutor", "tutor")
+            .leftJoinAndSelect("tutor.user", "")
             .where("order.id = :id", { id })
             .getOne();
 
         return order;
+    }
+
+    // Get orders awaiting for tutor approval
+    @Query(() => [Order])
+    async ordersTutorAwaitingApproval(
+        @Arg("tutorId") tutorId: number
+    ): Promise<Order[] | []> {
+        const result = await getConnection()
+            .getRepository(Order)
+            .createQueryBuilder("order")
+            .leftJoinAndSelect("order.user", "user")
+            .leftJoinAndSelect("order.classes", "classes")
+            .leftJoinAndSelect("classes.price", "price")
+            .leftJoinAndSelect("classes.tutor", "tutor")
+            .leftJoinAndSelect("tutor.user", "")
+            .where("classes.tutor.id = :id", { id: tutorId })
+            .andWhere("order.isOrderAproved = :cons", { cons: false })
+            .orderBy("order.createdAt", "DESC")
+            .getMany();
+
+        return result;
     }
 }

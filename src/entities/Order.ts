@@ -8,6 +8,7 @@ import {
     CreateDateColumn,
     UpdateDateColumn,
 } from "typeorm";
+import { Classes } from "./Classes";
 import { User } from "./User";
 
 @ObjectType()
@@ -21,9 +22,9 @@ export class Order extends BaseEntity {
     @ManyToOne(() => User, (user) => user.orders)
     user: User;
 
-    @Field(() => Int, { nullable: true })
-    @Column({ nullable: true })
-    classID: number;
+    @Field(() => Classes, { nullable: true })
+    @ManyToOne(() => Classes, (classes) => classes.orders)
+    classes: User;
 
     @Field(() => String)
     @Column()

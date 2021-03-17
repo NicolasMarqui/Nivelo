@@ -50,10 +50,11 @@ export const TitleArea = styled.div<TitleAreaProps>`
 interface ColumnGroupProps {
     margin?: string;
     padding?: string;
+    bColor?: string;
 }
 
 export const ColumnGroup = styled.div<ColumnGroupProps>`
-    background-color: #fff;
+    background-color: ${({ bColor }) => bColor || "#fff"};
     border-radius: 30px;
     margin: ${({ margin }) => (margin ? margin : "20px 0")};
     padding: ${({ padding }) => (padding ? padding : "20px 10px")};
@@ -72,3 +73,16 @@ export const PlatformsWrapper = styled.div`
         text-align: left;
     }
 `;
+
+export const AlertText = styled.h5`
+    color: #fff;
+    font-size: 18px;
+
+    span {
+        font-weight: 700;
+        margin: 0 5px;
+        font-size: 20px;
+    }
+`;
+
+export const TutorsOrdersWrapper = styled.div``;

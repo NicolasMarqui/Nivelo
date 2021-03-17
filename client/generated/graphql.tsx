@@ -36,6 +36,7 @@ export type Query = {
   getTutorFeedbacks: Array<Feedback>;
   getUserOrders: OrderDetailsAmount;
   orderDetail: Order;
+  ordersTutorAwaitingApproval: Array<Order>;
 };
 
 
@@ -105,6 +106,11 @@ export type QueryOrderDetailArgs = {
   id: Scalars['String'];
 };
 
+
+export type QueryOrdersTutorAwaitingApprovalArgs = {
+  tutorId: Scalars['Float'];
+};
+
 export type User = {
   __typename?: 'User';
   id: Scalars['Int'];
@@ -163,6 +169,7 @@ export type Classes = {
   description?: Maybe<Scalars['String']>;
   price?: Maybe<Array<Price>>;
   users?: Maybe<Array<User>>;
+  orders?: Maybe<Order>;
   active?: Maybe<Scalars['Boolean']>;
   createdAt?: Maybe<Scalars['String']>;
   updatedAt?: Maybe<Scalars['String']>;
@@ -178,6 +185,25 @@ export type Price = {
   discountAmount?: Maybe<Scalars['Int']>;
   createdAt?: Maybe<Scalars['String']>;
   updatedAt?: Maybe<Scalars['String']>;
+};
+
+export type Order = {
+  __typename?: 'Order';
+  id?: Maybe<Scalars['String']>;
+  user: User;
+  classes?: Maybe<Classes>;
+  date: Scalars['String'];
+  platformId?: Maybe<Scalars['Int']>;
+  classDuration: Scalars['String'];
+  userAccount: Scalars['String'];
+  classPrice?: Maybe<Scalars['Float']>;
+  isOrderAproved?: Maybe<Scalars['Boolean']>;
+  hasTutorConfirmedClassDone?: Maybe<Scalars['Boolean']>;
+  hasUserConfirmedClassDone?: Maybe<Scalars['Boolean']>;
+  isPaid?: Maybe<Scalars['Boolean']>;
+  paymentDetails?: Maybe<Scalars['String']>;
+  createdAt: Scalars['String'];
+  updatedAt: Scalars['String'];
 };
 
 export type Category = {
@@ -206,25 +232,6 @@ export type UserPlatformAccount = {
   account?: Maybe<Scalars['String']>;
   user?: Maybe<User>;
   platform?: Maybe<Platforms>;
-};
-
-export type Order = {
-  __typename?: 'Order';
-  id?: Maybe<Scalars['String']>;
-  user: User;
-  classID?: Maybe<Scalars['Int']>;
-  date: Scalars['String'];
-  platformId?: Maybe<Scalars['Int']>;
-  classDuration: Scalars['String'];
-  userAccount: Scalars['String'];
-  classPrice?: Maybe<Scalars['Float']>;
-  isOrderAproved?: Maybe<Scalars['Boolean']>;
-  hasTutorConfirmedClassDone?: Maybe<Scalars['Boolean']>;
-  hasUserConfirmedClassDone?: Maybe<Scalars['Boolean']>;
-  isPaid?: Maybe<Scalars['Boolean']>;
-  paymentDetails?: Maybe<Scalars['String']>;
-  createdAt: Scalars['String'];
-  updatedAt: Scalars['String'];
 };
 
 export type Feedback = {
@@ -864,7 +871,22 @@ export type NewOrderMutation = (
       & Pick<FieldError, 'field' | 'message'>
     )>>, order?: Maybe<(
       { __typename?: 'Order' }
-      & Pick<Order, 'id' | 'classID' | 'date' | 'platformId' | 'classDuration' | 'userAccount' | 'classPrice' | 'isOrderAproved' | 'hasTutorConfirmedClassDone' | 'hasUserConfirmedClassDone' | 'isPaid' | 'paymentDetails' | 'createdAt' | 'updatedAt'>
+      & Pick<Order, 'id' | 'date' | 'platformId' | 'classDuration' | 'userAccount' | 'classPrice' | 'isOrderAproved' | 'hasTutorConfirmedClassDone' | 'hasUserConfirmedClassDone' | 'isPaid' | 'paymentDetails' | 'createdAt' | 'updatedAt'>
+      & { classes?: Maybe<(
+        { __typename?: 'Classes' }
+        & Pick<Classes, 'id' | 'name' | 'description' | 'active' | 'level' | 'createdAt' | 'updatedAt'>
+        & { price?: Maybe<Array<(
+          { __typename?: 'Price' }
+          & Pick<Price, 'id' | 'time' | 'price'>
+        )>>, tutor?: Maybe<(
+          { __typename?: 'Tutor' }
+          & Pick<Tutor, 'id' | 'description'>
+          & { user?: Maybe<(
+            { __typename?: 'User' }
+            & Pick<User, 'id' | 'name'>
+          )> }
+        )> }
+      )> }
     )> }
   ) }
 );
@@ -1098,11 +1120,25 @@ export type OrderDetailQuery = (
   { __typename?: 'Query' }
   & { orderDetail: (
     { __typename?: 'Order' }
-    & Pick<Order, 'id' | 'classID' | 'date' | 'platformId' | 'classDuration' | 'userAccount' | 'classPrice' | 'isOrderAproved' | 'hasTutorConfirmedClassDone' | 'hasUserConfirmedClassDone' | 'isPaid' | 'paymentDetails' | 'createdAt' | 'updatedAt'>
+    & Pick<Order, 'id' | 'date' | 'platformId' | 'classDuration' | 'userAccount' | 'classPrice' | 'isOrderAproved' | 'hasTutorConfirmedClassDone' | 'hasUserConfirmedClassDone' | 'isPaid' | 'paymentDetails' | 'createdAt' | 'updatedAt'>
     & { user: (
       { __typename?: 'User' }
       & Pick<User, 'id' | 'name'>
-    ) }
+    ), classes?: Maybe<(
+      { __typename?: 'Classes' }
+      & Pick<Classes, 'id' | 'name' | 'description' | 'active' | 'level' | 'createdAt' | 'updatedAt'>
+      & { price?: Maybe<Array<(
+        { __typename?: 'Price' }
+        & Pick<Price, 'id' | 'time' | 'price'>
+      )>>, tutor?: Maybe<(
+        { __typename?: 'Tutor' }
+        & Pick<Tutor, 'id' | 'description'>
+        & { user?: Maybe<(
+          { __typename?: 'User' }
+          & Pick<User, 'id' | 'name'>
+        )> }
+      )> }
+    )> }
   ) }
 );
 
@@ -1190,6 +1226,37 @@ export type TutorFeedbackQuery = (
   )> }
 );
 
+export type TutorOrdersAwaitingApprovalQueryVariables = Exact<{
+  id: Scalars['Float'];
+}>;
+
+
+export type TutorOrdersAwaitingApprovalQuery = (
+  { __typename?: 'Query' }
+  & { ordersTutorAwaitingApproval: Array<(
+    { __typename?: 'Order' }
+    & Pick<Order, 'id' | 'date' | 'platformId' | 'classDuration' | 'userAccount' | 'classPrice' | 'isOrderAproved' | 'hasTutorConfirmedClassDone' | 'hasUserConfirmedClassDone' | 'isPaid' | 'paymentDetails' | 'createdAt' | 'updatedAt'>
+    & { user: (
+      { __typename?: 'User' }
+      & Pick<User, 'id' | 'name'>
+    ), classes?: Maybe<(
+      { __typename?: 'Classes' }
+      & Pick<Classes, 'id' | 'name' | 'description' | 'active' | 'level' | 'createdAt' | 'updatedAt'>
+      & { price?: Maybe<Array<(
+        { __typename?: 'Price' }
+        & Pick<Price, 'id' | 'time' | 'price'>
+      )>>, tutor?: Maybe<(
+        { __typename?: 'Tutor' }
+        & Pick<Tutor, 'id' | 'description'>
+        & { user?: Maybe<(
+          { __typename?: 'User' }
+          & Pick<User, 'id' | 'name'>
+        )> }
+      )> }
+    )> }
+  )> }
+);
+
 export type TutorsQueryVariables = Exact<{
   limit: Scalars['Int'];
   page: Scalars['Int'];
@@ -1256,11 +1323,25 @@ export type UserOrdersQuery = (
     & Pick<OrderDetailsAmount, 'amount'>
     & { order?: Maybe<Array<(
       { __typename?: 'Order' }
-      & Pick<Order, 'id' | 'classID' | 'date' | 'platformId' | 'classDuration' | 'userAccount' | 'classPrice' | 'isOrderAproved' | 'hasTutorConfirmedClassDone' | 'hasUserConfirmedClassDone' | 'isPaid' | 'paymentDetails' | 'createdAt' | 'updatedAt'>
+      & Pick<Order, 'id' | 'date' | 'platformId' | 'classDuration' | 'userAccount' | 'classPrice' | 'isOrderAproved' | 'hasTutorConfirmedClassDone' | 'hasUserConfirmedClassDone' | 'isPaid' | 'paymentDetails' | 'createdAt' | 'updatedAt'>
       & { user: (
         { __typename?: 'User' }
         & Pick<User, 'id' | 'name'>
-      ) }
+      ), classes?: Maybe<(
+        { __typename?: 'Classes' }
+        & Pick<Classes, 'id' | 'name' | 'description' | 'active' | 'level' | 'createdAt' | 'updatedAt'>
+        & { price?: Maybe<Array<(
+          { __typename?: 'Price' }
+          & Pick<Price, 'id' | 'time' | 'price'>
+        )>>, tutor?: Maybe<(
+          { __typename?: 'Tutor' }
+          & Pick<Tutor, 'id' | 'description'>
+          & { user?: Maybe<(
+            { __typename?: 'User' }
+            & Pick<User, 'id' | 'name'>
+          )> }
+        )> }
+      )> }
     )>> }
   ) }
 );
@@ -1518,12 +1599,33 @@ export const NewOrderDocument = gql`
     }
     order {
       id
-      classID
       date
       platformId
       classDuration
       userAccount
       classPrice
+      classes {
+        id
+        name
+        description
+        active
+        level
+        price {
+          id
+          time
+          price
+        }
+        tutor {
+          id
+          description
+          user {
+            id
+            name
+          }
+        }
+        createdAt
+        updatedAt
+      }
       isOrderAproved
       hasTutorConfirmedClassDone
       hasUserConfirmedClassDone
@@ -1807,13 +1909,34 @@ export const OrderDetailDocument = gql`
       id
       name
     }
-    classID
     date
     platformId
     classDuration
     userAccount
     classPrice
     isOrderAproved
+    classes {
+      id
+      name
+      description
+      active
+      level
+      price {
+        id
+        time
+        price
+      }
+      tutor {
+        id
+        description
+        user {
+          id
+          name
+        }
+      }
+      createdAt
+      updatedAt
+    }
     hasTutorConfirmedClassDone
     hasUserConfirmedClassDone
     isPaid
@@ -1935,6 +2058,55 @@ export const TutorFeedbackDocument = gql`
 export function useTutorFeedbackQuery(options: Omit<Urql.UseQueryArgs<TutorFeedbackQueryVariables>, 'query'> = {}) {
   return Urql.useQuery<TutorFeedbackQuery>({ query: TutorFeedbackDocument, ...options });
 };
+export const TutorOrdersAwaitingApprovalDocument = gql`
+    query TutorOrdersAwaitingApproval($id: Float!) {
+  ordersTutorAwaitingApproval(tutorId: $id) {
+    id
+    user {
+      id
+      name
+    }
+    classes {
+      id
+      name
+      description
+      active
+      level
+      price {
+        id
+        time
+        price
+      }
+      tutor {
+        id
+        description
+        user {
+          id
+          name
+        }
+      }
+      createdAt
+      updatedAt
+    }
+    date
+    platformId
+    classDuration
+    userAccount
+    classPrice
+    isOrderAproved
+    hasTutorConfirmedClassDone
+    hasUserConfirmedClassDone
+    isPaid
+    paymentDetails
+    createdAt
+    updatedAt
+  }
+}
+    `;
+
+export function useTutorOrdersAwaitingApprovalQuery(options: Omit<Urql.UseQueryArgs<TutorOrdersAwaitingApprovalQueryVariables>, 'query'> = {}) {
+  return Urql.useQuery<TutorOrdersAwaitingApprovalQuery>({ query: TutorOrdersAwaitingApprovalDocument, ...options });
+};
 export const TutorsDocument = gql`
     query Tutors($limit: Int!, $page: Int!, $order: String, $category: [String!], $type: [String!], $country: [String!]) {
   allTutors(
@@ -2017,7 +2189,28 @@ export const UserOrdersDocument = gql`
         id
         name
       }
-      classID
+      classes {
+        id
+        name
+        description
+        active
+        level
+        price {
+          id
+          time
+          price
+        }
+        tutor {
+          id
+          description
+          user {
+            id
+            name
+          }
+        }
+        createdAt
+        updatedAt
+      }
       date
       platformId
       classDuration

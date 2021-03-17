@@ -13,6 +13,7 @@ import {
     ManyToMany,
 } from "typeorm";
 import { User } from "./User";
+import { Order } from "./Order";
 
 @ObjectType()
 @Entity()
@@ -53,6 +54,10 @@ export class Classes extends BaseEntity {
         nullable: true,
     })
     users: User[];
+
+    @Field(() => Order, { nullable: true })
+    @OneToMany(() => Order, (order) => order.classes)
+    orders: Order[];
 
     @Field(() => Boolean, { nullable: true })
     @Column({ default: true, nullable: true })
