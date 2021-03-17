@@ -1,12 +1,18 @@
 import { AiOutlinePlusCircle } from "react-icons/ai";
 import { BiEditAlt } from "react-icons/bi";
 import ReactTooltip from "react-tooltip";
-import { Description, FormLabel } from "../../styles/helpers";
+import { Description, Flex, FormLabel } from "../../styles/helpers";
 import LoadingAnimation from "../LoadingAnimation";
-import { MoreInfoThingy, TutorMoreInfoWrapper } from "./TutorMoreInfo.style";
+import {
+    MoreInfoThingy,
+    TutorCategories,
+    TutorMoreInfoWrapper,
+} from "./TutorMoreInfo.style";
 import { Reoverlay } from "reoverlay";
 import DescriptionTutor from "../Modals/DescriptionTutor";
 import { shortTutorDescription } from "../../utils/shortTutorDescription";
+import TutorCategoriesList from "../DashboardComponents/TutorCategoriesList";
+import AddCategoriesTutor from "../Modals/AddCategoriesTutor";
 
 interface TutorMoreInfoProps {
     loading: boolean;
@@ -24,6 +30,12 @@ const TutorMoreInfo: React.FC<TutorMoreInfoProps> = ({ loading, data }) => {
         Reoverlay.showModal(DescriptionTutor, {
             tutorID: id,
             tutorDescription: description,
+        });
+
+    const handleTutorCategoriesModal = () =>
+        Reoverlay.showModal(AddCategoriesTutor, {
+            tutorID: id,
+            categories: categories.map((cat: any) => cat.id),
         });
 
     return (
@@ -56,7 +68,11 @@ const TutorMoreInfo: React.FC<TutorMoreInfoProps> = ({ loading, data }) => {
                             Você ainda não possui nenhuma categoria!
                         </Description>
                     ) : (
-                        ""
+                        <TutorCategories>
+                            {categories.map((cat) => (
+                                <TutorCategoriesList categories={cat} />
+                            ))}
+                        </TutorCategories>
                     )}
                 </div>
                 <div
@@ -64,7 +80,10 @@ const TutorMoreInfo: React.FC<TutorMoreInfoProps> = ({ loading, data }) => {
                     data-tip="Adicionar"
                     data-for="addT"
                 >
-                    <AiOutlinePlusCircle size={24} />
+                    <AiOutlinePlusCircle
+                        size={24}
+                        onClick={handleTutorCategoriesModal}
+                    />
                     <ReactTooltip id="addT" effect="solid" place="left" />
                 </div>
             </MoreInfoThingy>

@@ -80,6 +80,37 @@ export class CategoryResolver {
         return category;
     }
 
+    // Remove category to tutor
+    @Mutation(() => Boolean)
+    async removeCategoryFromTutor(
+        @Arg("tutorID") tutorID: number,
+        @Arg("categoryID") categoryID: number
+    ): Promise<Boolean> {
+        const category = await Category.findOne({
+            where: { id: categoryID },
+            relations: ["tutors"],
+        });
+
+        if (!category) return false;
+
+        const tutor = await Tutor.findOne({
+            where: { id: tutorID },
+            relations: ["categories"],
+        });
+        if (!tutor) return false;
+
+        if (tutor.categories.length === 0) {
+            return false;
+        }
+
+        tutor.categories = tutor.categories.filter(
+            (cat) => cat.id !== category.id
+        );
+        tutor.save();
+
+        return true;
+    }
+
     // Update category
     @Mutation(() => Category)
     async updateCategory(

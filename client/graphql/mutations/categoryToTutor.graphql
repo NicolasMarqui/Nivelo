@@ -1,0 +1,15 @@
+mutation CategoryToTutor($tutorID: Float!, $categoryID: Float!) {
+    categoryToTutor(tutorID: $tutorID, categoryID: $categoryID) {
+        id
+        name
+        icon
+        tutors {
+            id
+            description
+            user {
+                id
+                name
+            }
+        }
+    }
+}

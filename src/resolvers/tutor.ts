@@ -128,6 +128,7 @@ export class TutorResolver {
         }
 
         const newType = await TutorType.findOne({ where: { id: type } });
+        const newCat = await Category.findOne({ where: { id: 12 } });
 
         // Create a new tutor
         let tutor;
@@ -144,6 +145,9 @@ export class TutorResolver {
                 .returning("*")
                 .execute();
             tutor = result.raw[0];
+
+            tutor.categories.push(newCat);
+            tutor.save();
         } catch (err) {
             return { err };
         }

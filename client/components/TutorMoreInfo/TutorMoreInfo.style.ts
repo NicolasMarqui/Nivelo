@@ -39,3 +39,9 @@ export const MoreInfoThingy = styled.div`
         }
     }
 `;
+
+export const TutorCategories = styled.div`
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+`;

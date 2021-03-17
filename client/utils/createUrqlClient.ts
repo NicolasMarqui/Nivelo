@@ -53,6 +53,12 @@ export const createUrqlClient = (ssrExchange: any) => ({
                     updateClass: (_result, args, cache, info) => {
                         updateTutorCache(cache);
                     },
+                    categoryToTutor: (_result, args, cache, info) => {
+                        updateTutorCache(cache);
+                    },
+                    removeCategoryFromTutor: (_result, args, cache, info) => {
+                        updateTutorCache(cache);
+                    },
                     deleteClass: (_result, args, cache, info) => {
                         console.log("Deleted");
                         cache.invalidate({

@@ -284,6 +284,7 @@ export type Mutation = {
   deletePrice: Scalars['Boolean'];
   newCategory: CategoryResponse;
   categoryToTutor: Category;
+  removeCategoryFromTutor: Scalars['Boolean'];
   updateCategory: Category;
   deleteCategory: Scalars['Boolean'];
   newPlatform: PlatformsResponse;
@@ -435,6 +436,12 @@ export type MutationNewCategoryArgs = {
 
 
 export type MutationCategoryToTutorArgs = {
+  categoryID: Scalars['Float'];
+  tutorID: Scalars['Float'];
+};
+
+
+export type MutationRemoveCategoryFromTutorArgs = {
   categoryID: Scalars['Float'];
   tutorID: Scalars['Float'];
 };
@@ -612,6 +619,28 @@ export type RegularUserFragment = (
     { __typename?: 'Tutor' }
     & Pick<Tutor, 'id'>
   )> }
+);
+
+export type CategoryToTutorMutationVariables = Exact<{
+  tutorID: Scalars['Float'];
+  categoryID: Scalars['Float'];
+}>;
+
+
+export type CategoryToTutorMutation = (
+  { __typename?: 'Mutation' }
+  & { categoryToTutor: (
+    { __typename?: 'Category' }
+    & Pick<Category, 'id' | 'name' | 'icon'>
+    & { tutors?: Maybe<Array<(
+      { __typename?: 'Tutor' }
+      & Pick<Tutor, 'id' | 'description'>
+      & { user?: Maybe<(
+        { __typename?: 'User' }
+        & Pick<User, 'id' | 'name'>
+      )> }
+    )>> }
+  ) }
 );
 
 export type ChangeAvatarMutationVariables = Exact<{
@@ -889,6 +918,17 @@ export type RegisterMutation = (
       & RegularUserFragment
     )> }
   ) }
+);
+
+export type RemoveCategoryFromTutorMutationVariables = Exact<{
+  tutorID: Scalars['Float'];
+  categoryID: Scalars['Float'];
+}>;
+
+
+export type RemoveCategoryFromTutorMutation = (
+  { __typename?: 'Mutation' }
+  & Pick<Mutation, 'removeCategoryFromTutor'>
 );
 
 export type UpdateClassMutationVariables = Exact<{
@@ -1216,6 +1256,27 @@ export const RegularUserFragmentDoc = gql`
   }
 }
     `;
+export const CategoryToTutorDocument = gql`
+    mutation CategoryToTutor($tutorID: Float!, $categoryID: Float!) {
+  categoryToTutor(tutorID: $tutorID, categoryID: $categoryID) {
+    id
+    name
+    icon
+    tutors {
+      id
+      description
+      user {
+        id
+        name
+      }
+    }
+  }
+}
+    `;
+
+export function useCategoryToTutorMutation() {
+  return Urql.useMutation<CategoryToTutorMutation, CategoryToTutorMutationVariables>(CategoryToTutorDocument);
+};
 export const ChangeAvatarDocument = gql`
     mutation changeAvatar($id: Float!, $avatar: String!) {
   changeAvatar(id: $id, avatar: $avatar) {
@@ -1512,6 +1573,15 @@ export const RegisterDocument = gql`
 
 export function useRegisterMutation() {
   return Urql.useMutation<RegisterMutation, RegisterMutationVariables>(RegisterDocument);
+};
+export const RemoveCategoryFromTutorDocument = gql`
+    mutation removeCategoryFromTutor($tutorID: Float!, $categoryID: Float!) {
+  removeCategoryFromTutor(tutorID: $tutorID, categoryID: $categoryID)
+}
+    `;
+
+export function useRemoveCategoryFromTutorMutation() {
+  return Urql.useMutation<RemoveCategoryFromTutorMutation, RemoveCategoryFromTutorMutationVariables>(RemoveCategoryFromTutorDocument);
 };
 export const UpdateClassDocument = gql`
     mutation UpdateClass($id: Float!, $name: String, $description: String, $level: String) {
