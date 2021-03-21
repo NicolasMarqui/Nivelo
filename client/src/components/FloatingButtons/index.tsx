@@ -22,6 +22,10 @@ const FloatingButtons: React.FC<FloatingButtonsProps> = ({}) => {
 
     useEffect(() => {
         window.addEventListener("scroll", showButtons);
+
+        return () => {
+            window.removeEventListener("scroll", showButtons);
+        };
     }, []);
 
     return (

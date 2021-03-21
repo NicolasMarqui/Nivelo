@@ -2,13 +2,13 @@ import React from "react";
 import { AppProps } from "next/app";
 import "tailwindcss/tailwind.css";
 import "@styles/global.scss";
+import "nprogress/nprogress.css";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "react-tabs/style/react-tabs.css";
 import { appWithTranslation } from "@i18n";
 import Layout from "@components/Layout";
 import NProgress from "nprogress";
-import "nprogress/nprogress.css";
 import { Router } from "next/router";
 
 Router.events.on("routeChangeStart", () => {

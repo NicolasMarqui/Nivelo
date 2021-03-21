@@ -6,7 +6,7 @@ interface AvailabilityProps {}
 
 const Availability: React.FC<AvailabilityProps> = ({}) => {
     return (
-        <div className="flex-1 z-20 -mt-28 block ">
+        <div className="flex-1 z-20 -mt-28 md:block hidden">
             <Sticky topOffset={-112}>
                 {({ style, isSticky }) => (
                     <div

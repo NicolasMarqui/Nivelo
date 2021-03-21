@@ -19,8 +19,8 @@ const BestTutors: React.FC<BestTutorsProps> = ({}) => {
 
                 <div className="mt-10">
                     <Slider {...homeBestTutors}>
-                        {new Array(10).fill("-").map((a) => (
-                            <TutorCardSmall />
+                        {new Array(10).fill("-").map((a, idx) => (
+                            <TutorCardSmall key={idx} />
                         ))}
                     </Slider>
                 </div>
