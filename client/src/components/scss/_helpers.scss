@@ -1,0 +1,185 @@
+.hoverMenu {
+    position: relative;
+    transition: all 0.4s linear;
+
+    &.active {
+        &::before {
+            content: "";
+            position: absolute;
+            height: 4px;
+            background-color: #ff4338;
+            width: 70%;
+            top: 99%;
+            left: 0;
+            right: 0;
+            margin: 0 auto;
+        }
+    }
+
+    &:hover {
+        &::before {
+            content: "";
+            position: absolute;
+            height: 4px;
+            background-color: #ff4338;
+            width: 70%;
+            top: 99%;
+            left: 0;
+            right: 0;
+            margin: 0 auto;
+            animation: fromLeft 0.3s linear;
+        }
+
+        @keyframes fromLeft {
+            0% {
+                width: 0;
+            }
+
+            50% {
+                width: 50%;
+            }
+
+            100% {
+                width: 70%;
+            }
+        }
+    }
+
+    @media (max-width: 992px) {
+        &.active {
+            &::before {
+                content: none;
+            }
+
+            background-color: rgba(231, 111, 81, 0.31);
+            padding-left: 10px;
+            border-radius: 18px;
+
+            a {
+                color: #222;
+            }
+        }
+
+        &:hover {
+            &::before {
+                content: none;
+            }
+        }
+    }
+}
+
+.slick-next,
+.slick-prev {
+    background: #fff !important;
+    height: 40px !important;
+    width: 40px !important;
+    border-radius: 50% !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+
+    &::before {
+        color: #ff4338 !important;
+        padding: 9px !important;
+    }
+}
+
+.last__item {
+    display: none;
+}
+
+.side {
+    &.side__right {
+        animation: rightToOpen 0.45s ease-in-out;
+
+        @keyframes rightToOpen {
+            from {
+                transform: translateX(900px);
+            }
+            to {
+                transform: translateX(0);
+            }
+        }
+    }
+
+    &.side__left {
+        animation: leftToOpen 0.45s ease-in-out;
+
+        @keyframes leftToOpen {
+            from {
+                transform: translateX(-900px);
+            }
+            to {
+                transform: translateX(0);
+            }
+        }
+    }
+
+    &.side__closed {
+        animation: rightToClose 0.4s linear;
+
+        @keyframes rightToClose {
+            from {
+                transform: translateX(0);
+            }
+            to {
+                transform: translateX(900px);
+            }
+        }
+    }
+}
+
+.float__buttons {
+    animation: fromRight 0.25s ease-in-out;
+
+    @keyframes fromRight {
+        from {
+            transform: translateX(900px);
+        }
+        to {
+            transform: translateX(0);
+        }
+    }
+}
+
+.classes__detail {
+    position: absolute;
+    height: 220px;
+    width: 220px;
+    background-color: rgba(247, 157, 101, 0.1);
+    border-radius: 50%;
+    z-index: -1;
+
+    &.detail__ball1 {
+        top: 44px;
+        left: -21px;
+    }
+    &.detail__ball2 {
+        top: -53px;
+        right: -6px;
+    }
+    &.detail__ball3 {
+        bottom: -41px;
+        right: 38px;
+        background-color: rgba(255, 67, 56, 0.17);
+        height: 100px;
+        width: 100px;
+    }
+
+    @media (min-width: 1024px) {
+        &.detail__ball1 {
+            top: -53px;
+            left: -91px;
+        }
+
+        &.detail__ball2 {
+            top: -53px;
+            right: -91px;
+        }
+
+        &.detail__ball3 {
+            bottom: -41px;
+            right: -58px;
+        }
+    }
+}

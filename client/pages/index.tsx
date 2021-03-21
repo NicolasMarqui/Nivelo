@@ -1,33 +1,30 @@
-import { useState } from "react";
-import Meta from "../components/Meta";
-import { withUrqlClient } from "next-urql";
-import { createUrqlClient } from "../utils/createUrqlClient";
-import { useCategoriesQuery } from "../generated/graphql";
-import Categories from "../components/HomeComponents/Categorias";
-import Hero from "../components/HomeComponents/Hero/index";
-import Vantagens from "../components/HomeComponents/Vantagens";
-import ScrollToTop from "../components/ScrollToTop";
+import React from "react";
+import Meta from "@components/Meta";
+import Hero from "@components/Landing/Hero";
+import AnyWhere from "@components/Landing/Anywhere";
+import CTA from "@components/Landing/CTA";
+import Categories4u from "@components/Landing/Categories4u";
+import BestTutors from "@components/Landing/BestTutors";
+import Tutorial from "@components/Landing/Tutorial";
+import FloatingButtons from "@components/FloatingButtons";
 
-const Home = () => {
-    const [{ data }] = useCategoriesQuery();
-    const [searchBoxOpen, setIsSearchBoxOpen] = useState(false);
-    const handleOpen = () => setIsSearchBoxOpen(!searchBoxOpen);
-
+const Home: React.FC = () => {
     return (
-        <>
+        <div className="relative">
             <Meta
                 title="Home"
                 description="Encontre os melhores tutores para te ajudar nessa jornada"
                 keywords="home, tutor, javascript, nivelamento, aprender, algoritimos, comprar"
             />
-            <Hero
-                isCategoryVisible={searchBoxOpen}
-                categoryVisible={handleOpen}
-            />
-            <Vantagens />
-            <Categories data={data} />
-        </>
+            <FloatingButtons />
+            <Hero />
+            <AnyWhere />
+            <CTA />
+            <Categories4u />
+            <BestTutors />
+            <Tutorial />
+        </div>
     );
 };
 
-export default withUrqlClient(createUrqlClient, { ssr: true })(Home);
+export default Home;

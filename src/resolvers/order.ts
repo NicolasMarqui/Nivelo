@@ -176,4 +176,39 @@ export class OrderResolver {
 
         return result;
     }
+
+    // Make order approved
+    @Mutation(() => Order)
+    async makeOrderApproved(
+        @Arg("orderID") orderID: string
+    ): Promise<Order | undefined> {
+        let order;
+        let orderRel;
+        try {
+            const result = await getConnection()
+                .createQueryBuilder()
+                .update(Order)
+                .set({ isOrderAproved: true })
+                .where("id = :id", { id: orderID })
+                .returning("*")
+                .execute();
+
+            order = result.raw[0];
+
+            orderRel = await Order.findOne({
+                where: { id: order.id },
+                relations: [
+                    "user",
+                    "classes",
+                    "classes.price",
+                    "classes.tutor",
+                    "classes.tutor.user",
+                ],
+            });
+        } catch (err) {
+            console.log(err);
+        }
+
+        return orderRel;
+    }
 }
