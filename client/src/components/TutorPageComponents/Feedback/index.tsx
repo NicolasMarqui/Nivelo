@@ -1,4 +1,5 @@
 import FeedbackItem from "@components/FeedbackItem";
+import EmptyAnimation from "@components/UI/EmptyAnimation";
 import LoadingAnimation from "@components/UI/LoadingAnimation";
 import { useTutorFeedbackQuery } from "src/generated/graphql";
 
@@ -22,7 +23,7 @@ const Feedback: React.FC<FeedbackProps> = ({ tutorId }) => {
             ) : !data ||
               !data.getTutorFeedbacks ||
               data.getTutorFeedbacks.length === 0 ? (
-                <p>Niente</p>
+                <EmptyAnimation />
             ) : (
                 <div className="mt-5">
                     {data.getTutorFeedbacks.map((f) => (

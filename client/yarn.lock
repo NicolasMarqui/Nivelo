@@ -1648,6 +1648,20 @@
   dependencies:
     "@types/react" "*"
 
+"@types/react-lottie@^1.2.5":
+  version "1.2.5"
+  resolved "https://registry.yarnpkg.com/@types/react-lottie/-/react-lottie-1.2.5.tgz#659322961de534227ba354109342cad967d98841"
+  integrity sha512-g5c7r0VN8g0hLsFEtR71ZFDWDp6niY4D/7llcAcLjV3LpaoyANmaQ9jispskWpkAUP+NYQcFllMtoGIWUM6VRw==
+  dependencies:
+    "@types/react" "*"
+
+"@types/react-paginate@^6.2.1":
+  version "6.2.1"
+  resolved "https://registry.yarnpkg.com/@types/react-paginate/-/react-paginate-6.2.1.tgz#2329088d78010ea49661559c8467a24ecd942784"
+  integrity sha512-+q8k1N0WzbMyOCsIEH/p5D6/KQD8dXYLzfvSvriYn//94icd2sqhAL2rWXkgwGvqHGCSTU9AoHtsWCJxPfquUQ==
+  dependencies:
+    "@types/react" "*"
+
 "@types/react-select@^4.0.13":
   version "4.0.13"
   resolved "https://registry.yarnpkg.com/@types/react-select/-/react-select-4.0.13.tgz#8d2c41a0df7fbf67ab0b995797b0e9b4e6b38cde"
@@ -7607,7 +7621,7 @@ prompts@^2.0.1:
     kleur "^3.0.3"
     sisteransi "^1.0.5"
 
-prop-types@15.7.2, prop-types@^15.5.0, prop-types@^15.5.8, prop-types@^15.6.0, prop-types@^15.6.2, prop-types@^15.7.2:
+prop-types@15.7.2, prop-types@^15.5.0, prop-types@^15.5.8, prop-types@^15.6.0, prop-types@^15.6.1, prop-types@^15.6.2, prop-types@^15.7.2:
   version "15.7.2"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.7.2.tgz#52c41e75b8c87e72b9d9360e0206b99dcbffa6c5"
   integrity sha512-8QQikdH7//R2vurIJSutZ1smHYTcLpRWEOlHnzcWHmBYrOGUysKwSsrC89BCiFj3CbrfJ/nXFdJepOVrY1GCHQ==
@@ -7834,6 +7848,13 @@ react-lottie@^1.2.3:
   dependencies:
     babel-runtime "^6.26.0"
     lottie-web "^5.1.3"
+
+react-paginate@^7.1.1:
+  version "7.1.1"
+  resolved "https://registry.yarnpkg.com/react-paginate/-/react-paginate-7.1.1.tgz#9b4e34c8aa0def04fa7bb7e0f939f0d9400e30e9"
+  integrity sha512-LJJUJxThsnIhnpc01ooJHFvbl6+FcNNIQgaiv1cFK15w2tBVp7J42S70YEX/mXwHNOCZCLSTMHsEEAi0gDt2OA==
+  dependencies:
+    prop-types "^15.6.1"
 
 react-refresh@0.8.3:
   version "0.8.3"

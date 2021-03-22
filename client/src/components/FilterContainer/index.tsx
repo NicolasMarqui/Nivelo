@@ -5,9 +5,11 @@ import { VscListOrdered } from "react-icons/vsc";
 import { FiFilter } from "react-icons/fi";
 import Side from "@components/UI/Side";
 
-interface FilterContainerProps {}
+interface FilterContainerProps {
+    amount: number | string;
+}
 
-const FilterContainer: React.FC<FilterContainerProps> = ({}) => {
+const FilterContainer: React.FC<FilterContainerProps> = ({ amount }) => {
     const [isOpenFilter, setIsOpenFilter] = useState(false);
 
     return (
@@ -17,7 +19,7 @@ const FilterContainer: React.FC<FilterContainerProps> = ({}) => {
                     <p className="text-base text-black222">
                         Mostrando
                         <span className="text-lg font-bold text-primaryOrange mx-1">
-                            2
+                            {amount}
                         </span>
                         tutores
                     </p>

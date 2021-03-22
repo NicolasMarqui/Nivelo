@@ -16,7 +16,11 @@ const AvalClasses: React.FC<ClassesTutorProps> = ({ classes }) => {
                     <p>Nenhuma</p>
                 ) : (
                     classes.map((cl: ClassesProps) => (
-                        <ClassItem key={cl.id} singleClass={cl} />
+                        <ClassItem
+                            key={cl.id}
+                            singleClass={cl}
+                            extraClasses="bg-gray-100 p-4 my-2"
+                        />
                     ))
                 )}
             </div>

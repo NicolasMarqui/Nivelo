@@ -7,16 +7,17 @@ import { MdEvent } from "react-icons/md";
 
 interface ClassItemProps {
     singleClass: ClassesProps;
+    extraClasses?: string;
 }
 
-const ClassItem: React.FC<ClassItemProps> = ({ singleClass }) => {
+const ClassItem: React.FC<ClassItemProps> = ({ singleClass, extraClasses }) => {
     const [moreInfoClass, setMoreInfoClass] = useState(false);
     const { name, amountTimeTaught, description } = singleClass;
 
     return (
         <>
             <div
-                className="w-full flex flex-row items-center justify-between bg-gray-100 rounded-2xl p-4 my-2 cursor-pointer transform hover:scale-105"
+                className={`w-full flex flex-row items-center justify-between rounded-2xl cursor-pointer transform hover:scale-105 ${extraClasses}`}
                 onClick={() => setMoreInfoClass(true)}
             >
                 <div className="flex-none">
@@ -43,7 +44,11 @@ const ClassItem: React.FC<ClassItemProps> = ({ singleClass }) => {
                 header={{ title: name }}
             >
                 <h3 className="text-xl font-bold">{name}</h3>
-                <p>{description}</p>
+                <p>
+                    {description
+                        ? description
+                        : "Essa aula não possui descrição!"}
+                </p>
 
                 <div className="my-5 border-2 border-gray-200"></div>
 

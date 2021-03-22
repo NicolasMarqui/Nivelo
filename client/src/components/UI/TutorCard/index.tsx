@@ -7,6 +7,7 @@ import { TutorCardProps } from "src/types";
 import IconButton from "../IconButton";
 import ReactStarsRating from "react-awesome-stars-rating";
 import Tooltip from "react-tooltip";
+import TutorCardClasses from "@components/TutorCardClasses";
 
 const TutorCard: React.FC<TutorCardProps> = ({ tutor }) => {
     return (
@@ -87,7 +88,8 @@ const TutorCard: React.FC<TutorCardProps> = ({ tutor }) => {
                     </TabList>
 
                     <TabPanel>
-                        <h2>Aulas aqui</h2>
+                        {/* @ts-ignore */}
+                        <TutorCardClasses classes={tutor.classes} />
                     </TabPanel>
                     <TabPanel>
                         <h2>Calendário aqui</h2>

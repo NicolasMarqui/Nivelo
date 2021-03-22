@@ -12,6 +12,8 @@ import { createUrqlClient } from "@utils/createUrqlClient";
 import { useTutorsQuery } from "src/generated/graphql";
 import { useRouter } from "next/router";
 import LoaderTutorCard from "@components/UI/Skeletons/LoaderTutorCard";
+import ReactPaginate from "react-paginate";
+import { getTotalPages } from "@utils/getTotalPages";
 
 const Tutors: React.FC = ({}) => {
     const router = useRouter();
@@ -28,9 +30,18 @@ const Tutors: React.FC = ({}) => {
         },
     });
 
-    // if (error) {
-    //     router.push("/");
-    // }
+    const handlePagination = (newPage: number) => {
+        router.push(
+            {
+                pathname: `/tutors`,
+                query: { ...router.query, page: newPage },
+            },
+            undefined,
+            { shallow: true }
+        );
+
+        setPage(newPage);
+    };
 
     return (
         <>
@@ -62,7 +73,9 @@ const Tutors: React.FC = ({}) => {
                     </Container>
                 </div>
                 <Container>
-                    <FilterContainer />
+                    <FilterContainer
+                        amount={data ? data.allTutors.length : "-"}
+                    />
                     {fetching || error ? (
                         Array(6)
                             .fill(0)
@@ -72,7 +85,28 @@ const Tutors: React.FC = ({}) => {
                       data.allTutors.length === 0 ? (
                         <p>No results</p>
                     ) : (
-                        <TutorResults data={data.allTutors} />
+                        <>
+                            <TutorResults data={data.allTutors} />
+                            <div className="my-4">
+                                <ReactPaginate
+                                    previousLabel={"Anterior"}
+                                    nextLabel={"Próximo"}
+                                    containerClassName={"pagination"}
+                                    activeClassName={"active"}
+                                    pageCount={getTotalPages(
+                                        data.allTutors.length,
+                                        10
+                                    )}
+                                    marginPagesDisplayed={2}
+                                    pageRangeDisplayed={5}
+                                    onPageChange={(e) =>
+                                        handlePagination(
+                                            e.selected === 1 ? 2 : e.selected
+                                        )
+                                    }
+                                />
+                            </div>
+                        </>
                     )}
                 </Container>
             </div>
