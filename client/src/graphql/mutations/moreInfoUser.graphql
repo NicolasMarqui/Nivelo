@@ -1,0 +1,39 @@
+mutation MoreInfoUser(
+    $id: Float!
+    $description: String
+    $country: String
+    $name: String
+) {
+    addMoreInfo(
+        id: $id
+        options: { description: $description, country: $country, name: $name }
+    ) {
+        errors {
+            field
+            message
+        }
+        user {
+            id
+            name
+            description
+            email
+            dateBirth
+            sex
+            country
+            city
+            avatar
+            tutor {
+                id
+                description
+            }
+            userPlatformAccount {
+                platform {
+                    id
+                    name
+                }
+            }
+            createdAt
+            updatedAt
+        }
+    }
+}

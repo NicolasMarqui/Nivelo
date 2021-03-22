@@ -1,3 +1,4 @@
+import { useState } from "react";
 import Container from "@components/container";
 import FilterContainer from "@components/FilterContainer";
 import Meta from "@components/Meta";
@@ -6,8 +7,31 @@ import Breadcumb from "@components/UI/Breadcumb";
 import Title from "@components/UI/Title";
 import { tutorsBreadcumbList } from "@utils/breadumbList";
 import Link from "next/link";
+import { withUrqlClient } from "next-urql";
+import { createUrqlClient } from "@utils/createUrqlClient";
+import { useTutorsQuery } from "src/generated/graphql";
+import { useRouter } from "next/router";
+import LoaderTutorCard from "@components/UI/Skeletons/LoaderTutorCard";
 
 const Tutors: React.FC = ({}) => {
+    const router = useRouter();
+    const [limit, setLimit] = useState(10);
+    // prettier-ignore
+    const [page, setPage] = useState(typeof router.query.page === "string" ? parseInt(router.query.page) : 1);
+    const [{ data, fetching, error }] = useTutorsQuery({
+        variables: {
+            limit,
+            page,
+            type: router.query.tutor || null,
+            category: router.query.categoria || null,
+            order: null,
+        },
+    });
+
+    // if (error) {
+    //     router.push("/");
+    // }
+
     return (
         <>
             <Meta
@@ -39,10 +63,10 @@ const Tutors: React.FC = ({}) => {
                 </div>
                 <Container>
                     <FilterContainer />
-                    <TutorResults />
+                    {fetching || error ? <LoaderTutorCard /> : <TutorResults />}
                 </Container>
             </div>
         </>
     );
 };
-export default Tutors;
+export default withUrqlClient(createUrqlClient, { ssr: true })(Tutors);

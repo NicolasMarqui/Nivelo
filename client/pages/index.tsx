@@ -7,6 +7,8 @@ import Categories4u from "@components/Landing/Categories4u";
 import BestTutors from "@components/Landing/BestTutors";
 import Tutorial from "@components/Landing/Tutorial";
 import FloatingButtons from "@components/FloatingButtons";
+import { withUrqlClient } from "next-urql";
+import { createUrqlClient } from "@utils/createUrqlClient";
 
 const Home: React.FC = () => {
     return (
@@ -27,4 +29,4 @@ const Home: React.FC = () => {
     );
 };
 
-export default Home;
+export default withUrqlClient(createUrqlClient)(Home);

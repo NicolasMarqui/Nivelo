@@ -1,0 +1,17 @@
+query AllTutorClasses($tutorId: Float!) {
+    allTutorClasses(tutorId: $tutorId) {
+        id
+        name
+        description
+        amountTimeTaught
+        level
+        active
+        price {
+            id
+            price
+            time
+        }
+        createdAt
+        updatedAt
+    }
+}

@@ -1,0 +1,19 @@
+mutation newTutor {
+    newTutor(options: { description: "", type: 1 }) {
+        errors {
+            message
+        }
+        tutor {
+            id
+            description
+            user {
+                id
+                name
+            }
+            type {
+                id
+                name
+            }
+        }
+    }
+}

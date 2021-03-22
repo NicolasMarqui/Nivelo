@@ -1,0 +1,13 @@
+query TutorFeedback($id: Float!) {
+    getTutorFeedbacks(id: $id) {
+        id
+        rating
+        content
+        createdAt
+        user {
+            id
+            name
+            avatar
+        }
+    }
+}

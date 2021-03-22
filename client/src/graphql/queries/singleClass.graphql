@@ -1,0 +1,23 @@
+query SingleClass($id: Float!) {
+    singleClass(id: $id) {
+        id
+        name
+        description
+        amountTimeTaught
+        level
+
+        price {
+            id
+            price
+            time
+        }
+        tutor {
+            id
+            user {
+                name
+                avatar
+                email
+            }
+        }
+    }
+}

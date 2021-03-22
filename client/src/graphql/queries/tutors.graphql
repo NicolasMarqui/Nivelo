@@ -1,0 +1,60 @@
+query Tutors(
+    $limit: Int!
+    $page: Int!
+    $order: String
+    $category: [String!]
+    $type: [String!]
+    $country: [String!]
+) {
+    allTutors(
+        limit: $limit
+        page: $page
+        order: $order
+        type: $type
+        category: $category
+        country: $country
+    ) {
+        id
+        description
+        type {
+            id
+            name
+        }
+        rating
+        amountClasses
+        amountStudents
+        user {
+            id
+            name
+            email
+            sex
+            country
+            city
+            avatar
+            userPlatformAccount {
+                platform {
+                    id
+                    name
+                    account
+                }
+            }
+        }
+        classes {
+            id
+            name
+            description
+            active
+            amountTimeTaught
+            price {
+                id
+                price
+                time
+            }
+        }
+        categories {
+            id
+            name
+            icon
+        }
+    }
+}

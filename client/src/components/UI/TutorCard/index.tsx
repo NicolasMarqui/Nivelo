@@ -8,7 +8,7 @@ interface TutorCardProps {}
 const TutorCard: React.FC<TutorCardProps> = ({}) => {
     return (
         <div className="flex flex-col md:flex-row rounded-3xl items-center md:items-start bg-gray-100 mt-4 px-4 md:px-12 py-3 md:py-7">
-            <div className="flex-none flex flex-col self-center">
+            <div className="flex-none flex flex-col">
                 <img
                     src="/images/example.jpg"
                     className="flex-none rounded-full order-2 md:order-1 object-cover h-28 w-28 mt-4 md:mt-0"

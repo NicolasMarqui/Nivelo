@@ -1,0 +1,43 @@
+query OrderDetail($id: String!) {
+    orderDetail(id: $id) {
+        id
+        user {
+            id
+            name
+        }
+        date
+        platformId
+        classDuration
+        userAccount
+        classPrice
+        isOrderAproved
+        classes {
+            id
+            name
+            description
+            active
+            level
+            price {
+                id
+                time
+                price
+            }
+            tutor {
+                id
+                description
+                user {
+                    id
+                    name
+                }
+            }
+            createdAt
+            updatedAt
+        }
+        hasTutorConfirmedClassDone
+        hasUserConfirmedClassDone
+        isPaid
+        paymentDetails
+        createdAt
+        updatedAt
+    }
+}
