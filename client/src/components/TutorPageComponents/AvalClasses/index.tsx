@@ -1,8 +1,7 @@
 import ClassItem from "@components/ClassItem";
+import { ClassesProps, ClassesTutorProps } from "@types";
 
-interface AvalClassesProps {}
-
-const AvalClasses: React.FC<AvalClassesProps> = ({}) => {
+const AvalClasses: React.FC<ClassesTutorProps> = ({ classes }) => {
     return (
         <div className="flex mt-20 flex-col relative w-full justify-center md:justify-start">
             <div className="classes__detail detail__ball1"></div>
@@ -13,9 +12,13 @@ const AvalClasses: React.FC<AvalClassesProps> = ({}) => {
             </h3>
 
             <div className="flex flex-col mt-5">
-                <ClassItem />
-                <ClassItem />
-                <ClassItem />
+                {!classes || classes.length === 0 ? (
+                    <p>Nenhuma</p>
+                ) : (
+                    classes.map((cl: ClassesProps) => (
+                        <ClassItem key={cl.id} singleClass={cl} />
+                    ))
+                )}
             </div>
         </div>
     );

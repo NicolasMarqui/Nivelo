@@ -1,45 +1,55 @@
+import { checkAvatar } from "@utils/checkAvatar";
+import { shortTutorDescription } from "@utils/shortTutorDescription";
 import Link from "next/link";
 import { MdStarBorder, MdEvent, MdChatBubbleOutline } from "react-icons/md";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
+import { TutorCardProps } from "src/types";
 import IconButton from "../IconButton";
+import ReactStarsRating from "react-awesome-stars-rating";
+import Tooltip from "react-tooltip";
 
-interface TutorCardProps {}
-
-const TutorCard: React.FC<TutorCardProps> = ({}) => {
+const TutorCard: React.FC<TutorCardProps> = ({ tutor }) => {
     return (
-        <div className="flex flex-col md:flex-row rounded-3xl items-center md:items-start bg-gray-100 mt-4 px-4 md:px-12 py-3 md:py-7">
+        <div className="flex flex-col md:flex-row rounded-3xl items-center md:items-start bg-gray-100 mt-4 px-4 md:px-12 py-3 md:py-7 relative">
             <div className="flex-none flex flex-col">
                 <img
-                    src="/images/example.jpg"
+                    src={checkAvatar(tutor.user.avatar, tutor.user.name)}
                     className="flex-none rounded-full order-2 md:order-1 object-cover h-28 w-28 mt-4 md:mt-0"
                 />
 
-                <div className="flex-1 flex items-center jusify-center mt-4 order-3 md:order-2">
-                    <MdStarBorder size={20} />
-                    <MdStarBorder size={20} />
-                    <MdStarBorder size={20} />
-                    <MdStarBorder size={20} />
-                    <MdStarBorder size={20} />
+                <div
+                    className="flex-1 flex items-center jusify-center mt-5 order-3 md:order-2"
+                    data-for="rating"
+                    data-tip={`${
+                        tutor.rating === 0
+                            ? "Sem avaliações"
+                            : `Nota ${tutor.rating}`
+                    }`}
+                >
+                    <ReactStarsRating
+                        id="rating"
+                        value={tutor.rating}
+                        className="flex pointer-events-none"
+                    />
+                    <Tooltip id="rating" effect="solid" place="bottom" />
                 </div>
 
-                <div className="flex-1 flex items-center justify-center rounded-xl bg-primaryPurple mt-2 md:mt-4 order-1 md:order-3 py-1">
-                    <p className="text-white text-sm">Tutor</p>
-                </div>
+                <p className="bg-primaryPurple text-white text-sm text-center absolute top-0 -right-3 p-2 rounded-sm font-bold hidden md:block detail">
+                    {tutor.type.name}
+                </p>
             </div>
             <div className="flex-2 px-4 md:px-14 md:mr-4 md:border-r-2 md:border-gray-300 cursor-pointer">
-                <Link href="/tutor/123">
+                <Link href="/tutor/[id]" as={`/tutor/${tutor.id}`}>
                     <a className="flex flex-col items-center md:items-start">
                         <h3 className="text-black222 text-xl md:text-2xl font-bold mt-2 md:mt-0">
-                            Nicolas Marqui
+                            {tutor.user.name}
                         </h3>
                         <p className="text-sm text-primaryOrange md:-mt-1">
                             Javascript, Algoritimos
                         </p>
 
                         <p className="mt-4 text-base text-desc md:w-4/5 text-center md:text-left">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing
-                            elit, sed do eiusmod tempor incididunt ut labore et
-                            dolore magna aliqua. Ut enim ad minim veniam
+                            {shortTutorDescription(tutor.description, 200)}
                         </p>
                     </a>
                 </Link>

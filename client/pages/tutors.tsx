@@ -63,10 +63,22 @@ const Tutors: React.FC = ({}) => {
                 </div>
                 <Container>
                     <FilterContainer />
-                    {fetching || error ? <LoaderTutorCard /> : <TutorResults />}
+                    {fetching || error ? (
+                        Array(6)
+                            .fill(0)
+                            .map((_, idx) => <LoaderTutorCard key={idx} />)
+                    ) : !data ||
+                      !data.allTutors ||
+                      data.allTutors.length === 0 ? (
+                        <p>No results</p>
+                    ) : (
+                        <TutorResults data={data.allTutors} />
+                    )}
                 </Container>
             </div>
         </>
     );
 };
-export default withUrqlClient(createUrqlClient, { ssr: true })(Tutors);
+export default withUrqlClient(createUrqlClient, {
+    ssr: false,
+})(Tutors);

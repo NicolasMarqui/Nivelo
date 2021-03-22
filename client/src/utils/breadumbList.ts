@@ -5,14 +5,16 @@ export const tutorsBreadcumbList = [
     },
 ];
 
-export const tutorBreadcumbList = [
-    {
-        id: 1,
-        text: "Tutores",
-        linkTo: "/tutors",
-    },
-    {
-        id: 2,
-        text: "Nicolas Marqui",
-    },
-];
+export const tutorBreadcumbList = (name: string) => {
+    return [
+        {
+            id: 1,
+            text: "Tutores",
+            linkTo: "/tutors",
+        },
+        {
+            id: 2,
+            text: name,
+        },
+    ];
+};

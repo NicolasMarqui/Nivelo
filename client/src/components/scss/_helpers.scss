@@ -196,3 +196,18 @@
         }
     }
 }
+
+.detail {
+    &::before {
+        z-index: 1;
+        content: "";
+        position: absolute;
+        bottom: -5px;
+        right: 0;
+        height: 13px;
+        width: 23px;
+        background: #8390fa;
+        transform: rotate(327deg);
+        border-radius: 0 0 5px 0;
+    }
+}

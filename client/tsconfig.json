@@ -25,6 +25,8 @@
             "@utils": ["src/utils"],
             "@hooks/*": ["src/hooks/*"],
             "@hooks": ["src/hooks"],
+            "@types/*": ["src/types/*"],
+            "@types": ["src/types"],
             "@i18n": ["./i18n"],
             "@test/*": ["test/*"],
             "@test": ["test"]

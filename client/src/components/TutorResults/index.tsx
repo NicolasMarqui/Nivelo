@@ -1,12 +1,16 @@
 import TutorCard from "@components/UI/TutorCard";
+import { TutorProps } from "src/types";
 
-interface TutorResultsProps {}
+interface TutorResultsProps {
+    data: TutorProps[];
+}
 
-const TutorResults: React.FC<TutorResultsProps> = ({}) => {
+const TutorResults: React.FC<TutorResultsProps> = ({ data }) => {
     return (
         <div className="mt-8">
-            <TutorCard />
-            <TutorCard />
+            {data.map((t) => (
+                <TutorCard tutor={t} />
+            ))}
         </div>
     );
 };

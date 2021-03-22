@@ -1,7 +1,7 @@
 import Skeleton from "react-loading-skeleton";
 
 const LoaderTutorCard = () => (
-    <div className="flex flex-col md:flex-row rounded-3xl items-center md:items-start  mt-4 px-4 py-3 md:py-7">
+    <div className="flex flex-col md:flex-row rounded-3xl items-center md:items-start  mt-7 px-4 py-3 md:py-7 shadow-md">
         <div className="flex-none flex flex-col justify-center items-center">
             <Skeleton circle={true} height={120} width={120} />
 
