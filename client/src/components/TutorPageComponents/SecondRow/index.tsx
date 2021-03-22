@@ -1,5 +1,6 @@
 import AvalClasses from "@components/TutorPageComponents/AvalClasses";
 import Feedback from "@components/TutorPageComponents/Feedback";
+import BackButton from "@components/UI/BackButton";
 import Breadcumb from "@components/UI/Breadcumb";
 import { tutorBreadcumbList } from "@utils/breadumbList";
 import { MdRecordVoiceOver } from "react-icons/md";
@@ -9,10 +10,11 @@ interface SecondRowProps {}
 const SecondRow: React.FC<SecondRowProps> = ({}) => {
     return (
         <div className="flex-2 md:flex-2 flex flex-col items-center md:items-start px-4 md:px-14">
-            <div className="py-4 z-20 -mt-14 block">
+            <div className="py-4 z-20 -mt-20 hidden md:block">
+                <BackButton />
                 <Breadcumb list={tutorBreadcumbList} classes="text-center" />
             </div>
-            <h3 className="text-black222 text-xl md:text-3xl font-bold mt-2 md:mt-4">
+            <h3 className="text-black222 text-xl md:text-3xl font-bold mt-2 md:mt-5">
                 Nicolas Marqui
             </h3>
             <p className="text-sm text-primaryOrange md:-mt-1">

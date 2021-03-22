@@ -1,7 +1,0 @@
-query AllCategoriesTutor($id: Float!) {
-    allCategoriesTutor(tutorID: $id) {
-        id
-        name
-        icon
-    }
-}

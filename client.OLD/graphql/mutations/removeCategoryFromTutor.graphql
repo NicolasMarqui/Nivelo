@@ -1,3 +1,0 @@
-mutation removeCategoryFromTutor($tutorID: Float!, $categoryID: Float!) {
-    removeCategoryFromTutor(tutorID: $tutorID, categoryID: $categoryID)
-}

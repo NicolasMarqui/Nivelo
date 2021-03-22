@@ -1,13 +1,16 @@
 import Container from "@components/container";
 import Meta from "@components/Meta";
-import Availability from "@components/TutorPageComponents/Availability";
-import FirstRow from "@components/TutorPageComponents/FirstRow";
-import SecondRow from "@components/TutorPageComponents/SecondRow";
 import Breadcumb from "@components/UI/Breadcumb";
 import useWindowSize from "@hooks/useWindowSize";
 import { tutorBreadcumbList } from "@utils/breadumbList";
 import { useState } from "react";
 import { StickyContainer } from "react-sticky";
+import Side from "@components/UI/Side";
+
+import FirstRow from "@components/TutorPageComponents/FirstRow";
+import SecondRow from "@components/TutorPageComponents/SecondRow";
+import Availability from "@components/TutorPageComponents/Availability";
+import AvailabilityMobile from "@components/TutorPageComponents/AvailabilityMobile";
 
 interface TutorProps {}
 
@@ -35,14 +38,32 @@ const Tutor: React.FC<TutorProps> = ({}) => {
 
                 <Container classes="px-3">
                     <StickyContainer>
-                        <div className="flex flex-col md:flex-row">
+                        <div
+                            className="flex flex-col md:flex-row"
+                            onClick={() => setAgendarOpen(true)}
+                        >
                             <FirstRow />
                             <SecondRow />
-                            {width > 1024 ? <Availability /> : ""}
+                            {width > 1024 ? (
+                                <Availability />
+                            ) : (
+                                <AvailabilityMobile />
+                            )}
                         </div>
                     </StickyContainer>
                 </Container>
             </div>
+
+            {agendarOpen && (
+                <Side
+                    isOpen={agendarOpen}
+                    handleClose={() => setAgendarOpen(!agendarOpen)}
+                    position="bottom"
+                    header={{ title: "Agendamento" }}
+                >
+                    oi
+                </Side>
+            )}
         </>
     );
 };

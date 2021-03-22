@@ -1,7 +1,0 @@
-query AllTypes {
-    allTypes {
-        id
-        name
-        rules
-    }
-}

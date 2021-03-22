@@ -1,7 +1,0 @@
-query AllPlatforms {
-    allPlatforms {
-        id
-        name
-        icon
-    }
-}

@@ -19,7 +19,7 @@ const Breadcumb: React.FC<BreadcumbProps> = ({ list, classes }) => {
                 <li className="px-2">
                     <Link href="/">
                         <a
-                            className={`no-underline text-white text-lg hover:underline ${classes}`}
+                            className={`no-underline text-white text-base hover:underline ${classes}`}
                         >
                             Home
                         </a>
@@ -32,14 +32,14 @@ const Breadcumb: React.FC<BreadcumbProps> = ({ list, classes }) => {
                             {l.linkTo ? (
                                 <Link href={l.linkTo}>
                                     <a
-                                        className={`no-underline text-white text-lg hover:underline ${classes}`}
+                                        className={`no-underline text-white text-base hover:underline ${classes}`}
                                     >
                                         {l.text}
                                     </a>
                                 </Link>
                             ) : (
                                 <p
-                                    className={`no-underline text-white text-lg ${classes}`}
+                                    className={`no-underline text-white text-base ${classes}`}
                                 >
                                     {l.text}
                                 </p>

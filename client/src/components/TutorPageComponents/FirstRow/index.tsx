@@ -17,6 +17,10 @@ const FirstRow: React.FC<FirstRowProps> = ({}) => {
                 <MdStarBorder size={20} />
                 <MdStarBorder size={20} />
             </div>
+
+            <div className="hidden md:flex items-center justify-center rounded-lg bg-primaryPurple mt-2 md:mt-4 py-1 order-3">
+                <p className="text-white text-base">Tutor</p>
+            </div>
         </div>
     );
 };

@@ -1,7 +1,0 @@
-query Categories {
-    allCategories {
-        id
-        name
-        icon
-    }
-}

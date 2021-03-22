@@ -1,8 +1,0 @@
-fragment RegularUser on User {
-    id
-    name
-    email
-    tutor {
-        id
-    }
-}

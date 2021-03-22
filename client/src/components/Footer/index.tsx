@@ -108,6 +108,7 @@ const Footer: React.FC<FooterProps> = ({}) => {
                                 options={Languages}
                                 placeholder="Idioma"
                                 instanceId="idioma"
+                                menuPlacement="top"
                             />
                         </div>
 
@@ -117,6 +118,7 @@ const Footer: React.FC<FooterProps> = ({}) => {
                                 options={Currencies}
                                 placeholder="Moeda"
                                 instanceId="currency"
+                                menuPlacement="top"
                             />
                         </div>
                     </div>

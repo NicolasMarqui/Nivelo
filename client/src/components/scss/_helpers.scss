@@ -115,6 +115,19 @@
         }
     }
 
+    &.side__bottom {
+        animation: leftToBottom 0.45s ease-in-out;
+
+        @keyframes leftToBottom {
+            from {
+                transform: translateY(900px);
+            }
+            to {
+                transform: translateY(0);
+            }
+        }
+    }
+
     &.side__closed {
         animation: rightToClose 0.4s linear;
 
