@@ -58,13 +58,19 @@ export interface ClassesProps {
         id?: number;
         price?: number;
         time?: number;
-    };
+    }[];
     createdAt?: string;
     updatedAt?: string;
 }
 
 export interface ClassesTutorProps {
     classes: ClassesProps[] | [];
+}
+
+export interface PriceProps {
+    id?: number;
+    time?: number;
+    price?: number;
 }
 
 export interface TutorFeedbackProps {
@@ -76,5 +82,49 @@ export interface TutorFeedbackProps {
         id: number;
         name?: string;
         avatar?: string;
+    };
+}
+
+export interface meProps {
+    me: {
+        id?: number;
+        name?: string;
+        email?: string;
+        sex?: string;
+        country?: string;
+        city?: string;
+        avatar?: string;
+        userPlatformAccount?: {
+            platform?:
+                | {
+                      id?: number;
+                      name?: string;
+                      account?: string;
+                  }[]
+                | [];
+        };
+        description?: string;
+        dateBirth?: string;
+        tutor: {
+            id?: number;
+            description?: string;
+            classes:
+                | {
+                      id?: number;
+                      name?: string;
+                      amountTimeTaught?: number;
+                      level?: string;
+                      price:
+                          | {
+                                id?: number;
+                                time?: number;
+                                price?: number;
+                            }[]
+                          | [];
+                  }[]
+                | [];
+        };
+        createdAt?: string;
+        updatedAt?: string;
     };
 }

@@ -21,7 +21,7 @@ const Navbar: React.FC<NavbarProps> = ({}) => {
             <header
                 className={`border-b-2 border-gray-200 px-3 z-20 ${
                     router.pathname === "/"
-                        ? "md:absolute top-0 right-0 left-0"
+                        ? "md:absolute top-0 right-0 left-0 bg-white"
                         : "relative"
                 }`}
             >
@@ -43,7 +43,7 @@ const Navbar: React.FC<NavbarProps> = ({}) => {
                         <div className="flex-1 flex items-center justify-between">
                             <LanguageNav />
                             <div className="hidden md:block">
-                                <Menu />
+                                <Menu pageProps />
                             </div>
                         </div>
                         <div className="flex-none md:hidden">

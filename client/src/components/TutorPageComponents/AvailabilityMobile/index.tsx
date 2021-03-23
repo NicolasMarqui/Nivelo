@@ -1,9 +1,17 @@
 import { MdEvent, MdChatBubbleOutline } from "react-icons/md";
 import IconButton from "@components/UI/IconButton";
+import { ClassesProps } from "@types";
+import { lowestPriceAval } from "@utils/lowestPriceClasses";
 
-interface AvailabilityMobileProps {}
+interface AvailabilityMobileProps {
+    tutorId: number;
+    classes: ClassesProps[];
+}
 
-const AvailabilityMobile: React.FC<AvailabilityMobileProps> = ({}) => {
+const AvailabilityMobile: React.FC<AvailabilityMobileProps> = ({
+    tutorId,
+    classes,
+}) => {
     return (
         <div className="fixed bottom-0 left-0 right-0 bg-white flex flex-row items-center justify-between py-2 px-4 shadow-lg z-20">
             <div className="flex-1">
@@ -11,7 +19,9 @@ const AvailabilityMobile: React.FC<AvailabilityMobileProps> = ({}) => {
                     Preço por hora a partir de
                 </h5>
                 <p className="text-2xl text-primaryOrange text-left font-bold">
-                    R$8.00
+                    {classes && classes.length > 0
+                        ? `R$ ${lowestPriceAval(classes)}.00`
+                        : "R$-.00"}
                 </p>
             </div>
             <div className="flex-none flex justify-end">

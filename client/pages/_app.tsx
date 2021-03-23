@@ -10,6 +10,7 @@ import { appWithTranslation } from "@i18n";
 import Layout from "@components/Layout";
 import NProgress from "nprogress";
 import { Router } from "next/router";
+import { Toaster } from "react-hot-toast";
 
 Router.events.on("routeChangeStart", () => {
     NProgress.start();
@@ -19,9 +20,12 @@ Router.events.on("routeChangeError", () => NProgress.done());
 
 function MyApp({ Component, pageProps }: AppProps): JSX.Element {
     return (
-        <Layout>
-            <Component {...pageProps} />
-        </Layout>
+        <>
+            <Toaster position="top-center" />
+            <Layout>
+                <Component {...pageProps} />
+            </Layout>
+        </>
     );
 }
 

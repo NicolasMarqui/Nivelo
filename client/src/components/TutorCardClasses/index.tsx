@@ -1,4 +1,4 @@
-import ClassItem from "@components/ClassItem";
+import CardClassItem from "@components/CardClassItem";
 import EmptyAnimation from "@components/UI/EmptyAnimation";
 import { ClassesProps } from "@types";
 
@@ -7,18 +7,20 @@ interface TutorCardClassesProps {
     tutorId: number;
 }
 
-const TutorCardClasses: React.FC<TutorCardClassesProps> = ({ classes, tutorId }) => {
+const TutorCardClasses: React.FC<TutorCardClassesProps> = ({
+    classes,
+    tutorId,
+}) => {
     return (
         <div className="relative">
             {!classes || classes.length === 0 ? (
                 <EmptyAnimation />
             ) : (
                 classes.map((cl: ClassesProps) => (
-                    <ClassItem
+                    <CardClassItem
                         singleClass={cl}
                         key={cl.id}
                         extraClasses="bg-white my-2 p-2"
-                        hasClick={false}
                         tutorId={tutorId}
                     />
                 ))

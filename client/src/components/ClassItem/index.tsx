@@ -4,7 +4,8 @@ import { MdSchool } from "react-icons/md";
 import Side from "@components/UI/Side";
 import IconButton from "@components/UI/IconButton";
 import { MdEvent } from "react-icons/md";
-import { useRouter } from 'next/router';
+import { useRouter } from "next/router";
+import { lowestPriceClasses } from "@utils/lowestPriceClasses";
 
 interface ClassItemProps {
     singleClass: ClassesProps;
@@ -13,18 +14,23 @@ interface ClassItemProps {
     tutorId: number;
 }
 
-const ClassItem: React.FC<ClassItemProps> = ({ singleClass, extraClasses, hasClick = true, tutorId }) => {
+const ClassItem: React.FC<ClassItemProps> = ({
+    singleClass,
+    extraClasses,
+    hasClick = true,
+    tutorId,
+}) => {
     const router = useRouter();
     const [moreInfoClass, setMoreInfoClass] = useState(false);
-    const { name, amountTimeTaught, description } = singleClass;
+    const { name, amountTimeTaught, description, price } = singleClass;
 
     const handleClick = () => {
-        if(hasClick){
-            setMoreInfoClass(true)
-        }else{
-            router.push(`/tutor/${tutorId}#classes`)
+        if (hasClick) {
+            setMoreInfoClass(true);
+        } else {
+            router.push(`/tutor/${tutorId}#classes`);
         }
-    }
+    };
 
     return (
         <>
@@ -44,7 +50,8 @@ const ClassItem: React.FC<ClassItemProps> = ({ singleClass, extraClasses, hasCli
                 <div className="flex-none justify-self-end">
                     <div className="bg-primaryPink p-2 rounded-2xl">
                         <p className="text-base md:text-lg text-white font-bold">
-                            R$ 8.00
+                            R$ {lowestPriceClasses(price)}.00
+                            <span>{price.length > 1 ? "+" : ""}</span>
                         </p>
                     </div>
                 </div>

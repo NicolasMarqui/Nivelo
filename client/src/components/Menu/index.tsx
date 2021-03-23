@@ -1,11 +1,15 @@
 import MenuExtra from "@components/MenuExtra";
 import checkIfActive from "@utils/checkIfActive";
+import { createUrqlClient } from "@utils/createUrqlClient";
+import { withUrqlClient } from "next-urql";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { useMeQuery } from "src/generated/graphql";
 
 interface MenuProps {}
 
 const Menu: React.FC<MenuProps> = ({}) => {
+    const [{ data, fetching, error }] = useMeQuery();
     const router = useRouter();
 
     return (
@@ -59,8 +63,8 @@ const Menu: React.FC<MenuProps> = ({}) => {
                     <a className="text-nav py-4 md:py-5 block">Seja um tutor</a>
                 </Link>
             </li>
-            <MenuExtra />
+            <MenuExtra fetching={fetching} data={data} error={error} />
         </ul>
     );
 };
-export default Menu;
+export default withUrqlClient(createUrqlClient)(Menu);

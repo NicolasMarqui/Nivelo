@@ -76,9 +76,17 @@ const Tutor: React.FC<TutorProps> = ({}) => {
                                     classes={data.singleTutor.tutor.classes}
                                 />
                                 {width > 1024 ? (
-                                    <Availability tutorId={data.singleTutor.tutor.id} />
+                                    <Availability
+                                        tutorId={data.singleTutor.tutor.id}
+                                        // @ts-ignore
+                                        classes={data.singleTutor.tutor.classes}
+                                    />
                                 ) : (
-                                    <AvailabilityMobile />
+                                    <AvailabilityMobile
+                                        tutorId={data.singleTutor.tutor.id}
+                                        // @ts-ignore
+                                        classes={data.singleTutor.tutor.classes}
+                                    />
                                 )}
                             </div>
                         </StickyContainer>

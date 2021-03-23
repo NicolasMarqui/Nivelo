@@ -2,12 +2,15 @@ import { Sticky } from "react-sticky";
 import { MdEvent, MdChatBubbleOutline } from "react-icons/md";
 import IconButton from "@components/UI/IconButton";
 import CustomCalendarTutor from "@components/UI/CalendarTutor";
+import { lowestPriceAval } from "@utils/lowestPriceClasses";
+import { ClassesProps } from "@types";
 
 interface AvailabilityProps {
     tutorId: number;
+    classes: ClassesProps[];
 }
 
-const Availability: React.FC<AvailabilityProps> = ({ tutorId }) => {
+const Availability: React.FC<AvailabilityProps> = ({ tutorId, classes }) => {
     return (
         <div className="flex-1 z-20 -mt-28 md:block hidden">
             <Sticky topOffset={-120}>
@@ -23,7 +26,9 @@ const Availability: React.FC<AvailabilityProps> = ({ tutorId }) => {
                                 Preço por hora a partir de
                             </h5>
                             <p className="text-2xl text-primaryOrange text-center md:text-left font-bold">
-                                R$8.00
+                                {classes && classes.length > 0
+                                    ? `R$ ${lowestPriceAval(classes)}.00`
+                                    : "R$-.00"}
                             </p>
                             <div className="mt-4 flex items-center justify-center md:justify-start mb-5 md:mb-0">
                                 <IconButton
