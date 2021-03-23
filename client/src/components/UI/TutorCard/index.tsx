@@ -8,6 +8,7 @@ import IconButton from "../IconButton";
 import ReactStarsRating from "react-awesome-stars-rating";
 import Tooltip from "react-tooltip";
 import TutorCardClasses from "@components/TutorCardClasses";
+import CustomCalendarTutor from "../CalendarTutor";
 
 const TutorCard: React.FC<TutorCardProps> = ({ tutor }) => {
     return (
@@ -89,10 +90,15 @@ const TutorCard: React.FC<TutorCardProps> = ({ tutor }) => {
 
                     <TabPanel>
                         {/* @ts-ignore */}
-                        <TutorCardClasses classes={tutor.classes} />
+                        <TutorCardClasses classes={tutor.classes} tutorId={tutor.id}/>
                     </TabPanel>
                     <TabPanel>
-                        <h2>Calendário aqui</h2>
+                        <CustomCalendarTutor
+                            tutorId={tutor.id}
+                            smaller
+                            isTutorDashView={false}
+                            isAgendando={false}
+                        />
                     </TabPanel>
                 </Tabs>
             </div>

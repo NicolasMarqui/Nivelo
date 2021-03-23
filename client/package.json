@@ -13,6 +13,8 @@
   "dependencies": {
     "@next/bundle-analyzer": "^10.0.5",
     "@urql/exchange-graphcache": "^4.0.0",
+    "axios": "^0.21.1",
+    "axios-hooks": "^2.5.0",
     "date-fns": "^2.19.0",
     "graphql": "^15.5.0",
     "hamburger-react": "^2.4.0",

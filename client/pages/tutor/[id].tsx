@@ -76,7 +76,7 @@ const Tutor: React.FC<TutorProps> = ({}) => {
                                     classes={data.singleTutor.tutor.classes}
                                 />
                                 {width > 1024 ? (
-                                    <Availability />
+                                    <Availability tutorId={data.singleTutor.tutor.id} />
                                 ) : (
                                     <AvailabilityMobile />
                                 )}

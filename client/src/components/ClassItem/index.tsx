@@ -4,21 +4,33 @@ import { MdSchool } from "react-icons/md";
 import Side from "@components/UI/Side";
 import IconButton from "@components/UI/IconButton";
 import { MdEvent } from "react-icons/md";
+import { useRouter } from 'next/router';
 
 interface ClassItemProps {
     singleClass: ClassesProps;
     extraClasses?: string;
+    hasClick?: boolean;
+    tutorId: number;
 }
 
-const ClassItem: React.FC<ClassItemProps> = ({ singleClass, extraClasses }) => {
+const ClassItem: React.FC<ClassItemProps> = ({ singleClass, extraClasses, hasClick = true, tutorId }) => {
+    const router = useRouter();
     const [moreInfoClass, setMoreInfoClass] = useState(false);
     const { name, amountTimeTaught, description } = singleClass;
+
+    const handleClick = () => {
+        if(hasClick){
+            setMoreInfoClass(true)
+        }else{
+            router.push(`/tutor/${tutorId}#classes`)
+        }
+    }
 
     return (
         <>
             <div
                 className={`w-full flex flex-row items-center justify-between rounded-2xl cursor-pointer transform hover:scale-105 ${extraClasses}`}
-                onClick={() => setMoreInfoClass(true)}
+                onClick={handleClick}
             >
                 <div className="flex-none">
                     <MdSchool size={22} />

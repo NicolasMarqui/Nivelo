@@ -4,9 +4,10 @@ import { ClassesProps } from "@types";
 
 interface TutorCardClassesProps {
     classes: ClassesProps[] | [];
+    tutorId: number;
 }
 
-const TutorCardClasses: React.FC<TutorCardClassesProps> = ({ classes }) => {
+const TutorCardClasses: React.FC<TutorCardClassesProps> = ({ classes, tutorId }) => {
     return (
         <div className="relative">
             {!classes || classes.length === 0 ? (
@@ -17,6 +18,8 @@ const TutorCardClasses: React.FC<TutorCardClassesProps> = ({ classes }) => {
                         singleClass={cl}
                         key={cl.id}
                         extraClasses="bg-white my-2 p-2"
+                        hasClick={false}
+                        tutorId={tutorId}
                     />
                 ))
             )}

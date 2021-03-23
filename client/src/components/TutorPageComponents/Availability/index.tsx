@@ -1,10 +1,13 @@
 import { Sticky } from "react-sticky";
 import { MdEvent, MdChatBubbleOutline } from "react-icons/md";
 import IconButton from "@components/UI/IconButton";
+import CustomCalendarTutor from "@components/UI/CalendarTutor";
 
-interface AvailabilityProps {}
+interface AvailabilityProps {
+    tutorId: number;
+}
 
-const Availability: React.FC<AvailabilityProps> = ({}) => {
+const Availability: React.FC<AvailabilityProps> = ({ tutorId }) => {
     return (
         <div className="flex-1 z-20 -mt-28 md:block hidden">
             <Sticky topOffset={-120}>
@@ -48,7 +51,14 @@ const Availability: React.FC<AvailabilityProps> = ({}) => {
                                 Disponibilidade
                             </h5>
 
-                            <div className="my-3 h-32 bg-gray-200"></div>
+                            <div className="my-3">
+                                <CustomCalendarTutor
+                                    tutorId={tutorId}
+                                    smaller
+                                    isAgendando={false}
+                                    isTutorDashView={false}
+                                />
+                            </div>
 
                             <p className="my-2 text-center text-sm color-desc">
                                 Lorem ipsum dolor sit amet, consectetur eiusmod

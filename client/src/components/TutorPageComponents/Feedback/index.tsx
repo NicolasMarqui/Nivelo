@@ -2,6 +2,8 @@ import FeedbackItem from "@components/FeedbackItem";
 import EmptyAnimation from "@components/UI/EmptyAnimation";
 import LoadingAnimation from "@components/UI/LoadingAnimation";
 import { useTutorFeedbackQuery } from "src/generated/graphql";
+import ReactPaginate from "react-paginate";
+import { getTotalPages } from "@utils/getTotalPages";
 
 interface FeedbackProps {
     tutorId: number;
@@ -11,6 +13,10 @@ const Feedback: React.FC<FeedbackProps> = ({ tutorId }) => {
     const [{ data, fetching, error }] = useTutorFeedbackQuery({
         variables: { id: tutorId },
     });
+
+    const handlePaginationFeedback = (e: number) => {
+        console.log(e);
+    };
 
     return (
         <div className="flex mt-20 flex-col relative w-full justify-center md:justify-start">
@@ -29,6 +35,24 @@ const Feedback: React.FC<FeedbackProps> = ({ tutorId }) => {
                     {data.getTutorFeedbacks.map((f) => (
                         <FeedbackItem key={f.id} feed={f} />
                     ))}
+
+                    <div className="my-4">
+                        <ReactPaginate
+                            previousLabel={"Anterior"}
+                            nextLabel={"Próximo"}
+                            containerClassName={"pagination"}
+                            activeClassName={"active"}
+                            pageCount={getTotalPages(
+                                data.getTutorFeedbacks.length,
+                                5
+                            )}
+                            marginPagesDisplayed={2}
+                            pageRangeDisplayed={5}
+                            onPageChange={(e) =>
+                                handlePaginationFeedback(e.selected)
+                            }
+                        />
+                    </div>
                 </div>
             )}
         </div>

@@ -43,7 +43,6 @@ const FilterContainer: React.FC<FilterContainerProps> = ({ amount }) => {
                 <Side
                     isOpen={isOpenFilter}
                     handleClose={() => setIsOpenFilter(false)}
-                    position="left"
                     header={{ title: "Filtros" }}
                 >
                     Hello Side
