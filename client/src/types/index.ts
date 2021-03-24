@@ -128,3 +128,47 @@ export interface meProps {
         updatedAt?: string;
     };
 }
+
+export interface UOrdersProps {
+    id?: string;
+    user?: {
+        id?: number;
+        name?: string;
+    };
+    classes: {
+        id?: number;
+        name?: string;
+        description?: string;
+        active?: boolean;
+        level?: string;
+        price?:
+            | {
+                  id?: number;
+                  time?: number;
+                  price?: number;
+              }[]
+            | [];
+        tutor?: {
+            id?: number;
+            description?: string;
+            user?: {
+                id?: number;
+                name?: string;
+            };
+        };
+        createdAt?: string;
+        updatedAt?: string;
+    };
+    date?: string;
+    platformId?: number;
+    classDuration?: number | string;
+    userAccount?: string;
+    classPrice?: number | string;
+    isOrderAproved?: boolean;
+    hasTutorConfirmedClassDone?: boolean;
+    hasUserConfirmedClassDone?: boolean;
+    isPaid?: boolean;
+    paymentDetails?: string;
+    createdAt?: string;
+    updatedAt?: string;
+}

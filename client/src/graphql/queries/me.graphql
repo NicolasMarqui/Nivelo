@@ -9,6 +9,18 @@ query Me {
         country
         city
         avatar
+        followersAmount
+        classes {
+            id
+            name
+            amountTimeTaught
+            level
+            price {
+                id
+                time
+                price
+            }
+        }
         tutor {
             id
             description

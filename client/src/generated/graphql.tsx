@@ -1125,8 +1125,15 @@ export type MeQuery = (
   { __typename?: 'Query' }
   & { me?: Maybe<(
     { __typename?: 'User' }
-    & Pick<User, 'id' | 'name' | 'description' | 'email' | 'dateBirth' | 'sex' | 'country' | 'city' | 'avatar' | 'createdAt' | 'updatedAt'>
-    & { tutor?: Maybe<(
+    & Pick<User, 'id' | 'name' | 'description' | 'email' | 'dateBirth' | 'sex' | 'country' | 'city' | 'avatar' | 'followersAmount' | 'createdAt' | 'updatedAt'>
+    & { classes?: Maybe<Array<(
+      { __typename?: 'Classes' }
+      & Pick<Classes, 'id' | 'name' | 'amountTimeTaught' | 'level'>
+      & { price?: Maybe<Array<(
+        { __typename?: 'Price' }
+        & Pick<Price, 'id' | 'time' | 'price'>
+      )>> }
+    )>>, tutor?: Maybe<(
       { __typename?: 'Tutor' }
       & Pick<Tutor, 'id' | 'description'>
       & { classes?: Maybe<Array<(
@@ -1956,6 +1963,18 @@ export const MeDocument = gql`
     country
     city
     avatar
+    followersAmount
+    classes {
+      id
+      name
+      amountTimeTaught
+      level
+      price {
+        id
+        time
+        price
+      }
+    }
     tutor {
       id
       description
