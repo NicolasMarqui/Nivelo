@@ -35,6 +35,7 @@
     "react-paginate": "^7.1.1",
     "react-select": "^4.3.0",
     "react-slick": "^0.28.1",
+    "react-step-wizard": "^5.3.5",
     "react-sticky": "^6.0.3",
     "react-tabs": "^3.2.1",
     "react-timeago": "^5.2.0",

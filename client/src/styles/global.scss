@@ -22,9 +22,12 @@ body {
     width: 100%;
     height: 5px !important;
 }
+
 .rsw_2Y {
     overflow-x: hidden;
-    min-height: 300px;
+    max-height: 800px;
+    overflow-y: hidden;
+    padding-bottom: 100px;
 }
 
 .rsw_2f {

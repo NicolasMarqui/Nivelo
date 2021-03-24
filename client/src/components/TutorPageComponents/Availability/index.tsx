@@ -8,9 +8,16 @@ import { ClassesProps } from "@types";
 interface AvailabilityProps {
     tutorId: number;
     classes: ClassesProps[];
+    setAgendarOpen: (value: boolean) => void;
+    isAgendarOpen: boolean;
 }
 
-const Availability: React.FC<AvailabilityProps> = ({ tutorId, classes }) => {
+const Availability: React.FC<AvailabilityProps> = ({
+    tutorId,
+    classes,
+    setAgendarOpen,
+    isAgendarOpen,
+}) => {
     return (
         <div className="flex-1 z-20 -mt-28 md:block hidden">
             <Sticky topOffset={-120}>
@@ -26,7 +33,7 @@ const Availability: React.FC<AvailabilityProps> = ({ tutorId, classes }) => {
                                 Preço por hora a partir de
                             </h5>
                             <p className="text-2xl text-primaryOrange text-center md:text-left font-bold">
-                                {classes && classes.length > 0
+                                {classes !== null && classes.length > 0
                                     ? `R$ ${lowestPriceAval(classes)}.00`
                                     : "R$-.00"}
                             </p>
@@ -35,6 +42,9 @@ const Availability: React.FC<AvailabilityProps> = ({ tutorId, classes }) => {
                                     text="Agendar"
                                     icon={<MdEvent size={18} color="#222" />}
                                     classes="bg-primaryPink hover:bg-lightOrange text-white ml-0"
+                                    onClick={() =>
+                                        setAgendarOpen(!isAgendarOpen)
+                                    }
                                 />
                                 <IconButton
                                     text="Contato"

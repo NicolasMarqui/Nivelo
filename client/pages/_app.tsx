@@ -15,6 +15,7 @@ import DashboardLayout from "@components/Layout/DashboardLayout";
 
 Router.events.on("routeChangeStart", () => {
     NProgress.start();
+    document.querySelector("body").classList.remove("overflow-hidden");
 });
 Router.events.on("routeChangeComplete", () => NProgress.done());
 Router.events.on("routeChangeError", () => NProgress.done());
@@ -26,7 +27,7 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
         <>
             <Toaster position="top-center" />
             {router.pathname.startsWith("/dashboard") ? (
-                <DashboardLayout>
+                <DashboardLayout pageProps>
                     <Component {...pageProps} />
                 </DashboardLayout>
             ) : (

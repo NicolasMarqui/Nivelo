@@ -4,6 +4,7 @@ interface IconButtonProps {
     smaller?: boolean;
     classes?: string;
     onClick?: () => any;
+    isActive?: boolean;
 }
 
 const IconButton: React.FC<IconButtonProps> = ({
@@ -12,13 +13,16 @@ const IconButton: React.FC<IconButtonProps> = ({
     smaller = false,
     classes,
     onClick,
+    isActive = true,
 }) => {
     return (
         <div
             onClick={onClick}
             className={`flex rounded-xl cursor-pointer ${
                 smaller ? "p-2" : "p-2"
-            } bg-gray-100 items-center justify-center hover:bg-gray-50 ${classes}`}
+            } bg-gray-100 items-center justify-center hover:bg-gray-50 ${
+                !isActive ? "opacity-25 pointer-events-none" : ""
+            } ${classes}`}
         >
             {icon && (
                 <div className={`${text && "mr-2"} bg-white rounded-3xl p-2`}>

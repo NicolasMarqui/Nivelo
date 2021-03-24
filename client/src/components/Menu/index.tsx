@@ -15,52 +15,60 @@ const Menu: React.FC<MenuProps> = ({}) => {
     return (
         <ul className="flex flex-col md:flex-row">
             <li
-                className={`my-1 md:my-0 md:px-5 hoverMenu ${checkIfActive(
+                className={`my-1 md:my-0 md:px-3 lg:px-5 hoverMenu ${checkIfActive(
                     router.pathname,
                     "/"
                 )}`}
             >
                 <Link href="/">
-                    <a className="text-nav py-4 md:py-5 block">Home</a>
+                    <a className="text-nav md:text-base lg:text-nav py-4 md:py-5 block">
+                        Home
+                    </a>
                 </Link>
             </li>
             <li
-                className={`my-1 md:my-0 md:px-5 hoverMenu ${checkIfActive(
+                className={`my-1 md:my-0 md:px-3 lg:px-5 hoverMenu ${checkIfActive(
                     router.pathname,
                     "/categories"
                 )}`}
             >
                 <Link href="/categories">
-                    <a className="text-nav py-4 md:py-5 block">Categorias</a>
+                    <a className="text-nav md:text-base lg:text-nav py-4 md:py-5 block">
+                        Categorias
+                    </a>
                 </Link>
             </li>
             <li
-                className={`my-1 md:my-0 md:px-5 hoverMenu ${checkIfActive(
+                className={`my-1 md:my-0 md:px-3 lg:px-5 hoverMenu ${checkIfActive(
                     router.pathname,
                     "/tutors"
                 )}`}
             >
                 <Link href="/tutors">
-                    <a className="text-nav py-4 md:py-5 block">Tutores</a>
+                    <a className="text-nav md:text-base lg:text-nav py-4 md:py-5 block">
+                        Tutores
+                    </a>
                 </Link>
             </li>
             <li
-                className={`my-1 md:my-0 md:px-5 hoverMenu md:border-r-2 md:border-gray-200`}
+                className={`my-1 md:my-0 md:px-3 lg:px-5 hoverMenu md:border-r-2 md:border-gray-200`}
             >
                 <Link href="/#tutorial">
-                    <a className="text-nav py-4 md:py-5 block">
+                    <a className="text-nav md:text-base lg:text-nav py-4 md:py-5 block">
                         Como funciona?
                     </a>
                 </Link>
             </li>
             <li
-                className={`my-1 md:my-0 md:px-5 hoverMenu md:border-r-2 md:border-gray-200 ${checkIfActive(
+                className={`my-1 md:my-0 md:px-3 lg:px-5 hoverMenu md:border-r-2 md:border-gray-200 ${checkIfActive(
                     router.pathname,
                     "/become-tutor"
                 )}`}
             >
                 <Link href="/become-tutor">
-                    <a className="text-nav py-4 md:py-5 block">Seja um tutor</a>
+                    <a className="text-nav md:text-base lg:text-nav py-4 md:py-5 block">
+                        Seja um tutor
+                    </a>
                 </Link>
             </li>
             <MenuExtra fetching={fetching} data={data} error={error} />

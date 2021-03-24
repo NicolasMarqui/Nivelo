@@ -7,9 +7,17 @@ import cookieCutter from "cookie-cutter";
 import { toErrorMap } from "@utils/toErrorMap";
 import { toast } from "react-hot-toast";
 
-interface LoginFormProps {}
+interface LoginFormProps {
+    hasLogo?: boolean;
+    hasRedirect?: boolean;
+    nextStep?: any;
+}
 
-const LoginForm: React.FC<LoginFormProps> = ({}) => {
+const LoginForm: React.FC<LoginFormProps> = ({
+    hasLogo = true,
+    hasRedirect = true,
+    nextStep,
+}) => {
     const [{ fetching }, login] = useLoginMutation();
     const router = useRouter();
 
@@ -31,7 +39,13 @@ const LoginForm: React.FC<LoginFormProps> = ({}) => {
                 });
 
                 toast.success("Bem Vindo!");
-                router.push("/");
+                if (hasRedirect) {
+                    router.push("/");
+                }
+
+                if (nextStep) {
+                    nextStep();
+                }
             }
         },
     });

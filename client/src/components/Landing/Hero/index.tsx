@@ -8,7 +8,7 @@ interface HeroProps {}
 
 const Hero: React.FC<HeroProps> = ({}) => {
     return (
-        <div className="h-full md:h-screen border-b-2 border-gray-200 mt-10 md:mt-0">
+        <div className="h-full md:h-screen lg:h-full border-b-2 border-gray-200 mt-10 md:mt-0">
             <Container classes="h-full px-4">
                 <div className="flex flex-col md:flex-row items-center justify-between h-full">
                     <div className="flex-1 md:flex-2">

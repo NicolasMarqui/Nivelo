@@ -1,6 +1,6 @@
 import useClickOutside from "@hooks/useClickOutside";
 import { Router } from "next/router";
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
 import { FaTimes } from "react-icons/fa";
 
 interface SideProps {
@@ -23,15 +23,23 @@ const Side: React.FC<SideProps> = ({
     const sideRef = useRef();
 
     useClickOutside(sideRef, () => {
-        if (isOpen) handleClose();
+        if (isOpen) {
+            handleClose();
+            document.querySelector("body").classList.remove("overflow-hidden");
+        }
     });
 
     Router.events.on("routeChangeStart", () => {
         handleClose();
+        document.querySelector("body").classList.remove("overflow-hidden");
     });
 
+    useEffect(() => {
+        document.querySelector("body").classList.add("overflow-hidden");
+    }, []);
+
     // prettier-ignore
-    const positionClasses = position === "right" ? "top-0 bottom-0 right-0 w-72 md:w-80 side__right h-screen" : position === "left" ? "top-0 bottom-0 left-0 w-72 md:w-80 side__left h-screen" : "bottom-0 left-0 right-0 h-4/5 side__bottom";
+    const positionClasses = position === "right" ? "top-0 bottom-0 right-0 w-72 md:w-80 side__right h-screen" : position === "left" ? "top-0 bottom-0 left-0 w-72 md:w-80 side__left h-screen" : "bottom-0 left-0 right-0 h-5/6 side__bottom";
 
     return (
         <div
@@ -50,13 +58,20 @@ const Side: React.FC<SideProps> = ({
                         <h4 className="text-white text-base">{header.title}</h4>
                         <div
                             className="absolute right-2 flex items-center justify-center bg-white shadow-md inset-top p-2 rounded-full hover:bg-gray-300 cursor-pointer"
-                            onClick={() => handleClose()}
+                            onClick={() => {
+                                handleClose();
+                                document
+                                    .querySelector("body")
+                                    .classList.remove("overflow-hidden");
+                            }}
                         >
                             <FaTimes size={18} color="#222" />
                         </div>
                     </div>
                 )}
-                <div className={`${header ? "py-16" : "py-7"} px-4`}>
+                <div
+                    className={`${header ? "pt-16 pb-2 h-full" : "py-7"} px-4`}
+                >
                     {children}
                 </div>
                 {footer && (

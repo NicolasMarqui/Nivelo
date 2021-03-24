@@ -3,7 +3,7 @@ import Meta from "@components/Meta";
 import Breadcumb from "@components/UI/Breadcumb";
 import useWindowSize from "@hooks/useWindowSize";
 import { tutorBreadcumbList } from "@utils/breadumbList";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { StickyContainer } from "react-sticky";
 import Side from "@components/UI/Side";
 import { useSingleTutorQuery } from "src/generated/graphql";
@@ -16,6 +16,7 @@ import FirstRow from "@components/TutorPageComponents/FirstRow";
 import SecondRow from "@components/TutorPageComponents/SecondRow";
 import Availability from "@components/TutorPageComponents/Availability";
 import AvailabilityMobile from "@components/TutorPageComponents/AvailabilityMobile";
+import Agendar from "@components/Agendar";
 
 interface TutorProps {}
 
@@ -27,6 +28,12 @@ const Tutor: React.FC<TutorProps> = ({}) => {
     const [{ data, fetching, error }] = useSingleTutorQuery({
         variables: { id: parseInt(router.query.id as string) },
     });
+
+    const handleAgendar = (value: boolean) => setAgendarOpen(value);
+
+    useEffect(() => {
+        document.querySelector("body").classList.remove("overflow-hidden");
+    }, []);
 
     return (
         <>
@@ -80,12 +87,16 @@ const Tutor: React.FC<TutorProps> = ({}) => {
                                         tutorId={data.singleTutor.tutor.id}
                                         // @ts-ignore
                                         classes={data.singleTutor.tutor.classes}
+                                        setAgendarOpen={handleAgendar}
+                                        isAgendarOpen={agendarOpen}
                                     />
                                 ) : (
                                     <AvailabilityMobile
                                         tutorId={data.singleTutor.tutor.id}
                                         // @ts-ignore
                                         classes={data.singleTutor.tutor.classes}
+                                        setAgendarOpen={handleAgendar}
+                                        isAgendarOpen={agendarOpen}
                                     />
                                 )}
                             </div>
@@ -101,7 +112,13 @@ const Tutor: React.FC<TutorProps> = ({}) => {
                     position="bottom"
                     header={{ title: "Agendamento" }}
                 >
-                    oi
+                    <Agendar
+                        tutor={
+                            data && data.singleTutor
+                                ? data.singleTutor.tutor
+                                : null
+                        }
+                    />
                 </Side>
             )}
         </>

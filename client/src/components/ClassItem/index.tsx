@@ -49,10 +49,12 @@ const ClassItem: React.FC<ClassItemProps> = ({
                 </div>
                 <div className="flex-none justify-self-end">
                     <div className="bg-primaryPink p-2 rounded-2xl">
-                        <p className="text-base md:text-lg text-white font-bold">
-                            R$ {lowestPriceClasses(price)}.00
-                            <span>{price.length > 1 ? "+" : ""}</span>
-                        </p>
+                        {price && (
+                            <p className="text-base md:text-lg text-white font-bold">
+                                R$ {lowestPriceClasses(price)}.00
+                                <span>{price.length > 1 ? "+" : ""}</span>
+                            </p>
+                        )}
                     </div>
                 </div>
             </div>

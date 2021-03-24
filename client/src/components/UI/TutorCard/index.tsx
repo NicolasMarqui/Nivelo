@@ -90,7 +90,10 @@ const TutorCard: React.FC<TutorCardProps> = ({ tutor }) => {
 
                     <TabPanel>
                         {/* @ts-ignore */}
-                        <TutorCardClasses classes={tutor.classes} tutorId={tutor.id}/>
+                        <TutorCardClasses
+                            classes={tutor.classes}
+                            tutorId={tutor.id}
+                        />
                     </TabPanel>
                     <TabPanel>
                         <CustomCalendarTutor

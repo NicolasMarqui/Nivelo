@@ -18,7 +18,7 @@ const MenuExtra: React.FC<MenuExtraProps> = ({ data, fetching, error }) => {
                     <Skeleton height={30} width={40} className="mx-1" />
                 </li>
             ) : data && data.me ? (
-                <li className="my-2 md:my-0 md:mx-4 md:ml-5 group transform hover:scale-105">
+                <li className="my-2 md:my-0  md:mx-2 lg:mx-4 md:ml-5 group transform hover:scale-105">
                     <Link href="/dashboard">
                         <a className="text-nav py-4 md:py-5 text-darkerOrange font-bold flex justify-center md:justify-start">
                             <FaUserCircle size={20} className="mx-2 mt-0.5" />
@@ -28,14 +28,14 @@ const MenuExtra: React.FC<MenuExtraProps> = ({ data, fetching, error }) => {
                 </li>
             ) : (
                 <>
-                    <li className="my-2 md:my-0 md:mx-4 md:ml-9 hoverMenu">
+                    <li className="my-2 md:my-0  md:mx-2 lg:mx-4 md:ml-9 hoverMenu">
                         <Link href="/login">
                             <a className="text-nav py-4 md:py-5 text-darkerOrange font-bold flex justify-center md:justify-start">
                                 Login
                             </a>
                         </Link>
                     </li>
-                    <li className="my-2 md:my-0 md:mx-4 flex items-center justify-center md:justify-start">
+                    <li className="my-2 md:my-0  md:mx-2 lg:mx-4 flex items-center justify-center md:justify-start">
                         <Link href="/register">
                             <a className="transition duration-500 ease-in-out text-nav text-darkerOrange font-bold block border-2 border-orange rounded-3xl px-5 py-1 text-center hover:bg-primaryOrange hover:text-white cursor-pointer">
                                 Registrar
