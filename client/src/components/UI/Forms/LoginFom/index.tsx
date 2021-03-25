@@ -34,9 +34,11 @@ const LoginForm: React.FC<LoginFormProps> = ({
             } else if (response.data.login.user) {
                 const tutor = response.data.login.user.tutor;
 
-                cookieCutter.set("tid", tutor ? tutor.id : "", {
-                    expires: 1000 * 60 * 60 * 24 * 365 * 10,
-                });
+                if (tutor) {
+                    cookieCutter.set("tid", tutor ? tutor.id : "", {
+                        expires: 1000 * 60 * 60 * 24 * 365 * 10,
+                    });
+                }
 
                 toast.success("Bem Vindo!");
                 if (hasRedirect) {
@@ -76,7 +78,7 @@ const LoginForm: React.FC<LoginFormProps> = ({
                                 className="block w-full p-3 rounded bg-gray-100 border border-transparent focus:outline-none focus:border-orange"
                             />
                             {formik.errors.email && (
-                                <p className="my-1 bg-red-400">
+                                <p className="my-1 bg-red-200 p-2 text-sm text-white text-center">
                                     {formik.errors.email}
                                 </p>
                             )}
@@ -98,7 +100,7 @@ const LoginForm: React.FC<LoginFormProps> = ({
                                 className="block w-full p-3 rounded bg-gray-100 border border-transparent focus:outline-none focus:border-orange"
                             />
                             {formik.errors.password && (
-                                <p className="my-1 bg-red-400">
+                                <p className="my-1 bg-red-200 p-2 text-sm text-white text-center">
                                     {formik.errors.password}
                                 </p>
                             )}

@@ -1155,6 +1155,25 @@ export type MeQuery = (
   )> }
 );
 
+export type MeSimplifiedQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type MeSimplifiedQuery = (
+  { __typename?: 'Query' }
+  & { me?: Maybe<(
+    { __typename?: 'User' }
+    & Pick<User, 'id' | 'name' | 'description' | 'email' | 'dateBirth' | 'sex' | 'country' | 'city' | 'avatar' | 'followersAmount' | 'createdAt' | 'updatedAt'>
+    & { userPlatformAccount?: Maybe<Array<(
+      { __typename?: 'UserPlatformAccount' }
+      & Pick<UserPlatformAccount, 'account'>
+      & { platform?: Maybe<(
+        { __typename?: 'Platforms' }
+        & Pick<Platforms, 'id' | 'name'>
+      )> }
+    )>> }
+  )> }
+);
+
 export type OrderDetailQueryVariables = Exact<{
   id: Scalars['String'];
 }>;
@@ -2005,6 +2024,35 @@ export const MeDocument = gql`
 
 export function useMeQuery(options: Omit<Urql.UseQueryArgs<MeQueryVariables>, 'query'> = {}) {
   return Urql.useQuery<MeQuery>({ query: MeDocument, ...options });
+};
+export const MeSimplifiedDocument = gql`
+    query MeSimplified {
+  me {
+    id
+    name
+    description
+    email
+    dateBirth
+    sex
+    country
+    city
+    avatar
+    followersAmount
+    userPlatformAccount {
+      account
+      platform {
+        id
+        name
+      }
+    }
+    createdAt
+    updatedAt
+  }
+}
+    `;
+
+export function useMeSimplifiedQuery(options: Omit<Urql.UseQueryArgs<MeSimplifiedQueryVariables>, 'query'> = {}) {
+  return Urql.useQuery<MeSimplifiedQuery>({ query: MeSimplifiedDocument, ...options });
 };
 export const OrderDetailDocument = gql`
     query OrderDetail($id: String!) {

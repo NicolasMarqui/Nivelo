@@ -135,7 +135,7 @@ export interface UOrdersProps {
         id?: number;
         name?: string;
     };
-    classes: {
+    classes?: {
         id?: number;
         name?: string;
         description?: string;

@@ -4,12 +4,12 @@ import { createUrqlClient } from "@utils/createUrqlClient";
 import { withUrqlClient } from "next-urql";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useMeQuery } from "src/generated/graphql";
+import { useMeSimplifiedQuery } from "src/generated/graphql";
 
 interface MenuProps {}
 
 const Menu: React.FC<MenuProps> = ({}) => {
-    const [{ data, fetching, error }] = useMeQuery();
+    const [{ data, fetching, error }] = useMeSimplifiedQuery();
     const router = useRouter();
 
     return (

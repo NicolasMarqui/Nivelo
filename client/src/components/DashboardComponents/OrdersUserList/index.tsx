@@ -5,9 +5,13 @@ import OrdersUsersActions from "../OrdersUserActions";
 
 interface OrdersUserListProps {
     order: UOrdersProps;
+    isOrderPage?: boolean;
 }
 
-const OrdersUserList: React.FC<OrdersUserListProps> = ({ order }) => {
+const OrdersUserList: React.FC<OrdersUserListProps> = ({
+    order,
+    isOrderPage = false,
+}) => {
     const {
         classPrice,
         id,
@@ -120,6 +124,7 @@ const OrdersUserList: React.FC<OrdersUserListProps> = ({ order }) => {
                 <OrdersUsersActions
                     isPaid={isPaid}
                     hasUserConfirmedClassDone={hasUserConfirmedClassDone}
+                    isOrderPage={isOrderPage}
                 />
             </div>
         </div>

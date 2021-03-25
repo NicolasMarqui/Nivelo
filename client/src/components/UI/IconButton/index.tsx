@@ -21,7 +21,9 @@ const IconButton: React.FC<IconButtonProps> = ({
             className={`flex rounded-xl cursor-pointer ${
                 smaller ? "p-2" : "p-2"
             } bg-gray-100 items-center justify-center hover:bg-gray-50 ${
-                !isActive ? "opacity-25 pointer-events-none" : ""
+                !isActive
+                    ? "opacity-25 pointer-events-none cursor-not-allowed"
+                    : ""
             } ${classes}`}
         >
             {icon && (

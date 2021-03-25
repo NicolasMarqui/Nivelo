@@ -1,0 +1,23 @@
+query MeSimplified {
+    me {
+        id
+        name
+        description
+        email
+        dateBirth
+        sex
+        country
+        city
+        avatar
+        followersAmount
+        userPlatformAccount {
+            account
+            platform {
+                id
+                name
+            }
+        }
+        createdAt
+        updatedAt
+    }
+}

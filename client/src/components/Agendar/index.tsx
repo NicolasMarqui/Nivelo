@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { TutorProps } from "@types";
-import { useMeQuery } from "src/generated/graphql";
+import { useMeSimplifiedQuery } from "src/generated/graphql";
 import LoadingAnimation from "@components/UI/LoadingAnimation";
 import EmptyAnimation from "@components/UI/EmptyAnimation";
 import StepWizard from "react-step-wizard";
@@ -16,7 +16,7 @@ interface AgendarProps {
 }
 
 const Agendar: React.FC<AgendarProps> = ({ tutor }) => {
-    const [{ data, fetching, error }] = useMeQuery();
+    const [{ data, fetching, error }] = useMeSimplifiedQuery();
     const [selectedClass, setSelectedClass] = useState({});
     const [classPrice, setClassPrice] = useState({});
     const [schedule, setSchedule] = useState("");
