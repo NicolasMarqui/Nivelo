@@ -9,6 +9,7 @@ import ReactStarsRating from "react-awesome-stars-rating";
 import Tooltip from "react-tooltip";
 import TutorCardClasses from "@components/TutorCardClasses";
 import CustomCalendarTutor from "../CalendarTutor";
+import { getCategoriesFromArray } from "@utils/getCategoriesFromArray";
 
 const TutorCard: React.FC<TutorCardProps> = ({ tutor }) => {
     return (
@@ -47,7 +48,7 @@ const TutorCard: React.FC<TutorCardProps> = ({ tutor }) => {
                             {tutor.user.name}
                         </h3>
                         <p className="text-sm text-primaryOrange md:-mt-1">
-                            Javascript, Algoritimos
+                            {getCategoriesFromArray(tutor.categories)}
                         </p>
 
                         <p className="mt-4 text-base text-desc md:w-4/5 text-center md:text-left">
@@ -89,8 +90,8 @@ const TutorCard: React.FC<TutorCardProps> = ({ tutor }) => {
                     </TabList>
 
                     <TabPanel>
-                        {/* @ts-ignore */}
                         <TutorCardClasses
+                            // @ts-ignore
                             classes={tutor.classes}
                             tutorId={tutor.id}
                         />

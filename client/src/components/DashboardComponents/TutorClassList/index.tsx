@@ -28,6 +28,12 @@ const TutorClassList: React.FC<TutorClassListProps> = ({ classes }) => {
                                 <h2 className="text-center md:text-left text-xl font-semibold">
                                     {cl.name}
                                 </h2>
+                                <h3 className="text-center md:text-left text-base">
+                                    Nível:{" "}
+                                    <span className="text-primaryOrange">
+                                        {cl.level}
+                                    </span>
+                                </h3>
                                 <p className="text-center md:text-left text-desc text-sm md:text-base">
                                     Ensinada {cl.amountTimeTaught} vezes
                                 </p>

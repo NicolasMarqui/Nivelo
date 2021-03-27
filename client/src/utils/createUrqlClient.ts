@@ -1,3 +1,4 @@
+import { NewClassMutationVariables } from "./../generated/graphql";
 import { cacheExchange, Cache } from "@urql/exchange-graphcache";
 import Router from "next/router";
 import { dedupExchange, Exchange, fetchExchange } from "urql";
@@ -24,7 +25,7 @@ const updateTutorCache = (cache: Cache) => {
         // @ts-ignore
         data.singleTutor.tutor.classes.push({
             id: 999,
-            name: "I have no idea why it works",
+            name: "I have no idea why used to work",
         });
 
         return data;
@@ -73,7 +74,6 @@ export const createUrqlClient = (ssrExchange: any) => ({
                         updateOrdersCache(cache);
                     },
                     deleteClass: (_result, args, cache, info) => {
-                        console.log("Deleted");
                         cache.invalidate({
                             __typename: "Classes",
                             id: (args as DeleteClassMutationVariables).id,

@@ -2,11 +2,15 @@ import EmptyAnimation from "@components/UI/EmptyAnimation";
 import LoadingAnimation from "@components/UI/LoadingAnimation";
 import { GetServerSideProps } from "next";
 //prettier-ignore
-import { useSingleTutorQuery, useTutorOrdersAwaitingApprovalQuery,} from "src/generated/graphql";
+import { useAllCategoriesTutorQuery, useSingleTutorQuery, useTutorOrdersAwaitingApprovalQuery,} from "src/generated/graphql";
 import { FaCog } from "react-icons/fa";
 import TutorClassList from "@components/DashboardComponents/TutorClassList";
 import IconButton from "@components/UI/IconButton";
 import { FaChalkboardTeacher } from "react-icons/fa";
+import { Reoverlay } from "reoverlay";
+import AddClass from "@components/Modals/AddClass";
+import EditTutorAccount from "@components/Modals/EditTutorAccount";
+import TutorCategoriesList from "@components/DashboardComponents/TutorCategoriesList";
 
 interface TutorProps {
     tutorID: number;
@@ -17,6 +21,9 @@ const Tutor: React.FC<TutorProps> = (props) => {
     const [{ data, fetching, error }] = useSingleTutorQuery({ variables: { id: props.tutorID } });
     //prettier-ignore
     const [{ data: tutorsOrderData, fetching: tutorsOrderFetc }] = useTutorOrdersAwaitingApprovalQuery({ variables: { id: props.tutorID },});
+    const [{ data: tCat, fetching: tFet }] = useAllCategoriesTutorQuery({
+        variables: { id: props.tutorID },
+    });
 
     if (fetching) {
         return <LoadingAnimation />;
@@ -63,7 +70,11 @@ const Tutor: React.FC<TutorProps> = (props) => {
                                 <FaCog
                                     size={30}
                                     className="mt-5 md:mt-2 cursor-pointer transform hover:scale-105"
-                                    onClick={() => {}}
+                                    onClick={() =>
+                                        Reoverlay.showModal(EditTutorAccount, {
+                                            tutor: data.singleTutor.tutor,
+                                        })
+                                    }
                                 />
                             </div>
                         </div>
@@ -75,6 +86,20 @@ const Tutor: React.FC<TutorProps> = (props) => {
                     </div>
                 ) : (
                     <EmptyAnimation />
+                )}
+            </div>
+            <div className="relative p-8 bg-gray-50 rounded-3xl shadow-md mt-5">
+                <h2 className="text-3xl md:text-4xl font-bold text-center md:text-left">
+                    Suas
+                    <span className="text-primaryOrange ml-2">Categorias</span>
+                </h2>
+                {tCat && tCat.allCategoriesTutor !== undefined ? (
+                    <TutorCategoriesList
+                        tutorID={data.singleTutor.tutor.id}
+                        categories={tCat.allCategoriesTutor.map((c) => c.id)}
+                    />
+                ) : (
+                    <LoadingAnimation />
                 )}
             </div>
             <div className="relative p-8 bg-gray-50 rounded-3xl shadow-md mt-5">
@@ -97,6 +122,7 @@ const Tutor: React.FC<TutorProps> = (props) => {
                                         color="#222"
                                     />
                                 }
+                                onClick={() => Reoverlay.showModal(AddClass)}
                             />
                         </div>
                     </div>
