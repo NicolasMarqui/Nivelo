@@ -37,7 +37,7 @@ module.exports = {
             }),
             fontSize: {
                 nav: "1.05rem",
-                heroSize: "4rem",
+                heroSize: "4.5rem",
             },
             margin: {
                 hr: "200px",
@@ -100,5 +100,29 @@ module.exports = {
     variants: {
         extend: {},
     },
-    plugins: [],
+    plugins: [
+        function ({ addComponents }) {
+            addComponents({
+                ".container": {
+                    width: "100%",
+                    // marginLeft: 'auto',
+                    // marginRight: 'auto',
+                    // paddingLeft: '2rem',
+                    // paddingRight: '2rem',
+                    "@screen sm": {
+                        maxWidth: "80%",
+                    },
+                    "@screen md": {
+                        maxWidth: "90%",
+                    },
+                    "@screen lg": {
+                        maxWidth: "1024px",
+                    },
+                    "@screen xl": {
+                        maxWidth: "1280px",
+                    },
+                },
+            });
+        },
+    ],
 };

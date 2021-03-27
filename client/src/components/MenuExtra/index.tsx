@@ -39,7 +39,7 @@ const MenuExtra: React.FC<MenuExtraProps> = ({ data, fetching, error }) => {
                     <Dropdown
                         isOpen={dropOpen}
                         handleChange={() => setDropOpen(!dropOpen)}
-                        classes="shadow-lg bg-primaryOrange top-10 w-auto"
+                        classes="shadow-lg bg-primaryOrange top-10 w-auto z-40"
                     >
                         <NavDropdown />
                     </Dropdown>

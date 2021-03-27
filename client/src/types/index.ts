@@ -172,3 +172,45 @@ export interface UOrdersProps {
     createdAt?: string;
     updatedAt?: string;
 }
+
+export interface MePropsMe {
+    id?: number;
+    name?: string;
+    email?: string;
+    sex?: string;
+    country?: string;
+    city?: string;
+    avatar?: string;
+    userPlatformAccount?: {
+        platform?:
+            | {
+                  id?: number;
+                  name?: string;
+                  account?: string;
+              }[]
+            | [];
+    };
+    description?: string;
+    dateBirth?: string;
+    tutor: {
+        id?: number;
+        description?: string;
+        classes:
+            | {
+                  id?: number;
+                  name?: string;
+                  amountTimeTaught?: number;
+                  level?: string;
+                  price:
+                      | {
+                            id?: number;
+                            time?: number;
+                            price?: number;
+                        }[]
+                      | [];
+              }[]
+            | [];
+    };
+    createdAt?: string;
+    updatedAt?: string;
+}

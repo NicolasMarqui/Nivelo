@@ -54,7 +54,7 @@ const LoginForm: React.FC<LoginFormProps> = ({
 
     return (
         <div className="bg-white rounded-lg overflow-hidden shadow-2xl">
-            <div className="hidden md:flex flex-col my-12">
+            <div className="hidden md:flex flex-col my-3">
                 <Image src="/logo.svg" width={170} height={50} />
             </div>
             <div className="p-8">

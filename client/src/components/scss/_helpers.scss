@@ -216,3 +216,24 @@
     height: 500px;
     margin-top: -10.4rem;
 }
+
+.side__menu {
+    ul {
+        li.active {
+            border-left: 4px solid #ff4338;
+        }
+
+        li:hover {
+            border-left: 4px solid #ff4338;
+            background-color: #f2f2f2;
+        }
+    }
+}
+
+.container__modal {
+    width: 90%;
+
+    @media (min-width: 992px) {
+        width: auto;
+    }
+}

@@ -35,7 +35,9 @@ const Side: React.FC<SideProps> = ({
     });
 
     useEffect(() => {
-        document.querySelector("body").classList.add("overflow-hidden");
+        if (isOpen) {
+            document.querySelector("body").classList.add("overflow-hidden");
+        }
     }, []);
 
     // prettier-ignore

@@ -36,7 +36,7 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
             <div className="mt-20">
                 <Container classes="px-3">
                     <div className="flex md:flex-row flex-col items-start">
-                        <div className="flex-none bg-primaryOrange rounded-2xl p-3 mb-3 md:mb-0 w-full md:w-auto">
+                        <div className="flex-none bg-white shadow-2xl rounded-2xl p-3 mb-3 md:mb-0 w-full md:w-auto">
                             <Sidebar user={data} />
                         </div>
                         <div className="flex flex-2 bg-white rounded-2xl p-3 w-full md:w-auto md:ml-4 flex-col">

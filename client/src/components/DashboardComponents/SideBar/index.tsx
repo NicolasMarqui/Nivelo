@@ -21,14 +21,14 @@ const Sidebar: React.FC<SidebarProps> = ({ user }) => {
                     className="border-4 border-orange rounded-full"
                 />
 
-                <h2 className="mt-4 font-bold text-xl md:text-3xl text-white">
+                <h2 className="mt-4 font-bold text-xl md:text-3xl text-black222">
                     {name}
                 </h2>
                 <p className="my-1 text-gray-400 text-center text-base">
                     {country}
                 </p>
             </div>
-            <div className="mt-10 flex flex-col">
+            <div className="mt-3 flex flex-col">
                 <SidebarMenu isTutor={!!tutor} />
             </div>
         </div>

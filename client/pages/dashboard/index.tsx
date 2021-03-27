@@ -1,18 +1,26 @@
-import Container from "@components/container";
 import OrdersUsers from "@components/DashboardComponents/OrdersUser";
 import ShortcutUser from "@components/DashboardComponents/ShotcutUser";
 import EmptyAnimation from "@components/UI/EmptyAnimation";
 import LoadingAnimation from "@components/UI/LoadingAnimation";
-import Title from "@components/UI/Title";
 import { createUrqlClient } from "@utils/createUrqlClient";
 import { GetServerSideProps, NextPage } from "next";
 import { withUrqlClient } from "next-urql";
+import { FaCog } from "react-icons/fa";
 import { useMeQuery } from "src/generated/graphql";
+import Tooltip from "react-tooltip";
+import { Reoverlay } from "reoverlay";
+import EditUserAccount from "@components/Modals/EditUserAccount";
 
-interface DashbaordProps {}
+interface DashboardProps {}
 
-const Dashbaord: NextPage<DashbaordProps> = (props) => {
+const Dashboard: NextPage<DashboardProps> = (props) => {
     const [{ data, fetching, error }] = useMeQuery();
+
+    const openSettings = () =>
+        Reoverlay.showModal(EditUserAccount, {
+            user: data,
+            fetchingData: fetching,
+        });
 
     if (fetching) {
         return <LoadingAnimation />;
@@ -28,15 +36,33 @@ const Dashbaord: NextPage<DashbaordProps> = (props) => {
 
     return (
         <>
-            <div className="relative p-4 bg-gray-50 rounded-3xl ">
+            <div className="relative p-8 bg-gray-50 rounded-3xl shadow-md">
                 {data && data.me !== undefined ? (
                     <div className="flex flex-col my-1">
-                        <h2 className="text-2xl md:text-3xl font-bold text-center md:text-left">
-                            Bem vindo
-                            <span className="text-primaryOrange ml-1 md:block md:ml-0">
-                                {data.me.name}
-                            </span>
-                        </h2>
+                        <div className="flex flex-col md:flex-row items-center justify-between">
+                            <h2 className="text-3xl font-bold text-center md:text-left">
+                                Bem vindo
+                                <span className="text-primaryOrange ml-1 block md:ml-0">
+                                    {data.me.name}
+                                </span>
+                            </h2>
+                            <div
+                                className="relative"
+                                data-for="settings"
+                                data-tip="Editar suas informações"
+                            >
+                                <FaCog
+                                    size={30}
+                                    className="mt-5 md:mt-2 cursor-pointer transform hover:scale-105"
+                                    onClick={openSettings}
+                                />
+                                <Tooltip
+                                    effect="solid"
+                                    place="bottom"
+                                    id="settings"
+                                />
+                            </div>
+                        </div>
                         <p className="mt-4 text-base text-desc md:w-4/5 text-center md:text-left">
                             Lorem ipsum dolor sit amet, consectetur adipisicing
                             elit. Consequatur blanditiis velit exercitationem
@@ -50,11 +76,11 @@ const Dashbaord: NextPage<DashbaordProps> = (props) => {
                     <EmptyAnimation />
                 )}
             </div>
-            <div className="relative p-4 bg-gray-50 rounded-3xl mt-4">
+            <div className="relative p-8 bg-gray-50 rounded-3xl mt-6 shadow-md">
                 <div className="flex flex-col my-1">
-                    <h3 className="text-2xl md:text-3xl font-bold text-center md:text-left">
+                    <h3 className="text-3xl font-bold text-center md:text-left">
                         Seus
-                        <span className="text-primaryOrange ml-1 ">
+                        <span className="text-primaryOrange ml-1 block md:inline">
                             Pedidos
                         </span>
                     </h3>
@@ -76,19 +102,19 @@ const Dashbaord: NextPage<DashbaordProps> = (props) => {
     );
 };
 
-// export const getServerSideProps: GetServerSideProps = async (ctx: any) => {
-//     const cookie = ctx.req.cookies.qid;
+export const getServerSideProps: GetServerSideProps = async (ctx: any) => {
+    const cookie = ctx.req.cookies.qid;
 
-//     if (!cookie) {
-//         return {
-//             redirect: {
-//                 permanent: false,
-//                 destination: "/login",
-//             },
-//         };
-//     }
+    if (!cookie) {
+        return {
+            redirect: {
+                permanent: false,
+                destination: "/login",
+            },
+        };
+    }
 
-//     return { props: { logged: true, cookie } };
-// };
+    return { props: { logged: true, cookie } };
+};
 
-export default withUrqlClient(createUrqlClient)(Dashbaord);
+export default withUrqlClient(createUrqlClient)(Dashboard);

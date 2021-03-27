@@ -7,18 +7,27 @@ import { BiPencil, BiBookAdd } from "react-icons/bi";
 import { IoHomeOutline } from "react-icons/io5";
 import { FaUserGraduate } from "react-icons/fa";
 import { RiMoneyEuroCircleLine } from "react-icons/ri";
+import { useRouter } from "next/router";
+import checkIfActive from "@utils/checkIfActive";
 
 interface SidebarMenuProps {
     isTutor: boolean;
 }
 
 const SidebarMenu: React.FC<SidebarMenuProps> = ({ isTutor }) => {
+    const router = useRouter();
+
     return (
-        <div className="relative">
+        <div className="relative side__menu">
             <div className="my-4">
                 <h6 className="text-sm text-gray-300">Inicío</h6>
                 <ul className="mt-1">
-                    <li className="bg-white p-2">
+                    <li
+                        className={`p-2 ${checkIfActive(
+                            router.pathname,
+                            "/dashboard"
+                        )}`}
+                    >
                         <Link href="/dashboard">
                             <a className="flex justify-start">
                                 <IoHomeOutline
@@ -36,9 +45,9 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({ isTutor }) => {
                 <div className="my-4">
                     <h6 className="text-sm text-gray-300">Sua área</h6>
                     <ul className="mt-1">
-                        <li className="bg-white p-2">
+                        <li className=" p-2">
                             <Link href="/dashboard/tutor">
-                                <a className="flex justify-start">
+                                <a className="flex justify-start text-black222">
                                     <FaUserGraduate
                                         size={17}
                                         className="mt-1 mr-2"
@@ -47,9 +56,9 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({ isTutor }) => {
                                 </a>
                             </Link>
                         </li>
-                        <li className="my-4 bg-white p-2">
+                        <li className="my-4  p-2">
                             <Link href="/dashboard/tutor/calendar">
-                                <a className="flex justify-start">
+                                <a className="flex justify-start text-black222">
                                     <MdEventAvailable
                                         size={17}
                                         className="mt-1 mr-2"
@@ -58,9 +67,9 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({ isTutor }) => {
                                 </a>
                             </Link>
                         </li>
-                        <li className="my-4 bg-white p-2">
+                        <li className="my-4  p-2">
                             <Link href="/dashboard/tutor#info">
-                                <a className="flex justify-start">
+                                <a className="flex justify-start text-black222">
                                     <AiOutlineInfoCircle
                                         size={17}
                                         className="mt-1 mr-2"
@@ -69,9 +78,9 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({ isTutor }) => {
                                 </a>
                             </Link>
                         </li>
-                        <li className="my-4 bg-white p-2">
+                        <li className="my-4  p-2">
                             <Link href="/dashboard/tutor#classes">
-                                <a className="flex justify-start">
+                                <a className="flex justify-start text-black222">
                                     <BiBookAdd
                                         size={17}
                                         className="mt-1 mr-2"
@@ -80,9 +89,9 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({ isTutor }) => {
                                 </a>
                             </Link>
                         </li>
-                        <li className="my-4 bg-white p-2">
+                        <li className="my-4  p-2">
                             <Link href="/dashboard/tutor/orders">
-                                <a className="flex justify-start">
+                                <a className="flex justify-start text-black222">
                                     <RiMoneyEuroCircleLine
                                         size={17}
                                         className="mt-1 mr-2"
