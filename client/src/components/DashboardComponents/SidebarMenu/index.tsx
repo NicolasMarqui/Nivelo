@@ -45,7 +45,12 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({ isTutor }) => {
                 <div className="my-4">
                     <h6 className="text-sm text-gray-300">Sua área</h6>
                     <ul className="mt-1">
-                        <li className=" p-2">
+                        <li
+                            className={`p-2 ${checkIfActive(
+                                router.pathname,
+                                "/dashboard/tutor"
+                            )}`}
+                        >
                             <Link href="/dashboard/tutor">
                                 <a className="flex justify-start text-black222">
                                     <FaUserGraduate

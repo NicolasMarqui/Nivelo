@@ -23,8 +23,11 @@ export class Order extends BaseEntity {
     user: User;
 
     @Field(() => Classes, { nullable: true })
-    @ManyToOne(() => Classes, (classes) => classes.orders)
-    classes: User;
+    @ManyToOne(() => Classes, (classes) => classes.orders, {
+        nullable: true,
+        onDelete: "CASCADE",
+    })
+    classes: Classes;
 
     @Field(() => String)
     @Column()

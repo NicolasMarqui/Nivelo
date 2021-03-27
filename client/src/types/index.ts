@@ -54,7 +54,7 @@ export interface ClassesProps {
     amountTimeTaught?: number;
     level?: string;
     active?: boolean;
-    price: {
+    price?: {
         id?: number;
         price?: number;
         time?: number;

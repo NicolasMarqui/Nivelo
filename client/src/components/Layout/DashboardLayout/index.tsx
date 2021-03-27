@@ -50,19 +50,19 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
     );
 };
 
-// export const getServerSideProps: GetServerSideProps = async (ctx: any) => {
-//     const cookie = ctx.req.cookies.qid;
+export const getServerSideProps: GetServerSideProps = async (ctx: any) => {
+    const cookie = ctx.req.cookies.qid;
 
-//     if (!cookie) {
-//         return {
-//             redirect: {
-//                 permanent: false,
-//                 destination: "/login",
-//             },
-//         };
-//     }
+    if (!cookie) {
+        return {
+            redirect: {
+                permanent: false,
+                destination: "/login",
+            },
+        };
+    }
 
-//     return { props: { logged: true, cookie } };
-// };
+    return { props: { logged: true, cookie } };
+};
 
 export default withUrqlClient(createUrqlClient)(DashboardLayout);
