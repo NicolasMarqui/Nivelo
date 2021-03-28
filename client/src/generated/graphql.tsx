@@ -690,12 +690,28 @@ export type ChangeAvatarMutation = (
       & Pick<FieldError, 'field' | 'message'>
     )>>, user?: Maybe<(
       { __typename?: 'User' }
-      & Pick<User, 'id' | 'name' | 'description' | 'email' | 'dateBirth' | 'sex' | 'country' | 'city' | 'avatar' | 'createdAt' | 'updatedAt'>
-      & { tutor?: Maybe<(
+      & Pick<User, 'id' | 'name' | 'description' | 'email' | 'dateBirth' | 'sex' | 'country' | 'city' | 'avatar' | 'followersAmount' | 'createdAt' | 'updatedAt'>
+      & { classes?: Maybe<Array<(
+        { __typename?: 'Classes' }
+        & Pick<Classes, 'id' | 'name' | 'amountTimeTaught' | 'level'>
+        & { price?: Maybe<Array<(
+          { __typename?: 'Price' }
+          & Pick<Price, 'id' | 'time' | 'price'>
+        )>> }
+      )>>, tutor?: Maybe<(
         { __typename?: 'Tutor' }
         & Pick<Tutor, 'id' | 'description'>
+        & { classes?: Maybe<Array<(
+          { __typename?: 'Classes' }
+          & Pick<Classes, 'id' | 'name' | 'amountTimeTaught' | 'level'>
+          & { price?: Maybe<Array<(
+            { __typename?: 'Price' }
+            & Pick<Price, 'id' | 'time' | 'price'>
+          )>> }
+        )>> }
       )>, userPlatformAccount?: Maybe<Array<(
         { __typename?: 'UserPlatformAccount' }
+        & Pick<UserPlatformAccount, 'account'>
         & { platform?: Maybe<(
           { __typename?: 'Platforms' }
           & Pick<Platforms, 'id' | 'name'>
@@ -1470,11 +1486,35 @@ export const ChangeAvatarDocument = gql`
       country
       city
       avatar
+      followersAmount
+      classes {
+        id
+        name
+        amountTimeTaught
+        level
+        price {
+          id
+          time
+          price
+        }
+      }
       tutor {
         id
         description
+        classes {
+          id
+          name
+          amountTimeTaught
+          level
+          price {
+            id
+            time
+            price
+          }
+        }
       }
       userPlatformAccount {
+        account
         platform {
           id
           name

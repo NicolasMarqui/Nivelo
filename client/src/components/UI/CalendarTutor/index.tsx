@@ -3,12 +3,12 @@ import { MdChevronLeft, MdChevronRight } from "react-icons/md";
 import * as dateFns from "date-fns";
 import ptBr from "date-fns/locale/pt-BR";
 import ReactTooltip from "react-tooltip";
-// import { Reoverlay } from "reoverlay";
-// import useAxios from "axios-hooks";
+import { Reoverlay } from "reoverlay";
 import LoadingAnimation from "@components/UI/LoadingAnimation";
 import { getMonth } from "@utils/getMonth";
 import useAxios from "axios-hooks";
-// import toast from "react-hot-toast";
+import toast from "react-hot-toast";
+import AvailableDayHours from "@components/Modals/AvailableDayHours";
 
 interface CustomCalendarTutorProps {
     isTutorDashView?: Boolean;
@@ -190,10 +190,10 @@ const CustomCalendarTutor: React.FC<CustomCalendarTutorProps> = ({
         if (!isTutorDashView) return false;
 
         if (handleEvent(day).includes(true)) {
-            // Reoverlay.showModal(AvailableDayHours, {
-            //     day,
-            //     isCurrentAvailable: handleEvent(day).includes(true),
-            // });
+            Reoverlay.showModal(AvailableDayHours, {
+                day,
+                isCurrentAvailable: handleEvent(day).includes(true),
+            });
         } else {
             await executePost({
                 data: {
@@ -207,7 +207,7 @@ const CustomCalendarTutor: React.FC<CustomCalendarTutorProps> = ({
 
             if (!saveAvalLoad && saveAvalData) {
                 await refetch();
-                // toast.success("Dia adicionado como disponível");
+                toast.success("Dia adicionado como disponível");
             }
         }
     };

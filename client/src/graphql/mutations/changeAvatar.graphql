@@ -14,11 +14,35 @@ mutation changeAvatar($id: Float!, $avatar: String!) {
             country
             city
             avatar
+            followersAmount
+            classes {
+                id
+                name
+                amountTimeTaught
+                level
+                price {
+                    id
+                    time
+                    price
+                }
+            }
             tutor {
                 id
                 description
+                classes {
+                    id
+                    name
+                    amountTimeTaught
+                    level
+                    price {
+                        id
+                        time
+                        price
+                    }
+                }
             }
             userPlatformAccount {
+                account
                 platform {
                     id
                     name

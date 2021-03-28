@@ -23,13 +23,13 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({ isTutor }) => {
                 <h6 className="text-sm text-gray-300">Inicío</h6>
                 <ul className="mt-1">
                     <li
-                        className={`p-2 ${checkIfActive(
+                        className={`${checkIfActive(
                             router.pathname,
                             "/dashboard"
                         )}`}
                     >
                         <Link href="/dashboard">
-                            <a className="flex justify-start">
+                            <a className="flex justify-start p-2">
                                 <IoHomeOutline
                                     size={17}
                                     className="mt-1 mr-2"
@@ -46,13 +46,13 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({ isTutor }) => {
                     <h6 className="text-sm text-gray-300">Sua área</h6>
                     <ul className="mt-1">
                         <li
-                            className={`p-2 ${checkIfActive(
+                            className={` ${checkIfActive(
                                 router.pathname,
                                 "/dashboard/tutor"
                             )}`}
                         >
                             <Link href="/dashboard/tutor">
-                                <a className="flex justify-start text-black222">
+                                <a className="flex justify-start text-black222 p-2">
                                     <FaUserGraduate
                                         size={17}
                                         className="mt-1 mr-2"
@@ -61,9 +61,14 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({ isTutor }) => {
                                 </a>
                             </Link>
                         </li>
-                        <li className="my-4  p-2">
+                        <li
+                            className={`my-4 ${checkIfActive(
+                                router.pathname,
+                                "/dashboard/tutor/calendar"
+                            )}`}
+                        >
                             <Link href="/dashboard/tutor/calendar">
-                                <a className="flex justify-start text-black222">
+                                <a className="flex justify-start text-black222 p-2">
                                     <MdEventAvailable
                                         size={17}
                                         className="mt-1 mr-2"

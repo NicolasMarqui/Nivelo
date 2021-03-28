@@ -410,6 +410,8 @@ export class UserResolver {
         }
 
         let user;
+        let newAvatar;
+
         try {
             const result = await getConnection()
                 .createQueryBuilder()
@@ -421,11 +423,23 @@ export class UserResolver {
                 .returning("*")
                 .execute();
             user = result.raw[0];
+            newAvatar = await User.findOne({
+                where: { id: user.id },
+                relations: [
+                    "tutor",
+                    "tutor.type",
+                    "platforms",
+                    "userPlatformAccount",
+                    "userPlatformAccount.platform",
+                    "feedback",
+                    "classes",
+                ],
+            });
         } catch (err) {
             console.log(err);
         }
 
-        return { user };
+        return { user: newAvatar };
     }
 
     @Query(() => String, { nullable: true })
