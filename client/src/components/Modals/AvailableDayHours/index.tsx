@@ -10,17 +10,20 @@ import { BsPlusCircleFill } from "react-icons/bs";
 import Tooltip from "react-tooltip";
 import { TiDeleteOutline } from "react-icons/ti";
 import toast from "react-hot-toast";
+import axios from "axios";
 
 interface AvailableDayHoursProps {
     day: any;
     isCurrentAvailable: any;
+    tutorId: number;
 }
 
 const AvailableDayHours: React.FC<AvailableDayHoursProps> = ({
     day,
     isCurrentAvailable,
+    tutorId,
 }) => {
-    const [fields, setFields] = useState([{ from: "0", to: "0" }]);
+    const [fields, setFields] = useState([{ from: "", to: "" }]);
 
     const handleClose = () => {
         Reoverlay.hideModal();
@@ -45,21 +48,30 @@ const AvailableDayHours: React.FC<AvailableDayHoursProps> = ({
     };
 
     const handleAddMoreHour = () => {
-        setFields([...fields, { from: 0, to: 0 }]);
+        setFields([...fields, { from: "", to: "" }]);
     };
 
     const handleRemoveHour = (index: number) => {
         if (index === 0) return false;
 
         const newArr = [...fields];
-
         newArr.splice(index, 1);
-
         setFields(newArr);
     };
 
-    const handleSave = () => {
-        console.log(fields);
+    const handleSave = async () => {
+        fields.map((f) => {
+            if (f.from === "" || f.to === "" || f.to < f.from) {
+                return false;
+            }
+        });
+
+        await axios
+            .post(`http://localhost:4000/api/schedule/time/${tutorId}`, {
+                time: fields,
+                date: dateFns.format(day, "dd/MM/yyyy"),
+            })
+            .then((r) => console.log(r));
     };
 
     return (

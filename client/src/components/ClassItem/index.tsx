@@ -59,26 +59,28 @@ const ClassItem: React.FC<ClassItemProps> = ({
                 </div>
             </div>
 
-            <Side
-                isOpen={moreInfoClass}
-                handleClose={() => setMoreInfoClass(!moreInfoClass)}
-                header={{ title: name }}
-            >
-                <h3 className="text-xl font-bold">{name}</h3>
-                <p>
-                    {description
-                        ? description
-                        : "Essa aula não possui descrição!"}
-                </p>
+            {moreInfoClass && (
+                <Side
+                    isOpen={moreInfoClass}
+                    handleClose={() => setMoreInfoClass(!moreInfoClass)}
+                    header={{ title: name }}
+                >
+                    <h3 className="text-xl font-bold">{name}</h3>
+                    <p>
+                        {description
+                            ? description
+                            : "Essa aula não possui descrição!"}
+                    </p>
 
-                <div className="my-5 border-2 border-gray-200"></div>
+                    <div className="my-5 border-2 border-gray-200"></div>
 
-                <IconButton
-                    text="Agendar"
-                    icon={<MdEvent size={18} color="#222" />}
-                    classes="bg-primaryPink hover:bg-lightOrange text-white"
-                />
-            </Side>
+                    <IconButton
+                        text="Agendar"
+                        icon={<MdEvent size={18} color="#222" />}
+                        classes="bg-primaryPink hover:bg-lightOrange text-white"
+                    />
+                </Side>
+            )}
         </>
     );
 };

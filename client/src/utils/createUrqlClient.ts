@@ -1,3 +1,4 @@
+import { MakeOrderApprovedMutationVariables } from "./../../../client.OLD/generated/graphql";
 import { NewClassMutationVariables } from "./../generated/graphql";
 import { cacheExchange, Cache } from "@urql/exchange-graphcache";
 import Router from "next/router";
@@ -61,6 +62,9 @@ export const createUrqlClient = (ssrExchange: any) => ({
                     newClass: (_result, args, cache, info) => {
                         updateTutorCache(cache);
                     },
+                    newOrder: (_result, args, cache, info) => {
+                        updateTutorCache(cache);
+                    },
                     updateClass: (_result, args, cache, info) => {
                         updateTutorCache(cache);
                     },
@@ -72,6 +76,11 @@ export const createUrqlClient = (ssrExchange: any) => ({
                     },
                     makeOrderApproved: (_result, args, cache, info) => {
                         updateOrdersCache(cache);
+                        cache.invalidate({
+                            __typename: "Order",
+                            id: (args as MakeOrderApprovedMutationVariables)
+                                .orderID,
+                        });
                     },
                     deleteClass: (_result, args, cache, info) => {
                         cache.invalidate({

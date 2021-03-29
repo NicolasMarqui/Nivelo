@@ -99,9 +99,14 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({ isTutor }) => {
                                 </a>
                             </Link>
                         </li>
-                        <li className="my-4  p-2">
+                        <li
+                            className={`my-4 ${checkIfActive(
+                                router.pathname,
+                                "/dashboard/tutor/orders"
+                            )}`}
+                        >
                             <Link href="/dashboard/tutor/orders">
-                                <a className="flex justify-start text-black222">
+                                <a className="flex justify-start text-black222 p-2">
                                     <RiMoneyEuroCircleLine
                                         size={17}
                                         className="mt-1 mr-2"

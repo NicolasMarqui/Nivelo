@@ -193,6 +193,7 @@ const CustomCalendarTutor: React.FC<CustomCalendarTutorProps> = ({
             Reoverlay.showModal(AvailableDayHours, {
                 day,
                 isCurrentAvailable: handleEvent(day).includes(true),
+                tutorId,
             });
         } else {
             await executePost({
