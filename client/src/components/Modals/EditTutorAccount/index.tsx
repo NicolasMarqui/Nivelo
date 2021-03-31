@@ -2,7 +2,10 @@ import { TutorProps } from "@types";
 import { toErrorMap } from "@utils/toErrorMap";
 import { useFormik } from "formik";
 import toast from "react-hot-toast";
-import { useUpdateTutorMutation } from "src/generated/graphql";
+import {
+    useUpdateTutorMutation,
+    usePixChaveTutorMutation,
+} from "src/generated/graphql";
 import ModalContainer from "../ModalContainer";
 import { Reoverlay } from "reoverlay";
 import LoadingAnimation from "@components/UI/LoadingAnimation";
@@ -15,6 +18,7 @@ interface EditTutorAccountProps {
 
 const EditTutorAccount: React.FC<EditTutorAccountProps> = ({ tutor }) => {
     const [{ fetching }, updateUser] = useUpdateTutorMutation();
+    const [, pixChave] = usePixChaveTutorMutation();
 
     const handleClose = () => {
         Reoverlay.hideModal();
@@ -23,8 +27,13 @@ const EditTutorAccount: React.FC<EditTutorAccountProps> = ({ tutor }) => {
     const formik = useFormik({
         initialValues: {
             description: tutor.description || "",
+            pix: tutor.chavePix || "",
         },
         onSubmit: async (values, { setErrors }) => {
+            if (values.pix !== "" || values.pix !== tutor.chavePix) {
+                await pixChave({ tutorId: tutor.id, key: values.pix });
+            }
+
             const response = await updateUser({
                 id: tutor.id,
                 description: values.description,
@@ -68,6 +77,22 @@ const EditTutorAccount: React.FC<EditTutorAccountProps> = ({ tutor }) => {
                                     {formik.errors.description}
                                 </p>
                             )}
+                        </div>
+
+                        <div className="mb-5">
+                            <label
+                                htmlFor="description"
+                                className="block mb-2 text-sm font-medium text-gray-600"
+                            >
+                                Chave PIX
+                            </label>
+
+                            <input
+                                name="pix"
+                                onChange={formik.handleChange}
+                                value={formik.values.pix}
+                                className="block w-full p-3 rounded bg-gray-100 border border-transparent focus:outline-none focus:border-orange resize-none md:w-96"
+                            />
                         </div>
 
                         <div className="flex flex-col md:flex-row items-center justify-center">

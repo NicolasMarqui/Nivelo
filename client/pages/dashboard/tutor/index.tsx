@@ -37,8 +37,34 @@ const Tutor: React.FC<TutorProps> = (props) => {
         );
     }
 
+    const showSettingsModal = () => {
+        if (data && data.singleTutor !== undefined) {
+            Reoverlay.showModal(EditTutorAccount, {
+                tutor: data.singleTutor.tutor,
+            });
+        }
+    };
+
     return (
         <>
+            {!fetching &&
+            data &&
+            data.singleTutor !== undefined &&
+            data.singleTutor.tutor.chavePix === null ? (
+                <div className="w-full p-3 bg-yellow-500 flex flex-col md:flex-row items-center justify-between mb-2">
+                    <h3 className="text-white text-sm md:text-xl font-semibold">
+                        Adicione uma chave PIX para receber pagamentos
+                    </h3>
+                    <div
+                        className="p-1.5 bg-white text-black222 flex items-center justify-center mt-2 md:mt-0 cursor-pointer transform hover:scale-105 hover:bg-gray-50"
+                        onClick={showSettingsModal}
+                    >
+                        Adicionar
+                    </div>
+                </div>
+            ) : (
+                ""
+            )}
             {!tutorsOrderFetc &&
             tutorsOrderData.ordersTutorAwaitingApproval.length > 0 ? (
                 <div className="w-full p-3 bg-red-400 flex flex-col md:flex-row items-center justify-between">
@@ -70,11 +96,7 @@ const Tutor: React.FC<TutorProps> = (props) => {
                                 <FaCog
                                     size={30}
                                     className="mt-5 md:mt-2 cursor-pointer transform hover:scale-105"
-                                    onClick={() =>
-                                        Reoverlay.showModal(EditTutorAccount, {
-                                            tutor: data.singleTutor.tutor,
-                                        })
-                                    }
+                                    onClick={showSettingsModal}
                                 />
                             </div>
                         </div>
@@ -152,6 +174,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx: any) => {
             redirect: {
                 permanent: false,
                 destination: "/dashboard?message=Acesso negado",
+                namespacesRequired: ["common", "header", "footer"],
             },
         };
     }

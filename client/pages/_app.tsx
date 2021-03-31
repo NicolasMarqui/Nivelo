@@ -11,7 +11,6 @@ import Layout from "@components/Layout";
 import NProgress from "nprogress";
 import { Router, useRouter } from "next/router";
 import { Toaster } from "react-hot-toast";
-("");
 import DashboardLayout from "@components/Layout/DashboardLayout";
 import { ModalContainer } from "reoverlay";
 

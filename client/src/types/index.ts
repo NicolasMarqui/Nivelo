@@ -8,6 +8,7 @@ export interface TutorProps {
     rating?: number;
     amountClasses?: number;
     amountStudents?: number;
+    chavePix?: string;
     user?: {
         id?: number;
         name?: string;

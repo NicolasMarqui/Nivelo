@@ -114,7 +114,13 @@ export const getServerSideProps: GetServerSideProps = async (ctx: any) => {
         };
     }
 
-    return { props: { logged: true, cookie } };
+    return {
+        props: {
+            logged: true,
+            cookie,
+            namespacesRequired: ["common", "header", "footer"],
+        },
+    };
 };
 
 export default withUrqlClient(createUrqlClient)(Dashboard);

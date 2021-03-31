@@ -53,7 +53,9 @@ const Tutor: React.FC<TutorProps> = ({}) => {
                         <div className="md:hidden absolute inset-topMobBread flex justify-center right-0 left-0">
                             <Breadcumb
                                 list={tutorBreadcumbList(
-                                    data.singleTutor.tutor.user.name
+                                    data.singleTutor.tutor
+                                        ? data.singleTutor.tutor.user.name
+                                        : "-"
                                 )}
                                 classes="text-center text-sm"
                             />
@@ -66,11 +68,19 @@ const Tutor: React.FC<TutorProps> = ({}) => {
                                 <FirstRow
                                     type={data.singleTutor.tutor.type.name}
                                     avatar={data.singleTutor.tutor.user.avatar}
-                                    name={data.singleTutor.tutor.user.name}
+                                    name={
+                                        data.singleTutor.tutor
+                                            ? data.singleTutor.tutor.user.name
+                                            : "-"
+                                    }
                                     rating={data.singleTutor.tutor.rating}
                                 />
                                 <SecondRow
-                                    name={data.singleTutor.tutor.user.name}
+                                    name={
+                                        data.singleTutor.tutor
+                                            ? data.singleTutor.tutor.user.name
+                                            : "-"
+                                    }
                                     description={
                                         data.singleTutor.tutor.description
                                     }

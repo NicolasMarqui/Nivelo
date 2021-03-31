@@ -69,6 +69,10 @@ export class Order extends BaseEntity {
     @Column({ nullable: true })
     paymentDetails: String;
 
+    @Field(() => String, { nullable: true })
+    @Column({ nullable: true })
+    stripeClient: String;
+
     @Field(() => String)
     @CreateDateColumn()
     createdAt: Date;

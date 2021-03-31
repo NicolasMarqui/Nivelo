@@ -335,4 +335,30 @@ export class TutorResolver {
 
         return { tutor };
     }
+
+    // Add a PIX chave to tutor
+    @Mutation(() => TutorResponse)
+    async pixChaveTutor(
+        @Arg("tutorId") tutorId: number,
+        @Arg("key") key: string
+    ): Promise<TutorResponse> {
+        let tutor;
+        try {
+            const result = await getConnection()
+                .createQueryBuilder()
+                .update(Tutor)
+                .set({
+                    chavePix: key,
+                })
+                .where("id = :id", { id: tutorId })
+                .returning("*")
+                .execute();
+
+            tutor = result.raw[0];
+        } catch (err) {
+            console.log(err);
+        }
+
+        return { tutor };
+    }
 }

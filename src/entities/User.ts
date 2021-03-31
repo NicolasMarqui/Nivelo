@@ -58,6 +58,10 @@ export class User extends BaseEntity {
 
     @Field({ nullable: true })
     @Column({ nullable: true })
+    stripeId!: string;
+
+    @Field({ nullable: true })
+    @Column({ nullable: true })
     followersAmount!: number;
 
     @Field({ nullable: true })

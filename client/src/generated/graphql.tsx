@@ -121,6 +121,7 @@ export type User = {
   sex?: Maybe<Scalars['String']>;
   country?: Maybe<Scalars['String']>;
   city?: Maybe<Scalars['String']>;
+  stripeId?: Maybe<Scalars['String']>;
   followersAmount?: Maybe<Scalars['Float']>;
   avatar?: Maybe<Scalars['String']>;
   tutor?: Maybe<Tutor>;
@@ -142,6 +143,7 @@ export type Tutor = {
   rating?: Maybe<Scalars['Float']>;
   amountClasses?: Maybe<Scalars['Int']>;
   amountStudents?: Maybe<Scalars['Int']>;
+  chavePix?: Maybe<Scalars['String']>;
   instructionalVideo?: Maybe<Scalars['String']>;
   classes?: Maybe<Array<Classes>>;
   categories?: Maybe<Array<Category>>;
@@ -202,6 +204,7 @@ export type Order = {
   hasUserConfirmedClassDone?: Maybe<Scalars['Boolean']>;
   isPaid?: Maybe<Scalars['Boolean']>;
   paymentDetails?: Maybe<Scalars['String']>;
+  stripeClient?: Maybe<Scalars['String']>;
   createdAt: Scalars['String'];
   updatedAt: Scalars['String'];
 };
@@ -283,6 +286,7 @@ export type Mutation = {
   deleteAccount: Scalars['Boolean'];
   typeToTutor: TutorResponse;
   addAvailableDate: TutorResponse;
+  pixChaveTutor: TutorResponse;
   addType: TypeResponse;
   updateType: TypeResponse;
   deleteType: Scalars['Boolean'];
@@ -373,6 +377,12 @@ export type MutationTypeToTutorArgs = {
 export type MutationAddAvailableDateArgs = {
   options: Scalars['String'];
   id: Scalars['Float'];
+};
+
+
+export type MutationPixChaveTutorArgs = {
+  key: Scalars['String'];
+  tutorId: Scalars['Float'];
 };
 
 
@@ -633,7 +643,7 @@ export type OrderInput = {
 
 export type RegularUserFragment = (
   { __typename?: 'User' }
-  & Pick<User, 'id' | 'name' | 'email'>
+  & Pick<User, 'id' | 'name' | 'email' | 'stripeId'>
   & { tutor?: Maybe<(
     { __typename?: 'Tutor' }
     & Pick<Tutor, 'id'>
@@ -993,6 +1003,50 @@ export type NewTutorMutation = (
   ) }
 );
 
+export type PixChaveTutorMutationVariables = Exact<{
+  tutorId: Scalars['Float'];
+  key: Scalars['String'];
+}>;
+
+
+export type PixChaveTutorMutation = (
+  { __typename?: 'Mutation' }
+  & { pixChaveTutor: (
+    { __typename?: 'TutorResponse' }
+    & { errors?: Maybe<Array<(
+      { __typename?: 'FieldError' }
+      & Pick<FieldError, 'field' | 'message'>
+    )>>, tutor?: Maybe<(
+      { __typename?: 'Tutor' }
+      & Pick<Tutor, 'id' | 'description' | 'rating' | 'chavePix' | 'createdAt' | 'updatedAt'>
+      & { categories?: Maybe<Array<(
+        { __typename?: 'Category' }
+        & Pick<Category, 'id' | 'name' | 'icon'>
+      )>>, user?: Maybe<(
+        { __typename?: 'User' }
+        & Pick<User, 'id' | 'name' | 'email' | 'sex' | 'country' | 'city' | 'avatar'>
+        & { userPlatformAccount?: Maybe<Array<(
+          { __typename?: 'UserPlatformAccount' }
+          & { platform?: Maybe<(
+            { __typename?: 'Platforms' }
+            & Pick<Platforms, 'id' | 'name' | 'account'>
+          )> }
+        )>> }
+      )>, type?: Maybe<(
+        { __typename?: 'TutorType' }
+        & Pick<TutorType, 'id' | 'name'>
+      )>, classes?: Maybe<Array<(
+        { __typename?: 'Classes' }
+        & Pick<Classes, 'id' | 'name' | 'description' | 'amountTimeTaught' | 'level' | 'active' | 'createdAt' | 'updatedAt'>
+        & { price?: Maybe<Array<(
+          { __typename?: 'Price' }
+          & Pick<Price, 'id' | 'price' | 'time'>
+        )>> }
+      )>> }
+    )> }
+  ) }
+);
+
 export type RegisterMutationVariables = Exact<{
   email: Scalars['String'];
   password: Scalars['String'];
@@ -1066,7 +1120,7 @@ export type UpdateTutorMutation = (
       & Pick<FieldError, 'field' | 'message'>
     )>>, tutor?: Maybe<(
       { __typename?: 'Tutor' }
-      & Pick<Tutor, 'id' | 'description' | 'rating' | 'createdAt' | 'updatedAt'>
+      & Pick<Tutor, 'id' | 'description' | 'rating' | 'chavePix' | 'createdAt' | 'updatedAt'>
       & { categories?: Maybe<Array<(
         { __typename?: 'Category' }
         & Pick<Category, 'id' | 'name' | 'icon'>
@@ -1259,7 +1313,7 @@ export type SingleTutorQuery = (
       & Pick<FieldError, 'message'>
     )>>, tutor?: Maybe<(
       { __typename?: 'Tutor' }
-      & Pick<Tutor, 'id' | 'description' | 'rating' | 'createdAt' | 'updatedAt'>
+      & Pick<Tutor, 'id' | 'description' | 'rating' | 'chavePix' | 'createdAt' | 'updatedAt'>
       & { categories?: Maybe<Array<(
         { __typename?: 'Category' }
         & Pick<Category, 'id' | 'name' | 'icon'>
@@ -1430,6 +1484,7 @@ export const RegularUserFragmentDoc = gql`
   id
   name
   email
+  stripeId
   tutor {
     id
   }
@@ -1843,6 +1898,68 @@ export const NewTutorDocument = gql`
 export function useNewTutorMutation() {
   return Urql.useMutation<NewTutorMutation, NewTutorMutationVariables>(NewTutorDocument);
 };
+export const PixChaveTutorDocument = gql`
+    mutation pixChaveTutor($tutorId: Float!, $key: String!) {
+  pixChaveTutor(tutorId: $tutorId, key: $key) {
+    errors {
+      field
+      message
+    }
+    tutor {
+      id
+      description
+      rating
+      chavePix
+      categories {
+        id
+        name
+        icon
+      }
+      user {
+        id
+        name
+        email
+        sex
+        country
+        city
+        avatar
+        userPlatformAccount {
+          platform {
+            id
+            name
+            account
+          }
+        }
+      }
+      type {
+        id
+        name
+      }
+      classes {
+        id
+        name
+        description
+        amountTimeTaught
+        level
+        active
+        price {
+          id
+          price
+          time
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+}
+    `;
+
+export function usePixChaveTutorMutation() {
+  return Urql.useMutation<PixChaveTutorMutation, PixChaveTutorMutationVariables>(PixChaveTutorDocument);
+};
 export const RegisterDocument = gql`
     mutation Register($email: String!, $password: String!, $name: String!) {
   signup(options: {email: $email, password: $password, name: $name}) {
@@ -1911,6 +2028,7 @@ export const UpdateTutorDocument = gql`
       id
       description
       rating
+      chavePix
       categories {
         id
         name
@@ -2181,6 +2299,7 @@ export const SingleTutorDocument = gql`
       id
       description
       rating
+      chavePix
       categories {
         id
         name

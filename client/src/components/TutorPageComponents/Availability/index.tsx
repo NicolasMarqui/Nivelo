@@ -4,6 +4,7 @@ import IconButton from "@components/UI/IconButton";
 import CustomCalendarTutor from "@components/UI/CalendarTutor";
 import { lowestPriceAval } from "@utils/lowestPriceClasses";
 import { ClassesProps } from "@types";
+import PaymentList from "../PaymentList";
 
 interface AvailabilityProps {
     tutorId: number;
@@ -75,10 +76,12 @@ const Availability: React.FC<AvailabilityProps> = ({
                                 />
                             </div>
 
-                            <p className="my-2 text-center text-sm color-desc">
-                                Lorem ipsum dolor sit amet, consectetur eiusmod
-                                tempor.
-                            </p>
+                            <div className="relative">
+                                <p className="my-2 text-center text-sm color-desc">
+                                    Metódos de pagamento
+                                </p>
+                                <PaymentList />
+                            </div>
                         </div>
                     </div>
                 )}

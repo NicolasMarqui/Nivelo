@@ -115,6 +115,7 @@ export class OrderResolver {
         } = options;
 
         let order;
+        let newOrder;
         try {
             const result = await getConnection()
                 .createQueryBuilder()
@@ -136,22 +137,51 @@ export class OrderResolver {
             console.log(err);
         }
 
-        return { order };
+        newOrder = await Order.findOne({
+            where: { id: order.id },
+            relations: [
+                "user",
+                "user.tutor",
+                "classes",
+                "classes.price",
+                "classes.tutor",
+            ],
+        });
+
+        if (!newOrder) {
+            return {
+                errors: [
+                    {
+                        field: "general",
+                        message: "Algo deu errado",
+                    },
+                ],
+            };
+        }
+
+        return { order: newOrder };
     }
 
     // Get order details
     @Query(() => Order)
     async orderDetail(@Arg("id") id: string): Promise<Order | undefined> {
-        const order = await getConnection()
-            .getRepository(Order)
-            .createQueryBuilder("order")
-            .leftJoinAndSelect("order.user", "user")
-            .leftJoinAndSelect("order.classes", "classes")
-            .leftJoinAndSelect("classes.price", "price")
-            .leftJoinAndSelect("classes.tutor", "tutor")
-            .leftJoinAndSelect("tutor.user", "")
-            .where("order.id = :id", { id })
-            .getOne();
+        // const order = await getConnection()
+        //     .getRepository(Order)
+        //     .createQueryBuilder("order")
+        //     .leftJoinAndSelect("order.user", "user")
+        //     .leftJoinAndSelect("order.classes", "classes")
+        //     .leftJoinAndSelect("classes.price", "price")
+        //     .leftJoinAndSelect("classes.tutor", "tutor")
+        //     .leftJoinAndSelect("tutor.user", "")
+        //     .where("order.id = :id", { id })
+        //     .getOne();
+
+        const order = await Order.findOne({
+            where: { id },
+            relations: ["user", "classes", "classes.price", "classes.tutor"],
+        });
+
+        console.log(order);
 
         return order;
     }

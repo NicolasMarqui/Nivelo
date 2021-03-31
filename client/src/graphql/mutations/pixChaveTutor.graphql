@@ -1,6 +1,7 @@
-query SingleTutor($id: Float!) {
-    singleTutor(id: $id) {
+mutation pixChaveTutor($tutorId: Float!, $key: String!) {
+    pixChaveTutor(tutorId: $tutorId, key: $key) {
         errors {
+            field
             message
         }
         tutor {
@@ -26,7 +27,6 @@ query SingleTutor($id: Float!) {
                         id
                         name
                         account
-                        icon
                     }
                 }
             }

@@ -8,6 +8,7 @@ mutation UpdateTutor($id: Float!, $description: String) {
             id
             description
             rating
+            chavePix
             categories {
                 id
                 name

@@ -2,6 +2,7 @@ fragment RegularUser on User {
     id
     name
     email
+    stripeId
     tutor {
         id
     }

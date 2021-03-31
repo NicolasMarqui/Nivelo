@@ -53,10 +53,10 @@ const Order: React.FC<OrderProps> = ({}) => {
                         </p>
 
                         <div className="shadow-md mt-4 rounded-2xl">
-                            <OrdersUserList
+                            {/* <OrdersUserList
                                 order={data.orderDetail}
                                 isOrderPage
-                            />
+                            /> */}
                         </div>
                     </div>
                 </Container>

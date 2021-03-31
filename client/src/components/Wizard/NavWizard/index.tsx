@@ -84,7 +84,7 @@ const NavWizard: React.FC<NavWizardProps> = ({
             platformId: tool.id,
         });
 
-        if (response.data.createNewOrder.errors) {
+        if (response && response.data.createNewOrder.errors) {
             toast.error("Algo deu errado! Tente Novamente");
         } else if (response.data.createNewOrder.order) {
             toast.loading("Por favor aguarde...", { duration: 4000 });

@@ -54,6 +54,10 @@ export class Tutor extends BaseEntity {
     amountStudents: number;
 
     @Field({ nullable: true })
+    @Column("text", { nullable: true })
+    chavePix!: string;
+
+    @Field({ nullable: true })
     @Column({ nullable: true, type: "text" })
     instructionalVideo!: string;
 
