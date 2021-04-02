@@ -5,7 +5,7 @@ const Layout = ({ children }: any) => {
     return (
         <>
             <Navbar />
-            <div className="nivelo">{children}</div>
+            <div className="nivelo overflow-x-hidden">{children}</div>
             <Footer />
         </>
     );

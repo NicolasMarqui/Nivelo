@@ -6,17 +6,22 @@ import { tutorBreadcumbList } from "@utils/breadumbList";
 import { useEffect, useState } from "react";
 import { StickyContainer } from "react-sticky";
 import Side from "@components/UI/Side";
-import { useSingleTutorQuery } from "src/generated/graphql";
+import {
+    useMeSimplifiedQuery,
+    useSingleTutorQuery,
+} from "src/generated/graphql";
 import { useRouter } from "next/router";
 import LoaderTutorPage from "@components/UI/Skeletons/LoaderTutorPage";
 import { withUrqlClient } from "next-urql";
 import { createUrqlClient } from "@utils/createUrqlClient";
+import { Reoverlay } from "reoverlay";
 
 import FirstRow from "@components/TutorPageComponents/FirstRow";
 import SecondRow from "@components/TutorPageComponents/SecondRow";
 import Availability from "@components/TutorPageComponents/Availability";
 import AvailabilityMobile from "@components/TutorPageComponents/AvailabilityMobile";
 import Agendar from "@components/Agendar";
+import EmptyAnimation from "@components/UI/EmptyAnimation";
 
 interface TutorProps {}
 
@@ -24,6 +29,7 @@ const Tutor: React.FC<TutorProps> = ({}) => {
     const router = useRouter();
     const { width } = useWindowSize();
     const [agendarOpen, setAgendarOpen] = useState(false);
+    const [{ data: meData, fetching: meFetching }] = useMeSimplifiedQuery();
 
     const [{ data, fetching, error }] = useSingleTutorQuery({
         variables: { id: parseInt(router.query.id as string) },
@@ -35,6 +41,13 @@ const Tutor: React.FC<TutorProps> = ({}) => {
         document.querySelector("body").classList.remove("overflow-hidden");
     }, []);
 
+    useEffect(() => {
+        if (router.query.agendar && data) {
+            setAgendarOpen(true);
+        }
+        Reoverlay.hideAll();
+    }, [router.query, data]);
+
     return (
         <>
             <Meta
@@ -45,7 +58,7 @@ const Tutor: React.FC<TutorProps> = ({}) => {
             {fetching || error ? (
                 <LoaderTutorPage />
             ) : !data || !data.singleTutor || data.singleTutor.errors ? (
-                <p>Algo deu errado!</p>
+                <EmptyAnimation />
             ) : (
                 <div className="relative">
                     <div className="w-full h-52 relative bg-banner_t bg-bannerInterno bg-cover bg-no-repeat z-10">
@@ -53,7 +66,7 @@ const Tutor: React.FC<TutorProps> = ({}) => {
                         <div className="md:hidden absolute inset-topMobBread flex justify-center right-0 left-0">
                             <Breadcumb
                                 list={tutorBreadcumbList(
-                                    data.singleTutor.tutor
+                                    data.singleTutor.tutor !== null
                                         ? data.singleTutor.tutor.user.name
                                         : "-"
                                 )}

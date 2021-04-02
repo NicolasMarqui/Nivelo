@@ -11,15 +11,7 @@ interface SidebarProps {
 }
 
 const Sidebar: React.FC<SidebarProps> = ({ user }) => {
-    const {
-        avatar,
-        name,
-        country,
-        classes,
-        followersAmount,
-        tutor,
-        id,
-    } = user.me;
+    const { avatar, name, country, tutor, id } = user.me;
 
     return (
         <div className="flex flex-col justify-center p-9">

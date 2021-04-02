@@ -8,8 +8,10 @@ import NavWizard from "@components/Wizard/NavWizard";
 import StepOne from "@components/Wizard/StepOne";
 import StepTwo from "@components/Wizard/StepTwo";
 import StepThree from "@components/Wizard/StepThree";
-import LoginForm from "@components/UI/Forms/LoginFom";
 import StepFour from "@components/Wizard/StepFour";
+import Title from "@components/UI/Title";
+import Link from "next/link";
+import { useRouter } from "next/router";
 
 interface AgendarProps {
     tutor: TutorProps;
@@ -21,6 +23,7 @@ const Agendar: React.FC<AgendarProps> = ({ tutor }) => {
     const [classPrice, setClassPrice] = useState({});
     const [schedule, setSchedule] = useState("");
     const [tool, setTool] = useState("");
+    const router = useRouter();
 
     const { classes, user, id } = tutor;
 
@@ -67,9 +70,23 @@ const Agendar: React.FC<AgendarProps> = ({ tutor }) => {
                     handleChangePrice={handleChangePrice}
                 />
                 <StepThree handleScheduleChange={handleSchedule} tutorID={id} />
+
                 {!data.me && (
-                    <div className="md:w-5/12 mx-auto">
-                        <LoginForm hasRedirect={false} />
+                    <div className="md:w-5/12 mx-auto flex flex-col items-center">
+                        <Title classes="text-center mt-5 font-regular">
+                            Faça login para continuar
+                        </Title>
+                        <p className="text-center text-desc mt-2">
+                            A partir desse ponto você precisa estar logado para
+                            continuar....
+                        </p>
+                        <div className="bg-primaryOrange p-2 rounded-2xl mt-4 hover:bg-lightOrange">
+                            <Link href={`/login?from=${router.asPath}`}>
+                                <a className="text-center text-white">
+                                    Ir para o login
+                                </a>
+                            </Link>
+                        </div>
                     </div>
                 )}
 

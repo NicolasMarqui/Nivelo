@@ -1,17 +1,19 @@
 import { checkAvatar } from "@utils/checkAvatar";
 import { shortTutorDescription } from "@utils/shortTutorDescription";
 import Link from "next/link";
-import { MdStarBorder, MdEvent, MdChatBubbleOutline } from "react-icons/md";
+import { MdEvent, MdChatBubbleOutline } from "react-icons/md";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import { TutorCardProps } from "src/types";
 import IconButton from "../IconButton";
 import ReactStarsRating from "react-awesome-stars-rating";
 import Tooltip from "react-tooltip";
-import TutorCardClasses from "@components/TutorCardClasses";
 import CustomCalendarTutor from "../CalendarTutor";
 import { getCategoriesFromArray } from "@utils/getCategoriesFromArray";
+import { useRouter } from "next/router";
 
 const TutorCard: React.FC<TutorCardProps> = ({ tutor }) => {
+    const router = useRouter();
+
     return (
         <div className="flex flex-col md:flex-row rounded-3xl items-center md:items-start bg-gray-100 mt-4 px-4 md:px-12 py-3 md:py-7 relative">
             <div className="flex-none flex flex-col">
@@ -70,6 +72,9 @@ const TutorCard: React.FC<TutorCardProps> = ({ tutor }) => {
                         <IconButton
                             text="Agendar"
                             icon={<MdEvent size={18} color="#222" />}
+                            onClick={() =>
+                                router.push(`/tutor/${tutor.id}?agendar=true`)
+                            }
                             classes="bg-primaryPink hover:bg-lightOrange text-white"
                         />
                         <IconButton
@@ -77,6 +82,7 @@ const TutorCard: React.FC<TutorCardProps> = ({ tutor }) => {
                             icon={
                                 <MdChatBubbleOutline size={18} color="#222" />
                             }
+                            onClick={() => router.push(`/tutor/${tutor.id}`)}
                             classes="ml-2 bg-primaryGreen hover:bg-lightGreen text-white"
                         />
                     </div>
@@ -85,17 +91,8 @@ const TutorCard: React.FC<TutorCardProps> = ({ tutor }) => {
             <div className="flex-1.5 w-full">
                 <Tabs>
                     <TabList>
-                        <Tab>Aulas</Tab>
                         <Tab>Disponibilidade</Tab>
                     </TabList>
-
-                    <TabPanel>
-                        <TutorCardClasses
-                            // @ts-ignore
-                            classes={tutor.classes}
-                            tutorId={tutor.id}
-                        />
-                    </TabPanel>
                     <TabPanel>
                         <CustomCalendarTutor
                             tutorId={tutor.id}
@@ -103,6 +100,23 @@ const TutorCard: React.FC<TutorCardProps> = ({ tutor }) => {
                             isTutorDashView={false}
                             isAgendando={false}
                         />
+
+                        <div className="mt-4">
+                            <div className="flex flex-row items-center justify-center">
+                                <div className="flex-none flex items-center mr-7">
+                                    <div className="h-3 w-3 bg-primaryGreen rounded-full mr-1"></div>
+                                    <h5 className="text-sm text-desc">
+                                        Disponível
+                                    </h5>
+                                </div>
+                                <div className="flex-none flex items-center">
+                                    <div className="h-3 w-3 bg-white rounded-full mr-1 border-2 border-gray-500"></div>
+                                    <h5 className="text-sm text-desc">
+                                        Não disponível
+                                    </h5>
+                                </div>
+                            </div>
+                        </div>
                     </TabPanel>
                 </Tabs>
             </div>

@@ -19,7 +19,7 @@ const FilterContainer: React.FC<FilterContainerProps> = ({ amount }) => {
     const { width } = useWindowSize();
 
     // Filter open values
-    const [isOpenFilter, setIsOpenFilter] = useState(true);
+    const [isOpenFilter, setIsOpenFilter] = useState(false);
     const [isOpenOrder, setIsOpenOrder] = useState(false);
 
     const handleFilterClean = () => {
@@ -69,7 +69,7 @@ const FilterContainer: React.FC<FilterContainerProps> = ({ amount }) => {
                         router.query.minPreco ||
                         router.query.maxPreco ||
                         router.query.categoria ||
-                        router.query.disponibilidade ||
+                        router.query.ordenar ||
                         router.query.tutor) &&
                         Object.keys(router.query).length > 0 && (
                             <div className="filter__clear ml-2">

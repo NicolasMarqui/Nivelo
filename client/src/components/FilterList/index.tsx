@@ -8,7 +8,9 @@ interface FilterListProps {}
 
 const FilterList: React.FC<FilterListProps> = ({}) => {
     const router = useRouter();
-    const [selectedCategoria, setSelectedCategoria] = useState("");
+    const [selectedCategoria, setSelectedCategoria] = useState(
+        router.query.categoria ? router.query.categoria : ""
+    );
     const [rangeValues, setRangeValues] = useState({ min: 0, max: 500 });
 
     const handleAplicar = () => {

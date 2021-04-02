@@ -292,6 +292,10 @@ export class UserResolver {
 
         req.session.user = token;
 
+        if (user.tutor) {
+            req.session.tutor = user.tutor.id;
+        }
+
         return { user };
     }
 
@@ -301,6 +305,7 @@ export class UserResolver {
         return new Promise((resolve) =>
             req.session.destroy((err) => {
                 res.clearCookie(COOKIE_NAME);
+                res.clearCookie("tid");
                 if (err) {
                     console.log(err);
                     resolve(false);

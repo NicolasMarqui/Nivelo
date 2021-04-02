@@ -51,9 +51,8 @@
                 content: none;
             }
 
-            background-color: rgba(231, 111, 81, 0.31);
+            border-left: 3px solid #ff4338;
             padding-left: 10px;
-            border-radius: 18px;
 
             a {
                 color: #222;
@@ -214,7 +213,7 @@
 
 .h-400 {
     height: 500px;
-    margin-top: -10.4rem;
+    // margin-top: -10.4rem;
 }
 
 .side__menu {

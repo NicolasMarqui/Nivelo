@@ -159,6 +159,8 @@ export const getServerSideProps: GetServerSideProps = async (ctx: any) => {
     const cookie = ctx.req.cookies.qid;
     const tutorCookie = ctx.req.cookies.tid;
 
+    console.log(tutorCookie);
+
     if (!cookie) {
         return {
             redirect: {

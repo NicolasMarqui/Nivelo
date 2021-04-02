@@ -14,6 +14,7 @@ import { useRouter } from "next/router";
 import LoaderTutorCard from "@components/UI/Skeletons/LoaderTutorCard";
 import ReactPaginate from "react-paginate";
 import { getTotalPages } from "@utils/getTotalPages";
+import EmptyAnimation from "@components/UI/EmptyAnimation";
 
 const Tutors: React.FC = ({}) => {
     const router = useRouter();
@@ -83,7 +84,7 @@ const Tutors: React.FC = ({}) => {
                     ) : !data ||
                       !data.allTutors ||
                       data.allTutors.length === 0 ? (
-                        <p>No results</p>
+                        <EmptyAnimation />
                     ) : (
                         <>
                             <TutorResults data={data.allTutors} />

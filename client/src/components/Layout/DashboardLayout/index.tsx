@@ -28,7 +28,7 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
     return (
         <>
             <Meta
-                title={`Dashboard - ${data ? data.me.name : ""}`}
+                title={`Dashboard - ${data && data.me ? data.me.name : ""}`}
                 description="Encontre os melhores tutores para te ajudar nessa jornada"
                 keywords="home, tutor, javascript, nivelamento, aprender, algoritimos, comprar"
             />

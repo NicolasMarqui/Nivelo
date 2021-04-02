@@ -11,12 +11,14 @@ interface LoginFormProps {
     hasLogo?: boolean;
     hasRedirect?: boolean;
     nextStep?: any;
+    redirectTo?: string;
 }
 
 const LoginForm: React.FC<LoginFormProps> = ({
     hasLogo = true,
     hasRedirect = true,
     nextStep,
+    redirectTo = "/",
 }) => {
     const [{ fetching }, login] = useLoginMutation();
     const router = useRouter();
@@ -42,7 +44,7 @@ const LoginForm: React.FC<LoginFormProps> = ({
 
                 toast.success("Bem Vindo!");
                 if (hasRedirect) {
-                    router.push("/");
+                    router.push(redirectTo);
                 }
 
                 if (nextStep) {

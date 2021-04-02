@@ -23,7 +23,7 @@ const StepFour: React.FC<StepFourProps> = ({ platforms, handlePlat }) => {
 
     return (
         <div className="h-full overflow-x-hidden overflow-y-auto md:w-7/12 mx-auto mt-3">
-            <p>
+            <p className="text-desc text-center">
                 Essas são as plataformas que o tutor usa para ensinar, caso não
                 possua nenhuma das indicadas abaixos, entre em contato com o
                 tutor!

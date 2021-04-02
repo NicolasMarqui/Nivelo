@@ -23,7 +23,6 @@ const Home: React.FC = () => {
             <AnyWhere />
             <CTA />
             <Categories4u />
-            <BestTutors />
             <Tutorial />
         </div>
     );
