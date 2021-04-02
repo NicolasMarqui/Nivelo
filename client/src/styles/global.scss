@@ -110,3 +110,23 @@ body {
         }
     }
 }
+
+.accordion {
+    margin: 10px 0;
+    border: none !important;
+}
+
+.accordion .accordion__item {
+    cursor: pointer;
+    outline: none;
+}
+
+.accordion .acc__selected .accordion__button {
+    background-color: green !important;
+}
+
+.accordion .accordion__item .accordion__button {
+    outline: none;
+    background-color: #f7f7f7 !important;
+    width: auto !important;
+}

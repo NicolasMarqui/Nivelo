@@ -6,6 +6,8 @@ import "nprogress/nprogress.css";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "react-tabs/style/react-tabs.css";
+import "react-accessible-accordion/dist/fancy-example.css";
+import "react-input-range/lib/css/index.css";
 import { appWithTranslation } from "@i18n";
 import Layout from "@components/Layout";
 import NProgress from "nprogress";

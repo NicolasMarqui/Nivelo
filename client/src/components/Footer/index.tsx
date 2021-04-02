@@ -111,16 +111,6 @@ const Footer: React.FC<FooterProps> = ({}) => {
                                 menuPlacement="top"
                             />
                         </div>
-
-                        <div className="mt-4">
-                            <p className="text-xs text-gray-400">Moeda</p>
-                            <Select
-                                options={Currencies}
-                                placeholder="Moeda"
-                                instanceId="currency"
-                                menuPlacement="top"
-                            />
-                        </div>
                     </div>
                 </div>
             </Container>

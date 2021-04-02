@@ -260,3 +260,7 @@
     left: 50%;
     transform: translateX(-50%);
 }
+
+input:checked + svg {
+    display: block;
+}

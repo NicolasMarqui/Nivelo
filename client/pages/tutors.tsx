@@ -26,7 +26,7 @@ const Tutors: React.FC = ({}) => {
             page,
             type: router.query.tutor || null,
             category: router.query.categoria || null,
-            order: null,
+            order: (router.query.ordernar as string) || "tutor.id",
         },
     });
 

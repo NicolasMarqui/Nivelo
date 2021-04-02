@@ -1,0 +1,17 @@
+[{
+        "label": "+ Recentes",
+        "value": "DESC"
+    },
+    {
+        "label": "+ Antigos",
+        "value": "ASC"
+    },
+    {
+        "label": "Menor Preço",
+        "value": "Geral"
+    },
+    {
+        "label": "Maior Preço",
+        "value": "Javascript"
+    }
+]

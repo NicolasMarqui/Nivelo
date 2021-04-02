@@ -88,7 +88,18 @@ export class TutorResolver {
         }
 
         if (order) {
-            result.orderBy(order);
+            switch (order) {
+                case "DESC":
+                    result.orderBy("tutor.id", "DESC", "NULLS LAST");
+                    break;
+                case "ASC":
+                    result.orderBy("tutor.id", "ASC", "NULLS LAST");
+                    break;
+                default:
+                    result.orderBy("tutor.id", "DESC", "NULLS LAST");
+            }
+        } else {
+            result.orderBy("tutor.id", "DESC", "NULLS LAST");
         }
 
         return result.getMany();

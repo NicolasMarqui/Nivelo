@@ -10,6 +10,7 @@ interface SideProps {
     footer?: React.ReactElement;
     children?: any;
     isOpen: boolean;
+    filterAplicar?: () => any;
 }
 
 const Side: React.FC<SideProps> = ({
@@ -19,6 +20,7 @@ const Side: React.FC<SideProps> = ({
     footer,
     children,
     isOpen,
+    filterAplicar,
 }) => {
     const sideRef = useRef();
 
@@ -79,6 +81,14 @@ const Side: React.FC<SideProps> = ({
                 {footer && (
                     <div className="absolute top-0 left-0 right-0 flex items-center justify-center bg-gray-300 py-3">
                         {footer}
+                    </div>
+                )}
+                {filterAplicar && (
+                    <div
+                        className="bg-primaryGreen p-2 text-center cursor-pointer text-lg text-white font-bold hover:bg-lightGreen"
+                        onClick={filterAplicar}
+                    >
+                        APLICAR
                     </div>
                 )}
             </div>
