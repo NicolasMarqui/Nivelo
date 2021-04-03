@@ -1,46 +1,43 @@
-query UserOrders($id: Float!, $page: Int!) {
-    getUserOrders(userID: $id, page: $page) {
-        amount
-        order {
+query UserOrders($id: Float!) {
+    getUserOrders(userID: $id) {
+        id
+        user {
             id
-            user {
+            name
+        }
+        classes {
+            id
+            name
+            description
+            active
+            level
+            price {
                 id
-                name
+                time
+                price
             }
-            classes {
+            tutor {
                 id
-                name
                 description
-                active
-                level
-                price {
+                user {
                     id
-                    time
-                    price
+                    name
                 }
-                tutor {
-                    id
-                    description
-                    user {
-                        id
-                        name
-                    }
-                }
-                createdAt
-                updatedAt
             }
-            date
-            platformId
-            classDuration
-            userAccount
-            classPrice
-            isOrderAproved
-            hasTutorConfirmedClassDone
-            hasUserConfirmedClassDone
-            isPaid
-            paymentDetails
             createdAt
             updatedAt
         }
+        date
+        platformId
+        classDuration
+        userAccount
+        classPrice
+        isOrderAproved
+        hasTutorConfirmedClassDone
+        hasUserConfirmedClassDone
+        isPaid
+        paymentDetails
+        createdAt
+        updatedAt
     }
 }

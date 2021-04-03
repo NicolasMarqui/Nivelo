@@ -12,11 +12,10 @@ interface OrdersUsersProps {
 }
 
 const OrdersUsers: React.FC<OrdersUsersProps> = ({ userId }) => {
-    const router = useRouter();
+    const [page, setPage] = useState(1);
     // prettier-ignore
-    const [page, setPage] = useState(typeof router.query.page === "string" ? parseInt(router.query.page) : 1);
     const [{ data, fetching, error }] = useUserOrdersQuery({
-        variables: { id: userId, page },
+        variables: { id: userId },
     });
 
     if (fetching) {
@@ -28,35 +27,30 @@ const OrdersUsers: React.FC<OrdersUsersProps> = ({ userId }) => {
     }
 
     const handlePagination = (e: number) => {
-        router.push(
-            {
-                pathname: `/dashboard`,
-                query: { ...router.query, page: e },
-            },
-            undefined,
-            { shallow: true }
-        );
+        console.log(`page: ${page}, next: ${e}`);
 
         setPage(e);
     };
 
     return (
-        <>
+        <div id="userOrders">
             {data &&
             data.getUserOrders !== undefined &&
-            data.getUserOrders.order.length > 0 ? (
+            data.getUserOrders.length > 0 ? (
                 <>
-                    {data.getUserOrders.order.map((o) => (
-                        // @ts-ignore
-                        <OrdersUserList order={o} key={o.id} />
-                    ))}
+                    {data.getUserOrders
+                        .slice((page - 1) * 5, page * 5)
+                        .map((o) => (
+                            // @ts-ignore
+                            <OrdersUserList order={o} key={o.id} />
+                        ))}
 
                     <ReactPaginate
                         previousLabel={"Anterior"}
                         nextLabel={"Próximo"}
                         containerClassName={"pagination"}
                         activeClassName={"active"}
-                        pageCount={getTotalPages(data.getUserOrders.amount, 5)}
+                        pageCount={getTotalPages(data.getUserOrders.length, 5)}
                         marginPagesDisplayed={2}
                         pageRangeDisplayed={5}
                         onPageChange={(e) =>
@@ -69,7 +63,7 @@ const OrdersUsers: React.FC<OrdersUsersProps> = ({ userId }) => {
             ) : (
                 <EmptyAnimation />
             )}
-        </>
+        </div>
     );
 };
 export default OrdersUsers;

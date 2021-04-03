@@ -8,12 +8,13 @@ import { useOrderDetailQuery } from "src/generated/graphql";
 import { FcApproval } from "react-icons/fc";
 import { withUrqlClient } from "next-urql";
 import { createUrqlClient } from "@utils/createUrqlClient";
-import OrdersUserList from "@components/DashboardComponents/OrdersUserList";
+import { useState } from "react";
 
 interface OrderProps {}
 
 const Order: React.FC<OrderProps> = ({}) => {
     const router = useRouter();
+    const [openChave, setOpenChave] = useState(false);
     const [{ data, fetching, error }] = useOrderDetailQuery({
         variables: { id: router.query.id as string },
     });
@@ -47,17 +48,32 @@ const Order: React.FC<OrderProps> = ({}) => {
                             Seu pedido foi feito com sucesso.
                         </p>
                         <p className="mt-2 text-desc text-base text-center md:text-left">
-                            O tutor já foi notificado de seu pedido, agora cabe
-                            a ele(a) aceitar ou negar a aula. Caso ele negue,
-                            seu dinheiro será estornado para sua conta!
+                            O tutor já foi notificado de seu pedido, agora você
+                            tem acesso a chave PIX do tutor, faça o pagamento no
+                            valor de R${data.orderDetail.classPrice} para ter
+                            acesso a aula
                         </p>
 
-                        <div className="shadow-md mt-4 rounded-2xl">
-                            {/* <OrdersUserList
-                                order={data.orderDetail}
-                                isOrderPage
-                            /> */}
+                        <div
+                            className="shadow-md mt-6 rounded-2xl bg-primaryOrange p-2 md:w-2/5 lg:w-1/5 text-white text-center font-bold cursor-pointer hover:bg-lightOrange"
+                            onClick={() => setOpenChave(!openChave)}
+                        >
+                            Ver chave PIX do tutor
                         </div>
+                        {openChave && (
+                            <div className="my-6 p-4 shadow-lg bg-gray-50 transform transition-all ease-linear rounded-xl">
+                                <h4 className="text-lg">
+                                    Chave PIX de{" "}
+                                    {data.orderDetail.classes.tutor.user.name ||
+                                        "-"}
+                                </h4>
+
+                                <p className="py-2 text-primaryOrange w-auto font-bold text-xl mt-2">
+                                    {data.orderDetail.classes.tutor.chavePix ||
+                                        "-"}
+                                </p>
+                            </div>
+                        )}
                     </div>
                 </Container>
             </Section>

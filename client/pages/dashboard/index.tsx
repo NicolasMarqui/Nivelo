@@ -10,10 +10,12 @@ import { useMeQuery } from "src/generated/graphql";
 import Tooltip from "react-tooltip";
 import { Reoverlay } from "reoverlay";
 import EditUserAccount from "@components/Modals/EditUserAccount";
+import { useRouter } from "next/router";
 
 interface DashboardProps {}
 
 const Dashboard: NextPage<DashboardProps> = (props) => {
+    const router = useRouter();
     const [{ data, fetching, error }] = useMeQuery();
 
     const openSettings = () =>
@@ -36,6 +38,21 @@ const Dashboard: NextPage<DashboardProps> = (props) => {
 
     return (
         <>
+            {data && !fetching && data.me !== null && data.me.tutor ? (
+                <div className="w-full p-3 bg-indigo-400 flex flex-col md:flex-row items-center justify-between mb-2">
+                    <h3 className="text-white text-sm md:text-xl font-semibold">
+                        Acesse sua área de tutor!
+                    </h3>
+                    <div
+                        className="p-1.5 bg-white text-black222 flex items-center justify-center mt-2 md:mt-0 cursor-pointer transform hover:scale-105 hover:bg-gray-50"
+                        onClick={() => router.push("/dashboard/tutor")}
+                    >
+                        Acessar
+                    </div>
+                </div>
+            ) : (
+                ""
+            )}
             <div className="relative p-8 bg-gray-50 rounded-3xl shadow-md">
                 {data && data.me !== undefined ? (
                     <div className="flex flex-col my-1">
@@ -118,7 +135,6 @@ export const getServerSideProps: GetServerSideProps = async (ctx: any) => {
         props: {
             logged: true,
             cookie,
-            namespacesRequired: ["common", "header", "footer"],
         },
     };
 };

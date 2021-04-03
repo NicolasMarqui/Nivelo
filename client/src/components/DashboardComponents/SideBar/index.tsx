@@ -5,6 +5,7 @@ import SidebarMenu from "../SidebarMenu";
 import Tooltip from "react-tooltip";
 import { Reoverlay } from "reoverlay";
 import ChangeAvatar from "@components/Modals/ChangeAvatar";
+import LoadingAnimation from "@components/UI/LoadingAnimation";
 
 interface SidebarProps {
     user: MeQuery;

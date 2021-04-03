@@ -25,6 +25,7 @@ query OrderDetail($id: String!) {
             tutor {
                 id
                 description
+                chavePix
                 user {
                     id
                     name

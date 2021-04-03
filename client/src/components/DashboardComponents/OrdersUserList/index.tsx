@@ -23,7 +23,7 @@ const OrdersUserList: React.FC<OrdersUserListProps> = ({
     } = order;
 
     return (
-        <div className="my-5 bg-white rounded-3xl p-4 flex flex-col md:flex-row items-center">
+        <div className="my-5 bg-white rounded-3xl py-6 flex flex-col lg:flex-row items-center shadow-md px-8">
             <div className="flex-2">
                 <p className="text-primaryOrange text-xs text-center md:text-left">
                     {id}
@@ -46,27 +46,7 @@ const OrdersUserList: React.FC<OrdersUserListProps> = ({
                             <p className="text-base text-desc">Pago!</p>
                         ) : (
                             <p className="text-base text-desc">
-                                Aguardando pagamento!
-                            </p>
-                        )}
-                    </div>
-                    <div className="flex-1 flex items-center">
-                        {isOrderAproved ? (
-                            <FcApproval size={20} className="mt-1 mr-2" />
-                        ) : (
-                            <FaTimesCircle
-                                size={20}
-                                className="mt-1 mr-2"
-                                color="red"
-                            />
-                        )}
-                        {isOrderAproved ? (
-                            <p className="text-base text-desc">
-                                Tutor aprovou a aula!
-                            </p>
-                        ) : (
-                            <p className="text-base text-desc">
-                                Tutor ainda não aprovou a aula!
+                                Tutor não confirmou o recebimento do pagamento!
                             </p>
                         )}
                     </div>

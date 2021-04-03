@@ -33,8 +33,8 @@ const Search: React.FC<SearchProps> = ({}) => {
                 classes="top-full w-full shadow-xl bg-primaryOrange"
             >
                 <ul className="flex flex-wrap">
-                    {categories.map((cat) => (
-                        <Link href={`/tutors?categoria=${cat.value}`}>
+                    {categories.map((cat, idx) => (
+                        <Link href={`/tutors?categoria=${cat.value}`} key={idx}>
                             <li className="w-full md:w-2/5 p-2 cursor-pointer m-2 bg-white rounded-sm transform hover:scale-105">
                                 <p className="text-black222">{cat.value}</p>
                             </li>

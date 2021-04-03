@@ -22,7 +22,7 @@ class OrderResponse {
     errors?: FieldError[];
 
     @Field(() => Order, { nullable: true })
-    order?: Order;
+    order?: Order | Order[] | [];
 }
 
 @ObjectType()
@@ -37,40 +37,36 @@ class OrderDetailsAmount {
 @Resolver()
 export class OrderResolver {
     // Get all orders by user
-    @Query(() => OrderDetailsAmount)
+    @Query(() => [Order] || [])
     @UseMiddleware(isAuth)
-    async getUserOrders(
-        @Arg("userID") userId: number,
-        @Arg("page", () => Int) page: number
-    ): Promise<OrderDetailsAmount | []> {
-        const realLimit = 5;
-        let realOffset = 0;
-
-        if (page > 0) {
-            realOffset = (page - 1) * realLimit;
-        }
-
+    async getUserOrders(@Arg("userID") userId: number): Promise<Order[] | []> {
         const user = await User.findOne({ where: { id: userId } });
-        const totalOrders = await Order.find({ where: { user } });
 
-        const result = await getConnection()
-            .getRepository(Order)
-            .createQueryBuilder("order")
-            .leftJoinAndSelect("order.user", "user")
-            .leftJoinAndSelect("order.classes", "classes")
-            .leftJoinAndSelect("classes.price", "price")
-            .leftJoinAndSelect("classes.tutor", "tutor")
-            .leftJoinAndSelect("tutor.user", "")
-            .where("user.id = :user", { user: user?.id })
-            .take(realLimit)
-            .skip(realOffset)
-            .orderBy("order.createdAt", "DESC")
-            .getMany();
+        // const order2 = await getConnection()
+        //     .getRepository(Order)
+        //     .createQueryBuilder("order")
+        //     .leftJoinAndSelect("order.user", "user")
+        //     .leftJoinAndSelect("order.classes", "classes")
+        //     .leftJoinAndSelect("classes.price", "price")
+        //     .leftJoinAndSelect("classes.tutor", "tutor")
+        //     .leftJoinAndSelect("classes.tutor.user", "")
+        //     .where("user.id = :user", { user: user?.id })
+        //     .orderBy("order.createdAt", "DESC")
+        //     .getMany();
 
-        return {
-            order: result,
-            amount: totalOrders.length,
-        };
+        const order = await Order.find({
+            where: { user },
+            relations: [
+                "user",
+                "classes",
+                "classes.price",
+                "classes.tutor",
+                "classes.tutor.user",
+            ],
+            order: { createdAt: "DESC" },
+        });
+
+        return order;
     }
 
     // Create a new order
@@ -178,10 +174,14 @@ export class OrderResolver {
 
         const order = await Order.findOne({
             where: { id },
-            relations: ["user", "classes", "classes.price", "classes.tutor"],
+            relations: [
+                "user",
+                "classes",
+                "classes.price",
+                "classes.tutor",
+                "classes.tutor.user",
+            ],
         });
-
-        console.log(order);
 
         return order;
     }

@@ -11,12 +11,16 @@ import { Reoverlay } from "reoverlay";
 import AddClass from "@components/Modals/AddClass";
 import EditTutorAccount from "@components/Modals/EditTutorAccount";
 import TutorCategoriesList from "@components/DashboardComponents/TutorCategoriesList";
+import { useRouter } from "next/router";
+import { withUrqlClient } from "next-urql";
+import { createUrqlClient } from "@utils/createUrqlClient";
 
 interface TutorProps {
     tutorID: number;
 }
 
 const Tutor: React.FC<TutorProps> = (props) => {
+    const router = useRouter();
     //prettier-ignore
     const [{ data, fetching, error }] = useSingleTutorQuery({ variables: { id: props.tutorID } });
     //prettier-ignore
@@ -30,11 +34,8 @@ const Tutor: React.FC<TutorProps> = (props) => {
     }
 
     if (error) {
-        return (
-            <div className="flex-justify-center items-center text-center">
-                <EmptyAnimation />
-            </div>
-        );
+        router.push("/dashboard");
+        return false;
     }
 
     const showSettingsModal = () => {
@@ -176,7 +177,6 @@ export const getServerSideProps: GetServerSideProps = async (ctx: any) => {
             redirect: {
                 permanent: false,
                 destination: "/dashboard?message=Acesso negado",
-                namespacesRequired: ["common", "header", "footer"],
             },
         };
     }
@@ -184,4 +184,4 @@ export const getServerSideProps: GetServerSideProps = async (ctx: any) => {
     return { props: { tutorID: Number(tutorCookie) } };
 };
 
-export default Tutor;
+export default withUrqlClient(createUrqlClient)(Tutor as any);
