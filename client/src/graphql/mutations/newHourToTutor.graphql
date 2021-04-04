@@ -1,0 +1,20 @@
+mutation newHourToTutor(
+    $tutorID: Float!
+    $date: String!
+    $from: String!
+    $to: String!
+) {
+    newHourToTutor(tutorID: $tutorID, date: $date, from: $from, to: $to) {
+        errors {
+            field
+            message
+        }
+        hour {
+            id
+            tutorID
+            from
+            to
+            date
+        }
+    }
+}

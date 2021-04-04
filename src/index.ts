@@ -24,6 +24,7 @@ import { PlatformsResolver } from "./resolvers/platforms";
 import { UserPlatformAccountResolver } from "./resolvers/userPlatformAccount";
 import { FeedbackResolver } from "./resolvers/feedback";
 import { OrderResolver } from "./resolvers/order";
+import { HourResolver } from "./resolvers/hour";
 
 // Entities
 import { User } from "./entities/User";
@@ -36,6 +37,7 @@ import { Platforms } from "./entities/Platforms";
 import { UserPlatformAccount } from "./entities/UserPlatformAccount";
 import { Feedback } from "./entities/Feedback";
 import { Order } from "./entities/Order";
+import { Hour } from "./entities/Hour";
 
 import ScheduleSchema from "./models/Schedule";
 import scheduleRouter from "./routes/schedule";
@@ -62,6 +64,7 @@ const main = async () => {
             UserPlatformAccount,
             Feedback,
             Order,
+            Hour,
         ],
         synchronize: true,
     }).then(() => {
@@ -159,6 +162,7 @@ const main = async () => {
                 UserPlatformAccountResolver,
                 FeedbackResolver,
                 OrderResolver,
+                HourResolver,
             ],
             validate: false,
         }),

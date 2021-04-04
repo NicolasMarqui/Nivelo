@@ -27,8 +27,6 @@ const OrdersUsers: React.FC<OrdersUsersProps> = ({ userId }) => {
     }
 
     const handlePagination = (e: number) => {
-        console.log(`page: ${page}, next: ${e}`);
-
         setPage(e);
     };
 

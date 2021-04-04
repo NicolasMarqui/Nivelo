@@ -9,6 +9,7 @@ import { getMonth } from "@utils/getMonth";
 import useAxios from "axios-hooks";
 import toast from "react-hot-toast";
 import AvailableDayHours from "@components/Modals/AvailableDayHours";
+import { useRouter } from "next/router";
 
 interface CustomCalendarTutorProps {
     isTutorDashView?: Boolean;
@@ -25,6 +26,7 @@ const CustomCalendarTutor: React.FC<CustomCalendarTutorProps> = ({
     isAgendando = false,
     handleAgendado,
 }) => {
+    const router = useRouter();
     const [currentMonth, setCurrentMonth] = useState(new Date());
     const [selectedDate, setSelectedDate] = useState(new Date());
 
@@ -190,11 +192,18 @@ const CustomCalendarTutor: React.FC<CustomCalendarTutorProps> = ({
         if (!isTutorDashView) return false;
 
         if (handleEvent(day).includes(true)) {
-            Reoverlay.showModal(AvailableDayHours, {
-                day,
-                isCurrentAvailable: handleEvent(day).includes(true),
-                tutorId,
-            });
+            router.push(
+                `/dashboard/tutor/date/${tutorId}/${dateFns.format(
+                    day,
+                    "dd-MM-yyyy"
+                )}`
+            );
+            // Reoverlay.showModal(AvailableDayHours, {
+            //     day,
+            //     isCurrentAvailable: handleEvent(day).includes(true),
+            //     tutorId,
+            //     data,
+            // });
         } else {
             await executePost({
                 data: {

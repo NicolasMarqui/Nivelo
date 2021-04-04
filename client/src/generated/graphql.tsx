@@ -37,6 +37,7 @@ export type Query = {
   getUserOrders: Array<Order>;
   orderDetail: Order;
   ordersTutorAwaitingApproval: Array<Order>;
+  getTutorsHour: Array<Hour>;
 };
 
 
@@ -108,6 +109,12 @@ export type QueryOrderDetailArgs = {
 
 export type QueryOrdersTutorAwaitingApprovalArgs = {
   tutorId: Scalars['Float'];
+};
+
+
+export type QueryGetTutorsHourArgs = {
+  date: Scalars['String'];
+  tutorID: Scalars['Float'];
 };
 
 export type User = {
@@ -264,6 +271,15 @@ export type TutorResponse = {
   tutor?: Maybe<Tutor>;
 };
 
+export type Hour = {
+  __typename?: 'Hour';
+  id?: Maybe<Scalars['String']>;
+  tutorID: Scalars['Int'];
+  date: Scalars['String'];
+  from: Scalars['String'];
+  to: Scalars['String'];
+};
+
 export type Mutation = {
   __typename?: 'Mutation';
   changePassword: UserResponse;
@@ -304,6 +320,8 @@ export type Mutation = {
   newFeedback: FeedbackResponse;
   createNewOrder: OrderResponse;
   makeOrderApproved: Order;
+  newHourToTutor: HourResponse;
+  deleteHourFromTutor: Scalars['Boolean'];
 };
 
 
@@ -517,6 +535,19 @@ export type MutationMakeOrderApprovedArgs = {
   orderID: Scalars['String'];
 };
 
+
+export type MutationNewHourToTutorArgs = {
+  to: Scalars['String'];
+  from: Scalars['String'];
+  date: Scalars['String'];
+  tutorID: Scalars['Float'];
+};
+
+
+export type MutationDeleteHourFromTutorArgs = {
+  id: Scalars['String'];
+};
+
 export type UsernameEmailPasswordInput = {
   name: Scalars['String'];
   email: Scalars['String'];
@@ -632,6 +663,12 @@ export type OrderInput = {
   classPrice?: Maybe<Scalars['Float']>;
   platformId?: Maybe<Scalars['Int']>;
   userAccount: Scalars['String'];
+};
+
+export type HourResponse = {
+  __typename?: 'HourResponse';
+  errors?: Maybe<Array<FieldError>>;
+  hour?: Maybe<Hour>;
 };
 
 export type RegularUserFragment = (
@@ -781,6 +818,16 @@ export type DeleteClassMutation = (
   & Pick<Mutation, 'deleteClass'>
 );
 
+export type DeleteHourFromTutorMutationVariables = Exact<{
+  id: Scalars['String'];
+}>;
+
+
+export type DeleteHourFromTutorMutation = (
+  { __typename?: 'Mutation' }
+  & Pick<Mutation, 'deleteHourFromTutor'>
+);
+
 export type ForgotPasswordMutationVariables = Exact<{
   email: Scalars['String'];
 }>;
@@ -904,6 +951,28 @@ export type NewClassMutation = (
         { __typename?: 'Price' }
         & Pick<Price, 'id' | 'time' | 'price'>
       )>> }
+    )> }
+  ) }
+);
+
+export type NewHourToTutorMutationVariables = Exact<{
+  tutorID: Scalars['Float'];
+  date: Scalars['String'];
+  from: Scalars['String'];
+  to: Scalars['String'];
+}>;
+
+
+export type NewHourToTutorMutation = (
+  { __typename?: 'Mutation' }
+  & { newHourToTutor: (
+    { __typename?: 'HourResponse' }
+    & { errors?: Maybe<Array<(
+      { __typename?: 'FieldError' }
+      & Pick<FieldError, 'field' | 'message'>
+    )>>, hour?: Maybe<(
+      { __typename?: 'Hour' }
+      & Pick<Hour, 'id' | 'tutorID' | 'from' | 'to' | 'date'>
     )> }
   ) }
 );
@@ -1178,6 +1247,20 @@ export type CategoriesQuery = (
   & { allCategories: Array<(
     { __typename?: 'Category' }
     & Pick<Category, 'id' | 'name' | 'icon'>
+  )> }
+);
+
+export type GetTutorsHourQueryVariables = Exact<{
+  tutorID: Scalars['Float'];
+  date: Scalars['String'];
+}>;
+
+
+export type GetTutorsHourQuery = (
+  { __typename?: 'Query' }
+  & { getTutorsHour: Array<(
+    { __typename?: 'Hour' }
+    & Pick<Hour, 'id' | 'tutorID' | 'from' | 'to' | 'date'>
   )> }
 );
 
@@ -1630,6 +1713,15 @@ export const DeleteClassDocument = gql`
 export function useDeleteClassMutation() {
   return Urql.useMutation<DeleteClassMutation, DeleteClassMutationVariables>(DeleteClassDocument);
 };
+export const DeleteHourFromTutorDocument = gql`
+    mutation DeleteHourFromTutor($id: String!) {
+  deleteHourFromTutor(id: $id)
+}
+    `;
+
+export function useDeleteHourFromTutorMutation() {
+  return Urql.useMutation<DeleteHourFromTutorMutation, DeleteHourFromTutorMutationVariables>(DeleteHourFromTutorDocument);
+};
 export const ForgotPasswordDocument = gql`
     mutation ForgotPassword($email: String!) {
   forgotPassword(email: $email)
@@ -1781,6 +1873,27 @@ export const NewClassDocument = gql`
 
 export function useNewClassMutation() {
   return Urql.useMutation<NewClassMutation, NewClassMutationVariables>(NewClassDocument);
+};
+export const NewHourToTutorDocument = gql`
+    mutation newHourToTutor($tutorID: Float!, $date: String!, $from: String!, $to: String!) {
+  newHourToTutor(tutorID: $tutorID, date: $date, from: $from, to: $to) {
+    errors {
+      field
+      message
+    }
+    hour {
+      id
+      tutorID
+      from
+      to
+      date
+    }
+  }
+}
+    `;
+
+export function useNewHourToTutorMutation() {
+  return Urql.useMutation<NewHourToTutorMutation, NewHourToTutorMutationVariables>(NewHourToTutorDocument);
 };
 export const NewOrderDocument = gql`
     mutation NewOrder($userID: Float!, $classID: Int!, $date: String!, $classDuration: String!, $classPrice: Float!, $platformId: Int!) {
@@ -2115,6 +2228,21 @@ export const CategoriesDocument = gql`
 
 export function useCategoriesQuery(options: Omit<Urql.UseQueryArgs<CategoriesQueryVariables>, 'query'> = {}) {
   return Urql.useQuery<CategoriesQuery>({ query: CategoriesDocument, ...options });
+};
+export const GetTutorsHourDocument = gql`
+    query GetTutorsHour($tutorID: Float!, $date: String!) {
+  getTutorsHour(tutorID: $tutorID, date: $date) {
+    id
+    tutorID
+    from
+    to
+    date
+  }
+}
+    `;
+
+export function useGetTutorsHourQuery(options: Omit<Urql.UseQueryArgs<GetTutorsHourQueryVariables>, 'query'> = {}) {
+  return Urql.useQuery<GetTutorsHourQuery>({ query: GetTutorsHourDocument, ...options });
 };
 export const MeDocument = gql`
     query Me {

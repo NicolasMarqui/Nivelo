@@ -1,7 +1,4 @@
 import { UOrdersProps } from "@types";
-import { FaTimesCircle } from "react-icons/fa";
-import { FcApproval } from "react-icons/fc";
-import OrdersUsersActions from "../OrdersUserActions";
 import TimeAgo from "react-timeago";
 import { formatter } from "@utils/agoPtFormat";
 import { useMakeOrderApprovedMutation } from "src/generated/graphql";
@@ -14,7 +11,15 @@ interface OrdersTutorProps {
 const OrdersTutor: React.FC<OrdersTutorProps> = ({ order }) => {
     const [, makeOrderApproved] = useMakeOrderApprovedMutation();
 
-    const { classPrice, id, classes, createdAt, date } = order;
+    const {
+        classPrice,
+        id,
+        classes,
+        createdAt,
+        date,
+        platformId,
+        user,
+    } = order;
 
     const handleAprovar = async () => {
         const response = await makeOrderApproved({ orderID: order.id });
@@ -27,15 +32,15 @@ const OrdersTutor: React.FC<OrdersTutorProps> = ({ order }) => {
     };
 
     return (
-        <div className="my-5 bg-white rounded-3xl p-4 flex flex-col md:flex-row items-center">
-            <div className="flex-2">
+        <div className="my-5 bg-white rounded-3xl py-6 px-7 flex flex-col md:flex-row items-center">
+            <div className="flex-1">
                 <p className="text-primaryOrange text-xs text-center md:text-left">
                     {id}
                 </p>
-                <h3 className="text-lg text-center md:text-left font-semibold md:text-2xl ">
+                <h3 className="text-lg text-center md:text-left font-semibold md:text-2xl">
                     {classes.name}
                 </h3>
-                <p className="text-gray-500 text-sm">
+                <p className="text-gray-500 text-xs">
                     Agendamento feito
                     <TimeAgo
                         date={Number(createdAt)}
@@ -45,11 +50,18 @@ const OrdersTutor: React.FC<OrdersTutorProps> = ({ order }) => {
                     />
                 </p>
 
-                <h4 className="mt-2 font-bold text-center md:text-left">
+                <h4 className="mt-4">
+                    Aluno:{" "}
+                    <span className="text-indigo-500 underline">
+                        {user.name}
+                    </span>
+                </h4>
+
+                <h4 className="font-bold text-center md:text-left">
                     Dia: <span className="text-primaryOrange">{date}</span>
                 </h4>
             </div>
-            <div className="flex-1 flex items-center flex-col my-3 md:my-0">
+            <div className="flex-none justify-items-end flex items-center flex-col my-3 md:my-0">
                 <div className="flex-1">
                     <h4 className="text-base text-center md:text-right md:text-lg">
                         Valor:{" "}
@@ -58,14 +70,14 @@ const OrdersTutor: React.FC<OrdersTutorProps> = ({ order }) => {
                         </span>
                     </h4>
                 </div>
-            </div>
-            <div className="flex items-center justify-center">
-                <button
-                    className="w-full p-3 mt-4 bg-primaryGreen text-white rounded shadow hover:bg-lightGreen"
-                    onClick={handleAprovar}
-                >
-                    Aprovar
-                </button>
+                <div className="flex items-center justify-center">
+                    <button
+                        className="w-full p-3 mt-4 bg-primaryGreen text-white rounded shadow hover:bg-lightGreen"
+                        onClick={handleAprovar}
+                    >
+                        Confirmar recebimento do pagamento
+                    </button>
+                </div>
             </div>
         </div>
     );

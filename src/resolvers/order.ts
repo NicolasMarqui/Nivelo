@@ -218,7 +218,7 @@ export class OrderResolver {
             const result = await getConnection()
                 .createQueryBuilder()
                 .update(Order)
-                .set({ isOrderAproved: true })
+                .set({ isOrderAproved: true, isPaid: true })
                 .where("id = :id", { id: orderID })
                 .returning("*")
                 .execute();

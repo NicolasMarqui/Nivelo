@@ -28,20 +28,19 @@ scheduleRouter.get(
 );
 
 // Retrieve all times for single tutor by day
-// scheduleRouter.get(
-//     "/api/schedule/single/:id",
-//     async (req: Request, res: Response) => {
-//         const tutorID = req.params.id;
-//         const month = req.query.month?.toString();
+scheduleRouter.get(
+    "/api/schedule/single/:id",
+    async (req: Request, res: Response) => {
+        const tutorID = req.params.id;
+        const date = req.query.date;
 
-//         const allSchedule = await Schedule.findOne({
-//             tutorID,
-//             dates: { $elemMatch: { month } },
-//         });
+        const allSchedule = await Schedule.findOne({
+            "dates.month": "03",
+        });
 
-//         res.status(200).send({ data: allSchedule });
-//     }
-// );
+        res.status(200).send({ data: allSchedule });
+    }
+);
 
 // Make day available
 scheduleRouter.post(
@@ -59,7 +58,7 @@ scheduleRouter.post(
                 dates: [{ isAvailable: true, month, date, time: [] }],
             };
 
-            return Schedule.create(newDateCreated, (err, doc) => {
+            Schedule.create(newDateCreated, (err, doc) => {
                 if (err) {
                     return res.status(500).send({
                         status: "ERROR",

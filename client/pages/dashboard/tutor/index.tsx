@@ -19,6 +19,7 @@ interface TutorProps {
     tutorID: number;
 }
 
+// @ts-ignore
 const Tutor: React.FC<TutorProps> = (props) => {
     const router = useRouter();
     //prettier-ignore
@@ -74,9 +75,12 @@ const Tutor: React.FC<TutorProps> = (props) => {
                         <span className="mx-2 font-bold text-base md:text-2xl">
                             {tutorsOrderData.ordersTutorAwaitingApproval.length}
                         </span>
-                        pedidos de aula para aprovar!
+                        pedidos sem informaçõs de pagamento!
                     </h3>
-                    <div className="p-1.5 bg-white text-black222 flex items-center justify-center mt-2 md:mt-0 cursor-pointer transform hover:scale-105 hover:bg-gray-50">
+                    <div
+                        className="p-1.5 bg-white text-black222 flex items-center justify-center mt-2 md:mt-0 cursor-pointer transform hover:scale-105 hover:bg-gray-50"
+                        onClick={() => router.push("/dashboard/tutor/orders")}
+                    >
                         Visualizar
                     </div>
                 </div>
@@ -125,7 +129,10 @@ const Tutor: React.FC<TutorProps> = (props) => {
                     <LoadingAnimation />
                 )}
             </div>
-            <div className="relative p-8 bg-gray-50 rounded-3xl shadow-md mt-5">
+            <div
+                className="relative p-8 bg-gray-50 rounded-3xl shadow-md mt-5"
+                id="classes"
+            >
                 <div className="flex flex-col my-1">
                     <div className="flex flex-col md:flex-row items-center justify-between">
                         <h2 className="text-3xl md:text-4xl font-bold text-center md:text-left">
@@ -184,4 +191,4 @@ export const getServerSideProps: GetServerSideProps = async (ctx: any) => {
     return { props: { tutorID: Number(tutorCookie) } };
 };
 
-export default withUrqlClient(createUrqlClient)(Tutor as any);
+export default Tutor;

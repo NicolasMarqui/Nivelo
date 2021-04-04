@@ -231,6 +231,9 @@
 
 .container__modal {
     width: 90%;
+    overflow-y: clip;
+    max-height: 90vh;
+    overflow-x: hidden;
 
     @media (min-width: 992px) {
         width: auto;

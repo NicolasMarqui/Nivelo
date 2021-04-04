@@ -1,5 +1,9 @@
 import { MakeOrderApprovedMutationVariables } from "./../../../client.OLD/generated/graphql";
-import { NewClassMutationVariables } from "./../generated/graphql";
+import {
+    DeleteHourFromTutorMutationVariables,
+    NewClassMutationVariables,
+    NewHourToTutorMutationVariables,
+} from "./../generated/graphql";
 import { cacheExchange, Cache } from "@urql/exchange-graphcache";
 import Router from "next/router";
 import { dedupExchange, Exchange, fetchExchange } from "urql";
@@ -73,6 +77,20 @@ export const createUrqlClient = (ssrExchange: any) => ({
                     },
                     removeCategoryFromTutor: (_result, args, cache, info) => {
                         updateTutorCache(cache);
+                    },
+                    deleteHourFromTutor: (_result, args, cache, info) => {
+                        cache.invalidate({
+                            __typename: "Classes",
+                            id: (args as DeleteHourFromTutorMutationVariables)
+                                .id,
+                        });
+                    },
+                    newHourToTutor: (_result, args, cache, info) => {
+                        cache.invalidate({
+                            __typename: "Classes",
+                            id: (args as NewHourToTutorMutationVariables)
+                                .tutorID,
+                        });
                     },
                     makeOrderApproved: (_result, args, cache, info) => {
                         updateOrdersCache(cache);

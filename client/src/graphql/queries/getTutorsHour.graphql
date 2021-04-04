@@ -1,0 +1,9 @@
+query GetTutorsHour($tutorID: Float!, $date: String!) {
+    getTutorsHour(tutorID: $tutorID, date: $date) {
+        id
+        tutorID
+        from
+        to
+        date
+    }
+}

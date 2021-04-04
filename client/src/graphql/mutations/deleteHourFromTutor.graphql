@@ -1,0 +1,3 @@
+mutation DeleteHourFromTutor($id: String!) {
+    deleteHourFromTutor(id: $id)
+}
