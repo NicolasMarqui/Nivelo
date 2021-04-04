@@ -192,7 +192,7 @@ export class UserResolver {
                 errors: [
                     {
                         field: "email",
-                        message: "Email is not available",
+                        message: "Email não está disponível",
                     },
                 ],
             };
@@ -220,7 +220,7 @@ export class UserResolver {
                     errors: [
                         {
                             field: "email",
-                            message: "Email already taken",
+                            message: "Email já em uso",
                         },
                     ],
                 };
@@ -261,7 +261,7 @@ export class UserResolver {
                 errors: [
                     {
                         field: "email",
-                        message: "Credentials do not match",
+                        message: "Verifique as Informações",
                     },
                 ],
             };
@@ -276,7 +276,7 @@ export class UserResolver {
                 errors: [
                     {
                         field: "password",
-                        message: "Credentials do not match",
+                        message: "Verifique as Informações",
                     },
                 ],
             };

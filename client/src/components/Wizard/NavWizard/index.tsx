@@ -1,9 +1,8 @@
+import FinalizarOrder from "@components/Modals/FinalizarOrder";
 import IconButton from "@components/UI/IconButton";
 import { renderTitleAgendar } from "@utils/renderTitleAgendar";
-import { useRouter } from "next/router";
-import toast from "react-hot-toast";
-import { useNewOrderMutation } from "src/generated/graphql";
 import ReactToolTip from "react-tooltip";
+import { Reoverlay } from "reoverlay";
 
 interface NavWizardProps {
     totalSteps?: any;
@@ -30,6 +29,13 @@ interface NavWizardProps {
             time: number;
         };
         classSchedule?: string;
+        hour?: {
+            id?: string;
+            from?: string;
+            date?: string;
+            to?: string;
+            tutorID?: number;
+        };
         tool?: {
             id: number;
             name: string;
@@ -48,10 +54,14 @@ const NavWizard: React.FC<NavWizardProps> = ({
     totalSteps,
     userBuyingID,
 }) => {
-    const router = useRouter();
-    const [{ fetching, error }, newOrder] = useNewOrderMutation();
-
-    const { tutorName, selectedClass, classPrice, classSchedule, tool } = info;
+    const {
+        tutorName,
+        selectedClass,
+        classPrice,
+        classSchedule,
+        tool,
+        hour,
+    } = info;
 
     const dots = [];
     for (let i = 1; i <= totalSteps; i += 1) {
@@ -67,29 +77,10 @@ const NavWizard: React.FC<NavWizardProps> = ({
     }
 
     const handleFinalizar = async () => {
-        // prettier-ignore
-        if ( !selectedClass || Object.keys(classPrice).length === 0 || !classSchedule || !tool) {
-            toast.error(
-                "Verifique se todas as informações foram preenchidas corretamente!"
-            );
-            return false;
-        }
-
-        const response = await newOrder({
-            userID: userBuyingID,
-            classID: selectedClass.id,
-            date: classSchedule,
-            classPrice: classPrice.price,
-            classDuration: `${classPrice.time}min`,
-            platformId: tool.id,
+        Reoverlay.showModal(FinalizarOrder, {
+            info,
+            userBuyingID,
         });
-
-        if (response && response.data.createNewOrder.errors) {
-            toast.error("Algo deu errado! Tente Novamente");
-        } else if (response.data.createNewOrder.order) {
-            toast.loading("Por favor aguarde...", { duration: 4000 });
-            router.push(`/order/${response.data.createNewOrder.order.id}`);
-        }
     };
 
     return (
@@ -119,7 +110,7 @@ const NavWizard: React.FC<NavWizardProps> = ({
                     </h4>
                 </div>
                 <div className="flex-none justify-end items-end">
-                    {currentStep === (userBuyingID ? 4 : 5) ? (
+                    {currentStep === (userBuyingID ? 5 : 6) ? (
                         <div className="rel" data-tip data-for="final">
                             <IconButton
                                 text="Finalizar"
@@ -140,7 +131,10 @@ const NavWizard: React.FC<NavWizardProps> = ({
                             classes="bg-primaryGreen text-white font-bold m-0 hover:bg-lightGreen"
                             isActive={
                                 Object.keys(selectedClass).length === 0 ||
-                                (userBuyingID === null && currentStep === 4)
+                                (currentStep === 3 && !classSchedule) ||
+                                (currentStep === 4 &&
+                                    Object.keys(hour).length === 0) ||
+                                (userBuyingID === null && currentStep === 5)
                                     ? false
                                     : true
                             }

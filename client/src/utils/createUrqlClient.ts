@@ -53,6 +53,14 @@ const updateOrdersCache = (cache: Cache) => {
     );
 };
 
+function invalidateQuery(cache: Cache, field: string) {
+    const allFields = cache.inspectFields("Query");
+    const fieldInfos = allFields.filter((info) => info.fieldName === field);
+    fieldInfos.forEach((fi) => {
+        cache.invalidate("Query", field, fi.arguments || {});
+    });
+}
+
 function invalidadeTutorHour(cache: Cache) {
     const allFields = cache.inspectFields("Query");
     const fieldInfos = allFields.filter(
@@ -96,9 +104,8 @@ export const createUrqlClient = (ssrExchange: any) => ({
                     newClass: (_result, args, cache, info) => {
                         invalidadeTutorClass(cache);
                     },
-                    newOrder: (_result, args, cache, info) => {
-                        console.log(cache.inspectFields("Query"));
-                        updateTutorCache(cache);
+                    createNewOrder: (_result, args, cache, info) => {
+                        invalidateQuery(cache, "singleTutor");
                     },
                     updateClass: (_result, args, cache, info) => {
                         invalidadeTutorClass(cache);

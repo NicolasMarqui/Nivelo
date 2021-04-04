@@ -99,6 +99,7 @@ const TutorCard: React.FC<TutorCardProps> = ({ tutor }) => {
                             smaller
                             isTutorDashView={false}
                             isAgendando={false}
+                            isShowHours
                         />
 
                         <div className="mt-4">

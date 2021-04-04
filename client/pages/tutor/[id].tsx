@@ -57,7 +57,10 @@ const Tutor: React.FC<TutorProps> = ({}) => {
             />
             {fetching || error ? (
                 <LoaderTutorPage />
-            ) : !data || !data.singleTutor || data.singleTutor.errors ? (
+            ) : !data ||
+              !data.singleTutor ||
+              data.singleTutor.errors ||
+              !data.singleTutor.tutor ? (
                 <EmptyAnimation />
             ) : (
                 <div className="relative">

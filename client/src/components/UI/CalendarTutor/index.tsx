@@ -8,8 +8,9 @@ import LoadingAnimation from "@components/UI/LoadingAnimation";
 import { getMonth } from "@utils/getMonth";
 import useAxios from "axios-hooks";
 import toast from "react-hot-toast";
-import AvailableDayHours from "@components/Modals/AvailableDayHours";
 import { useRouter } from "next/router";
+import TutorHours from "@components/Modals/TutorHours";
+import { FcApproval } from "react-icons/fc";
 
 interface CustomCalendarTutorProps {
     isTutorDashView?: Boolean;
@@ -17,6 +18,8 @@ interface CustomCalendarTutorProps {
     smaller?: boolean;
     isAgendando?: boolean;
     handleAgendado?: (i: any) => any;
+    isShowHours?: boolean;
+    selectedDay?: string;
 }
 
 const CustomCalendarTutor: React.FC<CustomCalendarTutorProps> = ({
@@ -25,6 +28,8 @@ const CustomCalendarTutor: React.FC<CustomCalendarTutorProps> = ({
     smaller = false,
     isAgendando = false,
     handleAgendado,
+    isShowHours = false,
+    selectedDay,
 }) => {
     const router = useRouter();
     const [currentMonth, setCurrentMonth] = useState(new Date());
@@ -123,7 +128,7 @@ const CustomCalendarTutor: React.FC<CustomCalendarTutorProps> = ({
 
                 days.push(
                     <div
-                        className={`col cell ${
+                        className={`col cell relative ${
                             !dateFns.isSameMonth(day, monthStart)
                                 ? "disabled"
                                 : ""
@@ -146,6 +151,13 @@ const CustomCalendarTutor: React.FC<CustomCalendarTutorProps> = ({
                     >
                         <span className="number">{formattedDate}</span>
                         <span className="bg">{formattedDate}</span>
+                        {isAgendando &&
+                            selectedDay ===
+                                dateFns.format(day, "dd/MM/yyyy") && (
+                                <div className="dayIsSelected">
+                                    <FcApproval size={smaller ? 20 : 60} />
+                                </div>
+                            )}
                         {isTutorDashView && <ReactTooltip effect="solid" />}
                     </div>
                 );
@@ -181,12 +193,27 @@ const CustomCalendarTutor: React.FC<CustomCalendarTutorProps> = ({
     const onDateClick = async (day: Date) => {
         setSelectedDate(day);
 
+        console.log(new Date() === day);
+
         if (isAgendando) {
-            if (handleEvent(day).includes(true)) {
+            if (
+                (handleEvent(day).includes(true) && new Date() < day) ||
+                dateFns.format(new Date(), "dd/MM/yyyy") ===
+                    dateFns.format(day, "dd/MM/yyyy")
+            ) {
                 handleAgendado(dateFns.format(day, "dd/MM/yyyy"));
+            } else if (new Date() > day) {
+                return handleAgendado("notOld");
             } else {
                 return handleAgendado("not");
             }
+        }
+
+        if (isShowHours && handleEvent(day).includes(true)) {
+            Reoverlay.showModal(TutorHours, {
+                tutorId,
+                day: dateFns.format(day, "dd-MM-yyyy"),
+            });
         }
 
         if (!isTutorDashView) return false;
@@ -198,12 +225,6 @@ const CustomCalendarTutor: React.FC<CustomCalendarTutorProps> = ({
                     "dd-MM-yyyy"
                 )}`
             );
-            // Reoverlay.showModal(AvailableDayHours, {
-            //     day,
-            //     isCurrentAvailable: handleEvent(day).includes(true),
-            //     tutorId,
-            //     data,
-            // });
         } else {
             await executePost({
                 data: {

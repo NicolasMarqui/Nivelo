@@ -5,7 +5,7 @@ export const validateClasses = (options: ClassesInput) => {
         return [
             {
                 field: "description",
-                message: "Description is too big.",
+                message: "Descrição é muito longa",
             },
         ];
     }
@@ -14,7 +14,7 @@ export const validateClasses = (options: ClassesInput) => {
         return [
             {
                 field: "name",
-                message: "Name cannot include an @",
+                message: "Nome não pode incluir '@'",
             },
         ];
     }

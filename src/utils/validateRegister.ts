@@ -5,15 +5,15 @@ export const validateRegister = (options: UsernameEmailPasswordInput) => {
         return [
             {
                 field: "email",
-                message: "Email cannot be empty",
+                message: "Campo Email não pode ser vazio",
             },
             {
                 field: "username",
-                message: "Name cannot be empty",
+                message: "Campo Nome não pode ser vazio",
             },
             {
                 field: "password",
-                message: "Password cannot be empty",
+                message: "Campo Senha não pode ser vazio",
             },
         ];
     }
@@ -22,7 +22,7 @@ export const validateRegister = (options: UsernameEmailPasswordInput) => {
         return [
             {
                 field: "email",
-                message: "Invalid email ",
+                message: "Email inválido",
             },
         ];
     }
@@ -31,7 +31,7 @@ export const validateRegister = (options: UsernameEmailPasswordInput) => {
         return [
             {
                 field: "name",
-                message: "Name cannot include an @",
+                message: "Nome não pode incluir '@'",
             },
         ];
     }
@@ -40,7 +40,7 @@ export const validateRegister = (options: UsernameEmailPasswordInput) => {
         return [
             {
                 field: "password",
-                message: "Length must be greater than 2",
+                message: "Senha precisa ser maior",
             },
         ];
     }

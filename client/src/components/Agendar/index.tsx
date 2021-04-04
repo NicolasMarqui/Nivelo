@@ -12,6 +12,7 @@ import StepFour from "@components/Wizard/StepFour";
 import Title from "@components/UI/Title";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import StepHour from "@components/Wizard/StepHour";
 
 interface AgendarProps {
     tutor: TutorProps;
@@ -22,6 +23,7 @@ const Agendar: React.FC<AgendarProps> = ({ tutor }) => {
     const [selectedClass, setSelectedClass] = useState({});
     const [classPrice, setClassPrice] = useState({});
     const [schedule, setSchedule] = useState("");
+    const [hour, setHour] = useState({});
     const [tool, setTool] = useState("");
     const router = useRouter();
 
@@ -30,6 +32,7 @@ const Agendar: React.FC<AgendarProps> = ({ tutor }) => {
     const handleClassName = (value: any) => setSelectedClass(value);
     const handleChangePrice = (value: any) => setClassPrice(value);
     const handleSchedule = (value: any) => setSchedule(value);
+    const handleHour = (value: any) => setHour(value);
     const handlePlatform = (value: any) => setTool(value);
 
     const info = {
@@ -37,6 +40,7 @@ const Agendar: React.FC<AgendarProps> = ({ tutor }) => {
         selectedClass,
         classPrice,
         classSchedule: schedule,
+        hour,
         tool,
     };
 
@@ -70,6 +74,12 @@ const Agendar: React.FC<AgendarProps> = ({ tutor }) => {
                     handleChangePrice={handleChangePrice}
                 />
                 <StepThree handleScheduleChange={handleSchedule} tutorID={id} />
+
+                <StepHour
+                    tutorID={id}
+                    handleHour={handleHour}
+                    selectedDate={schedule}
+                />
 
                 {!data.me && (
                     <div className="md:w-5/12 mx-auto flex flex-col items-center">

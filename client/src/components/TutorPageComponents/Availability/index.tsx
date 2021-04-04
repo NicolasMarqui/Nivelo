@@ -73,6 +73,7 @@ const Availability: React.FC<AvailabilityProps> = ({
                                     smaller
                                     isAgendando={false}
                                     isTutorDashView={false}
+                                    isShowHours
                                 />
                             </div>
 

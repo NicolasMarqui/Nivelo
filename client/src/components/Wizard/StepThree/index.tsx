@@ -20,6 +20,8 @@ const StepThree: React.FC<StepThreeProps> = ({
 
         if (value === "not") {
             toast.error("Tutor não está disponível nesse dia!");
+        } else if (value === "notOld") {
+            toast.error("You Viajante no tempo man?????");
         } else if (value !== "") {
             console.log("Here");
             toast.success(`${value} selecionado!`);
@@ -37,6 +39,7 @@ const StepThree: React.FC<StepThreeProps> = ({
                 isAgendando
                 smaller={width > 1024 ? false : true}
                 handleAgendado={handleDay}
+                selectedDay={selectedDay}
             />
         </div>
     );

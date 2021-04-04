@@ -5,7 +5,7 @@ export const validateLogin = (options: EmailPasswordInput) => {
         return [
             {
                 field: "email",
-                message: "Invalid email ",
+                message: "Email inválido",
             },
         ];
     }
@@ -14,11 +14,11 @@ export const validateLogin = (options: EmailPasswordInput) => {
         return [
             {
                 field: "email",
-                message: "Email cannot be empty",
+                message: "Preencha o campo de Email",
             },
             {
                 field: "password",
-                message: "Password cannot be empty",
+                message: "Preencha o campo de Senha",
             },
         ];
     }
@@ -27,7 +27,7 @@ export const validateLogin = (options: EmailPasswordInput) => {
         return [
             {
                 field: "password",
-                message: "Length must be greater than 2",
+                message: "Senha muito curta!",
             },
         ];
     }
