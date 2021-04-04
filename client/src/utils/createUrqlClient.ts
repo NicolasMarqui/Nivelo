@@ -53,6 +53,36 @@ const updateOrdersCache = (cache: Cache) => {
     );
 };
 
+function invalidadeTutorHour(cache: Cache) {
+    const allFields = cache.inspectFields("Query");
+    const fieldInfos = allFields.filter(
+        (info) => info.fieldName === "getTutorsHour"
+    );
+    fieldInfos.forEach((fi) => {
+        cache.invalidate("Query", "getTutorsHour", fi.arguments || {});
+    });
+}
+
+function invalidadeTutorClass(cache: Cache) {
+    const allFields = cache.inspectFields("Query");
+    const fieldInfos = allFields.filter(
+        (info) => info.fieldName === "singleTutor"
+    );
+    fieldInfos.forEach((fi) => {
+        cache.invalidate("Query", "singleTutor", fi.arguments || {});
+    });
+}
+
+function invalidadeTutorCategories(cache: Cache) {
+    const allFields = cache.inspectFields("Query");
+    const fieldInfos = allFields.filter(
+        (info) => info.fieldName === "allCategoriesTutor"
+    );
+    fieldInfos.forEach((fi) => {
+        cache.invalidate("Query", "allCategoriesTutor", fi.arguments || {});
+    });
+}
+
 export const createUrqlClient = (ssrExchange: any) => ({
     url: "http://localhost:4000/graphql",
     fetchOptions: {
@@ -64,33 +94,30 @@ export const createUrqlClient = (ssrExchange: any) => ({
             updates: {
                 Mutation: {
                     newClass: (_result, args, cache, info) => {
-                        updateTutorCache(cache);
+                        invalidadeTutorClass(cache);
                     },
                     newOrder: (_result, args, cache, info) => {
+                        console.log(cache.inspectFields("Query"));
                         updateTutorCache(cache);
                     },
                     updateClass: (_result, args, cache, info) => {
-                        updateTutorCache(cache);
+                        invalidadeTutorClass(cache);
                     },
                     categoryToTutor: (_result, args, cache, info) => {
-                        updateTutorCache(cache);
+                        invalidadeTutorCategories(cache);
                     },
                     removeCategoryFromTutor: (_result, args, cache, info) => {
-                        updateTutorCache(cache);
+                        invalidadeTutorCategories(cache);
                     },
                     deleteHourFromTutor: (_result, args, cache, info) => {
                         cache.invalidate({
-                            __typename: "Classes",
+                            __typename: "Hour",
                             id: (args as DeleteHourFromTutorMutationVariables)
                                 .id,
                         });
                     },
                     newHourToTutor: (_result, args, cache, info) => {
-                        cache.invalidate({
-                            __typename: "Classes",
-                            id: (args as NewHourToTutorMutationVariables)
-                                .tutorID,
-                        });
+                        invalidadeTutorHour(cache);
                     },
                     makeOrderApproved: (_result, args, cache, info) => {
                         updateOrdersCache(cache);

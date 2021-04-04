@@ -29,7 +29,6 @@ const TutorCategoriesList: React.FC<TutorCategoriesListProps> = ({
     const [, categoryToTutor] = useCategoryToTutorMutation();
 
     const [hasCheck, setHasCheck] = useState(categories);
-    console.log(categories);
 
     if (fetching || error) {
         return <LoadingAnimation />;

@@ -1,4 +1,4 @@
-mutation newHourToTutor(
+mutation NewHourToTutor(
     $tutorID: Float!
     $date: String!
     $from: String!

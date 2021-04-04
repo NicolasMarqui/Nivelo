@@ -1875,7 +1875,7 @@ export function useNewClassMutation() {
   return Urql.useMutation<NewClassMutation, NewClassMutationVariables>(NewClassDocument);
 };
 export const NewHourToTutorDocument = gql`
-    mutation newHourToTutor($tutorID: Float!, $date: String!, $from: String!, $to: String!) {
+    mutation NewHourToTutor($tutorID: Float!, $date: String!, $from: String!, $to: String!) {
   newHourToTutor(tutorID: $tutorID, date: $date, from: $from, to: $to) {
     errors {
       field
