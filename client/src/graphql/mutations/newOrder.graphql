@@ -3,7 +3,7 @@ mutation NewOrder(
     $classID: Int!
     $date: String!
     $classDuration: String!
-    $classPrice: Float!
+    $classPrice: String!
     $platformId: Int!
     $horario: String!
 ) {

@@ -25,8 +25,8 @@ const CardClassItem: React.FC<CardClassItemProps> = ({
             data-for="priceCard"
             data-tip={
                 price.length > 1
-                    ? `Aulas a partir de R$ ${lowestPriceClasses(price)}.00`
-                    : `Aula com valor de R$ ${lowestPriceClasses(price)}.00`
+                    ? `Aulas a partir de R$ ${lowestPriceClasses(price)}`
+                    : `Aula com valor de R$ ${lowestPriceClasses(price)}`
             }
         >
             <div className="flex-none">
@@ -41,7 +41,7 @@ const CardClassItem: React.FC<CardClassItemProps> = ({
             <div className="flex-none justify-self-end">
                 <div className="bg-primaryPink p-2 rounded-2xl">
                     <p className="text-base md:text-lg text-white font-bold">
-                        R$ {lowestPriceClasses(price)}.00
+                        R$ {lowestPriceClasses(price)}
                         <span>{price.length > 1 ? "+" : ""}</span>
                     </p>
                 </div>

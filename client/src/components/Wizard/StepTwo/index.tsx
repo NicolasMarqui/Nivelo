@@ -6,7 +6,7 @@ import SelectPrices from "../SelectPrices";
 export interface PriceProps {
     id: number;
     time: number;
-    price: number;
+    price: string;
 }
 interface StepTwoProps {
     selected: {

@@ -40,7 +40,7 @@ const SelectClasses: React.FC<SelectClassesProps> = ({
                 <div className="bg-primaryPink p-2 rounded-2xl">
                     {singleClass && singleClass.price && (
                         <p className="text-base md:text-lg text-white font-bold">
-                            R$ {lowestPriceClasses(singleClass.price)}.00
+                            R$ {lowestPriceClasses(singleClass.price)}
                             <span>
                                 {singleClass.price.length > 1 ? "+" : ""}
                             </span>

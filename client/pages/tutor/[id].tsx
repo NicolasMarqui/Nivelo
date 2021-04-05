@@ -29,7 +29,6 @@ const Tutor: React.FC<TutorProps> = ({}) => {
     const router = useRouter();
     const { width } = useWindowSize();
     const [agendarOpen, setAgendarOpen] = useState(false);
-    const [{ data: meData, fetching: meFetching }] = useMeSimplifiedQuery();
 
     const [{ data, fetching, error }] = useSingleTutorQuery({
         variables: { id: parseInt(router.query.id as string) },

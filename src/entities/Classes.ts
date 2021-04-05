@@ -27,7 +27,7 @@ export class Classes extends BaseEntity {
     name: string;
 
     @Field(() => Tutor, { nullable: true })
-    @ManyToOne(() => Tutor, (tutor) => tutor.classes, { cascade: true })
+    @ManyToOne(() => Tutor, (tutor) => tutor.classes, { onDelete: "CASCADE" })
     tutor: Tutor;
 
     @Field(() => Int, { nullable: true })

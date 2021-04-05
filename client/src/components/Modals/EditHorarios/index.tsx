@@ -44,7 +44,7 @@ const EditHorarios: React.FC<EditHorariosProps> = ({ classID }) => {
     return (
         <ModalContainer>
             <h2 className="text-2xl md:text-3xl font-semibold">Horários</h2>
-            {!data && data.allPricesClass.length === 0 ? (
+            {!data || data.allPricesClass.length === 0 ? (
                 <EmptyAnimation />
             ) : (
                 data.allPricesClass.map((h) => (

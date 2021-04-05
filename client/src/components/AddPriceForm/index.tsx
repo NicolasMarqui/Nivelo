@@ -30,7 +30,7 @@ const AddPriceForm: React.FC<AddPriceFormProps> = ({ classID }) => {
             const response = await newPrice({
                 classID,
                 time,
-                price: Number(price),
+                price: price.toString(),
             });
             if (response.data.newPrice.errors) {
                 setErrors(toErrorMap(response.data.newPrice.errors as any));

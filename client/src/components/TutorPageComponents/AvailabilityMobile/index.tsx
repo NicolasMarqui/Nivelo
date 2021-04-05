@@ -24,7 +24,7 @@ const AvailabilityMobile: React.FC<AvailabilityMobileProps> = ({
                 </h5>
                 <p className="text-2xl text-primaryOrange text-left font-bold">
                     {classes !== null && classes.length > 0
-                        ? `R$ ${lowestPriceAval(classes)}.00`
+                        ? `R$ ${lowestPriceAval(classes)}`
                         : "R$-.00"}
                 </p>
             </div>

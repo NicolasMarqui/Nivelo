@@ -33,7 +33,7 @@ export interface TutorProps {
         amountTimeTaught?: number;
         price?: {
             id?: number;
-            price?: number;
+            price?: string;
             time?: number;
         };
     }[];
@@ -57,7 +57,7 @@ export interface ClassesProps {
     active?: boolean;
     price?: {
         id?: number;
-        price?: number;
+        price?: string;
         time?: number;
     }[];
     createdAt?: string;
@@ -71,7 +71,7 @@ export interface ClassesTutorProps {
 export interface PriceProps {
     id?: number;
     time?: number;
-    price?: number;
+    price?: string;
 }
 
 export interface TutorFeedbackProps {
@@ -119,7 +119,7 @@ export interface meProps {
                           | {
                                 id?: number;
                                 time?: number;
-                                price?: number;
+                                price?: string;
                             }[]
                           | [];
                   }[]
@@ -146,7 +146,7 @@ export interface UOrdersProps {
             | {
                   id?: number;
                   time?: number;
-                  price?: number;
+                  price?: string;
               }[]
             | [];
         tutor?: {
@@ -164,7 +164,7 @@ export interface UOrdersProps {
     platformId?: number;
     classDuration?: number | string;
     userAccount?: string;
-    classPrice?: number | string;
+    classPrice?: string;
     isOrderAproved?: boolean;
     hasTutorConfirmedClassDone?: boolean;
     hasUserConfirmedClassDone?: boolean;
@@ -207,7 +207,7 @@ export interface MePropsMe {
                       | {
                             id?: number;
                             time?: number;
-                            price?: number;
+                            price?: string;
                         }[]
                       | [];
               }[]

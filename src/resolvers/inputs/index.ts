@@ -88,8 +88,8 @@ export class PriceInput {
     @Field(() => Int, { nullable: true })
     time: number;
 
-    @Field(() => Float, { nullable: true })
-    price: number;
+    @Field({ nullable: true })
+    price: string;
 
     @Field(() => Boolean)
     isPromotionalCode: boolean;
@@ -142,8 +142,8 @@ export class OrderInput {
     @Field(() => String)
     classDuration: String;
 
-    @Field(() => Float, { nullable: true })
-    classPrice: number;
+    @Field({ nullable: true })
+    classPrice: string;
 
     @Field(() => Int, { nullable: true })
     platformId: number;

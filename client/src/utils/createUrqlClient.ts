@@ -108,6 +108,7 @@ export const createUrqlClient = (ssrExchange: any) => ({
                     createNewOrder: (_result, args, cache, info) => {
                         invalidateQuery(cache, "singleTutor");
                         invalidateQuery(cache, "ordersTutorAwaitingApproval");
+                        invalidateQuery(cache, "getUserOrders");
                     },
                     changeClassStatus: (_result, args, cache, info) => {
                         invalidateQuery(cache, "singleTutor");
@@ -144,6 +145,12 @@ export const createUrqlClient = (ssrExchange: any) => ({
                             id: (args as MakeOrderApprovedMutationVariables)
                                 .orderID,
                         });
+                    },
+                    makeTutorConfirmDone: (_result, args, cache, info) => {
+                        invalidateQuery(cache, "ordersTutorAwaitingApproval");
+                    },
+                    makeUserConfirmDone: (_result, args, cache, info) => {
+                        invalidateQuery(cache, "getUserOrders");
                     },
                     deleteClass: (_result, args, cache, info) => {
                         cache.invalidate({

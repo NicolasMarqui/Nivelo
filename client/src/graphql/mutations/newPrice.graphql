@@ -1,4 +1,4 @@
-mutation NewPrice($classID: Float!, $time: Int!, $price: Float!) {
+mutation NewPrice($classID: Float!, $time: Int!, $price: String!) {
     newPrice(
         classID: $classID
         options: {

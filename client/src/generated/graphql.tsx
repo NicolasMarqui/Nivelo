@@ -193,7 +193,7 @@ export type Price = {
   __typename?: 'Price';
   id?: Maybe<Scalars['Int']>;
   time?: Maybe<Scalars['Int']>;
-  price?: Maybe<Scalars['Float']>;
+  price?: Maybe<Scalars['String']>;
   classes?: Maybe<Classes>;
   isPromotionalCode?: Maybe<Scalars['Boolean']>;
   discountAmount?: Maybe<Scalars['Int']>;
@@ -211,7 +211,7 @@ export type Order = {
   classDuration: Scalars['String'];
   userAccount: Scalars['String'];
   horario?: Maybe<Scalars['String']>;
-  classPrice?: Maybe<Scalars['Float']>;
+  classPrice?: Maybe<Scalars['String']>;
   isOrderAproved?: Maybe<Scalars['Boolean']>;
   hasTutorConfirmedClassDone?: Maybe<Scalars['Boolean']>;
   hasUserConfirmedClassDone?: Maybe<Scalars['Boolean']>;
@@ -327,6 +327,8 @@ export type Mutation = {
   newFeedback: FeedbackResponse;
   createNewOrder: OrderResponse;
   makeOrderApproved: Order;
+  makeUserConfirmDone: Order;
+  makeTutorConfirmDone: Order;
   newHourToTutor: HourResponse;
   deleteHourFromTutor: Scalars['Boolean'];
 };
@@ -543,6 +545,16 @@ export type MutationMakeOrderApprovedArgs = {
 };
 
 
+export type MutationMakeUserConfirmDoneArgs = {
+  orderID: Scalars['String'];
+};
+
+
+export type MutationMakeTutorConfirmDoneArgs = {
+  orderID: Scalars['String'];
+};
+
+
 export type MutationNewHourToTutorArgs = {
   to: Scalars['String'];
   from: Scalars['String'];
@@ -618,7 +630,7 @@ export type PriceResponse = {
 
 export type PriceInput = {
   time?: Maybe<Scalars['Int']>;
-  price?: Maybe<Scalars['Float']>;
+  price?: Maybe<Scalars['String']>;
   isPromotionalCode: Scalars['Boolean'];
   discountAmount?: Maybe<Scalars['Int']>;
 };
@@ -668,7 +680,7 @@ export type OrderInput = {
   date: Scalars['String'];
   horario: Scalars['String'];
   classDuration: Scalars['String'];
-  classPrice?: Maybe<Scalars['Float']>;
+  classPrice?: Maybe<Scalars['String']>;
   platformId?: Maybe<Scalars['Int']>;
   userAccount: Scalars['String'];
 };
@@ -915,6 +927,68 @@ export type MakeOrderApprovedMutation = (
   ) }
 );
 
+export type MakeTutorConfirmDoneMutationVariables = Exact<{
+  orderID: Scalars['String'];
+}>;
+
+
+export type MakeTutorConfirmDoneMutation = (
+  { __typename?: 'Mutation' }
+  & { makeTutorConfirmDone: (
+    { __typename?: 'Order' }
+    & Pick<Order, 'id' | 'date' | 'platformId' | 'classDuration' | 'userAccount' | 'classPrice' | 'isOrderAproved' | 'hasTutorConfirmedClassDone' | 'hasUserConfirmedClassDone' | 'isPaid' | 'paymentDetails' | 'createdAt' | 'updatedAt'>
+    & { user: (
+      { __typename?: 'User' }
+      & Pick<User, 'id' | 'name'>
+    ), classes?: Maybe<(
+      { __typename?: 'Classes' }
+      & Pick<Classes, 'id' | 'name' | 'description' | 'active' | 'level' | 'createdAt' | 'updatedAt'>
+      & { price?: Maybe<Array<(
+        { __typename?: 'Price' }
+        & Pick<Price, 'id' | 'time' | 'price'>
+      )>>, tutor?: Maybe<(
+        { __typename?: 'Tutor' }
+        & Pick<Tutor, 'id' | 'description'>
+        & { user?: Maybe<(
+          { __typename?: 'User' }
+          & Pick<User, 'id' | 'name'>
+        )> }
+      )> }
+    )> }
+  ) }
+);
+
+export type MakeUserConfirmDoneMutationVariables = Exact<{
+  orderID: Scalars['String'];
+}>;
+
+
+export type MakeUserConfirmDoneMutation = (
+  { __typename?: 'Mutation' }
+  & { makeUserConfirmDone: (
+    { __typename?: 'Order' }
+    & Pick<Order, 'id' | 'date' | 'platformId' | 'classDuration' | 'userAccount' | 'classPrice' | 'isOrderAproved' | 'hasTutorConfirmedClassDone' | 'hasUserConfirmedClassDone' | 'isPaid' | 'paymentDetails' | 'createdAt' | 'updatedAt'>
+    & { user: (
+      { __typename?: 'User' }
+      & Pick<User, 'id' | 'name'>
+    ), classes?: Maybe<(
+      { __typename?: 'Classes' }
+      & Pick<Classes, 'id' | 'name' | 'description' | 'active' | 'level' | 'createdAt' | 'updatedAt'>
+      & { price?: Maybe<Array<(
+        { __typename?: 'Price' }
+        & Pick<Price, 'id' | 'time' | 'price'>
+      )>>, tutor?: Maybe<(
+        { __typename?: 'Tutor' }
+        & Pick<Tutor, 'id' | 'description'>
+        & { user?: Maybe<(
+          { __typename?: 'User' }
+          & Pick<User, 'id' | 'name'>
+        )> }
+      )> }
+    )> }
+  ) }
+);
+
 export type MoreInfoUserMutationVariables = Exact<{
   id: Scalars['Float'];
   description?: Maybe<Scalars['String']>;
@@ -1000,7 +1074,7 @@ export type NewOrderMutationVariables = Exact<{
   classID: Scalars['Int'];
   date: Scalars['String'];
   classDuration: Scalars['String'];
-  classPrice: Scalars['Float'];
+  classPrice: Scalars['String'];
   platformId: Scalars['Int'];
   horario: Scalars['String'];
 }>;
@@ -1038,7 +1112,7 @@ export type NewOrderMutation = (
 export type NewPriceMutationVariables = Exact<{
   classID: Scalars['Float'];
   time: Scalars['Int'];
-  price: Scalars['Float'];
+  price: Scalars['String'];
 }>;
 
 
@@ -1847,6 +1921,104 @@ export const MakeOrderApprovedDocument = gql`
 export function useMakeOrderApprovedMutation() {
   return Urql.useMutation<MakeOrderApprovedMutation, MakeOrderApprovedMutationVariables>(MakeOrderApprovedDocument);
 };
+export const MakeTutorConfirmDoneDocument = gql`
+    mutation MakeTutorConfirmDone($orderID: String!) {
+  makeTutorConfirmDone(orderID: $orderID) {
+    id
+    user {
+      id
+      name
+    }
+    classes {
+      id
+      name
+      description
+      active
+      level
+      price {
+        id
+        time
+        price
+      }
+      tutor {
+        id
+        description
+        user {
+          id
+          name
+        }
+      }
+      createdAt
+      updatedAt
+    }
+    date
+    platformId
+    classDuration
+    userAccount
+    classPrice
+    isOrderAproved
+    hasTutorConfirmedClassDone
+    hasUserConfirmedClassDone
+    isPaid
+    paymentDetails
+    createdAt
+    updatedAt
+  }
+}
+    `;
+
+export function useMakeTutorConfirmDoneMutation() {
+  return Urql.useMutation<MakeTutorConfirmDoneMutation, MakeTutorConfirmDoneMutationVariables>(MakeTutorConfirmDoneDocument);
+};
+export const MakeUserConfirmDoneDocument = gql`
+    mutation MakeUserConfirmDone($orderID: String!) {
+  makeUserConfirmDone(orderID: $orderID) {
+    id
+    user {
+      id
+      name
+    }
+    classes {
+      id
+      name
+      description
+      active
+      level
+      price {
+        id
+        time
+        price
+      }
+      tutor {
+        id
+        description
+        user {
+          id
+          name
+        }
+      }
+      createdAt
+      updatedAt
+    }
+    date
+    platformId
+    classDuration
+    userAccount
+    classPrice
+    isOrderAproved
+    hasTutorConfirmedClassDone
+    hasUserConfirmedClassDone
+    isPaid
+    paymentDetails
+    createdAt
+    updatedAt
+  }
+}
+    `;
+
+export function useMakeUserConfirmDoneMutation() {
+  return Urql.useMutation<MakeUserConfirmDoneMutation, MakeUserConfirmDoneMutationVariables>(MakeUserConfirmDoneDocument);
+};
 export const MoreInfoUserDocument = gql`
     mutation MoreInfoUser($id: Float!, $description: String, $country: String, $name: String) {
   addMoreInfo(
@@ -1937,7 +2109,7 @@ export function useNewHourToTutorMutation() {
   return Urql.useMutation<NewHourToTutorMutation, NewHourToTutorMutationVariables>(NewHourToTutorDocument);
 };
 export const NewOrderDocument = gql`
-    mutation NewOrder($userID: Float!, $classID: Int!, $date: String!, $classDuration: String!, $classPrice: Float!, $platformId: Int!, $horario: String!) {
+    mutation NewOrder($userID: Float!, $classID: Int!, $date: String!, $classDuration: String!, $classPrice: String!, $platformId: Int!, $horario: String!) {
   createNewOrder(
     userID: $userID
     options: {classID: $classID, date: $date, classDuration: $classDuration, classPrice: $classPrice, platformId: $platformId, userAccount: "", horario: $horario}
@@ -1991,7 +2163,7 @@ export function useNewOrderMutation() {
   return Urql.useMutation<NewOrderMutation, NewOrderMutationVariables>(NewOrderDocument);
 };
 export const NewPriceDocument = gql`
-    mutation NewPrice($classID: Float!, $time: Int!, $price: Float!) {
+    mutation NewPrice($classID: Float!, $time: Int!, $price: String!) {
   newPrice(
     classID: $classID
     options: {time: $time, price: $price, isPromotionalCode: false, discountAmount: 0}

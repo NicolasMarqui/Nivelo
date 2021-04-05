@@ -55,7 +55,7 @@ const ClassItem: React.FC<ClassItemProps> = ({
                     <div className="bg-primaryPink p-2 rounded-2xl">
                         {price && (
                             <p className="text-base md:text-lg text-white font-bold">
-                                R$ {lowestPriceClasses(price)}.00
+                                R$ {lowestPriceClasses(price)}
                                 <span>{price.length > 1 ? "+" : ""}</span>
                             </p>
                         )}

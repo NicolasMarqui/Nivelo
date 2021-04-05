@@ -22,7 +22,7 @@ interface FinalizarOrderProps {
         };
         classPrice: {
             id: number;
-            price: number;
+            price: string;
             time: number;
         };
         classSchedule?: string;

@@ -35,7 +35,7 @@ const Availability: React.FC<AvailabilityProps> = ({
                             </h5>
                             <p className="text-2xl text-primaryOrange text-center md:text-left font-bold">
                                 {classes !== null && classes.length > 0
-                                    ? `R$ ${lowestPriceAval(classes)}.00`
+                                    ? `R$ ${lowestPriceAval(classes)}`
                                     : "R$-.00"}
                             </p>
                             <div className="mt-4 flex items-center justify-center md:justify-start mb-5 md:mb-0">

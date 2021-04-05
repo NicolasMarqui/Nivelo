@@ -103,6 +103,7 @@ const OrdersUserList: React.FC<OrdersUserListProps> = ({
                 </div>
                 <OrdersUsersActions
                     isPaid={isPaid}
+                    orderID={id}
                     hasUserConfirmedClassDone={hasUserConfirmedClassDone}
                     isOrderPage={isOrderPage}
                 />

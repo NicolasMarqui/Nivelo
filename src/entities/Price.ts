@@ -21,9 +21,9 @@ export class Price extends BaseEntity {
     @Column({ nullable: true })
     time: number;
 
-    @Field(() => Float, { nullable: true })
-    @Column({ type: "decimal", nullable: true })
-    price: number;
+    @Field(() => String, { nullable: true })
+    @Column({ nullable: true })
+    price: string;
 
     @Field(() => Classes, { nullable: true })
     @ManyToOne(() => Classes, (classes) => classes.price, {

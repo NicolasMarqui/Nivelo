@@ -2,7 +2,7 @@ interface SelectPricesProps {
     price: {
         id: number;
         time: number;
-        price: number;
+        price: string;
     };
     handleSelectedPrice: (i: any) => any;
     active?: boolean;
@@ -30,9 +30,7 @@ const SelectPrices: React.FC<SelectPricesProps> = ({
             </div>
             <div className="flex items-center justify-between">
                 <h3 className={`${active ? "text-white" : ""}`}>Valor de: </h3>
-                <p className="text-primaryOrange font-bold">
-                    R${price.price},00
-                </p>
+                <p className="text-primaryOrange font-bold">R${price.price}</p>
             </div>
         </div>
     );

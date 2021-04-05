@@ -243,4 +243,74 @@ export class OrderResolver {
 
         return orderRel;
     }
+
+    // Make order approved
+    @Mutation(() => Order)
+    async makeUserConfirmDone(
+        @Arg("orderID") orderID: string
+    ): Promise<Order | undefined> {
+        let order;
+        let orderRel;
+        try {
+            const result = await getConnection()
+                .createQueryBuilder()
+                .update(Order)
+                .set({ hasUserConfirmedClassDone: true })
+                .where("id = :id", { id: orderID })
+                .returning("*")
+                .execute();
+
+            order = result.raw[0];
+
+            orderRel = await Order.findOne({
+                where: { id: order.id },
+                relations: [
+                    "user",
+                    "classes",
+                    "classes.price",
+                    "classes.tutor",
+                    "classes.tutor.user",
+                ],
+            });
+        } catch (err) {
+            console.log(err);
+        }
+
+        return orderRel;
+    }
+
+    // Make order approved
+    @Mutation(() => Order)
+    async makeTutorConfirmDone(
+        @Arg("orderID") orderID: string
+    ): Promise<Order | undefined> {
+        let order;
+        let orderRel;
+        try {
+            const result = await getConnection()
+                .createQueryBuilder()
+                .update(Order)
+                .set({ hasTutorConfirmedClassDone: true })
+                .where("id = :id", { id: orderID })
+                .returning("*")
+                .execute();
+
+            order = result.raw[0];
+
+            orderRel = await Order.findOne({
+                where: { id: order.id },
+                relations: [
+                    "user",
+                    "classes",
+                    "classes.price",
+                    "classes.tutor",
+                    "classes.tutor.user",
+                ],
+            });
+        } catch (err) {
+            console.log(err);
+        }
+
+        return orderRel;
+    }
 }

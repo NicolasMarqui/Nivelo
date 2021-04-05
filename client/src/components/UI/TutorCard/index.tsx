@@ -68,7 +68,7 @@ const TutorCard: React.FC<TutorCardProps> = ({ tutor }) => {
                         <p className="text-2xl text-primaryOrange text-center md:text-left font-bold">
                             {tutor.classes !== null && tutor.classes.length > 0
                                 ? // @ts-ignore
-                                  `R$ ${lowestPriceAval(tutor.classes)}.00`
+                                  `R$ ${lowestPriceAval(tutor.classes)}`
                                 : "R$-.00"}
                         </p>
                     </div>

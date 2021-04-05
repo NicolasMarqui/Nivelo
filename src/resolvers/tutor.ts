@@ -168,16 +168,20 @@ export class TutorResolver {
 
     // Delete a Tutor
     @Mutation(() => Boolean)
-    @UseMiddleware(isAuth)
     async deleteTutor(@Arg("id") id: number): Promise<Boolean> {
-        const tutor = await Tutor.findOne({ where: { id: id } });
+        const tutorToDelete = await getConnection()
+            .createQueryBuilder()
+            .delete()
+            .from(Tutor)
+            .where("id = :id", { id })
+            .returning("*")
+            .execute();
 
-        if (!tutor) {
-            return false;
+        if (tutorToDelete.affected) {
+            return true;
         }
 
-        await tutor.remove();
-        return true;
+        return false;
     }
 
     // Update a Tutor

@@ -25,7 +25,7 @@ interface NavWizardProps {
         };
         classPrice: {
             id: number;
-            price: number;
+            price: string;
             time: number;
         };
         classSchedule?: string;
@@ -106,7 +106,7 @@ const NavWizard: React.FC<NavWizardProps> = ({
                 </div>
                 <div className="flex-3 justify-center">
                     <h4 className="text-center text-xl font-bold">
-                        R${classPrice.price || 0},00
+                        R${classPrice.price || 0}
                     </h4>
                 </div>
                 <div className="flex-none justify-end items-end">
@@ -120,7 +120,7 @@ const NavWizard: React.FC<NavWizardProps> = ({
 
                             <ReactToolTip effect="solid" id="final">
                                 <p>Aula: {selectedClass.name}</p>
-                                <p>Valor: R${classPrice.price || 0},00</p>
+                                <p>Valor: R${classPrice.price || 0}</p>
                                 <p>Dias: {classSchedule}</p>
                                 <p>Meio: {tool.name} </p>
                             </ReactToolTip>
