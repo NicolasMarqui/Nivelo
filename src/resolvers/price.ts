@@ -32,6 +32,25 @@ export class PriceResolver {
         return prices;
     }
 
+    // Get All prices by classes
+    @Query(() => [Price] || [])
+    async allPricesClass(
+        @Arg("classID") classID: number
+    ): Promise<Price[] | []> {
+        const sClass = await Classes.findOne({ where: { id: classID } });
+
+        if (!sClass) {
+            return [];
+        }
+
+        const prices = await Price.find({
+            where: { classes: sClass },
+            relations: ["classes", "classes.tutor", "classes.tutor.user"],
+        });
+
+        return prices;
+    }
+
     // Add new price
     @Mutation(() => PriceResponse)
     async newPrice(

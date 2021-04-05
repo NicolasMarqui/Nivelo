@@ -45,6 +45,10 @@ export class Order extends BaseEntity {
     @Column()
     userAccount: String;
 
+    @Field(() => String, { nullable: true })
+    @Column("text", { nullable: true })
+    horario: String;
+
     @Field(() => Float, { nullable: true })
     @Column({ type: "decimal", nullable: true })
     classPrice: number;

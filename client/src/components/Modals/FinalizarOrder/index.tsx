@@ -69,13 +69,15 @@ const FinalizarOrder: React.FC<FinalizarOrderProps> = ({
             classPrice: classPrice.price,
             classDuration: `${classPrice.time}min`,
             platformId: tool.id,
+            horario: `A partir de ${hour.from} até ${hour.to}`,
         });
 
         if (response && response.data.createNewOrder.errors) {
             toast.error("Algo deu errado! Tente Novamente");
             Reoverlay.hideModal();
         } else if (response.data.createNewOrder.order) {
-            toast.loading("Por favor aguarde...", { duration: 4000 });
+            toast.loading("Por favor aguarde...", { duration: 3000 });
+            Reoverlay.hideModal();
             router.push(`/order/${response.data.createNewOrder.order.id}`);
         }
     };

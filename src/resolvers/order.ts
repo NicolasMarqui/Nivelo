@@ -108,6 +108,7 @@ export class OrderResolver {
             platformId,
             date,
             userAccount,
+            horario,
         } = options;
 
         let order;
@@ -125,6 +126,7 @@ export class OrderResolver {
                     platformId,
                     date,
                     userAccount,
+                    horario,
                 })
                 .returning("*")
                 .execute();

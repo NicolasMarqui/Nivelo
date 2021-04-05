@@ -170,6 +170,7 @@ export interface UOrdersProps {
     hasUserConfirmedClassDone?: boolean;
     isPaid?: boolean;
     paymentDetails?: string;
+    horario?: string;
     createdAt?: string;
     updatedAt?: string;
 }

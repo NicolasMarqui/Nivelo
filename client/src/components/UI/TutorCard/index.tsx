@@ -10,6 +10,7 @@ import Tooltip from "react-tooltip";
 import CustomCalendarTutor from "../CalendarTutor";
 import { getCategoriesFromArray } from "@utils/getCategoriesFromArray";
 import { useRouter } from "next/router";
+import { lowestPriceAval } from "@utils/lowestPriceClasses";
 
 const TutorCard: React.FC<TutorCardProps> = ({ tutor }) => {
     const router = useRouter();
@@ -65,7 +66,10 @@ const TutorCard: React.FC<TutorCardProps> = ({ tutor }) => {
                             Preço por hora a partir de
                         </h5>
                         <p className="text-2xl text-primaryOrange text-center md:text-left font-bold">
-                            R$8.00
+                            {tutor.classes !== null && tutor.classes.length > 0
+                                ? // @ts-ignore
+                                  `R$ ${lowestPriceAval(tutor.classes)}.00`
+                                : "R$-.00"}
                         </p>
                     </div>
                     <div className="mt-4 flex items-center justify-center md:justify-start mb-5 md:mb-0">

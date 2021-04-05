@@ -28,6 +28,7 @@ query UserOrders($id: Float!) {
             updatedAt
         }
         date
+        horario
         platformId
         classDuration
         userAccount

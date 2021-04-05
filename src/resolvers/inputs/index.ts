@@ -137,6 +137,9 @@ export class OrderInput {
     date: String;
 
     @Field(() => String)
+    horario: String;
+
+    @Field(() => String)
     classDuration: String;
 
     @Field(() => Float, { nullable: true })

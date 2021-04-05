@@ -10,6 +10,7 @@ import { createUrqlClient } from "@utils/createUrqlClient";
 import classLevels from "@utils/JSON/classesLevels.json";
 import Select from "react-select";
 import LoadingAnimation from "@components/UI/LoadingAnimation";
+import EditHorarios from "../EditHorarios";
 
 interface EditClassProps {
     singleClass: ClassesProps;
@@ -89,7 +90,7 @@ const EditClass: React.FC<EditClassProps> = ({ singleClass }) => {
                             name="description"
                             onChange={formik.handleChange}
                             value={formik.values.description}
-                            className="block w-full p-3 rounded bg-gray-100 border border-transparent focus:outline-none focus:border-orange h-52 resize-none md:w-96"
+                            className="block w-full p-3 rounded bg-gray-100 border border-transparent focus:outline-none focus:border-orange h-52 resize-none"
                         />
                         {formik.errors.description && (
                             <p className="my-1 bg-red-200 p-2 text-sm text-white text-center">
@@ -114,6 +115,19 @@ const EditClass: React.FC<EditClassProps> = ({ singleClass }) => {
                                 {formik.errors.level}
                             </p>
                         )}
+                    </div>
+
+                    <div className="h-24 my-2">
+                        <div
+                            className="w-full p-3 mt-4 bg-primaryPurple text-white rounded shadow hover:bg-lightPurple text-center cursor-pointer"
+                            onClick={() =>
+                                Reoverlay.showModal(EditHorarios, {
+                                    classId: singleClass.id,
+                                })
+                            }
+                        >
+                            Editar Horários e preços
+                        </div>
                     </div>
 
                     <div className="flex flex-col md:flex-row items-center justify-center">

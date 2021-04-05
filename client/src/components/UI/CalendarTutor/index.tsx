@@ -193,8 +193,6 @@ const CustomCalendarTutor: React.FC<CustomCalendarTutorProps> = ({
     const onDateClick = async (day: Date) => {
         setSelectedDate(day);
 
-        console.log(new Date() === day);
-
         if (isAgendando) {
             if (
                 (handleEvent(day).includes(true) && new Date() < day) ||

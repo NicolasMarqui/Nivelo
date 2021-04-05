@@ -5,6 +5,7 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 import { Reoverlay } from "reoverlay";
 import { useNewPriceMutation } from "src/generated/graphql";
+import InputMask from "react-input-mask";
 
 interface AddPriceFormProps {
     classID?: number;
@@ -20,17 +21,21 @@ const AddPriceForm: React.FC<AddPriceFormProps> = ({ classID }) => {
     const formik = useFormik({
         initialValues: {
             time: 0,
-            price: 0,
+            price: 10.0,
         },
         onSubmit: async (values, { setErrors }) => {
             const { time, price } = values;
 
-            const response = await newPrice({ classID, time, price });
+            const response = await newPrice({
+                classID,
+                time,
+                price: Number(price),
+            });
             if (response.data.newPrice.errors) {
                 setErrors(toErrorMap(response.data.newPrice.errors as any));
             } else if (response.data.newPrice.price) {
                 formik.setFieldValue("time", 0);
-                formik.setFieldValue("price", 0);
+                formik.setFieldValue("price", 10.0);
 
                 toast.success("Horário adicionado com sucesso");
             }
@@ -69,11 +74,12 @@ const AddPriceForm: React.FC<AddPriceFormProps> = ({ classID }) => {
                             Preço /hr
                         </label>
 
-                        <input
+                        <InputMask
+                            mask="99.99"
                             name="price"
-                            type="number"
                             onChange={formik.handleChange}
                             value={formik.values.price}
+                            required
                             className="block w-full p-3 rounded bg-gray-100 border border-transparent focus:outline-none focus:border-orange resize-none"
                         />
                     </div>

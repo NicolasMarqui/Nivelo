@@ -30,6 +30,7 @@ query TutorOrdersAwaitingApproval($id: Float!) {
         date
         platformId
         classDuration
+        horario
         userAccount
         classPrice
         isOrderAproved

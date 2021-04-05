@@ -32,6 +32,10 @@ const ClassItem: React.FC<ClassItemProps> = ({
         }
     };
 
+    const handlePush = () => {
+        router.push({ pathname: router.asPath, query: { agendar: true } });
+    };
+
     return (
         <>
             <div
@@ -62,6 +66,7 @@ const ClassItem: React.FC<ClassItemProps> = ({
             {moreInfoClass && (
                 <Side
                     isOpen={moreInfoClass}
+                    position="left"
                     handleClose={() => setMoreInfoClass(!moreInfoClass)}
                     header={{ title: name }}
                 >
@@ -78,6 +83,7 @@ const ClassItem: React.FC<ClassItemProps> = ({
                         text="Agendar"
                         icon={<MdEvent size={18} color="#222" />}
                         classes="bg-primaryPink hover:bg-lightOrange text-white"
+                        onClick={handlePush}
                     />
                 </Side>
             )}

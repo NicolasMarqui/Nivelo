@@ -8,7 +8,6 @@ import { tutorBreadcumbList } from "@utils/breadumbList";
 import { getCategoriesFromArray } from "@utils/getCategoriesFromArray";
 import { MdRecordVoiceOver } from "react-icons/md";
 import TimeAgo from "react-timeago";
-import { useTutorFeedbackQuery } from "src/generated/graphql";
 
 interface SecondRowProps {
     name: string;

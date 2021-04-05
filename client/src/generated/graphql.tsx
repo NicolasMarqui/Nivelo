@@ -204,6 +204,7 @@ export type Order = {
   platformId?: Maybe<Scalars['Int']>;
   classDuration: Scalars['String'];
   userAccount: Scalars['String'];
+  horario?: Maybe<Scalars['String']>;
   classPrice?: Maybe<Scalars['Float']>;
   isOrderAproved?: Maybe<Scalars['Boolean']>;
   hasTutorConfirmedClassDone?: Maybe<Scalars['Boolean']>;
@@ -659,6 +660,7 @@ export type OrderResponse = {
 export type OrderInput = {
   classID?: Maybe<Scalars['Int']>;
   date: Scalars['String'];
+  horario: Scalars['String'];
   classDuration: Scalars['String'];
   classPrice?: Maybe<Scalars['Float']>;
   platformId?: Maybe<Scalars['Int']>;
@@ -984,6 +986,7 @@ export type NewOrderMutationVariables = Exact<{
   classDuration: Scalars['String'];
   classPrice: Scalars['Float'];
   platformId: Scalars['Int'];
+  horario: Scalars['String'];
 }>;
 
 
@@ -1444,7 +1447,7 @@ export type TutorOrdersAwaitingApprovalQuery = (
   { __typename?: 'Query' }
   & { ordersTutorAwaitingApproval: Array<(
     { __typename?: 'Order' }
-    & Pick<Order, 'id' | 'date' | 'platformId' | 'classDuration' | 'userAccount' | 'classPrice' | 'isOrderAproved' | 'hasTutorConfirmedClassDone' | 'hasUserConfirmedClassDone' | 'isPaid' | 'paymentDetails' | 'createdAt' | 'updatedAt'>
+    & Pick<Order, 'id' | 'date' | 'platformId' | 'classDuration' | 'horario' | 'userAccount' | 'classPrice' | 'isOrderAproved' | 'hasTutorConfirmedClassDone' | 'hasUserConfirmedClassDone' | 'isPaid' | 'paymentDetails' | 'createdAt' | 'updatedAt'>
     & { user: (
       { __typename?: 'User' }
       & Pick<User, 'id' | 'name'>
@@ -1528,7 +1531,7 @@ export type UserOrdersQuery = (
   { __typename?: 'Query' }
   & { getUserOrders: Array<(
     { __typename?: 'Order' }
-    & Pick<Order, 'id' | 'date' | 'platformId' | 'classDuration' | 'userAccount' | 'classPrice' | 'isOrderAproved' | 'hasTutorConfirmedClassDone' | 'hasUserConfirmedClassDone' | 'isPaid' | 'paymentDetails' | 'createdAt' | 'updatedAt'>
+    & Pick<Order, 'id' | 'date' | 'horario' | 'platformId' | 'classDuration' | 'userAccount' | 'classPrice' | 'isOrderAproved' | 'hasTutorConfirmedClassDone' | 'hasUserConfirmedClassDone' | 'isPaid' | 'paymentDetails' | 'createdAt' | 'updatedAt'>
     & { user: (
       { __typename?: 'User' }
       & Pick<User, 'id' | 'name'>
@@ -1896,10 +1899,10 @@ export function useNewHourToTutorMutation() {
   return Urql.useMutation<NewHourToTutorMutation, NewHourToTutorMutationVariables>(NewHourToTutorDocument);
 };
 export const NewOrderDocument = gql`
-    mutation NewOrder($userID: Float!, $classID: Int!, $date: String!, $classDuration: String!, $classPrice: Float!, $platformId: Int!) {
+    mutation NewOrder($userID: Float!, $classID: Int!, $date: String!, $classDuration: String!, $classPrice: Float!, $platformId: Int!, $horario: String!) {
   createNewOrder(
     userID: $userID
-    options: {classID: $classID, date: $date, classDuration: $classDuration, classPrice: $classPrice, platformId: $platformId, userAccount: ""}
+    options: {classID: $classID, date: $date, classDuration: $classDuration, classPrice: $classPrice, platformId: $platformId, userAccount: "", horario: $horario}
   ) {
     errors {
       field
@@ -2520,6 +2523,7 @@ export const TutorOrdersAwaitingApprovalDocument = gql`
     date
     platformId
     classDuration
+    horario
     userAccount
     classPrice
     isOrderAproved
@@ -2639,6 +2643,7 @@ export const UserOrdersDocument = gql`
       updatedAt
     }
     date
+    horario
     platformId
     classDuration
     userAccount

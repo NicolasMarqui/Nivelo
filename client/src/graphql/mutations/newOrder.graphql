@@ -5,6 +5,7 @@ mutation NewOrder(
     $classDuration: String!
     $classPrice: Float!
     $platformId: Int!
+    $horario: String!
 ) {
     createNewOrder(
         userID: $userID
@@ -15,6 +16,7 @@ mutation NewOrder(
             classPrice: $classPrice
             platformId: $platformId
             userAccount: ""
+            horario: $horario
         }
     ) {
         errors {

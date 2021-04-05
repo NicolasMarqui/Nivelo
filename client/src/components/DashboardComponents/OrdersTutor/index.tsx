@@ -19,6 +19,7 @@ const OrdersTutor: React.FC<OrdersTutorProps> = ({ order }) => {
         date,
         platformId,
         user,
+        horario,
     } = order;
 
     const handleAprovar = async () => {
@@ -59,6 +60,10 @@ const OrdersTutor: React.FC<OrdersTutorProps> = ({ order }) => {
 
                 <h4 className="font-bold text-center md:text-left">
                     Dia: <span className="text-primaryOrange">{date}</span>
+                </h4>
+                <h4 className="font-bold text-center text-base md:text-left">
+                    Horário:{" "}
+                    <span className="text-primaryOrange">{horario || "-"}</span>
                 </h4>
             </div>
             <div className="flex-none justify-items-end flex items-center flex-col my-3 md:my-0">
