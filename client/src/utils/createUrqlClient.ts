@@ -55,6 +55,7 @@ const updateOrdersCache = (cache: Cache) => {
 
 function invalidateQuery(cache: Cache, field: string) {
     const allFields = cache.inspectFields("Query");
+    console.log(allFields);
     const fieldInfos = allFields.filter((info) => info.fieldName === field);
     fieldInfos.forEach((fi) => {
         cache.invalidate("Query", field, fi.arguments || {});
@@ -106,6 +107,16 @@ export const createUrqlClient = (ssrExchange: any) => ({
                     },
                     createNewOrder: (_result, args, cache, info) => {
                         invalidateQuery(cache, "singleTutor");
+                        invalidateQuery(cache, "ordersTutorAwaitingApproval");
+                    },
+                    changeClassStatus: (_result, args, cache, info) => {
+                        invalidateQuery(cache, "singleTutor");
+                    },
+                    newPrice: (_result, args, cache, info) => {
+                        invalidateQuery(cache, "allPricesClass");
+                    },
+                    deletePrice: (_result, args, cache, info) => {
+                        invalidateQuery(cache, "allPricesClass");
                     },
                     updateClass: (_result, args, cache, info) => {
                         invalidadeTutorClass(cache);

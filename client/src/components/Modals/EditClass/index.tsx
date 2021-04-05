@@ -20,7 +20,7 @@ const EditClass: React.FC<EditClassProps> = ({ singleClass }) => {
     const [{ fetching }, updateClass] = useUpdateClassMutation();
 
     const handleClose = () => {
-        Reoverlay.hideModal();
+        Reoverlay.hideAll();
     };
 
     const formik = useFormik({
@@ -122,7 +122,7 @@ const EditClass: React.FC<EditClassProps> = ({ singleClass }) => {
                             className="w-full p-3 mt-4 bg-primaryPurple text-white rounded shadow hover:bg-lightPurple text-center cursor-pointer"
                             onClick={() =>
                                 Reoverlay.showModal(EditHorarios, {
-                                    classId: singleClass.id,
+                                    classID: singleClass.id,
                                 })
                             }
                         >

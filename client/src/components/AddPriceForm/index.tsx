@@ -20,8 +20,9 @@ const AddPriceForm: React.FC<AddPriceFormProps> = ({ classID }) => {
 
     const formik = useFormik({
         initialValues: {
-            time: 0,
-            price: 10.0,
+            time: 60,
+            // prettier-ignore
+            price: 10.55,
         },
         onSubmit: async (values, { setErrors }) => {
             const { time, price } = values;
@@ -35,7 +36,7 @@ const AddPriceForm: React.FC<AddPriceFormProps> = ({ classID }) => {
                 setErrors(toErrorMap(response.data.newPrice.errors as any));
             } else if (response.data.newPrice.price) {
                 formik.setFieldValue("time", 0);
-                formik.setFieldValue("price", 10.0);
+                formik.setFieldValue("price", 10.55);
 
                 toast.success("Horário adicionado com sucesso");
             }
@@ -74,14 +75,19 @@ const AddPriceForm: React.FC<AddPriceFormProps> = ({ classID }) => {
                             Preço /hr
                         </label>
 
-                        <InputMask
-                            mask="99.99"
-                            name="price"
-                            onChange={formik.handleChange}
-                            value={formik.values.price}
-                            required
-                            className="block w-full p-3 rounded bg-gray-100 border border-transparent focus:outline-none focus:border-orange resize-none"
-                        />
+                        <div className="flex items-center">
+                            <div className="p-1 mr-2">
+                                <p>R$</p>
+                            </div>
+                            <InputMask
+                                mask="99.99"
+                                name="price"
+                                onChange={formik.handleChange}
+                                value={formik.values.price}
+                                required
+                                className="block w-full p-3 rounded bg-gray-100 border border-transparent focus:outline-none focus:border-orange resize-none  relative"
+                            />
+                        </div>
                     </div>
 
                     <div className="flex flex-col md:flex-row items-center justify-center">

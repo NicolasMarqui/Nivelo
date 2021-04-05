@@ -28,6 +28,7 @@ export type Query = {
   singleClass: Classes;
   allTutorClasses: Array<Classes>;
   allPrices: Array<Price>;
+  allPricesClass: Array<Price>;
   allCategories: Array<Category>;
   allCategoriesTutor: Array<Category>;
   allPlatforms: Array<Platforms>;
@@ -79,6 +80,11 @@ export type QuerySingleClassArgs = {
 
 export type QueryAllTutorClassesArgs = {
   tutorId: Scalars['Float'];
+};
+
+
+export type QueryAllPricesClassArgs = {
+  classID: Scalars['Float'];
 };
 
 
@@ -830,6 +836,16 @@ export type DeleteHourFromTutorMutation = (
   & Pick<Mutation, 'deleteHourFromTutor'>
 );
 
+export type DeletePriceMutationVariables = Exact<{
+  id: Scalars['Float'];
+}>;
+
+
+export type DeletePriceMutation = (
+  { __typename?: 'Mutation' }
+  & Pick<Mutation, 'deletePrice'>
+);
+
 export type ForgotPasswordMutationVariables = Exact<{
   email: Scalars['String'];
 }>;
@@ -1222,6 +1238,19 @@ export type AllPlatformsQuery = (
   & { allPlatforms: Array<(
     { __typename?: 'Platforms' }
     & Pick<Platforms, 'id' | 'name' | 'icon'>
+  )> }
+);
+
+export type AllPricesClassQueryVariables = Exact<{
+  classID: Scalars['Float'];
+}>;
+
+
+export type AllPricesClassQuery = (
+  { __typename?: 'Query' }
+  & { allPricesClass: Array<(
+    { __typename?: 'Price' }
+    & Pick<Price, 'id' | 'price' | 'time' | 'createdAt' | 'updatedAt'>
   )> }
 );
 
@@ -1725,6 +1754,15 @@ export const DeleteHourFromTutorDocument = gql`
 export function useDeleteHourFromTutorMutation() {
   return Urql.useMutation<DeleteHourFromTutorMutation, DeleteHourFromTutorMutationVariables>(DeleteHourFromTutorDocument);
 };
+export const DeletePriceDocument = gql`
+    mutation DeletePrice($id: Float!) {
+  deletePrice(id: $id)
+}
+    `;
+
+export function useDeletePriceMutation() {
+  return Urql.useMutation<DeletePriceMutation, DeletePriceMutationVariables>(DeletePriceDocument);
+};
 export const ForgotPasswordDocument = gql`
     mutation ForgotPassword($email: String!) {
   forgotPassword(email: $email)
@@ -2195,6 +2233,21 @@ export const AllPlatformsDocument = gql`
 
 export function useAllPlatformsQuery(options: Omit<Urql.UseQueryArgs<AllPlatformsQueryVariables>, 'query'> = {}) {
   return Urql.useQuery<AllPlatformsQuery>({ query: AllPlatformsDocument, ...options });
+};
+export const AllPricesClassDocument = gql`
+    query AllPricesClass($classID: Float!) {
+  allPricesClass(classID: $classID) {
+    id
+    price
+    time
+    createdAt
+    updatedAt
+  }
+}
+    `;
+
+export function useAllPricesClassQuery(options: Omit<Urql.UseQueryArgs<AllPricesClassQueryVariables>, 'query'> = {}) {
+  return Urql.useQuery<AllPricesClassQuery>({ query: AllPricesClassDocument, ...options });
 };
 export const AllTutorClassesDocument = gql`
     query AllTutorClasses($tutorId: Float!) {

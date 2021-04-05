@@ -294,8 +294,24 @@ export class TutorResolver {
     // Get a single tutor
     @Query(() => TutorResponse)
     async singleTutor(@Arg("id") id: number): Promise<TutorResponse> {
+        // const tutor = await getConnection()
+        //     .getRepository(Tutor)
+        //     .createQueryBuilder("tutor")
+        //     .leftJoinAndSelect("tutor.user", "user")
+        //     .leftJoinAndSelect("tutor.type", "tutorType")
+        //     .leftJoinAndSelect("tutor.classes", "classes")
+        //     .leftJoinAndSelect("classes.price", "price")
+        //     .leftJoinAndSelect("tutor.categories", "categories")
+        //     .leftJoinAndSelect(
+        //         "user.userPlatformAccount",
+        //         "userPlatformAccount"
+        //     )
+        //     .leftJoinAndSelect("userPlatformAccount.platform", "platforms")
+        //     .where("tutor.id = :id", { id })
+        //     .andWhere("classes.active = :active", { active: true })
+        //     .getOne();
+
         const tutor = await Tutor.findOne({
-            where: { id },
             relations: [
                 "user",
                 "type",
@@ -305,6 +321,7 @@ export class TutorResolver {
                 "user.userPlatformAccount",
                 "user.userPlatformAccount.platform",
             ],
+            where: { id },
         });
 
         if (!tutor) {

@@ -1,0 +1,9 @@
+query AllPricesClass($classID: Float!) {
+    allPricesClass(classID: $classID) {
+        id
+        price
+        time
+        createdAt
+        updatedAt
+    }
+}

@@ -62,7 +62,10 @@ const SecondRow: React.FC<SecondRowProps> = ({
                     />
                 </p>
             </div>
-            <AvalClasses classes={classes} tutorId={id} />
+            <AvalClasses
+                classes={classes.filter((cl) => cl.active)}
+                tutorId={id}
+            />
             <Feedback tutorId={id} />
         </div>
     );
