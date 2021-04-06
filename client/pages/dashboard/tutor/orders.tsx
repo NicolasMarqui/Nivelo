@@ -16,6 +16,9 @@ const Orders: React.FC<OrdersProps> = (props) => {
     const router = useRouter();
     const [page, setPage] = useState(1);
     const [showOnlyAwaiting, setShowOnlyAwaiting] = useState(false);
+    const [showOnlyAwaitingApproval, setShowOnlyAwaitingApproval] = useState(
+        false
+    );
     const [{ data, fetching, error }] = useTutorOrdersQuery({
         variables: { id: props.tutorID },
     });
@@ -59,6 +62,26 @@ const Orders: React.FC<OrdersProps> = (props) => {
                 </label>
             </div>
 
+            <div className="my-1">
+                <label className="inline-flex items-center mt-3 cursor-pointer">
+                    <input
+                        type="checkbox"
+                        className="form-radio h-5 w-5 text-gray-600"
+                        name="categories"
+                        checked={showOnlyAwaitingApproval}
+                        onChange={(e) =>
+                            setShowOnlyAwaitingApproval(
+                                !showOnlyAwaitingApproval
+                            )
+                        }
+                    />
+                    <span className="ml-2 text-gray-400">
+                        Mostrar apenas pedidos esperando confirmação de aula
+                        finalizada
+                    </span>
+                </label>
+            </div>
+
             {data && data.getTutorOrders !== undefined && (
                 <div className="mt-4">
                     {data.getTutorOrders.length === 0 ||
@@ -67,11 +90,15 @@ const Orders: React.FC<OrdersProps> = (props) => {
                     ) : (
                         <>
                             {data.getTutorOrders
-                                .slice((page - 1) * 5, page * 5)
                                 .filter((o) =>
-                                    showOnlyAwaiting ? !o.isOrderAproved : o
+                                    showOnlyAwaiting
+                                        ? !o.isOrderAproved
+                                        : showOnlyAwaitingApproval
+                                        ? !o.hasTutorConfirmedClassDone
+                                        : o
                                 )
-                                .map((ord, idx) =>
+                                .slice((page - 1) * 5, page * 5)
+                                .map((ord) =>
                                     ord ? (
                                         <OrdersTutor order={ord} key={ord.id} />
                                     ) : (
@@ -86,7 +113,11 @@ const Orders: React.FC<OrdersProps> = (props) => {
                                 activeClassName={"active"}
                                 pageCount={getTotalPages(
                                     data.getTutorOrders.filter((o) =>
-                                        showOnlyAwaiting ? !o.isOrderAproved : o
+                                        showOnlyAwaiting
+                                            ? !o.isOrderAproved
+                                            : showOnlyAwaitingApproval
+                                            ? !o.hasTutorConfirmedClassDone
+                                            : o
                                     ).length,
                                     5
                                 )}

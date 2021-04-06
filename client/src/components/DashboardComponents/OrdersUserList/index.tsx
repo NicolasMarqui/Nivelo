@@ -20,6 +20,7 @@ const OrdersUserList: React.FC<OrdersUserListProps> = ({
         isOrderAproved,
         hasUserConfirmedClassDone,
         hasTutorConfirmedClassDone,
+        user,
     } = order;
 
     return (
@@ -107,6 +108,7 @@ const OrdersUserList: React.FC<OrdersUserListProps> = ({
                     hasUserConfirmedClassDone={hasUserConfirmedClassDone}
                     isOrderPage={isOrderPage}
                     tutorID={classes.tutor.id}
+                    userID={user.id}
                 />
             </div>
         </div>

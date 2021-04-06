@@ -1,0 +1,3 @@
+mutation UpdateTutorRating($tutorID: Float!) {
+    updateTutorRating(tutorID: $tutorID)
+}

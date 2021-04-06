@@ -119,9 +119,6 @@ export class PlatformsInput implements Partial<Platforms> {
 @InputType()
 export class FeedbackInput implements Partial<Feedback> {
     @Field(() => String, { nullable: true })
-    name: string;
-
-    @Field(() => String, { nullable: true })
     content!: string;
 
     @Field(() => Int, { nullable: true })

@@ -117,6 +117,13 @@ export const createUrqlClient = (ssrExchange: any) => ({
                     changeClassStatus: (_result, args, cache, info) => {
                         invalidateQuery(cache, "singleTutor");
                     },
+                    updateTutorRating: (_result, args, cache, info) => {
+                        invalidateQuery(cache, "singleTutor");
+                        invalidateQuery(cache, "allTutors");
+                    },
+                    newFeedback: (_result, args, cache, info) => {
+                        invalidateQuery(cache, "singleTutor");
+                    },
                     newPrice: (_result, args, cache, info) => {
                         invalidateQuery(cache, "allPricesClass");
                     },

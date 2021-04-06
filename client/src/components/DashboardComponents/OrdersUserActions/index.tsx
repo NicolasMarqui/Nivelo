@@ -1,7 +1,8 @@
-import { useRouter } from "next/router";
 import toast from "react-hot-toast";
 import Tooltip from "react-tooltip";
 import { useMakeUserConfirmDoneMutation } from "src/generated/graphql";
+import { Reoverlay } from "reoverlay";
+import AddFeedback from "@components/Modals/AddFeedback";
 
 interface OrdersUsersActionsProps {
     isPaid: boolean;
@@ -9,6 +10,7 @@ interface OrdersUsersActionsProps {
     isOrderPage?: boolean;
     orderID: string;
     tutorID: number;
+    userID: number;
 }
 
 const OrdersUsersActions: React.FC<OrdersUsersActionsProps> = ({
@@ -17,8 +19,8 @@ const OrdersUsersActions: React.FC<OrdersUsersActionsProps> = ({
     isPaid,
     orderID,
     tutorID,
+    userID,
 }) => {
-    const router = useRouter();
     const [{ fetching }, makeOrderDone] = useMakeUserConfirmDoneMutation();
 
     const handleConfirm = async () => {
@@ -31,7 +33,9 @@ const OrdersUsersActions: React.FC<OrdersUsersActionsProps> = ({
         }
     };
 
-    const handleFeedback = () => router.push(`/tutor/${tutorID}#feedbacks`);
+    const handleFeedback = () => {
+        Reoverlay.showModal(AddFeedback, { userID, tutorID });
+    };
 
     return (
         <div

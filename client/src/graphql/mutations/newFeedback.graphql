@@ -1,0 +1,28 @@
+mutation NewFeedback(
+    $tutorID: Float!
+    $userID: Float!
+    $content: String!
+    $rating: Int!
+) {
+    newFeedback(
+        tutorID: $tutorID
+        options: { content: $content, rating: $rating }
+        userID: $userID
+    ) {
+        errors {
+            field
+            message
+        }
+        feedback {
+            id
+            content
+            rating
+            user {
+                id
+                name
+                avatar
+            }
+            createdAt
+        }
+    }
+}

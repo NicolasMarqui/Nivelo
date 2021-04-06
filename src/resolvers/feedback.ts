@@ -1,3 +1,4 @@
+import { Tutor } from "./../entities/Tutor";
 import { isAuth } from "./../middleware/index";
 import { User } from "./../entities/User";
 import { FeedbackInput } from "./inputs/index";
@@ -48,7 +49,7 @@ export class FeedbackResolver {
             return {
                 errors: [
                     {
-                        field: "general",
+                        field: "description",
                         message: "Something went wrong... Try again",
                     },
                 ],
@@ -61,8 +62,9 @@ export class FeedbackResolver {
             return {
                 errors: [
                     {
-                        field: "general",
-                        message: "You already left a feedback to this tutor...",
+                        field: "description",
+                        message:
+                            "Você já deixou um feedback para esse tutor...",
                     },
                 ],
             };
@@ -87,5 +89,29 @@ export class FeedbackResolver {
         }
 
         return { feedback };
+    }
+
+    // User add new Feedback
+    @Mutation(() => Boolean)
+    async updateTutorRating(@Arg("tutorID") tutorID: number): Promise<Boolean> {
+        const tutorFeed = await Feedback.find({ where: { tutorID } });
+        let initialValue = 0;
+
+        if (tutorFeed) {
+            let sum = tutorFeed.reduce((totalValue, currentValue) => {
+                console.log(
+                    `totalValue: ${totalValue}, currentValue: ${currentValue.rating}`
+                );
+                return totalValue + currentValue.rating;
+            }, initialValue);
+
+            const newTut = await Tutor.findOne({ where: { id: tutorID } });
+            if (newTut) {
+                newTut!.rating = sum / tutorFeed.length;
+                await newTut.save();
+            }
+        }
+
+        return true;
     }
 }

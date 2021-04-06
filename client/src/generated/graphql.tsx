@@ -332,6 +332,7 @@ export type Mutation = {
   addPlatformUser: Scalars['Boolean'];
   updatePlatformUser: UserPlatformAccount;
   newFeedback: FeedbackResponse;
+  updateTutorRating: Scalars['Boolean'];
   createNewOrder: OrderResponse;
   makeOrderApproved: Order;
   makeUserConfirmDone: Order;
@@ -546,6 +547,11 @@ export type MutationNewFeedbackArgs = {
 };
 
 
+export type MutationUpdateTutorRatingArgs = {
+  tutorID: Scalars['Float'];
+};
+
+
 export type MutationCreateNewOrderArgs = {
   options: OrderInput;
   userID: Scalars['Float'];
@@ -676,7 +682,6 @@ export type FeedbackResponse = {
 };
 
 export type FeedbackInput = {
-  name?: Maybe<Scalars['String']>;
   content?: Maybe<Scalars['String']>;
   rating?: Maybe<Scalars['Int']>;
 };
@@ -1082,6 +1087,32 @@ export type NewClassMutation = (
   ) }
 );
 
+export type NewFeedbackMutationVariables = Exact<{
+  tutorID: Scalars['Float'];
+  userID: Scalars['Float'];
+  content: Scalars['String'];
+  rating: Scalars['Int'];
+}>;
+
+
+export type NewFeedbackMutation = (
+  { __typename?: 'Mutation' }
+  & { newFeedback: (
+    { __typename?: 'FeedbackResponse' }
+    & { errors?: Maybe<Array<(
+      { __typename?: 'FieldError' }
+      & Pick<FieldError, 'field' | 'message'>
+    )>>, feedback?: Maybe<(
+      { __typename?: 'Feedback' }
+      & Pick<Feedback, 'id' | 'content' | 'rating' | 'createdAt'>
+      & { user: (
+        { __typename?: 'User' }
+        & Pick<User, 'id' | 'name' | 'avatar'>
+      ) }
+    )> }
+  ) }
+);
+
 export type NewHourToTutorMutationVariables = Exact<{
   tutorID: Scalars['Float'];
   date: Scalars['String'];
@@ -1337,6 +1368,16 @@ export type UpdateTutorMutation = (
       )>> }
     )> }
   ) }
+);
+
+export type UpdateTutorRatingMutationVariables = Exact<{
+  tutorID: Scalars['Float'];
+}>;
+
+
+export type UpdateTutorRatingMutation = (
+  { __typename?: 'Mutation' }
+  & Pick<Mutation, 'updateTutorRating'>
 );
 
 export type AllPlatformsQueryVariables = Exact<{ [key: string]: never; }>;
@@ -2178,6 +2219,35 @@ export const NewClassDocument = gql`
 export function useNewClassMutation() {
   return Urql.useMutation<NewClassMutation, NewClassMutationVariables>(NewClassDocument);
 };
+export const NewFeedbackDocument = gql`
+    mutation NewFeedback($tutorID: Float!, $userID: Float!, $content: String!, $rating: Int!) {
+  newFeedback(
+    tutorID: $tutorID
+    options: {content: $content, rating: $rating}
+    userID: $userID
+  ) {
+    errors {
+      field
+      message
+    }
+    feedback {
+      id
+      content
+      rating
+      user {
+        id
+        name
+        avatar
+      }
+      createdAt
+    }
+  }
+}
+    `;
+
+export function useNewFeedbackMutation() {
+  return Urql.useMutation<NewFeedbackMutation, NewFeedbackMutationVariables>(NewFeedbackDocument);
+};
 export const NewHourToTutorDocument = gql`
     mutation NewHourToTutor($tutorID: Float!, $date: String!, $from: String!, $to: String!) {
   newHourToTutor(tutorID: $tutorID, date: $date, from: $from, to: $to) {
@@ -2483,6 +2553,15 @@ export const UpdateTutorDocument = gql`
 
 export function useUpdateTutorMutation() {
   return Urql.useMutation<UpdateTutorMutation, UpdateTutorMutationVariables>(UpdateTutorDocument);
+};
+export const UpdateTutorRatingDocument = gql`
+    mutation UpdateTutorRating($tutorID: Float!) {
+  updateTutorRating(tutorID: $tutorID)
+}
+    `;
+
+export function useUpdateTutorRatingMutation() {
+  return Urql.useMutation<UpdateTutorRatingMutation, UpdateTutorRatingMutationVariables>(UpdateTutorRatingDocument);
 };
 export const AllPlatformsDocument = gql`
     query AllPlatforms {
