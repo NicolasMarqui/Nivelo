@@ -36,6 +36,7 @@ export type Query = {
   getSingleAccount: Array<UserPlatformAccount>;
   getTutorFeedbacks: Array<Feedback>;
   getUserOrders: Array<Order>;
+  getTutorOrders: Array<Order>;
   orderDetail: Order;
   ordersTutorAwaitingApproval: Array<Order>;
   getTutorsHour: Array<Hour>;
@@ -105,6 +106,11 @@ export type QueryGetTutorFeedbacksArgs = {
 
 export type QueryGetUserOrdersArgs = {
   userID: Scalars['Float'];
+};
+
+
+export type QueryGetTutorOrdersArgs = {
+  tutorID: Scalars['Float'];
 };
 
 
@@ -312,6 +318,7 @@ export type Mutation = {
   priceToClasses: Classes;
   userToClass: ClassesResponse;
   changeClassStatus: ClassesResponse;
+  increaseTotalTaught: ClassesResponse;
   newPrice: PriceResponse;
   updatePrice: PriceResponse;
   deletePrice: Scalars['Boolean'];
@@ -453,6 +460,11 @@ export type MutationUserToClassArgs = {
 
 export type MutationChangeClassStatusArgs = {
   active: Scalars['Boolean'];
+  classID: Scalars['Float'];
+};
+
+
+export type MutationIncreaseTotalTaughtArgs = {
   classID: Scalars['Float'];
 };
 
@@ -866,6 +878,29 @@ export type ForgotPasswordMutationVariables = Exact<{
 export type ForgotPasswordMutation = (
   { __typename?: 'Mutation' }
   & Pick<Mutation, 'forgotPassword'>
+);
+
+export type IncreaseTotalTaughtMutationVariables = Exact<{
+  classID: Scalars['Float'];
+}>;
+
+
+export type IncreaseTotalTaughtMutation = (
+  { __typename?: 'Mutation' }
+  & { increaseTotalTaught: (
+    { __typename?: 'ClassesResponse' }
+    & { errors?: Maybe<Array<(
+      { __typename?: 'FieldError' }
+      & Pick<FieldError, 'field' | 'message'>
+    )>>, classes?: Maybe<(
+      { __typename?: 'Classes' }
+      & Pick<Classes, 'id' | 'name' | 'amountTimeTaught' | 'description'>
+      & { price?: Maybe<Array<(
+        { __typename?: 'Price' }
+        & Pick<Price, 'id' | 'time' | 'price'>
+      )>> }
+    )> }
+  ) }
 );
 
 export type LoginMutationVariables = Exact<{
@@ -1541,6 +1576,37 @@ export type TutorFeedbackQuery = (
   )> }
 );
 
+export type TutorOrdersQueryVariables = Exact<{
+  id: Scalars['Float'];
+}>;
+
+
+export type TutorOrdersQuery = (
+  { __typename?: 'Query' }
+  & { getTutorOrders: Array<(
+    { __typename?: 'Order' }
+    & Pick<Order, 'id' | 'date' | 'horario' | 'platformId' | 'classDuration' | 'userAccount' | 'classPrice' | 'isOrderAproved' | 'hasTutorConfirmedClassDone' | 'hasUserConfirmedClassDone' | 'isPaid' | 'paymentDetails' | 'createdAt' | 'updatedAt'>
+    & { user: (
+      { __typename?: 'User' }
+      & Pick<User, 'id' | 'name'>
+    ), classes?: Maybe<(
+      { __typename?: 'Classes' }
+      & Pick<Classes, 'id' | 'name' | 'description' | 'active' | 'level' | 'createdAt' | 'updatedAt'>
+      & { price?: Maybe<Array<(
+        { __typename?: 'Price' }
+        & Pick<Price, 'id' | 'time' | 'price'>
+      )>>, tutor?: Maybe<(
+        { __typename?: 'Tutor' }
+        & Pick<Tutor, 'id' | 'description'>
+        & { user?: Maybe<(
+          { __typename?: 'User' }
+          & Pick<User, 'id' | 'name'>
+        )> }
+      )> }
+    )> }
+  )> }
+);
+
 export type TutorOrdersAwaitingApprovalQueryVariables = Exact<{
   id: Scalars['Float'];
 }>;
@@ -1845,6 +1911,31 @@ export const ForgotPasswordDocument = gql`
 
 export function useForgotPasswordMutation() {
   return Urql.useMutation<ForgotPasswordMutation, ForgotPasswordMutationVariables>(ForgotPasswordDocument);
+};
+export const IncreaseTotalTaughtDocument = gql`
+    mutation IncreaseTotalTaught($classID: Float!) {
+  increaseTotalTaught(classID: $classID) {
+    errors {
+      field
+      message
+    }
+    classes {
+      id
+      price {
+        id
+        time
+        price
+      }
+      name
+      amountTimeTaught
+      description
+    }
+  }
+}
+    `;
+
+export function useIncreaseTotalTaughtMutation() {
+  return Urql.useMutation<IncreaseTotalTaughtMutation, IncreaseTotalTaughtMutationVariables>(IncreaseTotalTaughtDocument);
 };
 export const LoginDocument = gql`
     mutation Login($email: String!, $password: String!) {
@@ -2714,6 +2805,56 @@ export const TutorFeedbackDocument = gql`
 
 export function useTutorFeedbackQuery(options: Omit<Urql.UseQueryArgs<TutorFeedbackQueryVariables>, 'query'> = {}) {
   return Urql.useQuery<TutorFeedbackQuery>({ query: TutorFeedbackDocument, ...options });
+};
+export const TutorOrdersDocument = gql`
+    query TutorOrders($id: Float!) {
+  getTutorOrders(tutorID: $id) {
+    id
+    user {
+      id
+      name
+    }
+    classes {
+      id
+      name
+      description
+      active
+      level
+      price {
+        id
+        time
+        price
+      }
+      tutor {
+        id
+        description
+        user {
+          id
+          name
+        }
+      }
+      createdAt
+      updatedAt
+    }
+    date
+    horario
+    platformId
+    classDuration
+    userAccount
+    classPrice
+    isOrderAproved
+    hasTutorConfirmedClassDone
+    hasUserConfirmedClassDone
+    isPaid
+    paymentDetails
+    createdAt
+    updatedAt
+  }
+}
+    `;
+
+export function useTutorOrdersQuery(options: Omit<Urql.UseQueryArgs<TutorOrdersQueryVariables>, 'query'> = {}) {
+  return Urql.useQuery<TutorOrdersQuery>({ query: TutorOrdersDocument, ...options });
 };
 export const TutorOrdersAwaitingApprovalDocument = gql`
     query TutorOrdersAwaitingApproval($id: Float!) {

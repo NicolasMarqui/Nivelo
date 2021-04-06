@@ -1,0 +1,44 @@
+query TutorOrders($id: Float!) {
+    getTutorOrders(tutorID: $id) {
+        id
+        user {
+            id
+            name
+        }
+        classes {
+            id
+            name
+            description
+            active
+            level
+            price {
+                id
+                time
+                price
+            }
+            tutor {
+                id
+                description
+                user {
+                    id
+                    name
+                }
+            }
+            createdAt
+            updatedAt
+        }
+        date
+        horario
+        platformId
+        classDuration
+        userAccount
+        classPrice
+        isOrderAproved
+        hasTutorConfirmedClassDone
+        hasUserConfirmedClassDone
+        isPaid
+        paymentDetails
+        createdAt
+        updatedAt
+    }
+}

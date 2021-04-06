@@ -4,7 +4,7 @@ import EmptyAnimation from "@components/UI/EmptyAnimation";
 import LoadingAnimation from "@components/UI/LoadingAnimation";
 import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
-import { useTutorOrdersAwaitingApprovalQuery } from "src/generated/graphql";
+import { useTutorOrdersQuery } from "src/generated/graphql";
 import ReactPaginate from "react-paginate";
 import { getTotalPages } from "@utils/getTotalPages";
 
@@ -15,7 +15,8 @@ interface OrdersProps {
 const Orders: React.FC<OrdersProps> = (props) => {
     const router = useRouter();
     const [page, setPage] = useState(1);
-    const [{ data, fetching, error }] = useTutorOrdersAwaitingApprovalQuery({
+    const [showOnlyAwaiting, setShowOnlyAwaiting] = useState(false);
+    const [{ data, fetching, error }] = useTutorOrdersQuery({
         variables: { id: props.tutorID },
     });
 
@@ -42,18 +43,41 @@ const Orders: React.FC<OrdersProps> = (props) => {
                 Cupiditate, dolore dolor vero laudantium harum molestias?
             </p>
 
-            {data && data.ordersTutorAwaitingApproval !== undefined && (
+            <div className="my-4">
+                <label className="inline-flex items-center mt-3 cursor-pointer">
+                    <input
+                        type="checkbox"
+                        className="form-radio h-5 w-5 text-gray-600"
+                        name="categories"
+                        checked={showOnlyAwaiting}
+                        onChange={(e) => setShowOnlyAwaiting(!showOnlyAwaiting)}
+                    />
+                    <span className="ml-2 text-gray-400">
+                        Mostrar apenas pedidos esperando confirmação de
+                        pagamento
+                    </span>
+                </label>
+            </div>
+
+            {data && data.getTutorOrders !== undefined && (
                 <div className="mt-4">
-                    {data.ordersTutorAwaitingApproval.length === 0 ||
-                    !data.ordersTutorAwaitingApproval ? (
+                    {data.getTutorOrders.length === 0 ||
+                    !data.getTutorOrders ? (
                         <EmptyAnimation />
                     ) : (
                         <>
-                            {data.ordersTutorAwaitingApproval
+                            {data.getTutorOrders
                                 .slice((page - 1) * 5, page * 5)
-                                .map((ord) => (
-                                    <OrdersTutor order={ord} key={ord.id} />
-                                ))}
+                                .filter((o) =>
+                                    showOnlyAwaiting ? !o.isOrderAproved : o
+                                )
+                                .map((ord, idx) =>
+                                    ord ? (
+                                        <OrdersTutor order={ord} key={ord.id} />
+                                    ) : (
+                                        <EmptyAnimation />
+                                    )
+                                )}
 
                             <ReactPaginate
                                 previousLabel={"Anterior"}
@@ -61,7 +85,9 @@ const Orders: React.FC<OrdersProps> = (props) => {
                                 containerClassName={"pagination"}
                                 activeClassName={"active"}
                                 pageCount={getTotalPages(
-                                    data.ordersTutorAwaitingApproval.length,
+                                    data.getTutorOrders.filter((o) =>
+                                        showOnlyAwaiting ? !o.isOrderAproved : o
+                                    ).length,
                                     5
                                 )}
                                 marginPagesDisplayed={2}

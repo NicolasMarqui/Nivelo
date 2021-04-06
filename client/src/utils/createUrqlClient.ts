@@ -105,10 +105,14 @@ export const createUrqlClient = (ssrExchange: any) => ({
                     newClass: (_result, args, cache, info) => {
                         invalidadeTutorClass(cache);
                     },
+                    increaseTotalTaught: (_result, args, cache, info) => {
+                        invalidadeTutorClass(cache);
+                        invalidateQuery(cache, "singleTutor");
+                    },
                     createNewOrder: (_result, args, cache, info) => {
                         invalidateQuery(cache, "singleTutor");
-                        invalidateQuery(cache, "ordersTutorAwaitingApproval");
                         invalidateQuery(cache, "getUserOrders");
+                        invalidateQuery(cache, "getTutorOrders");
                     },
                     changeClassStatus: (_result, args, cache, info) => {
                         invalidateQuery(cache, "singleTutor");

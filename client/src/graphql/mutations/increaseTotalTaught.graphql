@@ -1,0 +1,19 @@
+mutation IncreaseTotalTaught($classID: Float!) {
+    increaseTotalTaught(classID: $classID) {
+        errors {
+            field
+            message
+        }
+        classes {
+            id
+            price {
+                id
+                time
+                price
+            }
+            name
+            amountTimeTaught
+            description
+        }
+    }
+}

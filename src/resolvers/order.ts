@@ -1,3 +1,4 @@
+import { Tutor } from "../entities/Tutor";
 import { Classes } from "../entities/Classes";
 import { OrderInput } from "./inputs/index";
 import { isAuth } from "./../middleware/index";
@@ -65,6 +66,27 @@ export class OrderResolver {
             ],
             order: { createdAt: "DESC" },
         });
+
+        return order;
+    }
+
+    // Get all orders by tutor
+    @Query(() => [Order] || [])
+    async getTutorOrders(
+        @Arg("tutorID") tutorID: number
+    ): Promise<Order[] | []> {
+        const tutor = await Tutor.findOne({ where: { id: tutorID } });
+
+        const order = await getConnection()
+            .getRepository(Order)
+            .createQueryBuilder("order")
+            .leftJoinAndSelect("order.user", "user")
+            .leftJoinAndSelect("order.classes", "classes")
+            .leftJoinAndSelect("classes.price", "price")
+            .leftJoinAndSelect("classes.tutor", "tutor")
+            .where("classes.tutor.id = :tutor", { tutor: tutorID })
+            .orderBy("order.createdAt", "DESC")
+            .getMany();
 
         return order;
     }

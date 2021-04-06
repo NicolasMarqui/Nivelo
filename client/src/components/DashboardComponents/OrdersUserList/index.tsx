@@ -106,6 +106,7 @@ const OrdersUserList: React.FC<OrdersUserListProps> = ({
                     orderID={id}
                     hasUserConfirmedClassDone={hasUserConfirmedClassDone}
                     isOrderPage={isOrderPage}
+                    tutorID={classes.tutor.id}
                 />
             </div>
         </div>

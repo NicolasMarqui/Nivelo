@@ -1,3 +1,4 @@
+import { useRouter } from "next/router";
 import toast from "react-hot-toast";
 import Tooltip from "react-tooltip";
 import { useMakeUserConfirmDoneMutation } from "src/generated/graphql";
@@ -7,6 +8,7 @@ interface OrdersUsersActionsProps {
     hasUserConfirmedClassDone: boolean;
     isOrderPage?: boolean;
     orderID: string;
+    tutorID: number;
 }
 
 const OrdersUsersActions: React.FC<OrdersUsersActionsProps> = ({
@@ -14,7 +16,9 @@ const OrdersUsersActions: React.FC<OrdersUsersActionsProps> = ({
     isOrderPage = false,
     isPaid,
     orderID,
+    tutorID,
 }) => {
+    const router = useRouter();
     const [{ fetching }, makeOrderDone] = useMakeUserConfirmDoneMutation();
 
     const handleConfirm = async () => {
@@ -27,14 +31,18 @@ const OrdersUsersActions: React.FC<OrdersUsersActionsProps> = ({
         }
     };
 
+    const handleFeedback = () => router.push(`/tutor/${tutorID}#feedbacks`);
+
     return (
         <div
             className="flex flex-wrap flex-col md:flex-row items-center mt-4"
             data-for="pagar"
             data-tip={
-                isPaid
+                isPaid && !hasUserConfirmedClassDone
                     ? "Confirmar finalização da aula"
-                    : "O tutor deve confirmar o pagamento antes"
+                    : !hasUserConfirmedClassDone && !isOrderPage
+                    ? "O tutor deve confirmar o pagamento antes"
+                    : "Deixar Feedback para o Tutor"
             }
         >
             {!hasUserConfirmedClassDone && !isOrderPage && (
@@ -51,6 +59,17 @@ const OrdersUsersActions: React.FC<OrdersUsersActionsProps> = ({
                     {fetching
                         ? "Carregando....."
                         : "Confirmar finalização da aula"}
+                </div>
+            )}
+
+            {hasUserConfirmedClassDone && (
+                <div
+                    onClick={handleFeedback}
+                    className={`md:ml-2 mt-3 md:mt-0 cursor-pointer w-full flex-1 px-10 md:px-4 py-2 bg-yellow-300 text-center text-white font-bold rounded-xl hover:bg-yellow-100 text-sm: ""
+                }
+            `}
+                >
+                    Deixar feedback
                 </div>
             )}
             <Tooltip id="pagar" />

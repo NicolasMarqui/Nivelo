@@ -251,4 +251,29 @@ export class ClassesResolver {
 
         return { classes };
     }
+
+    // Increase amount times taught
+    @Mutation(() => ClassesResponse)
+    async increaseTotalTaught(
+        @Arg("classID") classID: number
+    ): Promise<ClassesResponse> {
+        let classes;
+        try {
+            const result = await getConnection()
+                .createQueryBuilder()
+                .update(Classes)
+                .set({
+                    amountTimeTaught: () => '"amountTimeTaught" + 1',
+                })
+                .where("id = :id", { id: classID })
+                .returning("*")
+                .execute();
+
+            classes = result.raw[0];
+        } catch (err) {
+            console.log(err);
+        }
+
+        return { classes };
+    }
 }
