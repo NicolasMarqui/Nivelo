@@ -55,6 +55,8 @@ export type QueryUserHasPlatformArgs = {
 
 
 export type QueryAllTutorsArgs = {
+  maxPrice?: Maybe<Scalars['String']>;
+  minPrice?: Maybe<Scalars['String']>;
   country?: Maybe<Array<Scalars['String']>>;
   type?: Maybe<Array<Scalars['String']>>;
   category?: Maybe<Array<Scalars['String']>>;
@@ -1683,6 +1685,8 @@ export type TutorsQueryVariables = Exact<{
   limit: Scalars['Int'];
   page: Scalars['Int'];
   order?: Maybe<Scalars['String']>;
+  minPrice?: Maybe<Scalars['String']>;
+  maxPrice?: Maybe<Scalars['String']>;
   category?: Maybe<Array<Scalars['String']> | Scalars['String']>;
   type?: Maybe<Array<Scalars['String']> | Scalars['String']>;
   country?: Maybe<Array<Scalars['String']> | Scalars['String']>;
@@ -2986,7 +2990,7 @@ export function useTutorOrdersAwaitingApprovalQuery(options: Omit<Urql.UseQueryA
   return Urql.useQuery<TutorOrdersAwaitingApprovalQuery>({ query: TutorOrdersAwaitingApprovalDocument, ...options });
 };
 export const TutorsDocument = gql`
-    query Tutors($limit: Int!, $page: Int!, $order: String, $category: [String!], $type: [String!], $country: [String!]) {
+    query Tutors($limit: Int!, $page: Int!, $order: String, $minPrice: String, $maxPrice: String, $category: [String!], $type: [String!], $country: [String!]) {
   allTutors(
     limit: $limit
     page: $page
@@ -2994,6 +2998,8 @@ export const TutorsDocument = gql`
     type: $type
     category: $category
     country: $country
+    minPrice: $minPrice
+    maxPrice: $maxPrice
   ) {
     id
     description

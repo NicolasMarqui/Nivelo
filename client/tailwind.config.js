@@ -18,6 +18,7 @@ module.exports = {
                 primaryPink: "#FF928B",
                 primaryRed: "#FB475E",
                 overlay: "rgba(0, 0, 0, 0.47)",
+                overlayDarker: "rgba(0, 0, 0, 0.56)",
                 black222: "#222222",
                 divider: "#C4C4C4",
                 lightGray: "#F5F5F5",
@@ -27,6 +28,7 @@ module.exports = {
             backgroundImage: (theme) => ({
                 banner: "url('/images/banner.jpg')",
                 banner_t: "url('/images/banner-t.jpg')",
+                banner_bt: "url('/images/banner-bt.jpg')",
             }),
             backgroundPosition: {
                 centerMobile: "67%",

@@ -1,136 +1,80 @@
-import Container from "@components/container";
-import LoadingAnimation from "@components/UI/LoadingAnimation";
-import { useFormik } from "formik";
-import { useRouter } from "next/router";
-import { useLoginMutation, useRegisterMutation } from "src/generated/graphql";
-import cookieCutter from "cookie-cutter";
-import { toErrorMap } from "@utils/toErrorMap";
-import { toast } from "react-hot-toast";
+import Meta from "@components/Meta";
+import SignupForm from "@components/SignupForm";
+import Title from "@components/UI/Title";
+import { createUrqlClient } from "@utils/createUrqlClient";
+import { withUrqlClient } from "next-urql";
 
 interface SignupProps {}
 
 const Signup: React.FC<SignupProps> = ({}) => {
-    const [{ fetching }, register] = useRegisterMutation();
-    const router = useRouter();
-
-    const formik = useFormik({
-        initialValues: {
-            email: "",
-            password: "",
-            name: "",
-        },
-        onSubmit: async (values, { setErrors }) => {
-            const response = await register(values);
-
-            if (response.data.signup.errors) {
-                setErrors(toErrorMap(response.data.signup.errors));
-            } else if (response.data.signup.user) {
-                const tutor = response.data.signup.user.tutor;
-
-                if (tutor) {
-                    cookieCutter.set("tid", tutor ? tutor.id : "", {
-                        expires: 1000 * 60 * 60 * 24 * 365 * 10,
-                    });
-                }
-
-                toast.success("Bem Vindo!");
-                router.push("/");
-            }
-        },
-    });
-
     return (
-        <Container>
-            <div className="p-8">
-                {fetching ? (
-                    <LoadingAnimation />
-                ) : (
-                    <form onSubmit={formik.handleSubmit}>
-                        <div className="mb-5">
-                            <label
-                                htmlFor="name"
-                                className="block mb-2 text-sm font-medium text-gray-600"
-                            >
-                                Nome
-                            </label>
+        <>
+            <Meta
+                title="Criar conta"
+                description="Encontre os melhores tutores para te ajudar nessa jornada"
+                keywords="home, tutor, javascript, nivelamento, aprender, algoritimos, comprar"
+            />
+            <div className="flex h-screen w-full flex-row">
+                <div className="order-2 flex-1 hidden md:flex md:flex-col lg:grid grid-cols-3 grid-rows-3 gap-4 justify-center pl-12 overflow-hidden max-h-screen">
+                    <div className="col-span-1 row-span-2">
+                        <img
+                            src="/images/hero-1.jpg"
+                            className="w-full rounded-3xl object-cover h-full"
+                        />
+                    </div>
+                    <div className="row-start-3 row-span-1  h-400 col-start-1">
+                        <img
+                            src="/images/hero-4.jpg"
+                            className="w-full rounded-3xl h-full object-cover"
+                        />
+                    </div>
+                    <div className="col-start-2 row-start-1">
+                        <img
+                            src="/images/hero-2.jpg"
+                            className="w-full rounded-3xl h-full object-cover"
+                        />
+                    </div>
+                    <div className="col-start-2 row-start-2">
+                        <img
+                            src="/images/hero-3.jpg"
+                            className="w-full rounded-3xl h-full object-cover"
+                        />
+                    </div>
+                    <div className="col-start-2 row-start-3">
+                        <img
+                            src="/images/hero-2.jpg"
+                            className="w-full rounded-3xl h-full object-cover"
+                        />
+                    </div>
+                    <div className="col-start-3 row-start-1 row-span-2">
+                        <img
+                            src="/images/hero-2.jpg"
+                            className="w-full rounded-3xl h-full object-cover"
+                        />
+                    </div>
+                    <div className="col-start-3 row-start-3">
+                        <img
+                            src="/images/hero-3.jpg"
+                            className="w-full rounded-3xl h-full object-cover w-"
+                        />
+                    </div>
+                </div>
+                <div className="order-1 flex-1 flex flex-col items-center justify-center px-8 max-h-screen pt-4">
+                    <div className="md:hidden flex flex-col">
+                        <Title classes="text-center">Bem vindo</Title>
+                        <p className="text-sm text-gray-400 mt-4 text-center">
+                            Lorem ipsum dolor sit amet consectetur adipisicing
+                            elit. Dolore repudiandae nemo iure perferendis fugit
+                            laudantium. Totam minus nostrum laudantium culpa.
+                        </p>
+                    </div>
 
-                            <input
-                                type="text"
-                                name="name"
-                                onChange={formik.handleChange}
-                                value={formik.values.name}
-                                className="block w-full p-3 rounded bg-gray-100 border border-transparent focus:outline-none focus:border-orange"
-                            />
-                            {formik.errors.name && (
-                                <p className="my-1 bg-red-200 p-2 text-sm text-white text-center">
-                                    {formik.errors.name}
-                                </p>
-                            )}
-                        </div>
-                        <div className="mb-5">
-                            <label
-                                htmlFor="email"
-                                className="block mb-2 text-sm font-medium text-gray-600"
-                            >
-                                Email
-                            </label>
-
-                            <input
-                                type="text"
-                                name="email"
-                                onChange={formik.handleChange}
-                                value={formik.values.email}
-                                className="block w-full p-3 rounded bg-gray-100 border border-transparent focus:outline-none focus:border-orange"
-                            />
-                            {formik.errors.email && (
-                                <p className="my-1 bg-red-200 p-2 text-sm text-white text-center">
-                                    {formik.errors.email}
-                                </p>
-                            )}
-                        </div>
-
-                        <div className="mb-5">
-                            <label
-                                htmlFor="password"
-                                className="block mb-2 text-sm font-medium text-gray-600"
-                            >
-                                Senha
-                            </label>
-
-                            <input
-                                type="password"
-                                name="password"
-                                onChange={formik.handleChange}
-                                value={formik.values.password}
-                                className="block w-full p-3 rounded bg-gray-100 border border-transparent focus:outline-none focus:border-orange"
-                            />
-                            {formik.errors.password && (
-                                <p className="my-1 bg-red-200 p-2 text-sm text-white text-center">
-                                    {formik.errors.password}
-                                </p>
-                            )}
-                        </div>
-
-                        <button
-                            className="w-full p-3 mt-4 bg-primaryOrange text-white rounded shadow hover:bg-lightOrange"
-                            type="submit"
-                        >
-                            Login
-                        </button>
-                    </form>
-                )}
+                    <div className="mt-5 w-580">
+                        <SignupForm />
+                    </div>
+                </div>
             </div>
-
-            <div className="flex justify-between p-8 text-sm border-t border-gray-300 bg-gray-100">
-                <a href="#" className="font-medium text-indigo-500">
-                    Criar conta
-                </a>
-
-                <a href="#" className="text-gray-600">
-                    Esqueceu a senha?
-                </a>
-            </div>
-        </Container>
+        </>
     );
 };
-export default Signup;
+export default withUrqlClient(createUrqlClient)(Signup as any);

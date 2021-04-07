@@ -1,41 +1,32 @@
 import LoadingAnimation from "@components/UI/LoadingAnimation";
 import { useFormik } from "formik";
-import Image from "next/image";
 import { useRouter } from "next/router";
-import { useLoginMutation } from "src/generated/graphql";
+import { useRegisterMutation } from "src/generated/graphql";
 import cookieCutter from "cookie-cutter";
 import { toErrorMap } from "@utils/toErrorMap";
 import { toast } from "react-hot-toast";
 import Link from "next/link";
+import Image from "next/image";
 
-interface LoginFormProps {
-    hasLogo?: boolean;
-    hasRedirect?: boolean;
-    nextStep?: any;
-    redirectTo?: string;
-}
+interface SignupFormProps {}
 
-const LoginForm: React.FC<LoginFormProps> = ({
-    hasLogo = true,
-    hasRedirect = true,
-    nextStep,
-    redirectTo = "/",
-}) => {
-    const [{ fetching }, login] = useLoginMutation();
+const SignupForm: React.FC<SignupFormProps> = ({}) => {
+    const [{ fetching }, register] = useRegisterMutation();
     const router = useRouter();
 
     const formik = useFormik({
         initialValues: {
             email: "",
             password: "",
+            name: "",
         },
         onSubmit: async (values, { setErrors }) => {
-            const response = await login(values);
+            const response = await register(values);
 
-            if (response.data.login.errors) {
-                setErrors(toErrorMap(response.data.login.errors));
-            } else if (response.data.login.user) {
-                const tutor = response.data.login.user.tutor;
+            if (response.data.signup.errors) {
+                setErrors(toErrorMap(response.data.signup.errors));
+            } else if (response.data.signup.user) {
+                const tutor = response.data.signup.user.tutor;
 
                 if (tutor) {
                     cookieCutter.set("tid", tutor ? tutor.id : "", {
@@ -44,13 +35,7 @@ const LoginForm: React.FC<LoginFormProps> = ({
                 }
 
                 toast.success("Bem Vindo!");
-                if (hasRedirect) {
-                    router.push(redirectTo);
-                }
-
-                if (nextStep) {
-                    nextStep();
-                }
+                router.push("/");
             }
         },
     });
@@ -65,6 +50,27 @@ const LoginForm: React.FC<LoginFormProps> = ({
                     <LoadingAnimation />
                 ) : (
                     <form onSubmit={formik.handleSubmit}>
+                        <div className="mb-5">
+                            <label
+                                htmlFor="name"
+                                className="block mb-2 text-sm font-medium text-gray-600"
+                            >
+                                Nome
+                            </label>
+
+                            <input
+                                type="text"
+                                name="name"
+                                onChange={formik.handleChange}
+                                value={formik.values.name}
+                                className="block w-full p-3 rounded bg-gray-100 border border-transparent focus:outline-none focus:border-orange"
+                            />
+                            {formik.errors.name && (
+                                <p className="my-1 bg-red-400 p-2 text-sm text-white text-center">
+                                    {formik.errors.name}
+                                </p>
+                            )}
+                        </div>
                         <div className="mb-5">
                             <label
                                 htmlFor="email"
@@ -113,23 +119,20 @@ const LoginForm: React.FC<LoginFormProps> = ({
                             className="w-full p-3 mt-4 bg-primaryOrange text-white rounded shadow hover:bg-lightOrange"
                             type="submit"
                         >
-                            Login
+                            Criar Conta
                         </button>
                     </form>
                 )}
             </div>
 
             <div className="flex justify-between p-8 text-sm border-t border-gray-300 bg-gray-100">
-                <Link href="/signup">
-                    <a className="font-medium text-indigo-500">Criar conta</a>
-                </Link>
-
-                <Link href="/forgot">
-                    <a className="text-gray-600">Esqueceu a senha?</a>
+                <Link href="/login">
+                    <a href="#" className="font-medium text-indigo-500">
+                        Já possui conta?
+                    </a>
                 </Link>
             </div>
         </div>
     );
 };
-
-export default LoginForm;
+export default SignupForm;

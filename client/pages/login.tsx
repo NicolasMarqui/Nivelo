@@ -19,7 +19,7 @@ const Login: React.FC<LoginProps> = ({}) => {
                 keywords="home, tutor, javascript, nivelamento, aprender, algoritimos, comprar"
             />
             <div className="flex  h-screen w-full flex-row">
-                <div className="flex-1 hidden md:grid grid-cols-3 grid-rows-3 gap-4 justify-center pr-12 overflow-hidden max-h-screen">
+                <div className="flex-1 hidden md:flex md:flex-col lg:grid grid-cols-3 grid-rows-3 gap-4 justify-center pr-12 overflow-hidden max-h-screen">
                     <div className="col-span-1 row-span-2">
                         <img
                             src="/images/hero-1.jpg"
@@ -73,7 +73,7 @@ const Login: React.FC<LoginProps> = ({}) => {
                         </p>
                     </div>
 
-                    <div className="mt-5 w-full lg:w-5/12">
+                    <div className="mt-5 w-580">
                         <LoginForm
                             redirectTo={`${
                                 router.query.from ? router.query.from : "/"

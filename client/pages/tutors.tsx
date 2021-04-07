@@ -28,6 +28,8 @@ const Tutors: React.FC = ({}) => {
             type: router.query.tutor || null,
             category: router.query.categoria || null,
             order: (router.query.ordernar as string) || "tutor.id",
+            minPrice: (router.query.minPreco as string) || null,
+            maxPrice: (router.query.maxPreco as string) || null,
         },
     });
 

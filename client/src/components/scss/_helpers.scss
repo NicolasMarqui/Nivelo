@@ -266,3 +266,15 @@
 input:checked + svg {
     display: block;
 }
+
+.h-648 {
+    height: 384px;
+
+    @media (min-width: 992px) {
+        height: 648px;
+    }
+}
+
+.w-580 {
+    width: 411px;
+}

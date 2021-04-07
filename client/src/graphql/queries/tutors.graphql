@@ -2,6 +2,8 @@ query Tutors(
     $limit: Int!
     $page: Int!
     $order: String
+    $minPrice: String
+    $maxPrice: String
     $category: [String!]
     $type: [String!]
     $country: [String!]
@@ -13,6 +15,8 @@ query Tutors(
         type: $type
         category: $category
         country: $country
+        minPrice: $minPrice
+        maxPrice: $maxPrice
     ) {
         id
         description

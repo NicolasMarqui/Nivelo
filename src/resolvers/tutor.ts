@@ -54,7 +54,11 @@ export class TutorResolver {
         @Arg("type", () => [String], { nullable: true })
         type: string[] | null,
         @Arg("country", () => [String], { nullable: true })
-        country: string[] | null
+        country: string[] | null,
+        @Arg("minPrice", () => String, { nullable: true })
+        minPrice: string | null,
+        @Arg("maxPrice", () => String, { nullable: true })
+        maxPrice: string | null
     ): Promise<Tutor[]> {
         const realLimit = Math.min(50, limit) || 10;
         const realOffset = (page - 1) * realLimit;
@@ -101,6 +105,20 @@ export class TutorResolver {
         } else {
             result.orderBy("tutor.id", "DESC", "NULLS LAST");
         }
+
+        if (minPrice) {
+            result.andWhere("price.price <= :price", {
+                price: Number(minPrice),
+            });
+        }
+
+        if (maxPrice) {
+            result.andWhere("price.price >= :price", {
+                price: Number(maxPrice),
+            });
+        }
+
+        console.log(await result.getMany());
 
         return result.getMany();
     }

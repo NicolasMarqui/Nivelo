@@ -3,13 +3,23 @@ import Link from "next/link";
 import Select from "react-select";
 import Categories from "@utils/JSON/categories.json";
 import Languages from "@utils/JSON/languages.json";
-import Currencies from "@utils/JSON/currencies.json";
+import { useRouter } from "next/router";
 
 interface FooterProps {}
 
 const Footer: React.FC<FooterProps> = ({}) => {
+    const router = useRouter();
+
+    const marginClass =
+        router.pathname === "/become-tutor" ||
+        router.pathname === "/login" ||
+        router.pathname === "/signup"
+            ? "mt-0"
+            : "mt-10";
+    console.log(router.pathname);
+
     return (
-        <footer className="border-t-4 border-orange mt-10">
+        <footer className={`border-t-4 border-orange ${marginClass}`}>
             <Container classes="px-3">
                 <div className="flex flex-col md:flex-row py-8">
                     <div className="flex-1.5 flex flex-col items-center md:items-start">
