@@ -24,6 +24,7 @@ const SelectPlatform: React.FC<SelectPlatformProps> = ({
                 src={platform.icon ? platform.icon : "/logo.svg"}
                 height={75}
                 width={75}
+                className="mx-auto"
             />
             <h3 className="text-center text-lg mt-2">{platform.name}</h3>
         </div>

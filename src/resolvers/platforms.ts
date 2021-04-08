@@ -1,3 +1,4 @@
+import { User } from "./../entities/User";
 import { PlatformsInput } from "./inputs/index";
 import { Platforms } from "./../entities/Platforms";
 import {

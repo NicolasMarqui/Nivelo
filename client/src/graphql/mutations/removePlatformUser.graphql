@@ -1,0 +1,3 @@
+mutation RemovePlatformUser($userID: Float!, $platformID: Float!) {
+    removePlatformUser(userID: $userID, platformID: $platformID)
+}

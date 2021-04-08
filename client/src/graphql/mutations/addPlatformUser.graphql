@@ -1,0 +1,11 @@
+mutation AddPlatformUser(
+    $userID: Float!
+    $platformID: Float!
+    $userAccount: String!
+) {
+    addPlatformUser(
+        userID: $userID
+        platformID: $platformID
+        userAccount: $userAccount
+    )
+}

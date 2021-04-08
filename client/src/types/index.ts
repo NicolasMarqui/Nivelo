@@ -216,3 +216,16 @@ export interface MePropsMe {
     createdAt?: string;
     updatedAt?: string;
 }
+
+export interface PlatformProps {
+    platform: {
+        id?: number;
+        name?: string;
+        icon?: string;
+        userPlatformAccount?: {
+            id?: number;
+            account?: string;
+        };
+        account?: string;
+    };
+}

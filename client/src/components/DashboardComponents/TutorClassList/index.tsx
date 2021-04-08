@@ -20,7 +20,7 @@ const TutorClassList: React.FC<TutorClassListProps> = ({ classes }) => {
                         <div
                             className={`
                             flex flex-col md:flex-row bg-white rounded-3xl my-3 py-4 px-6 items-center justify-center md:justify-between transform
-                            ${!cl.active ? " opacity-60" : " hover:scale-105"}
+                            ${!cl.active ? " opacity-60" : " "}
                         `}
                             key={cl.id}
                         >

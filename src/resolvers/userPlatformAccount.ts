@@ -73,4 +73,26 @@ export class UserPlatformAccountResolver {
 
         return plat;
     }
+
+    // Remove platform from user
+    @Mutation(() => Boolean)
+    async removePlatformUser(
+        @Arg("userID") userID: number,
+        @Arg("platformID") platformID: number
+    ): Promise<Boolean> {
+        const platform = await getConnection()
+            .createQueryBuilder()
+            .delete()
+            .from(UserPlatformAccount)
+            .where("userId = :userID", { userID })
+            .andWhere("platformId = :platformId", { platformId: platformID })
+            .returning("*")
+            .execute();
+
+        if (platform.affected) {
+            return true;
+        }
+
+        return false;
+    }
 }

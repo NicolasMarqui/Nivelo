@@ -13,6 +13,7 @@ import EditTutorAccount from "@components/Modals/EditTutorAccount";
 import TutorCategoriesList from "@components/DashboardComponents/TutorCategoriesList";
 import { useRouter } from "next/router";
 import cookies from "next-cookies";
+import AddPlatform from "@components/Modals/AddPlatform";
 interface TutorProps {
     tutorID: number;
 }
@@ -66,20 +67,23 @@ const Tutor: React.FC<TutorProps> = (props) => {
             ) : (
                 ""
             )}
-            {(!fetching &&
-                data &&
-                data.singleTutor !== undefined &&
-                !data.singleTutor.tutor.user.userPlatformAccount) ||
-            data.singleTutor.tutor.user.userPlatformAccount.length === 0 ? (
+            {!fetching && data && data.singleTutor !== undefined ? (
                 <div className="w-full p-3 bg-green-500 flex flex-col md:flex-row items-center justify-between mb-2">
                     <h3 className="text-white text-sm md:text-xl font-semibold">
-                        Adicione a plataforma que será usada para dar aula
+                        Gerencie as plataformas usadas para ensino
                     </h3>
                     <div
                         className="p-1.5 bg-white text-black222 flex items-center justify-center mt-2 md:mt-0 cursor-pointer transform hover:scale-105 hover:bg-gray-50"
-                        onClick={showSettingsModal}
+                        onClick={() =>
+                            Reoverlay.showModal(AddPlatform, {
+                                userID: data.singleTutor.tutor.user.id,
+                                platforms:
+                                    data.singleTutor.tutor.user
+                                        .userPlatformAccount,
+                            })
+                        }
                     >
-                        Adicionar
+                        Gerenciar
                     </div>
                 </div>
             ) : (

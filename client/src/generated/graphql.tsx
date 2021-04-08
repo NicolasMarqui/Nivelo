@@ -334,6 +334,7 @@ export type Mutation = {
   updatePlatform: PlatformsResponse;
   addPlatformUser: Scalars['Boolean'];
   updatePlatformUser: UserPlatformAccount;
+  removePlatformUser: Scalars['Boolean'];
   newFeedback: FeedbackResponse;
   updateTutorRating: Scalars['Boolean'];
   createNewOrder: OrderResponse;
@@ -543,6 +544,12 @@ export type MutationUpdatePlatformUserArgs = {
 };
 
 
+export type MutationRemovePlatformUserArgs = {
+  platformID: Scalars['Float'];
+  userID: Scalars['Float'];
+};
+
+
 export type MutationNewFeedbackArgs = {
   options: FeedbackInput;
   tutorID: Scalars['Float'];
@@ -718,6 +725,18 @@ export type RegularUserFragment = (
     { __typename?: 'Tutor' }
     & Pick<Tutor, 'id'>
   )> }
+);
+
+export type AddPlatformUserMutationVariables = Exact<{
+  userID: Scalars['Float'];
+  platformID: Scalars['Float'];
+  userAccount: Scalars['String'];
+}>;
+
+
+export type AddPlatformUserMutation = (
+  { __typename?: 'Mutation' }
+  & Pick<Mutation, 'addPlatformUser'>
 );
 
 export type AllCategoriesTutorQueryVariables = Exact<{
@@ -1303,6 +1322,17 @@ export type RemoveCategoryFromTutorMutation = (
   & Pick<Mutation, 'removeCategoryFromTutor'>
 );
 
+export type RemovePlatformUserMutationVariables = Exact<{
+  userID: Scalars['Float'];
+  platformID: Scalars['Float'];
+}>;
+
+
+export type RemovePlatformUserMutation = (
+  { __typename?: 'Mutation' }
+  & Pick<Mutation, 'removePlatformUser'>
+);
+
 export type UpdateClassMutationVariables = Exact<{
   id: Scalars['Float'];
   name?: Maybe<Scalars['String']>;
@@ -1787,6 +1817,19 @@ export const RegularUserFragmentDoc = gql`
   }
 }
     `;
+export const AddPlatformUserDocument = gql`
+    mutation AddPlatformUser($userID: Float!, $platformID: Float!, $userAccount: String!) {
+  addPlatformUser(
+    userID: $userID
+    platformID: $platformID
+    userAccount: $userAccount
+  )
+}
+    `;
+
+export function useAddPlatformUserMutation() {
+  return Urql.useMutation<AddPlatformUserMutation, AddPlatformUserMutationVariables>(AddPlatformUserDocument);
+};
 export const AllCategoriesTutorDocument = gql`
     query AllCategoriesTutor($id: Float!) {
   allCategoriesTutor(tutorID: $id) {
@@ -2473,6 +2516,15 @@ export const RemoveCategoryFromTutorDocument = gql`
 
 export function useRemoveCategoryFromTutorMutation() {
   return Urql.useMutation<RemoveCategoryFromTutorMutation, RemoveCategoryFromTutorMutationVariables>(RemoveCategoryFromTutorDocument);
+};
+export const RemovePlatformUserDocument = gql`
+    mutation RemovePlatformUser($userID: Float!, $platformID: Float!) {
+  removePlatformUser(userID: $userID, platformID: $platformID)
+}
+    `;
+
+export function useRemovePlatformUserMutation() {
+  return Urql.useMutation<RemovePlatformUserMutation, RemovePlatformUserMutationVariables>(RemovePlatformUserDocument);
 };
 export const UpdateClassDocument = gql`
     mutation UpdateClass($id: Float!, $name: String, $description: String, $level: String) {

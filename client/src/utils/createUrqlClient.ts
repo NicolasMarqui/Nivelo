@@ -129,6 +129,12 @@ export const createUrqlClient = (ssrExchange: any) => ({
                         invalidateQuery(cache, "singleTutor");
                         invalidateQuery(cache, "allTutors");
                     },
+                    addPlatformUser: (_result, args, cache, info) => {
+                        invalidateQuery(cache, "singleTutor");
+                    },
+                    removePlatformUser: (_result, args, cache, info) => {
+                        invalidateQuery(cache, "singleTutor");
+                    },
                     deletePrice: (_result, args, cache, info) => {
                         invalidateQuery(cache, "allPricesClass");
                     },
