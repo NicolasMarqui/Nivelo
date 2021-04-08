@@ -7,7 +7,7 @@ import { MyContext } from "./../types";
 import { EmailPasswordInput, MoreInfoUser } from "./inputs";
 import { validateRegister } from "./../utils/validateRegister";
 // prettier-ignore
-import { Arg, Ctx, Field, Mutation, ObjectType, Query, Resolver, UseMiddleware} from "type-graphql";
+import { Arg, Ctx, Field, Int, Mutation, ObjectType, Query, Resolver, UseMiddleware} from "type-graphql";
 import { User } from "./../entities/User";
 import argon2 from "argon2";
 import { UsernameEmailPasswordInput } from "./inputs";
@@ -291,6 +291,7 @@ export class UserResolver {
         );
 
         req.session.user = token;
+        req.session!.test = "Salve caraio";
 
         if (user.tutor) {
             req.session.tutor = user.tutor.id;
@@ -299,6 +300,16 @@ export class UserResolver {
         console.log(req.session);
 
         return { user };
+    }
+
+    @Query(() => Int || null, { nullable: true })
+    getTutorCookie(@Ctx() { req }: MyContext): Number | null {
+        console.log(req.session);
+        if (req.session.user) {
+            return req.session.tutor || null;
+        } else {
+            return null;
+        }
     }
 
     // Log a User out

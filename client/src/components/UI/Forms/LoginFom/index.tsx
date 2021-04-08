@@ -37,11 +37,13 @@ const LoginForm: React.FC<LoginFormProps> = ({
             } else if (response.data.login && response.data.login.user) {
                 const tutor = response.data.login.user.tutor;
 
-                console.log("Welcome");
-
-                if (tutor) {
-                    cookieCutter.set("tid", tutor ? tutor.id : "", {
+                if (
+                    (tutor && tutor !== null) ||
+                    Object.keys(tutor).length !== 0
+                ) {
+                    await cookieCutter.set("tid", tutor.id, {
                         expires: 1000 * 60 * 60 * 24 * 365 * 10,
+                        path: "/",
                     });
                 }
 

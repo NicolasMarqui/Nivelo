@@ -18,6 +18,7 @@ export type Query = {
   __typename?: 'Query';
   allUsers: Array<User>;
   me?: Maybe<User>;
+  getTutorCookie?: Maybe<Scalars['Int']>;
   singleUser: UserResponse;
   userHasPlatform?: Maybe<Scalars['String']>;
   allTutors: Array<Tutor>;
@@ -1434,6 +1435,14 @@ export type CategoriesQuery = (
   )> }
 );
 
+export type GetTutorCookieQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetTutorCookieQuery = (
+  { __typename?: 'Query' }
+  & Pick<Query, 'getTutorCookie'>
+);
+
 export type GetTutorsHourQueryVariables = Exact<{
   tutorID: Scalars['Float'];
   date: Scalars['String'];
@@ -2630,6 +2639,15 @@ export const CategoriesDocument = gql`
 
 export function useCategoriesQuery(options: Omit<Urql.UseQueryArgs<CategoriesQueryVariables>, 'query'> = {}) {
   return Urql.useQuery<CategoriesQuery>({ query: CategoriesDocument, ...options });
+};
+export const GetTutorCookieDocument = gql`
+    query GetTutorCookie {
+  getTutorCookie
+}
+    `;
+
+export function useGetTutorCookieQuery(options: Omit<Urql.UseQueryArgs<GetTutorCookieQueryVariables>, 'query'> = {}) {
+  return Urql.useQuery<GetTutorCookieQuery>({ query: GetTutorCookieDocument, ...options });
 };
 export const GetTutorsHourDocument = gql`
     query GetTutorsHour($tutorID: Float!, $date: String!) {

@@ -149,22 +149,6 @@ const main = async () => {
         })
     );
 
-    app.use(
-        session({
-            name: "tid",
-            store: new RedisStore({ client: redis as any, disableTouch: true }),
-            cookie: {
-                maxAge: cookieDuration,
-                httpOnly: true,
-                sameSite: "lax",
-                secure: false,
-            },
-            saveUninitialized: false,
-            secret: "asjdnkjasdniuh3ru23ib2e2s2fsdver__)_)",
-            resave: false,
-        })
-    );
-
     const apolloServer = new ApolloServer({
         schema: await buildSchema({
             resolvers: [

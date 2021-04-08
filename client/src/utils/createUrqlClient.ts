@@ -180,6 +180,7 @@ export const createUrqlClient = (ssrExchange: any) => ({
                         );
                     },
                     login: (_result, args, cache, info) => {
+                        invalidateQuery(cache, "me");
                         betterUpdateQuery<LoginMutation, MeQuery>(
                             cache,
                             { query: MeDocument },

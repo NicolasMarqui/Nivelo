@@ -2,7 +2,7 @@ import EmptyAnimation from "@components/UI/EmptyAnimation";
 import LoadingAnimation from "@components/UI/LoadingAnimation";
 import { GetServerSideProps } from "next";
 //prettier-ignore
-import { useAllCategoriesTutorQuery, useSingleTutorQuery, useTutorOrdersAwaitingApprovalQuery,} from "src/generated/graphql";
+import { useAllCategoriesTutorQuery, useGetTutorCookieQuery, useSingleTutorQuery, useTutorOrdersAwaitingApprovalQuery,} from "src/generated/graphql";
 import { FaCog } from "react-icons/fa";
 import TutorClassList from "@components/DashboardComponents/TutorClassList";
 import IconButton from "@components/UI/IconButton";
@@ -12,6 +12,7 @@ import AddClass from "@components/Modals/AddClass";
 import EditTutorAccount from "@components/Modals/EditTutorAccount";
 import TutorCategoriesList from "@components/DashboardComponents/TutorCategoriesList";
 import { useRouter } from "next/router";
+import cookies from "next-cookies";
 interface TutorProps {
     tutorID: number;
 }
@@ -54,6 +55,25 @@ const Tutor: React.FC<TutorProps> = (props) => {
                 <div className="w-full p-3 bg-yellow-500 flex flex-col md:flex-row items-center justify-between mb-2">
                     <h3 className="text-white text-sm md:text-xl font-semibold">
                         Adicione uma chave PIX para receber pagamentos
+                    </h3>
+                    <div
+                        className="p-1.5 bg-white text-black222 flex items-center justify-center mt-2 md:mt-0 cursor-pointer transform hover:scale-105 hover:bg-gray-50"
+                        onClick={showSettingsModal}
+                    >
+                        Adicionar
+                    </div>
+                </div>
+            ) : (
+                ""
+            )}
+            {(!fetching &&
+                data &&
+                data.singleTutor !== undefined &&
+                !data.singleTutor.tutor.user.userPlatformAccount) ||
+            data.singleTutor.tutor.user.userPlatformAccount.length === 0 ? (
+                <div className="w-full p-3 bg-green-500 flex flex-col md:flex-row items-center justify-between mb-2">
+                    <h3 className="text-white text-sm md:text-xl font-semibold">
+                        Adicione a plataforma que será usada para dar aula
                     </h3>
                     <div
                         className="p-1.5 bg-white text-black222 flex items-center justify-center mt-2 md:mt-0 cursor-pointer transform hover:scale-105 hover:bg-gray-50"
@@ -162,10 +182,8 @@ const Tutor: React.FC<TutorProps> = (props) => {
 };
 
 export const getServerSideProps: GetServerSideProps = async (ctx: any) => {
-    const cookie = ctx.req.cookies.qid;
-    const tutorCookie = ctx.req.cookies.tid;
-
-    console.log(ctx.req.cookies);
+    const cookie = cookies(ctx).qid;
+    const tutorCookie = cookies(ctx).tid;
 
     if (!cookie) {
         return {
@@ -177,7 +195,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx: any) => {
         };
     }
 
-    if (!tutorCookie || tutorCookie === "") {
+    if (!tutorCookie) {
         return {
             redirect: {
                 permanent: false,
