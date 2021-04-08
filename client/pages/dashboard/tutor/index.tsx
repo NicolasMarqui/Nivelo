@@ -12,9 +12,6 @@ import AddClass from "@components/Modals/AddClass";
 import EditTutorAccount from "@components/Modals/EditTutorAccount";
 import TutorCategoriesList from "@components/DashboardComponents/TutorCategoriesList";
 import { useRouter } from "next/router";
-import { withUrqlClient } from "next-urql";
-import { createUrqlClient } from "@utils/createUrqlClient";
-
 interface TutorProps {
     tutorID: number;
 }
@@ -49,9 +46,10 @@ const Tutor: React.FC<TutorProps> = (props) => {
 
     return (
         <>
-            {!fetching &&
-            data &&
-            data.singleTutor !== undefined &&
+            {(!fetching &&
+                data &&
+                data.singleTutor !== undefined &&
+                data.singleTutor.tutor.chavePix === "") ||
             data.singleTutor.tutor.chavePix === null ? (
                 <div className="w-full p-3 bg-yellow-500 flex flex-col md:flex-row items-center justify-between mb-2">
                     <h3 className="text-white text-sm md:text-xl font-semibold">
@@ -167,7 +165,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx: any) => {
     const cookie = ctx.req.cookies.qid;
     const tutorCookie = ctx.req.cookies.tid;
 
-    console.log(tutorCookie);
+    console.log(ctx.req.cookies);
 
     if (!cookie) {
         return {

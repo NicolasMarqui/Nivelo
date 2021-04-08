@@ -223,7 +223,10 @@ const CustomCalendarTutor: React.FC<CustomCalendarTutorProps> = ({
                     "dd-MM-yyyy"
                 )}`
             );
-        } else {
+        } else if (
+            dateFns.format(new Date(), "dd/MM/yyyy") <=
+            dateFns.format(day, "dd/MM/yyyy")
+        ) {
             await executePost({
                 data: {
                     month:
@@ -238,6 +241,8 @@ const CustomCalendarTutor: React.FC<CustomCalendarTutorProps> = ({
                 await refetch();
                 toast.success("Dia adicionado como disponível");
             }
+        } else {
+            toast.error("Me empresta a máquina do tempo ai!");
         }
     };
 

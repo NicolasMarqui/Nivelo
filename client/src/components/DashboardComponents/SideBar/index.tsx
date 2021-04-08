@@ -5,7 +5,7 @@ import SidebarMenu from "../SidebarMenu";
 import Tooltip from "react-tooltip";
 import { Reoverlay } from "reoverlay";
 import ChangeAvatar from "@components/Modals/ChangeAvatar";
-import LoadingAnimation from "@components/UI/LoadingAnimation";
+import { shortUserName } from "@utils/shortUserName";
 
 interface SidebarProps {
     user: MeQuery;
@@ -35,9 +35,16 @@ const Sidebar: React.FC<SidebarProps> = ({ user }) => {
                     <Tooltip id="changeAvatar" />
                 </div>
 
-                <h2 className="mt-4 font-bold text-xl md:text-3xl text-black222">
-                    {name}
-                </h2>
+                <div>
+                    <h2
+                        className="mt-4 font-bold text-xl md:text-3xl text-black222"
+                        data-for="userName"
+                        data-tip={name}
+                    >
+                        {shortUserName(name)}
+                    </h2>
+                    <Tooltip id="userName" effect="solid" place="bottom" />
+                </div>
                 <p className="my-1 text-gray-400 text-center text-base">
                     {country}
                 </p>

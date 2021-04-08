@@ -16,7 +16,6 @@ const Footer: React.FC<FooterProps> = ({}) => {
         router.pathname === "/signup"
             ? "mt-0"
             : "mt-10";
-    console.log(router.pathname);
 
     return (
         <footer className={`border-t-4 border-orange ${marginClass}`}>

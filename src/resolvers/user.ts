@@ -296,6 +296,8 @@ export class UserResolver {
             req.session.tutor = user.tutor.id;
         }
 
+        console.log(req.session);
+
         return { user };
     }
 

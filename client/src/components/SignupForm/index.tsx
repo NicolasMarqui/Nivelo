@@ -2,7 +2,6 @@ import LoadingAnimation from "@components/UI/LoadingAnimation";
 import { useFormik } from "formik";
 import { useRouter } from "next/router";
 import { useRegisterMutation } from "src/generated/graphql";
-import cookieCutter from "cookie-cutter";
 import { toErrorMap } from "@utils/toErrorMap";
 import { toast } from "react-hot-toast";
 import Link from "next/link";
@@ -26,14 +25,6 @@ const SignupForm: React.FC<SignupFormProps> = ({}) => {
             if (response.data.signup.errors) {
                 setErrors(toErrorMap(response.data.signup.errors));
             } else if (response.data.signup.user) {
-                const tutor = response.data.signup.user.tutor;
-
-                if (tutor) {
-                    cookieCutter.set("tid", tutor ? tutor.id : "", {
-                        expires: 1000 * 60 * 60 * 24 * 365 * 10,
-                    });
-                }
-
                 toast.success("Bem Vindo!");
                 router.push("/");
             }

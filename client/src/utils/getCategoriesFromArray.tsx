@@ -8,7 +8,11 @@ export const getCategoriesFromArray = (arr: CategoriesContent[]) => {
     return arr.map((cat, idx) => {
         return (
             <span key={cat.id}>
-                {idx === arr.length - 1 ? " e " : idx === 0 ? "  " : " , "}
+                {idx === arr.length - 1 && idx !== 0
+                    ? " e "
+                    : idx === 0
+                    ? "  "
+                    : " , "}
                 {cat.name}
             </span>
         );

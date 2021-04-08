@@ -13,7 +13,7 @@ const TutorClassList: React.FC<TutorClassListProps> = ({ classes }) => {
     return (
         <div className="relative">
             <div className="flex flex-col">
-                {!classes ? (
+                {!classes || classes.length === 0 ? (
                     <EmptyAnimation />
                 ) : (
                     classes.map((cl: ClassesProps) => (

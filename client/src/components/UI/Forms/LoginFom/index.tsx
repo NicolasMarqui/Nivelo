@@ -34,8 +34,10 @@ const LoginForm: React.FC<LoginFormProps> = ({
 
             if (response.data.login.errors) {
                 setErrors(toErrorMap(response.data.login.errors));
-            } else if (response.data.login.user) {
+            } else if (response.data.login && response.data.login.user) {
                 const tutor = response.data.login.user.tutor;
+
+                console.log("Welcome");
 
                 if (tutor) {
                     cookieCutter.set("tid", tutor ? tutor.id : "", {
@@ -51,6 +53,8 @@ const LoginForm: React.FC<LoginFormProps> = ({
                 if (nextStep) {
                     nextStep();
                 }
+            } else {
+                toast.error("Ops.... Algo deu errado");
             }
         },
     });

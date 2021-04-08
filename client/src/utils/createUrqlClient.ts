@@ -55,7 +55,6 @@ const updateOrdersCache = (cache: Cache) => {
 
 function invalidateQuery(cache: Cache, field: string) {
     const allFields = cache.inspectFields("Query");
-    console.log(allFields);
     const fieldInfos = allFields.filter((info) => info.fieldName === field);
     fieldInfos.forEach((fi) => {
         cache.invalidate("Query", field, fi.arguments || {});
@@ -116,6 +115,7 @@ export const createUrqlClient = (ssrExchange: any) => ({
                     },
                     changeClassStatus: (_result, args, cache, info) => {
                         invalidateQuery(cache, "singleTutor");
+                        invalidateQuery(cache, "allTutors");
                     },
                     updateTutorRating: (_result, args, cache, info) => {
                         invalidateQuery(cache, "singleTutor");
@@ -126,6 +126,8 @@ export const createUrqlClient = (ssrExchange: any) => ({
                     },
                     newPrice: (_result, args, cache, info) => {
                         invalidateQuery(cache, "allPricesClass");
+                        invalidateQuery(cache, "singleTutor");
+                        invalidateQuery(cache, "allTutors");
                     },
                     deletePrice: (_result, args, cache, info) => {
                         invalidateQuery(cache, "allPricesClass");
@@ -195,21 +197,22 @@ export const createUrqlClient = (ssrExchange: any) => ({
                         );
                     },
                     register: (_result, args, cache, info) => {
-                        betterUpdateQuery<RegisterMutation, MeQuery>(
-                            cache,
-                            { query: MeDocument },
-                            _result,
-                            // @ts-ignore
-                            (result, query) => {
-                                if (result.signup.errors) {
-                                    return query;
-                                } else {
-                                    return {
-                                        me: result.signup.user,
-                                    };
-                                }
-                            }
-                        );
+                        invalidateQuery(cache, "me");
+                        // betterUpdateQuery<RegisterMutation, MeQuery>(
+                        //     cache,
+                        //     { query: MeDocument },
+                        //     _result,
+                        //     // @ts-ignore
+                        //     (result, query) => {
+                        //         if (result.signup.errors) {
+                        //             return query;
+                        //         } else {
+                        //             return {
+                        //                 me: result.signup.user,
+                        //             };
+                        //         }
+                        //     }
+                        // );
                     },
                 },
             },

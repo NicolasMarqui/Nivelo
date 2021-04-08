@@ -103,29 +103,29 @@ const ChangeAvatar: React.FC<ChangeAvatarProps> = ({ userId }) => {
                             </p>
                         </div>
                     </div>
+                    {hasError && (
+                        <p className="my-1 bg-red-200 p-2 text-sm text-black222 text-center">
+                            Algo não está certo
+                        </p>
+                    )}
+                    <div className="flex items-center justify-center mt4">
+                        <button
+                            className="w-full p-3 mt-4 bg-primaryGreen text-white rounded shadow hover:bg-lightGreen"
+                            onClick={handleUpload}
+                        >
+                            Salvar
+                        </button>
+                        <button
+                            className="w-full p-3 mt-4 bg-red-400 text-white rounded shadow hover:bg-lightOrange ml-2"
+                            onClick={handleClose}
+                        >
+                            Cancelar
+                        </button>
+                    </div>
                 </>
             ) : (
                 <LoadingAnimation />
             )}
-            {hasError && (
-                <p className="my-1 bg-red-200 p-2 text-sm text-black222 text-center">
-                    Algo não está certo
-                </p>
-            )}
-            <div className="flex items-center justify-center mt4">
-                <button
-                    className="w-full p-3 mt-4 bg-primaryGreen text-white rounded shadow hover:bg-lightGreen"
-                    onClick={handleUpload}
-                >
-                    Salvar
-                </button>
-                <button
-                    className="w-full p-3 mt-4 bg-red-400 text-white rounded shadow hover:bg-lightOrange ml-2"
-                    onClick={handleClose}
-                >
-                    Cancelar
-                </button>
-            </div>
         </ModalContainer>
     );
 };

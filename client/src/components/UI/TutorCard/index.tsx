@@ -55,7 +55,11 @@ const TutorCard: React.FC<TutorCardProps> = ({ tutor }) => {
                         </p>
 
                         <p className="mt-4 text-base text-desc md:w-4/5 text-center md:text-left">
-                            {shortTutorDescription(tutor.description, 200)}
+                            {shortTutorDescription(
+                                tutor.description ||
+                                    "Nenhuma descrição disponível",
+                                200
+                            )}
                         </p>
                     </a>
                 </Link>
