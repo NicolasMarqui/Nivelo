@@ -1,4 +1,5 @@
 import useWindowSize from "@hooks/useWindowSize";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import { FaQuestion } from "react-icons/fa";
 import { MdCall } from "react-icons/md";
@@ -45,9 +46,11 @@ const FloatingButtons: React.FC<FloatingButtonsProps> = ({}) => {
                 </p>
             </div>
             <div className="md:rounded-3xl bg-primaryOrange text-center py-2 px-5 cursor-pointer flex items-center group hover:bg-lightOrange">
-                <p className="text-base text-white font-bold group-hover:text-primaryOrange">
-                    Se torne um tutor
-                </p>
+                <Link href="/become-tutor">
+                    <a className="text-base text-white font-bold group-hover:text-primaryOrange">
+                        Se torne um tutor
+                    </a>
+                </Link>
             </div>
             <div className="md:rounded-3xl bg-primaryGreen text-center py-2 px-5 flex-1 md:mb-3 flex md:hidden items-center justify-center cursor-pointer">
                 <MdCall size={17} color="#fff" />

@@ -11,7 +11,7 @@ const AnyWhere: React.FC<AnyWhereProps> = ({}) => {
         <Section classes="border-b-2 border-gray-200">
             <Container classes="px-4">
                 <div className="flex flex-col md:flex-row justify-between">
-                    <div className="flex-1.5">
+                    <div className="flex-1 order-2">
                         <PreTitle classes="text-center md:text-left">
                             Portabilidade
                         </PreTitle>
@@ -43,7 +43,7 @@ const AnyWhere: React.FC<AnyWhereProps> = ({}) => {
                         </div>
                     </div>
 
-                    <div className="flex-1.5 hidden md:flex -mt-28">
+                    <div className="flex-1.5 hidden md:flex order-1">
                         <Image
                             src="/images/hero-4.jpg"
                             width={400}

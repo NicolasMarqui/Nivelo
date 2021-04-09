@@ -8,27 +8,28 @@ interface HeroProps {}
 
 const Hero: React.FC<HeroProps> = ({}) => {
     return (
-        <div className="h-full md:h-screen lg:h-full border-b-2 border-gray-200 mt-10 md:mt-0">
-            <Container classes="h-full px-4">
-                <div className="flex flex-col md:flex-row items-center justify-between h-full">
-                    <div className="flex-1 md:flex-2">
-                        <Title classes="text-center md:text-left md:text-heroSize md:w-2/3">
+        <div className="relative border-b-2 border-gray-200 heroHeight md:mt-4">
+            <Container classes="h-full px-4 z-2">
+                <div className="flex flex-col md:flex-row items-center justify-center h-full">
+                    <div className="flex items-center flex-col justify-center z-10">
+                        <Title classes="text-center md:text-heroSize md:w-2/3 text-white mx-auto">
                             Aprenda com os melhores
                         </Title>
-                        <p className="text-center md:text-left text-gray-500 md:w-3/4 mt-5">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing
-                            elit, sed do eiusmod tempor incididunt ut labore et
-                            dolore magna aliqua. Ut enim ad minim veniam
+                        <p className="text-center mx-auto text-white md:w-2/4 mt-4 md:mt-3">
+                            Lorem ipsum dolor sit amet consectetur adipisicing
+                            elit. Nostrum odio ipsam illum! Earum, nisi.
                         </p>
 
                         <Search />
 
-                        <div className="mt-9 flex cursor-pointer justify-center md:justify-start">
-                            <MdExpandMore size={20} />
-                            <p className="font-bold ml-1 text-sm">Saiba mais</p>
-                        </div>
+                        {/* <div className="mt-9 flex cursor-pointer justify-center md:justify-start">
+                            <MdExpandMore size={20} color="#fff" />
+                            <p className="font-bold ml-1 text-sm text-white">
+                                Saiba mais
+                            </p>
+                        </div> */}
                     </div>
-                    <div className="flex-1 md:flex-1.5">
+                    <div className="absolute inset-0 flex-2 overflow-hidden">
                         <ImagesHero />
                     </div>
                 </div>

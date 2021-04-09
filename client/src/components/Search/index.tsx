@@ -13,7 +13,7 @@ const Search: React.FC<SearchProps> = ({}) => {
 
     return (
         <div
-            className="mt-4 flex items-center rounded-lg shadow-md bg-lightGray md:w-3/4 p-3 cursor-pointer relative"
+            className="mt-6 flex items-center rounded-lg shadow-md bg-lightGray md:w-2/4 p-3 cursor-pointer relative"
             onClick={() => setIsOpenDrop(!isOpenDrop)}
         >
             <p className="relative flex-1 flex items-center text-sm md:text-base text-gray-400">

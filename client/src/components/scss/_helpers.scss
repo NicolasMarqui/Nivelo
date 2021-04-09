@@ -278,3 +278,11 @@ input:checked + svg {
 .w-580 {
     width: 411px;
 }
+
+.heroHeight {
+    height: 50vh;
+
+    @media (min-width: 992px) {
+        height: 80vh;
+    }
+}

@@ -19,6 +19,7 @@ module.exports = {
                 primaryRed: "#FB475E",
                 overlay: "rgba(0, 0, 0, 0.47)",
                 overlayDarker: "rgba(0, 0, 0, 0.56)",
+                overlayEvenDarker: "rgba(0, 0, 0, 0.67)",
                 black222: "#222222",
                 divider: "#C4C4C4",
                 lightGray: "#F5F5F5",
@@ -39,7 +40,7 @@ module.exports = {
             }),
             fontSize: {
                 nav: "1.05rem",
-                heroSize: "4.5rem",
+                heroSize: "5.5rem",
             },
             margin: {
                 hr: "200px",
