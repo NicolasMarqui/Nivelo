@@ -10,7 +10,7 @@ interface BestTutorsProps {}
 
 const BestTutors: React.FC<BestTutorsProps> = ({}) => {
     return (
-        <Section classes="bg-lightBG">
+        <Section>
             <Container classes="px-4">
                 <PreTitle classes="text-center">Os Melhores</PreTitle>
                 <Title classes="text-center md:text-6xl md:w-2/5 m-auto">

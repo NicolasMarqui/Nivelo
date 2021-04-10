@@ -20,7 +20,7 @@ const Availability: React.FC<AvailabilityProps> = ({
     isAgendarOpen,
 }) => {
     return (
-        <div className="flex-1 z-20 -mt-28 md:block hidden">
+        <div className="flex-1 z-0 -mt-28 md:block hidden">
             <Sticky topOffset={-120}>
                 {({ style, isSticky }) => (
                     <div

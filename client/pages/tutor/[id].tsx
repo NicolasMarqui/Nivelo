@@ -63,7 +63,7 @@ const Tutor: React.FC<TutorProps> = ({}) => {
                 <EmptyAnimation />
             ) : (
                 <div className="relative">
-                    <div className="w-full h-52 relative bg-banner_t bg-bannerInterno bg-cover bg-no-repeat z-10">
+                    <div className="w-full h-52 relative bg-banner_t bg-bannerInterno bg-cover bg-no-repeat">
                         <div className="absolute inset-0 bg-overlay"></div>
                         <div className="md:hidden absolute inset-topMobBread flex justify-center right-0 left-0">
                             <Breadcumb

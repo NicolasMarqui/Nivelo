@@ -25,11 +25,14 @@ module.exports = {
                 lightGray: "#F5F5F5",
                 desc: "#646464",
                 lightBG: "#FAFAFC",
+                lightPink: "rgba(255, 146, 139, 0.13)",
+                start: "#F27059",
             },
             backgroundImage: (theme) => ({
                 banner: "url('/images/banner.jpg')",
                 banner_t: "url('/images/banner-t.jpg')",
                 banner_bt: "url('/images/banner-bt.jpg')",
+                homeGrad: "url('/images/homeGrad.jpg')",
             }),
             backgroundPosition: {
                 centerMobile: "67%",

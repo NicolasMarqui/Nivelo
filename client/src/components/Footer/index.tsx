@@ -13,7 +13,8 @@ const Footer: React.FC<FooterProps> = ({}) => {
     const marginClass =
         router.pathname === "/become-tutor" ||
         router.pathname === "/login" ||
-        router.pathname === "/signup"
+        router.pathname === "/signup" ||
+        router.pathname === "/"
             ? "mt-0"
             : "mt-10";
 
