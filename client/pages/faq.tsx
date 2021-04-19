@@ -3,7 +3,9 @@ import FaqContent from "@components/FaqContent";
 import Meta from "@components/Meta";
 import BackButton from "@components/UI/BackButton";
 import Title from "@components/UI/Title";
+import { createUrqlClient } from "@utils/createUrqlClient";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { withUrqlClient } from "next-urql";
 
 const Faq: React.FC = ({}) => {
     return (
@@ -34,4 +36,4 @@ export const getStaticProps = async ({ locale }) => ({
     },
 });
 
-export default Faq;
+export default withUrqlClient(createUrqlClient)(Faq);
