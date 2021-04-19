@@ -1,21 +1,16 @@
 const withPlugins = require("next-compose-plugins");
+const { i18n } = require("./next-i18next.config");
 
 const withBundleAnalyzer = require("@next/bundle-analyzer")({
-  enabled: process.env.ANALYZE === "true",
+    enabled: process.env.ANALYZE === "true",
 });
 
-const { nextI18NextRewrites } = require("next-i18next/rewrites");
+// const config = {
+//     publicRuntimeConfig: {
+//         localeSubpaths,
+//     },
+// };
 
-const localeSubpaths = {
-  tr: "tr",
-  en: "en",
+module.exports = {
+    i18n,
 };
-
-const config = {
-  rewrites: async () => nextI18NextRewrites(localeSubpaths),
-  publicRuntimeConfig: {
-    localeSubpaths,
-  },
-};
-
-module.exports = withPlugins([[withBundleAnalyzer]], config);

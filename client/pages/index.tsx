@@ -3,12 +3,12 @@ import Meta from "@components/Meta";
 import Hero from "@components/Landing/Hero";
 import AnyWhere from "@components/Landing/Anywhere";
 import Categories4u from "@components/Landing/Categories4u";
-import BestTutors from "@components/Landing/BestTutors";
 import Tutorial from "@components/Landing/Tutorial";
 import FloatingButtons from "@components/FloatingButtons";
 import { withUrqlClient } from "next-urql";
 import { createUrqlClient } from "@utils/createUrqlClient";
 import Start from "@components/Landing/Start";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 const Home: React.FC = () => {
     return (
@@ -27,5 +27,11 @@ const Home: React.FC = () => {
         </div>
     );
 };
+
+export const getStaticProps = async ({ locale }) => ({
+    props: {
+        ...(await serverSideTranslations(locale, ["home"])),
+    },
+});
 
 export default withUrqlClient(createUrqlClient)(Home);

@@ -21,14 +21,14 @@ const Start: React.FC<StartProps> = ({}) => {
                 <div className="mt-8 flex flex-col md:flex-row items-center w-full md:w-auto group">
                     <div className="flex-1 px-14 py-2 bg-white cursor-pointer text-center rounded-2xl transform hover:scale-105 w-2/3 md:w-auto">
                         <Link href="/login">
-                            <a className="text-primaryOrange font-bold text-lg">
+                            <a className="text-primaryOrange font-bold text-lg block w-full h-full">
                                 Login
                             </a>
                         </Link>
                     </div>
                     <div className="flex-1 px-14 py-2 bg-white cursor-pointer text-center md:ml-3 mt-4 md:mt-0  rounded-2xl transform hover:scale-105 w-2/3 md:w-auto">
                         <Link href="/signup">
-                            <a className="text-primaryOrange font-bold text-lg">
+                            <a className="text-primaryOrange font-bold text-lg  w-full h-full">
                                 Register
                             </a>
                         </Link>

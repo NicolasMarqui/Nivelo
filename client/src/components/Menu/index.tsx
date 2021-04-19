@@ -39,6 +39,18 @@ const Menu: React.FC<MenuProps> = ({}) => {
                 </Link>
             </li>
             <li
+                className={`my-1 md:my-0 md:px-3 lg:px-5 hoverMenu ${checkIfActive(
+                    router.pathname,
+                    "/faq"
+                )}`}
+            >
+                <Link href="/faq">
+                    <a className="text-nav md:text-base lg:text-nav py-4 md:py-5 block">
+                        F.A.Q
+                    </a>
+                </Link>
+            </li>
+            <li
                 className={`my-1 md:my-0 md:px-3 lg:px-5 hoverMenu md:border-r-2 md:border-gray-200`}
             >
                 <Link href="/#tutorial">

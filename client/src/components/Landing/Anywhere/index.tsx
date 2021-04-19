@@ -5,12 +5,10 @@ import Title from "@components/UI/Title";
 import Image from "next/image";
 import { MdSlowMotionVideo } from "react-icons/md";
 
-interface AnyWhereProps {}
-
-const AnyWhere: React.FC<AnyWhereProps> = ({}) => {
+const AnyWhere: React.FC = ({}) => {
     return (
         <>
-            <div className="w-full h-96 bg-homeGrad bg-centerMobile bg-no-repeat bg-cover md:bg-center "></div>
+            <div className="w-full h-96 bg-homeGrad bg-centerMobile bg-no-repeat bg-cover md:bg-center"></div>
             <Section classes="border-b-2 border-gray-200" hasBgDetail>
                 <Container classes="px-4 z-20">
                     <div className="flex flex-col md:flex-row justify-between">

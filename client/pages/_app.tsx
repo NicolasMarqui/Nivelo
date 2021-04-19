@@ -8,7 +8,7 @@ import "slick-carousel/slick/slick-theme.css";
 import "react-tabs/style/react-tabs.css";
 import "react-accessible-accordion/dist/fancy-example.css";
 import "react-input-range/lib/css/index.css";
-import { appWithTranslation } from "@i18n";
+import { appWithTranslation } from "next-i18next";
 import Layout from "@components/Layout";
 import NProgress from "nprogress";
 import { Router, useRouter } from "next/router";

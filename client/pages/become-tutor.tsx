@@ -42,7 +42,7 @@ const BecomeTutor: React.FC<BecomeTutorProps> = ({}) => {
                 <div className="w-full bg-banner_bt bg-no-repeat bg-center md:bg-top bg-cover relative h-648 flex justify-center items-center">
                     <div className="absolute inset-0 bg-overlayDarker"></div>
 
-                    <div className="flex flex-col">
+                    <div className="flex flex-col px-4">
                         <Title classes="text-center md:text-heroSize text-white z-10">
                             Se torne um tutor{" "}
                             <span className="text-primaryOrange block">

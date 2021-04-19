@@ -1,17 +1,13 @@
 [{
         "label": "Inglês",
-        "value": "Inglês"
+        "value": "Inglês",
+        "locale": "en",
+        "code": "us"
     },
     {
         "label": "Português",
-        "value": "Português"
-    },
-    {
-        "label": "Italiano",
-        "value": "Italiano"
-    },
-    {
-        "label": "Espanhol",
-        "value": "Espanhol"
+        "value": "Português",
+        "locale": "pt",
+        "code": "br"
     }
 ]

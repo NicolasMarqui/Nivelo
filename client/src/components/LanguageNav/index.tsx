@@ -1,10 +1,15 @@
 import Dropdown from "@components/UI/Dropdown";
+import { useRouter } from "next/router";
 import { useState } from "react";
 import { MdExpandMore } from "react-icons/md";
+import languages from "@utils/JSON/languages.json";
+import Link from "next/link";
+import { renderCurrentFlat } from "@utils/renderCurrentFlag";
 
 interface LanguageNavProps {}
 
 const LanguageNav: React.FC<LanguageNavProps> = ({}) => {
+    const router = useRouter();
     const [isOpen, setIsOpen] = useState(false);
     const handleOpen = (value: boolean) => setIsOpen(value);
 
@@ -14,7 +19,9 @@ const LanguageNav: React.FC<LanguageNavProps> = ({}) => {
             onClick={() => setIsOpen(!isOpen)}
         >
             <img
-                src="https://www.countryflags.io/us/flat/64.png"
+                src={`https://www.countryflags.io/${renderCurrentFlat(
+                    router
+                )}/flat/64.png`}
                 className="w-10 mx-2"
             />
             <MdExpandMore size={17} />
@@ -24,7 +31,21 @@ const LanguageNav: React.FC<LanguageNavProps> = ({}) => {
                 handleChange={handleOpen}
                 classes="top-topNav left-0 right-auto w-auto border-3 border-orange"
             >
-                Hemlo
+                {languages
+                    .filter((cl) => cl.locale !== router.locale)
+                    .map((l) => (
+                        <div
+                            className="hover:scale-105 transform hover:bg-gray-50"
+                            key={l.locale}
+                        >
+                            <Link href={router.pathname} locale={l.locale}>
+                                <img
+                                    src={`https://www.countryflags.io/${l.code}/flat/64.png`}
+                                    className="w-16"
+                                />
+                            </Link>
+                        </div>
+                    ))}
             </Dropdown>
         </div>
     );

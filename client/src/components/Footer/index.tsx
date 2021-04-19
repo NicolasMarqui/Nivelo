@@ -1,9 +1,8 @@
 import Container from "@components/container";
 import Link from "next/link";
-import Select from "react-select";
 import Categories from "@utils/JSON/categories.json";
-import Languages from "@utils/JSON/languages.json";
 import { useRouter } from "next/router";
+import languages from "@utils/JSON/languages.json";
 
 interface FooterProps {}
 
@@ -113,13 +112,27 @@ const Footer: React.FC<FooterProps> = ({}) => {
                             Configurações
                         </h5>
                         <div className="mt-4">
-                            <p className="text-xs text-gray-400">Idioma</p>
-                            <Select
-                                options={Languages}
-                                placeholder="Idioma"
-                                instanceId="idioma"
-                                menuPlacement="top"
-                            />
+                            <p className="text-xs text-gray-400 text-center md:text-left">
+                                Idioma
+                            </p>
+                            <div className="flex items-center justify-center md:justify-start">
+                                {languages.map((l) => (
+                                    <div
+                                        className="hover:scale-105 transform hover:bg-gray-50 cursor-pointer mr-2"
+                                        key={l.locale}
+                                    >
+                                        <Link
+                                            href={router.pathname}
+                                            locale={l.locale}
+                                        >
+                                            <img
+                                                src={`https://www.countryflags.io/${l.code}/flat/64.png`}
+                                                className="w-16"
+                                            />
+                                        </Link>
+                                    </div>
+                                ))}
+                            </div>
                         </div>
                     </div>
                 </div>

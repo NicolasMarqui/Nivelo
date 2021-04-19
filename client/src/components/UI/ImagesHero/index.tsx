@@ -18,7 +18,7 @@ const ImagesHero: React.FC<ImagesHeroProps> = ({}) => {
     }, []);
 
     return (
-        <div className="grid grid-cols-3 grid-rows-3 gap-2 h-screen relative">
+        <div className="grid grid-cols-3 grid-rows-3 gap-2 h-full relative bg-black222">
             <div className="absolute inset-0 z-2 bg-overlayEvenDarker"></div>
             {/* 1 */}
             <div className="col-start-1 row-span-2 row-start-1">

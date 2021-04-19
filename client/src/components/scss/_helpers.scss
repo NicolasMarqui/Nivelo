@@ -276,13 +276,25 @@ input:checked + svg {
 }
 
 .w-580 {
-    width: 411px;
+    @media (min-width: 580px) {
+        width: 411px;
+    }
 }
 
 .heroHeight {
-    height: 50vh;
+    padding: 150px 0;
 
-    @media (min-width: 992px) {
-        height: 80vh;
+    @media (min-width: 1024px) {
+        padding: 180px 0;
     }
+
+    @media (min-width: 2000px) {
+        padding: 200px 0;
+    }
+
+    // height: 50vh;
+
+    // @media (min-width: 992px) {
+    //     height: 80vh;
+    // }
 }

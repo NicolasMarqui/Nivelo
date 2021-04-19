@@ -18,3 +18,10 @@ export const tutorBreadcumbList = (name: string) => {
         },
     ];
 };
+
+export const faqBreadcumbList = [
+    {
+        id: 1,
+        text: "F.A.Q",
+    },
+];

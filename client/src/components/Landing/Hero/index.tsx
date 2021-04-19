@@ -1,19 +1,28 @@
 import Container from "@components/container";
 import Search from "@components/Search";
 import ImagesHero from "@components/UI/ImagesHero";
+import ScrollAnimation from "@components/UI/ScrollAnimation";
 import Title from "@components/UI/Title";
-import { MdExpandMore } from "react-icons/md";
+import { useTranslation } from "next-i18next";
+import { motion } from "framer-motion";
 
 interface HeroProps {}
 
 const Hero: React.FC<HeroProps> = ({}) => {
+    const { t } = useTranslation("home");
+
     return (
-        <div className="relative border-b-2 border-gray-200 heroHeight md:mt-4">
+        <div className="relative border-b-2 border-gray-200 heroHeight">
             <Container classes="h-full px-4 z-2">
                 <div className="flex flex-col md:flex-row items-center justify-center h-full">
-                    <div className="flex items-center flex-col justify-center z-10">
+                    <motion.div
+                        className="flex items-center flex-col justify-center z-10"
+                        initial={{ y: 300 }}
+                        animate={{ y: 0 }}
+                        transition={{ duration: 0.8 }}
+                    >
                         <Title classes="text-center md:text-heroSize md:w-2/3 text-white mx-auto">
-                            Aprenda com os melhores
+                            {t("hero")}
                         </Title>
                         <p className="text-center mx-auto text-white md:w-2/4 mt-4 md:mt-3">
                             Lorem ipsum dolor sit amet consectetur adipisicing
@@ -21,14 +30,8 @@ const Hero: React.FC<HeroProps> = ({}) => {
                         </p>
 
                         <Search />
-
-                        {/* <div className="mt-9 flex cursor-pointer justify-center md:justify-start">
-                            <MdExpandMore size={20} color="#fff" />
-                            <p className="font-bold ml-1 text-sm text-white">
-                                Saiba mais
-                            </p>
-                        </div> */}
-                    </div>
+                        <ScrollAnimation />
+                    </motion.div>
                     <div className="absolute inset-0 flex-2 overflow-hidden">
                         <ImagesHero />
                     </div>
