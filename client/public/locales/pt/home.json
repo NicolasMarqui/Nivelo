@@ -1,5 +1,23 @@
 {
   "title": "Home",
   "hero": "Aprenda com os melhores",
-  "search": "Escolha a categoria que deseja aprender"
+  "heroDesc": "Encontre excelentes tutores para te ajudar nessa jornada de aprendizado.",
+  "search": "Escolha a categoria que deseja aprender",
+  "pre4u": "O melhor do ensino",
+  "title4u": "Categorias que combinam com você",
+  "4u1": "Aprenda com os melhores",
+  "4u2": "Diversas opções",
+  "4u3": "Suporte 24h",
+  "4u4": "Em alta no mercado",
+  "titleWorks": "Como funciona?",
+  "works1": "Clique em registrar na barra de navegação e preencha os campos para criar uma conta em nosso sistema.",
+  "works2": "Caso tenha interesse em apenas aprender, acesse a página de tutores na barra de navegação e começe a procurar o melhor tutor para você. Caso deseje ensinar, clique em Seja um tutor na barra de navegação.",
+  "works3": "Após escolher um tutor, efetue o pagamento, e após isso nos diga o que achou do tutor ☺",
+  "preAny": "Portabilidade",
+  "titleAny": "Aprenda em qualquer lugar",
+  "any1": "No conforto",
+  "any2": "Sem problemas",
+  "anyVideo": "Veja mais sobre nosso sistema",
+  "ready": "Pronto para começar",
+  "readySign": "Criar conta"
 }

@@ -17,16 +17,16 @@ const Hero: React.FC<HeroProps> = ({}) => {
                 <div className="flex flex-col md:flex-row items-center justify-center h-full">
                     <motion.div
                         className="flex items-center flex-col justify-center z-10"
-                        initial={{ y: 300 }}
-                        animate={{ y: 0 }}
-                        transition={{ duration: 0.8 }}
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ delay: 0.7 }}
                     >
                         <Title classes="text-center md:text-heroSize md:w-2/3 text-white mx-auto">
                             {t("hero")}
                         </Title>
                         <p className="text-center mx-auto text-white md:w-2/4 mt-4 md:mt-3">
-                            Lorem ipsum dolor sit amet consectetur adipisicing
-                            elit. Nostrum odio ipsam illum! Earum, nisi.
+                            Encontre excelentes tutores para te ajudar nessa
+                            jornada de aprendizado.
                         </p>
 
                         <Search />

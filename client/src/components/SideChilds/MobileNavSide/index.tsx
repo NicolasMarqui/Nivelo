@@ -25,7 +25,7 @@ const MobileNavSide: React.FC<MobileNavSideProps> = ({}) => {
                             className="hover:scale-105 transform hover:bg-gray-50"
                             key={l.locale}
                         >
-                            <Link href={router.pathname} locale={l.locale}>
+                            <Link href={router.asPath} locale={l.locale}>
                                 <img
                                     src={`https://www.countryflags.io/${l.code}/flat/64.png`}
                                     className="w-16"

@@ -10,6 +10,7 @@ export default function Meta({ title, keywords, description }: MetaProps) {
     return (
         <Head>
             <title>Nivelo | {title}</title>
+            <link rel="manifest" href="/meta.json" />
             <meta name="description" content={description} />
             <meta name="keywords" content={keywords} />
             <meta property="og:type" content="website" />

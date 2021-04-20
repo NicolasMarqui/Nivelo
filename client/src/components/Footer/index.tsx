@@ -27,6 +27,7 @@ const Footer: React.FC<FooterProps> = ({}) => {
                             width={170}
                             height={50}
                             className="block"
+                            alt="Nivelo"
                         />
                         <p className="mt-2 text-base text-gray-400 md:w-4/5 text-center md:text-left">
                             Lorem ipsum dolor sit amet, consectetur adipiscing
@@ -38,12 +39,14 @@ const Footer: React.FC<FooterProps> = ({}) => {
                                 src="/icons/soonApple.svg"
                                 width={180}
                                 height={60}
+                                alt="Em breve na Apple Store"
                             />
                             <img
                                 src="/icons/soonAndroid.svg"
                                 width={180}
                                 height={60}
                                 className="mt-1"
+                                alt="Em breve na Play Store"
                             />
                         </div>
                     </div>
@@ -122,12 +125,13 @@ const Footer: React.FC<FooterProps> = ({}) => {
                                         key={l.locale}
                                     >
                                         <Link
-                                            href={router.pathname}
+                                            href={router.asPath}
                                             locale={l.locale}
                                         >
                                             <img
                                                 src={`https://www.countryflags.io/${l.code}/flat/64.png`}
                                                 className="w-16"
+                                                alt="Language"
                                             />
                                         </Link>
                                     </div>
@@ -138,12 +142,7 @@ const Footer: React.FC<FooterProps> = ({}) => {
                 </div>
             </Container>
             <div className="flex flex-col md:flex-row bg-black222 justify-center items-center">
-                <Link href="/cookies">
-                    <a className="text-white underline text-base p-3 md:border-r-2 border-gray-300">
-                        Uso de Cookies
-                    </a>
-                </Link>
-                <p className="text-base text-white md:mx-3 mb-2 md:mb-0">
+                <p className="text-base text-white md:mx-3 mb-2 md:mb-0 py-2">
                     Feito com ❤ por Juarez Junior e Nicolas Marqui
                 </p>
             </div>

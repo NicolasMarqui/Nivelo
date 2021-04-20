@@ -1,8 +1,7 @@
-import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { FaQuestion } from "react-icons/fa";
-import { MdCall, MdExpandLess } from "react-icons/md";
+import { MdExpandLess } from "react-icons/md";
+import { motion } from "framer-motion";
 
 interface FloatingButtonsProps {}
 
@@ -27,13 +26,15 @@ const FloatingButtons: React.FC<FloatingButtonsProps> = ({}) => {
     }, []);
 
     return (
-        <div
+        <motion.div
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.8 }}
             className={`${
                 isVisible ? "flex" : "hidden"
-            } float__buttons transition duration-500 ease-in-out h-20 w-20 bg-primaryOrange rounded-full flex items-center justify-center`}
+            } float__buttons transition duration-500 ease-in-out h-16 w-16 bg-primaryOrange rounded-full flex items-center justify-center fixed bottom-10 right-7 z-50 cursor-pointer`}
         >
-            <MdExpandLess size={20} />
-        </div>
+            <MdExpandLess size={40} color="white" />
+        </motion.div>
     );
 };
 export default FloatingButtons;

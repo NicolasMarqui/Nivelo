@@ -2,18 +2,15 @@ import Container from "@components/container";
 import PreTitle from "@components/UI/PreTitle";
 import Section from "@components/UI/Section";
 import Title from "@components/UI/Title";
-import useWindowSize from "@hooks/useWindowSize";
 import Link from "next/link";
 import List4u from "../List4u";
 
 interface Categories4uProps {}
 
 const Categories4u: React.FC<Categories4uProps> = ({}) => {
-    const { width } = useWindowSize();
-
     return (
         <Section classes="z-0">
-            <Container classes="z-0 relative border-l-2 border-r-2 border-gray-50">
+            <Container classes="z-0 relative ">
                 <div className="flex flex-col md:flex-row items-center justify-between">
                     <div className="flex flex-col flex-2">
                         <PreTitle classes="text-center md:text-left">

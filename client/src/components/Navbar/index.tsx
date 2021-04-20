@@ -35,6 +35,7 @@ const Navbar: React.FC<NavbarProps> = ({}) => {
                                             src="/logo.svg"
                                             width={170}
                                             height={50}
+                                            alt="Nivelo"
                                         />
                                     </h1>
                                 </a>

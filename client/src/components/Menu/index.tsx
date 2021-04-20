@@ -21,7 +21,7 @@ const Menu: React.FC<MenuProps> = ({}) => {
                 )}`}
             >
                 <Link href="/">
-                    <a className="text-nav md:text-base lg:text-nav py-4 md:py-5 block">
+                    <a className="text-nav md:text-sm lg:text-base lg:text-nav py-4 md:py-5 block">
                         Home
                     </a>
                 </Link>
@@ -33,7 +33,7 @@ const Menu: React.FC<MenuProps> = ({}) => {
                 )}`}
             >
                 <Link href="/tutors">
-                    <a className="text-nav md:text-base lg:text-nav py-4 md:py-5 block">
+                    <a className="text-nav md:text-sm lg:text-base lg:text-nav py-4 md:py-5 block">
                         Tutores
                     </a>
                 </Link>
@@ -45,7 +45,7 @@ const Menu: React.FC<MenuProps> = ({}) => {
                 )}`}
             >
                 <Link href="/faq">
-                    <a className="text-nav md:text-base lg:text-nav py-4 md:py-5 block">
+                    <a className="text-nav md:text-sm lg:text-base lg:text-nav py-4 md:py-5 block">
                         F.A.Q
                     </a>
                 </Link>
@@ -54,7 +54,7 @@ const Menu: React.FC<MenuProps> = ({}) => {
                 className={`my-1 md:my-0 md:px-3 lg:px-5 hoverMenu md:border-r-2 md:border-gray-200`}
             >
                 <Link href="/#tutorial">
-                    <a className="text-nav md:text-base lg:text-nav py-4 md:py-5 block">
+                    <a className="text-nav md:text-sm lg:text-base lg:text-nav py-4 md:py-5 block">
                         Como funciona?
                     </a>
                 </Link>
@@ -66,7 +66,7 @@ const Menu: React.FC<MenuProps> = ({}) => {
                 )}`}
             >
                 <Link href="/become-tutor">
-                    <a className="text-nav md:text-base lg:text-nav py-4 md:py-5 block">
+                    <a className="text-nav md:text-sm lg:text-base lg:text-nav py-4 md:py-5 block">
                         Seja um tutor
                     </a>
                 </Link>

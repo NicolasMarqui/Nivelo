@@ -28,6 +28,7 @@ const Tutorial: React.FC<TutorialProps> = ({}) => {
                     width={1300}
                     height={941}
                     className="hidden lg:block absolute -bottom-44 lg:-right-96 2xl:-right-44 3xl:right-0"
+                    alt="Como Funciona?"
                 />
             </Section>
         </div>

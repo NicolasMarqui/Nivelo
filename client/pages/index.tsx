@@ -21,8 +21,8 @@ const Home: React.FC = () => {
             <FloatingButtons />
             <Hero />
             <Categories4u />
-            <AnyWhere />
             <Tutorial />
+            <AnyWhere />
             <Start />
         </div>
     );

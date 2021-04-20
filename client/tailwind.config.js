@@ -19,7 +19,7 @@ module.exports = {
                 primaryRed: "#FB475E",
                 overlay: "rgba(0, 0, 0, 0.47)",
                 overlayDarker: "rgba(0, 0, 0, 0.56)",
-                overlayEvenDarker: "rgba(0, 0, 0, 0.58)",
+                overlayEvenDarker: "rgba(0, 0, 0, 0.62)",
                 black222: "#222222",
                 divider: "#C4C4C4",
                 lightGray: "#F5F5F5",

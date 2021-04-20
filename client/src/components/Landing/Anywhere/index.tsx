@@ -8,7 +8,6 @@ import { MdSlowMotionVideo } from "react-icons/md";
 const AnyWhere: React.FC = ({}) => {
     return (
         <>
-            <div className="w-full h-96 bg-homeGrad bg-centerMobile bg-no-repeat bg-cover md:bg-center"></div>
             <Section classes="border-b-2 border-gray-200" hasBgDetail>
                 <Container classes="px-4 z-20">
                     <div className="flex flex-col md:flex-row justify-between">
@@ -51,12 +50,13 @@ const AnyWhere: React.FC = ({}) => {
                             </div>
                         </div>
 
-                        <div className="flex-1 order-1 -mt-72 md:-ml-10">
+                        <div className="flex-1 order-1 -mt-32">
                             <Image
                                 src="/icons/detailNivelo.svg"
                                 width={634}
                                 height={779}
                                 className="rounded-lg object-cover"
+                                alt="ImageDetail"
                             />
                         </div>
                     </div>

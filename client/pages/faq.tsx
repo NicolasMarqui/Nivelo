@@ -30,10 +30,10 @@ const Faq: React.FC = ({}) => {
     );
 };
 
-export const getStaticProps = async ({ locale }) => ({
-    props: {
-        ...(await serverSideTranslations(locale, ["faq"])),
-    },
-});
+// export const getStaticProps = async ({ locale }) => ({
+//     props: {
+//         ...(await serverSideTranslations(locale, ["faq"])),
+//     },
+// });
 
 export default withUrqlClient(createUrqlClient)(Faq);
