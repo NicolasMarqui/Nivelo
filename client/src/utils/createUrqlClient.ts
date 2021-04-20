@@ -92,7 +92,7 @@ function invalidadeTutorCategories(cache: Cache) {
 }
 
 export const createUrqlClient = (ssrExchange: any) => ({
-    url: "http://localhost:4000/graphql",
+    url: "https://nivelo.herokuapp.com/graphql",
     fetchOptions: {
         credentials: "include" as const,
     },

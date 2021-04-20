@@ -37,7 +37,7 @@ const CustomCalendarTutor: React.FC<CustomCalendarTutorProps> = ({
 
     const [{ data, loading, error }, refetch] = useAxios({
         method: "GET",
-        url: `http://localhost:4000/api/schedule/single/${tutorId}?month=${
+        url: `https://nivelo.herokuapp.com/api/schedule/single/${tutorId}?month=${
             getMonth(currentMonth) < 10
                 ? `0${getMonth(currentMonth)}`
                 : getMonth(currentMonth)
@@ -49,7 +49,7 @@ const CustomCalendarTutor: React.FC<CustomCalendarTutorProps> = ({
         executePost,
     ] = useAxios({
         method: "POST",
-        url: `http://localhost:4000/api/schedule/available/${tutorId}`,
+        url: `https://nivelo.herokuapp.com/api/schedule/available/${tutorId}`,
     });
 
     const renderHeader = () => {

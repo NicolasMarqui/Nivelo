@@ -1,9 +1,11 @@
-require("dotenv").config();
+require("dotenv").config({
+    path: `.env.${process.env.NODE_ENV}`,
+});
 import "reflect-metadata";
+import path from "path";
 import { cookieDuration } from "./constants";
 import { MyContext } from "./types";
 import { createConnection } from "typeorm";
-import path from "path";
 import express from "express";
 import { ApolloServer } from "apollo-server-express";
 import { buildSchema } from "type-graphql";
@@ -39,7 +41,6 @@ import { Feedback } from "./entities/Feedback";
 import { Order } from "./entities/Order";
 import { Hour } from "./entities/Hour";
 
-import ScheduleSchema from "./models/Schedule";
 import scheduleRouter from "./routes/schedule";
 
 const main = async () => {
@@ -47,10 +48,17 @@ const main = async () => {
 
     await createConnection({
         type: "postgres",
-        host: "localhost",
+        host: process.env.POSTGRES_HOST,
         port: 5432,
-        username: "postgres",
-        password: "postgres",
+        username: process.env.POSTGRES_USER,
+        // database: process.env.POSTGRES_DB,
+        password: process.env.POSTGRES_PASSWORD,
+        // ssl: process.env.NODE_ENV?.includes("development"),
+        // extra: {
+        //     ssl: {
+        //         rejectUnauthorized: false,
+        //     },
+        // },
         // logging: true,
         migrations: [path.join(__dirname, "./migrations/*")],
         entities: [
@@ -80,52 +88,17 @@ const main = async () => {
             console.log("MongoDB Connected");
         });
 
-    // const test = {
-    //     tutorID: 24,
-    //     dates: [
-    //         {
-    //             month: "03",
-    //             date: "05/03/2021",
-    //             time: [
-    //                 { from: "06:00", to: "09:00" },
-    //                 { from: "12:00", to: "14:00" },
-    //             ],
-    //         },
-    //         {
-    //             month: "03",
-    //             date: "07/03/2021",
-    //             time: [
-    //                 { from: "06:00", to: "09:00" },
-    //                 { from: "12:00", to: "14:00" },
-    //             ],
-    //         },
-    //         {
-    //             month: "03",
-    //             date: "14/03/2021",
-    //             time: [
-    //                 { from: "06:00", to: "09:00" },
-    //                 { from: "12:00", to: "14:00" },
-    //             ],
-    //         },
-    //         {
-    //             month: "05",
-    //             date: "19/05/2021",
-    //             time: [
-    //                 { from: "06:00", to: "09:00" },
-    //                 { from: "12:00", to: "14:00" },
-    //             ],
-    //         },
-    //     ],
-    // } as any;
-
-    // await ScheduleSchema.create(test);
-
     const app = express();
     const PORT = 4000 || process.env.PORT;
 
     // Initialize Redis
     const RedisStore = connectRedis(session);
-    const redis = new Redis({ host: "localhost", password: "nick" });
+    // @ts-ignore
+    const redis = new Redis({
+        host: process.env.REDIS_HOST,
+        password: process.env.REDIS_PASSWORD,
+        port: process.env.REDIS_PORT,
+    });
     app.use(
         cors({
             origin: "http://localhost:3000",
