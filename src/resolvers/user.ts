@@ -173,7 +173,7 @@ export class UserResolver {
     // Register new User
     @Mutation(() => UserResponse)
     async signup(
-        @Arg("options") options: UsernameEmailPasswordInput,
+        @Arg("options") options: UsernameEmailPasswordInput | any,
         @Ctx() { req }: MyContext
     ): Promise<UserResponse> {
         // Check if it has any errors
