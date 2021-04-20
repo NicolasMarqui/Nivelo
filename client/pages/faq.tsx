@@ -32,7 +32,7 @@ const Faq: React.FC = ({}) => {
 
 export const getStaticProps = async ({ locale }) => ({
     props: {
-        ...(await serverSideTranslations(locale, ["home"])),
+        ...(await serverSideTranslations(locale, ["faq"])),
     },
 });
 
