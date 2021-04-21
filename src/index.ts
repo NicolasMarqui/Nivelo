@@ -91,13 +91,10 @@ const main = async () => {
         });
 
     const app = express();
-    const PORT = 4000 || process.env.PORT;
+    const PORT = process.env.PORT || 4000;
 
     // Initialize Redis
     const RedisStore = connectRedis(session);
-
-    console.log(process.env.NODE_ENV);
-    console.log(process.env.REDIS_URI);
     const redisOptions = process.env.NODE_ENV?.includes("development")
         ? {
               host: process.env.REDIS_HOST,
@@ -116,7 +113,7 @@ const main = async () => {
             ignoreUnauthorized: false,
         },
     });
-    console.log(redis);
+
     app.use(
         cors({
             origin: "http://localhost:3000",
