@@ -116,7 +116,7 @@ const main = async () => {
 
     app.use(
         cors({
-            origin: process.env.URL || "http://localhost:3000",
+            origin: process.env.URL,
             credentials: true,
         })
     );
@@ -138,6 +138,8 @@ const main = async () => {
     );
 
     const apolloServer = new ApolloServer({
+        // Make playground available in production
+        introspection: true,
         schema: await buildSchema({
             resolvers: [
                 UserResolver,

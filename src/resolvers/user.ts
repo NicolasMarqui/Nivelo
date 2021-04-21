@@ -295,20 +295,16 @@ export class UserResolver {
         );
 
         req.session.user = token;
-        req.session!.test = "Salve caraio";
 
         if (user.tutor) {
             req.session.tutor = user.tutor.id;
         }
-
-        console.log(req.session);
 
         return { user };
     }
 
     @Query(() => Int || null, { nullable: true })
     getTutorCookie(@Ctx() { req }: MyContext): Number | null {
-        console.log(req.session);
         if (req.session.user) {
             return req.session.tutor || null;
         } else {
