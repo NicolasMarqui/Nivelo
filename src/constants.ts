@@ -1,3 +1,4 @@
+export const __prod__ = process.env.NODE_ENV?.includes("production");
 export const cookieDuration = 1000 * 60 * 60 * 24 * 365 * 10; // 10 Years
 export const COOKIE_NAME = "qid";
 

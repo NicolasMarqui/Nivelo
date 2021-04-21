@@ -3,7 +3,7 @@ require("dotenv").config({
 });
 import "reflect-metadata";
 import path from "path";
-import { cookieDuration } from "./constants";
+import { cookieDuration, __prod__ } from "./constants";
 import { MyContext } from "./types";
 import { createConnection } from "typeorm";
 import express from "express";
@@ -121,9 +121,13 @@ const main = async () => {
         })
     );
 
-    if (process.env.NODE_ENV?.includes("production")) {
+    console.log(__prod__);
+
+    if (__prod__) {
         app.set("trust proxy", 1); // trust first proxy
     }
+
+    app.set("trust proxy", 1);
 
     app.use(
         session({
@@ -131,9 +135,10 @@ const main = async () => {
             store: new RedisStore({ client: redis as any, disableTouch: true }),
             cookie: {
                 maxAge: cookieDuration,
-                httpOnly: process.env.NODE_ENV?.includes("development"),
-                sameSite: "lax",
-                secure: process.env.NODE_ENV?.includes("production"),
+                httpOnly: true,
+                sameSite: "lax", // csrf
+                secure: __prod__, // cookie only works in https
+                domain: __prod__ ? ".herokuapp.com" : undefined,
             },
             saveUninitialized: false,
             secret: "asjdnkjasdniuh3ru23ib2e2s2fsdver__)_)",
