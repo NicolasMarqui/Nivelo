@@ -121,6 +121,10 @@ const main = async () => {
         })
     );
 
+    if (process.env.NODE_ENV?.includes("prodution")) {
+        app.set("trust proxy", 1); // trust first proxy
+    }
+
     app.use(
         session({
             name: "qid",
@@ -129,7 +133,7 @@ const main = async () => {
                 maxAge: cookieDuration,
                 httpOnly: true,
                 sameSite: "lax",
-                secure: false,
+                secure: process.env.NODE_ENV?.includes("prodution"),
             },
             saveUninitialized: false,
             secret: "asjdnkjasdniuh3ru23ib2e2s2fsdver__)_)",
