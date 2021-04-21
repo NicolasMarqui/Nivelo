@@ -139,6 +139,7 @@ const main = async () => {
 
     const apolloServer = new ApolloServer({
         // Make playground available in production
+        playground: true,
         introspection: true,
         schema: await buildSchema({
             resolvers: [
