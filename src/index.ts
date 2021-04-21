@@ -131,7 +131,7 @@ const main = async () => {
             store: new RedisStore({ client: redis as any, disableTouch: true }),
             cookie: {
                 maxAge: cookieDuration,
-                httpOnly: process.env.NODE_ENV?.includes("production"),
+                httpOnly: process.env.NODE_ENV?.includes("development"),
                 sameSite: "lax",
                 secure: process.env.NODE_ENV?.includes("production"),
             },
