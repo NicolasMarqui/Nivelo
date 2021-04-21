@@ -92,6 +92,7 @@ const main = async () => {
 
     const app = express();
     const PORT = process.env.PORT || 4000;
+    app.set("trust proxy", 1); // trust first proxy
 
     // Initialize Redis
     const RedisStore = connectRedis(session);
@@ -121,10 +122,6 @@ const main = async () => {
         })
     );
 
-    if (__prod__) {
-        app.set("trust proxy", 1); // trust first proxy
-    }
-
     app.use(
         session({
             name: "qid",
@@ -134,7 +131,6 @@ const main = async () => {
                 httpOnly: true,
                 sameSite: "lax", // csrf
                 secure: __prod__, // cookie only works in https
-                domain: __prod__ ? ".herokuapp.com" : undefined,
             },
             saveUninitialized: false,
             secret: "asjdnkjasdniuh3ru23ib2e2s2fsdver__)_)",
