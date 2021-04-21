@@ -116,7 +116,7 @@ const main = async () => {
 
     app.use(
         cors({
-            origin: "http://localhost:3000",
+            origin: process.env.URL || "http://localhost:3000",
             credentials: true,
         })
     );
@@ -163,7 +163,7 @@ const main = async () => {
     app.use(scheduleRouter);
 
     app.get("/", (_, res) => {
-        res.send("Hello");
+        res.send("Welcome to Nivelo's API, please leave");
     });
 
     app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

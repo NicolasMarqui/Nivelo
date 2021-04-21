@@ -163,7 +163,9 @@ export class UserResolver {
 
         await sendEmail(
             email,
-            `<a href="http://localhost:3000/change-password/${token}">Alterar sua senha</a>`,
+            `<a href="${
+                process.env.URL || "http://localhost:3000"
+            }/change-password/${token}">Alterar sua senha</a>`,
             "Alterar sua senha"
         );
 
