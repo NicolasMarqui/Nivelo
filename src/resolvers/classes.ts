@@ -47,7 +47,7 @@ export class ClassesResolver {
     @Mutation(() => ClassesResponse)
     async newClass(
         @Arg("tutorID") tutorID: number,
-        @Arg("options") options: ClassesInput
+        @Arg("options", (_type) => ClassesInput) options: ClassesInput
     ): Promise<ClassesResponse> {
         const errors = validateClasses(options);
         if (errors) return { errors };
@@ -89,7 +89,7 @@ export class ClassesResolver {
     @Mutation(() => ClassesResponse)
     async updateClass(
         @Arg("classID") classID: number,
-        @Arg("options") options: ClassesInput
+        @Arg("options", (_type) => ClassesInput) options: ClassesInput
     ): Promise<ClassesResponse> {
         const errors = validateClasses(options);
         if (errors) return { errors };

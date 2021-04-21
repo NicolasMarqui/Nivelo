@@ -127,7 +127,7 @@ export class TutorResolver {
     @Mutation(() => TutorResponse)
     @UseMiddleware(isAuth)
     async newTutor(
-        @Arg("options") options: NewTutorInput,
+        @Arg("options", (_type) => NewTutorInput) options: NewTutorInput,
         @Ctx() { req }: MyContext
     ) {
         const { description, type } = options;
@@ -207,7 +207,7 @@ export class TutorResolver {
     @UseMiddleware(isAuth)
     async updateTutor(
         @Arg("id") id: number,
-        @Arg("options") options: TutorInput
+        @Arg("options", (_type) => TutorInput) options: TutorInput
     ): Promise<TutorResponse> {
         const errors = validateTutorInfo(options);
         if (errors) {
@@ -364,7 +364,7 @@ export class TutorResolver {
     @Mutation(() => TutorResponse)
     async addAvailableDate(
         @Arg("id") id: number,
-        @Arg("options") options: string
+        @Arg("options", (_type) => String) options: string
     ): Promise<TutorResponse> {
         const tutor = await Tutor.findOne({ where: { id } });
         if (!tutor) {

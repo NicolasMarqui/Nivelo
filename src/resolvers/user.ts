@@ -173,7 +173,8 @@ export class UserResolver {
     // Register new User
     @Mutation(() => UserResponse)
     async signup(
-        @Arg("options") options: UsernameEmailPasswordInput | any,
+        @Arg("options", (_type) => UsernameEmailPasswordInput)
+        options: UsernameEmailPasswordInput,
         @Ctx() { req }: MyContext
     ): Promise<UserResponse> {
         // Check if it has any errors
@@ -243,7 +244,8 @@ export class UserResolver {
     // Login a User
     @Mutation(() => UserResponse)
     async login(
-        @Arg("options") options: EmailPasswordInput,
+        @Arg("options", (_type) => EmailPasswordInput)
+        options: EmailPasswordInput,
         @Ctx() { req }: MyContext
     ): Promise<UserResponse> {
         const errors = validateLogin(options);
@@ -335,7 +337,7 @@ export class UserResolver {
     @UseMiddleware(isAuth)
     async addMoreInfo(
         @Arg("id") id: Number,
-        @Arg("options") options: MoreInfoUser
+        @Arg("options", (_type) => MoreInfoUser) options: MoreInfoUser
     ): Promise<UserResponse> {
         const errors = validateNewInfo(options);
         if (errors) {

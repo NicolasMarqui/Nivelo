@@ -95,7 +95,7 @@ export class OrderResolver {
     @Mutation(() => OrderResponse)
     async createNewOrder(
         @Arg("userID") userId: number,
-        @Arg("options") options: OrderInput
+        @Arg("options", (_type) => OrderInput) options: OrderInput
     ): Promise<OrderResponse> {
         const user = await User.findOne({ where: { id: userId } });
         if (!user) {

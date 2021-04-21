@@ -42,7 +42,7 @@ export class FeedbackResolver {
     async newFeedback(
         @Arg("userID") userID: number,
         @Arg("tutorID") tutorID: number,
-        @Arg("options") options: FeedbackInput
+        @Arg("options", (_type) => FeedbackInput) options: FeedbackInput
     ): Promise<FeedbackResponse> {
         const user = await User.findOne({ where: { id: userID } });
         if (!user) {

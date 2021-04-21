@@ -53,7 +53,7 @@ export class CategoryResolver {
     // Add new category
     @Mutation(() => CategoryResponse)
     async newCategory(
-        @Arg("options") options: CategoryInput
+        @Arg("options", (_type) => CategoryInput) options: CategoryInput
     ): Promise<CategoryResponse> {
         let category;
         try {
@@ -130,7 +130,7 @@ export class CategoryResolver {
     @Mutation(() => Category)
     async updateCategory(
         @Arg("id") id: number,
-        @Arg("options") options: CategoryInput
+        @Arg("options", (_type) => CategoryInput) options: CategoryInput
     ): Promise<Category> {
         let category;
         try {

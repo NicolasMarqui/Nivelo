@@ -36,7 +36,7 @@ export class PlatformsResolver {
     // Insert a new Platform
     @Mutation(() => PlatformsResponse)
     async newPlatform(
-        @Arg("options") options: PlatformsInput
+        @Arg("options", (_type) => PlatformsInput) options: PlatformsInput
     ): Promise<PlatformsResponse> {
         let platforms;
         try {
@@ -61,7 +61,7 @@ export class PlatformsResolver {
     @Mutation(() => PlatformsResponse)
     async updatePlatform(
         @Arg("id") id: number,
-        @Arg("options") options: PlatformsInput
+        @Arg("options", (_type) => PlatformsInput) options: PlatformsInput
     ): Promise<PlatformsResponse> {
         const { name, icon } = options;
 

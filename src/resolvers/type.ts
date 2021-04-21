@@ -12,7 +12,7 @@ import {
 } from "type-graphql";
 import { FieldError } from "./helpers";
 import { getConnection } from "typeorm";
-import { isAuth } from "../../src/middleware";
+import { isAuth } from "../middleware";
 
 @ObjectType()
 class TypeResponse {
@@ -37,7 +37,9 @@ export class TypeResolver {
 
     // Create a new type
     @Mutation(() => TypeResponse)
-    async addType(@Arg("options") options: TypeInput): Promise<TypeResponse> {
+    async addType(
+        @Arg("options", (_type) => TypeInput) options: TypeInput
+    ): Promise<TypeResponse> {
         const errors = validateType(options);
         if (errors) {
             return { errors };
@@ -72,7 +74,7 @@ export class TypeResolver {
     @UseMiddleware(isAuth)
     async updateType(
         @Arg("id") id: number,
-        @Arg("options") options: TypeInput
+        @Arg("options", (_type) => TypeInput) options: TypeInput
     ): Promise<TypeResponse> {
         const errors = validateType(options);
         if (errors) {

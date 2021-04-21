@@ -4,6 +4,7 @@ import { Category } from "./../../entities/Category";
 import { Classes } from "./../../entities/Classes";
 import { Price } from "../../entities/Price";
 import { InputType, Field, Int, ObjectType, Float } from "type-graphql";
+import { Any } from "typeorm";
 
 @InputType()
 export class UsernameEmailPasswordInput {
