@@ -121,13 +121,9 @@ const main = async () => {
         })
     );
 
-    console.log(__prod__);
-
     if (__prod__) {
         app.set("trust proxy", 1); // trust first proxy
     }
-
-    app.set("trust proxy", 1);
 
     app.use(
         session({

@@ -12,6 +12,7 @@ import { pipe, tap } from "wonka";
 import { DeleteClassMutationVariables, LoginMutation, LogoutMutation, MeDocument, MeQuery, RegisterMutation} from "../generated/graphql";
 import { betterUpdateQuery } from "./betterUpdateQuery";
 import { singleQuery, ordersQuery } from "./singleQuery";
+import { isServer } from "./isServer";
 
 const errorExchange: Exchange = ({ forward }) => (ops$) => {
     return pipe(
@@ -91,141 +92,161 @@ function invalidadeTutorCategories(cache: Cache) {
     });
 }
 
-export const createUrqlClient = (ssrExchange: any) => ({
-    url: "https://nivelo.herokuapp.com/graphql",
-    fetchOptions: {
-        credentials: "include" as const,
-    },
-    exchanges: [
-        dedupExchange,
-        cacheExchange({
-            updates: {
-                Mutation: {
-                    newClass: (_result, args, cache, info) => {
-                        invalidadeTutorClass(cache);
-                    },
-                    increaseTotalTaught: (_result, args, cache, info) => {
-                        invalidadeTutorClass(cache);
-                        invalidateQuery(cache, "singleTutor");
-                    },
-                    createNewOrder: (_result, args, cache, info) => {
-                        invalidateQuery(cache, "singleTutor");
-                        invalidateQuery(cache, "getUserOrders");
-                        invalidateQuery(cache, "getTutorOrders");
-                    },
-                    changeClassStatus: (_result, args, cache, info) => {
-                        invalidateQuery(cache, "singleTutor");
-                        invalidateQuery(cache, "allTutors");
-                    },
-                    updateTutorRating: (_result, args, cache, info) => {
-                        invalidateQuery(cache, "singleTutor");
-                        invalidateQuery(cache, "allTutors");
-                    },
-                    newFeedback: (_result, args, cache, info) => {
-                        invalidateQuery(cache, "singleTutor");
-                    },
-                    newPrice: (_result, args, cache, info) => {
-                        invalidateQuery(cache, "allPricesClass");
-                        invalidateQuery(cache, "singleTutor");
-                        invalidateQuery(cache, "allTutors");
-                    },
-                    addPlatformUser: (_result, args, cache, info) => {
-                        invalidateQuery(cache, "singleTutor");
-                    },
-                    removePlatformUser: (_result, args, cache, info) => {
-                        invalidateQuery(cache, "singleTutor");
-                    },
-                    deletePrice: (_result, args, cache, info) => {
-                        invalidateQuery(cache, "allPricesClass");
-                    },
-                    updateClass: (_result, args, cache, info) => {
-                        invalidadeTutorClass(cache);
-                    },
-                    categoryToTutor: (_result, args, cache, info) => {
-                        invalidadeTutorCategories(cache);
-                    },
-                    removeCategoryFromTutor: (_result, args, cache, info) => {
-                        invalidadeTutorCategories(cache);
-                    },
-                    deleteHourFromTutor: (_result, args, cache, info) => {
-                        cache.invalidate({
-                            __typename: "Hour",
-                            id: (args as DeleteHourFromTutorMutationVariables)
-                                .id,
-                        });
-                    },
-                    newHourToTutor: (_result, args, cache, info) => {
-                        invalidadeTutorHour(cache);
-                    },
-                    makeOrderApproved: (_result, args, cache, info) => {
-                        updateOrdersCache(cache);
-                        cache.invalidate({
-                            __typename: "Order",
-                            id: (args as MakeOrderApprovedMutationVariables)
-                                .orderID,
-                        });
-                    },
-                    makeTutorConfirmDone: (_result, args, cache, info) => {
-                        invalidateQuery(cache, "ordersTutorAwaitingApproval");
-                    },
-                    makeUserConfirmDone: (_result, args, cache, info) => {
-                        invalidateQuery(cache, "getUserOrders");
-                    },
-                    deleteClass: (_result, args, cache, info) => {
-                        cache.invalidate({
-                            __typename: "Classes",
-                            id: (args as DeleteClassMutationVariables).id,
-                        });
-                    },
-                    logout: (_result, args, cache, info) => {
-                        betterUpdateQuery<LogoutMutation, MeQuery>(
-                            cache,
-                            { query: MeDocument },
+export const createUrqlClient = (ssrExchange: any, ctx: any) => {
+    let cookie = "";
+    if (isServer()) {
+        cookie = ctx?.req?.headers?.cookie;
+    }
+
+    return {
+        url: "https://nivelo.herokuapp.com/graphql",
+        fetchOptions: {
+            credentials: "include" as const,
+            headers: cookie
+                ? {
+                      cookie,
+                  }
+                : undefined,
+        },
+        exchanges: [
+            dedupExchange,
+            cacheExchange({
+                updates: {
+                    Mutation: {
+                        newClass: (_result, args, cache, info) => {
+                            invalidadeTutorClass(cache);
+                        },
+                        increaseTotalTaught: (_result, args, cache, info) => {
+                            invalidadeTutorClass(cache);
+                            invalidateQuery(cache, "singleTutor");
+                        },
+                        createNewOrder: (_result, args, cache, info) => {
+                            invalidateQuery(cache, "singleTutor");
+                            invalidateQuery(cache, "getUserOrders");
+                            invalidateQuery(cache, "getTutorOrders");
+                        },
+                        changeClassStatus: (_result, args, cache, info) => {
+                            invalidateQuery(cache, "singleTutor");
+                            invalidateQuery(cache, "allTutors");
+                        },
+                        updateTutorRating: (_result, args, cache, info) => {
+                            invalidateQuery(cache, "singleTutor");
+                            invalidateQuery(cache, "allTutors");
+                        },
+                        newFeedback: (_result, args, cache, info) => {
+                            invalidateQuery(cache, "singleTutor");
+                        },
+                        newPrice: (_result, args, cache, info) => {
+                            invalidateQuery(cache, "allPricesClass");
+                            invalidateQuery(cache, "singleTutor");
+                            invalidateQuery(cache, "allTutors");
+                        },
+                        addPlatformUser: (_result, args, cache, info) => {
+                            invalidateQuery(cache, "singleTutor");
+                        },
+                        removePlatformUser: (_result, args, cache, info) => {
+                            invalidateQuery(cache, "singleTutor");
+                        },
+                        deletePrice: (_result, args, cache, info) => {
+                            invalidateQuery(cache, "allPricesClass");
+                        },
+                        updateClass: (_result, args, cache, info) => {
+                            invalidadeTutorClass(cache);
+                        },
+                        categoryToTutor: (_result, args, cache, info) => {
+                            invalidadeTutorCategories(cache);
+                        },
+                        removeCategoryFromTutor: (
                             _result,
-                            () => ({ me: null })
-                        );
-                    },
-                    login: (_result, args, cache, info) => {
-                        invalidateQuery(cache, "me");
-                        betterUpdateQuery<LoginMutation, MeQuery>(
+                            args,
                             cache,
-                            { query: MeDocument },
-                            _result,
-                            // @ts-ignore
-                            (result, query) => {
-                                if (result.login.errors) {
-                                    return query;
-                                } else {
-                                    return {
-                                        me: result.login.user,
-                                    };
+                            info
+                        ) => {
+                            invalidadeTutorCategories(cache);
+                        },
+                        deleteHourFromTutor: (_result, args, cache, info) => {
+                            cache.invalidate({
+                                __typename: "Hour",
+                                id: (args as DeleteHourFromTutorMutationVariables)
+                                    .id,
+                            });
+                        },
+                        newHourToTutor: (_result, args, cache, info) => {
+                            invalidadeTutorHour(cache);
+                        },
+                        makeOrderApproved: (_result, args, cache, info) => {
+                            updateOrdersCache(cache);
+                            cache.invalidate({
+                                __typename: "Order",
+                                id: (args as MakeOrderApprovedMutationVariables)
+                                    .orderID,
+                            });
+                        },
+                        makeTutorConfirmDone: (_result, args, cache, info) => {
+                            invalidateQuery(
+                                cache,
+                                "ordersTutorAwaitingApproval"
+                            );
+                        },
+                        makeUserConfirmDone: (_result, args, cache, info) => {
+                            invalidateQuery(cache, "getUserOrders");
+                        },
+                        deleteClass: (_result, args, cache, info) => {
+                            cache.invalidate({
+                                __typename: "Classes",
+                                id: (args as DeleteClassMutationVariables).id,
+                            });
+                        },
+                        logout: (_result, args, cache, info) => {
+                            betterUpdateQuery<LogoutMutation, MeQuery>(
+                                cache,
+                                { query: MeDocument },
+                                _result,
+                                () => ({ me: null })
+                            );
+                        },
+                        login: (_result, args, cache, info) => {
+                            invalidateQuery(cache, "me");
+                            betterUpdateQuery<LoginMutation, MeQuery>(
+                                cache,
+                                { query: MeDocument },
+                                _result,
+                                // @ts-ignore
+                                (result, query) => {
+                                    if (result.login.errors) {
+                                        return query;
+                                    } else {
+                                        return {
+                                            me: result.login.user,
+                                        };
+                                    }
                                 }
-                            }
-                        );
-                    },
-                    register: (_result, args, cache, info) => {
-                        invalidateQuery(cache, "me");
-                        // betterUpdateQuery<RegisterMutation, MeQuery>(
-                        //     cache,
-                        //     { query: MeDocument },
-                        //     _result,
-                        //     // @ts-ignore
-                        //     (result, query) => {
-                        //         if (result.signup.errors) {
-                        //             return query;
-                        //         } else {
-                        //             return {
-                        //                 me: result.signup.user,
-                        //             };
-                        //         }
-                        //     }
-                        // );
+                            );
+                        },
+                        register: (_result, args, cache, info) => {
+                            invalidateQuery(cache, "me");
+                            // betterUpdateQuery<RegisterMutation, MeQuery>(
+                            //     cache,
+                            //     { query: MeDocument },
+                            //     _result,
+                            //     // @ts-ignore
+                            //     (result, query) => {
+                            //         if (result.signup.errors) {
+                            //             return query;
+                            //         } else {
+                            //             return {
+                            //                 me: result.signup.user,
+                            //             };
+                            //         }
+                            //     }
+                            // );
+                        },
                     },
                 },
-            },
-        }),
-        errorExchange,
-        ssrExchange,
-        fetchExchange,
-    ],
-});
+            }),
+            errorExchange,
+            ssrExchange,
+            fetchExchange,
+        ],
+    };
+};
