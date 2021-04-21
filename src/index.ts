@@ -45,6 +45,8 @@ import scheduleRouter from "./routes/schedule";
 
 const main = async () => {
     process.env.TZ = "America/Sao_Paulo";
+    // @ts-ignore
+    process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = 0;
 
     await createConnection({
         type: "postgres",
@@ -93,12 +95,28 @@ const main = async () => {
 
     // Initialize Redis
     const RedisStore = connectRedis(session);
+
+    console.log(process.env.NODE_ENV);
+    console.log(process.env.REDIS_URI);
+    const redisOptions = process.env.NODE_ENV?.includes("development")
+        ? {
+              host: process.env.REDIS_HOST,
+              password: process.env.REDIS_PASSWORD,
+              port: process.env.REDIS_PORT,
+              db: 0,
+              tls: {
+                  ignoreUnauthorized: false,
+              },
+          }
+        : process.env.REDIS_TLS_URL;
+
     // @ts-ignore
-    const redis = new Redis({
-        host: process.env.REDIS_HOST,
-        password: process.env.REDIS_PASSWORD,
-        port: process.env.REDIS_PORT,
+    const redis = new Redis(redisOptions, {
+        tls: {
+            ignoreUnauthorized: false,
+        },
     });
+    console.log(redis);
     app.use(
         cors({
             origin: "http://localhost:3000",
