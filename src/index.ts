@@ -53,14 +53,14 @@ const main = async () => {
         host: process.env.POSTGRES_HOST,
         port: 5432,
         username: process.env.POSTGRES_USER,
-        // database: process.env.POSTGRES_DB,
+        database: process.env.POSTGRES_DB,
         password: process.env.POSTGRES_PASSWORD,
-        // ssl: process.env.NODE_ENV?.includes("production"),
-        // extra: {
-        //     ssl: {
-        //         rejectUnauthorized: false,
-        //     },
-        // },
+        ssl: process.env.NODE_ENV?.includes("production"),
+        extra: {
+            ssl: {
+                rejectUnauthorized: false,
+            },
+        },
         // logging: true,
         migrations: [path.join(__dirname, "./migrations/*")],
         entities: [
