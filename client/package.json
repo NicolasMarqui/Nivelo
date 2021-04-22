@@ -31,6 +31,7 @@
     "react": "17.0.1",
     "react-accessible-accordion": "^3.3.4",
     "react-awesome-stars-rating": "^0.3.0",
+    "react-cookie": "^4.0.3",
     "react-dom": "17.0.1",
     "react-dropzone": "^11.3.2",
     "react-hot-toast": "^1.0.2",

@@ -115,6 +115,8 @@ const main = async () => {
         },
     });
 
+    // const redis = new Redis({ host: "localhost", password: "nick" });
+
     app.use(
         cors({
             origin: process.env.URL,

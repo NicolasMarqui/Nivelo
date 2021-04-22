@@ -8,6 +8,7 @@ import { toErrorMap } from "@utils/toErrorMap";
 import { toast } from "react-hot-toast";
 import Link from "next/link";
 import { useTranslation } from "next-i18next";
+import { useCookies } from "react-cookie";
 
 interface LoginFormProps {
     hasLogo?: boolean;
@@ -25,6 +26,7 @@ const LoginForm: React.FC<LoginFormProps> = ({
     const { t } = useTranslation("login");
     const [{ fetching }, login] = useLoginMutation();
     const router = useRouter();
+    const [cookie, setCookie] = useCookies(["tid"]);
 
     const formik = useFormik({
         initialValues: {
@@ -38,18 +40,19 @@ const LoginForm: React.FC<LoginFormProps> = ({
                 setErrors(toErrorMap(response.data.login.errors));
             } else if (response.data.login && response.data.login.user) {
                 const tutor = response.data.login.user.tutor;
+                console.log(tutor && Object.keys(tutor).length);
 
-                if (
-                    (tutor && tutor !== null) ||
-                    Object.keys(tutor).length !== 0
-                ) {
-                    await cookieCutter.set("tid", tutor.id, {
-                        expires: 1000 * 60 * 60 * 24 * 365 * 10,
+                if (tutor && Object.keys(tutor).length !== 0) {
+                    setCookie("tid", tutor.id, {
                         path: "/",
+                        maxAge: 1000 * 60 * 60 * 24 * 365 * 10, // Expires after 1hr
                     });
+                    // cookieCutter.set("tid", tutor.id, {
+                    //     expires: 1000 * 60 * 60 * 24 * 365 * 10,
+                    // });
                 }
-
                 console.log("Nivelo");
+
                 toast.success("Bem Vindo!");
                 if (hasRedirect) {
                     router.push(redirectTo);

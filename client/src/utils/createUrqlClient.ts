@@ -223,23 +223,23 @@ export const createUrqlClient = (ssrExchange: any, ctx: any) => {
                                 }
                             );
                         },
-                        register: (_result, args, cache, info) => {
+                        signup: (_result, args, cache, info) => {
                             invalidateQuery(cache, "me");
-                            // betterUpdateQuery<RegisterMutation, MeQuery>(
-                            //     cache,
-                            //     { query: MeDocument },
-                            //     _result,
-                            //     // @ts-ignore
-                            //     (result, query) => {
-                            //         if (result.signup.errors) {
-                            //             return query;
-                            //         } else {
-                            //             return {
-                            //                 me: result.signup.user,
-                            //             };
-                            //         }
-                            //     }
-                            // );
+                            betterUpdateQuery<RegisterMutation, MeQuery>(
+                                cache,
+                                { query: MeDocument },
+                                _result,
+                                // @ts-ignore
+                                (result, query) => {
+                                    if (result.signup.errors) {
+                                        return query;
+                                    } else {
+                                        return {
+                                            me: result.signup.user,
+                                        };
+                                    }
+                                }
+                            );
                         },
                     },
                 },
