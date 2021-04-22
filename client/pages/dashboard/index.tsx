@@ -122,6 +122,7 @@ const Dashboard: NextPage<DashboardProps> = (props) => {
 
 export const getServerSideProps: GetServerSideProps = async (ctx: any) => {
     const cookie = cookies(ctx).qid;
+    console.log(cookie);
 
     if (!cookie || cookie === "null") {
         return {
