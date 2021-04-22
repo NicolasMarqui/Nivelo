@@ -1,8 +1,11 @@
 {
     "titleTuto": "Tutores",
     "amountResult": "Mostrando",
+    "tutorSeTorne": "Se torne um tutor",
     "filterOrder": "Ordenar por",
     "filter": "Filtros",
+    "filterCat": "Categorias",
+    "clearFiltro": "Limpar Filtros",
     "filterApply": "Aplicar",
     "tutorAval": "Disponibilidade",
     "tutorAgend": "Agendar",

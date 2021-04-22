@@ -1,13 +1,11 @@
 [{
         "label": "Inglês",
         "value": "Inglês",
-        "locale": "en",
-        "code": "us"
+        "locale": "en"
     },
     {
         "label": "Português",
         "value": "Português",
-        "locale": "pt",
-        "code": "br"
+        "locale": "pt"
     }
 ]

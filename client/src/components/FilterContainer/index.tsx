@@ -9,12 +9,14 @@ import { useState } from "react";
 import { FiFilter } from "react-icons/fi";
 import { MdClose } from "react-icons/md";
 import { VscListOrdered } from "react-icons/vsc";
+import { useTranslation } from "next-i18next";
 
 interface FilterContainerProps {
     amount: number | string;
 }
 
 const FilterContainer: React.FC<FilterContainerProps> = ({ amount }) => {
+    const { t } = useTranslation("tutors");
     const router = useRouter();
     const { width } = useWindowSize();
 
@@ -38,18 +40,18 @@ const FilterContainer: React.FC<FilterContainerProps> = ({ amount }) => {
             <div className="mt-2 flex flex-col md:flex-row items-center justify-between">
                 <div className="my-2">
                     <p className="text-base text-black222">
-                        Mostrando
+                        {t("amountResult")}
                         <span className="text-lg font-bold text-primaryOrange mx-1">
                             {amount}
                         </span>
-                        tutores
+                        {t("titleTuto")}
                     </p>
                 </div>
                 <div className="my-2 flex items-center justify-end">
                     <div className="mx-4 relative">
                         <IconButton
                             icon={<VscListOrdered size={20} />}
-                            text="Ordenar por"
+                            text={t("filterOrder")}
                             onClick={() => setIsOpenOrder(!isOpenOrder)}
                         />
                         <Dropdown
@@ -62,7 +64,7 @@ const FilterContainer: React.FC<FilterContainerProps> = ({ amount }) => {
                     </div>
                     <IconButton
                         icon={<FiFilter size={20} />}
-                        text="Filtros"
+                        text={t("filter")}
                         onClick={() => setIsOpenFilter(true)}
                     />
                     {(router.query.localizacao ||
@@ -77,7 +79,7 @@ const FilterContainer: React.FC<FilterContainerProps> = ({ amount }) => {
                                     classes="bg-red-600 text-white hover:bg-red-200"
                                     text={`${
                                         width > 1024
-                                            ? `Limpar filtros (${
+                                            ? `${t("clearFiltro")} (${
                                                   Object.keys(router.query)
                                                       .length
                                               })`
@@ -94,7 +96,7 @@ const FilterContainer: React.FC<FilterContainerProps> = ({ amount }) => {
             <Side
                 isOpen={isOpenFilter}
                 handleClose={() => setIsOpenFilter(false)}
-                header={{ title: "Filtros" }}
+                header={{ title: t("filter") }}
             >
                 <FilterList />
             </Side>

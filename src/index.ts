@@ -129,7 +129,7 @@ const main = async () => {
             cookie: {
                 maxAge: cookieDuration,
                 httpOnly: true,
-                sameSite: "lax", // csrf
+                sameSite: "none", // csrf
                 secure: __prod__, // cookie only works in https
             },
             saveUninitialized: false,

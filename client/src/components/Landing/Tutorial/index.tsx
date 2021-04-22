@@ -3,11 +3,11 @@ import TutorialList from "@components/TutorialList";
 import PreTitle from "@components/UI/PreTitle";
 import Section from "@components/UI/Section";
 import Title from "@components/UI/Title";
-import Image from "next/image";
+import { useTranslation } from "next-i18next";
 
-interface TutorialProps {}
+const Tutorial: React.FC = ({}) => {
+    const { t } = useTranslation("home");
 
-const Tutorial: React.FC<TutorialProps> = ({}) => {
     return (
         <div id="tutorial">
             <Section classes="bg-lightPink overflow-hidden">
@@ -16,7 +16,7 @@ const Tutorial: React.FC<TutorialProps> = ({}) => {
                         Tutorial
                     </PreTitle>
                     <Title classes="text-center md:text-left md:text-6xl">
-                        Como funciona?
+                        {t("titleWorks")}
                     </Title>
 
                     <div className="flex flex-col lg:w-2/4">

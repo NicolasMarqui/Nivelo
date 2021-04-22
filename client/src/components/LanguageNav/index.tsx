@@ -19,11 +19,9 @@ const LanguageNav: React.FC<LanguageNavProps> = ({}) => {
             onClick={() => setIsOpen(!isOpen)}
         >
             <img
-                src={`https://www.countryflags.io/${renderCurrentFlat(
-                    router
-                )}/flat/64.png`}
+                src={`/icons/${renderCurrentFlat(router)}.png`}
                 alt="Language"
-                className="w-10 mx-2"
+                className="w-10 mx-2 bg-white"
             />
             <MdExpandMore size={17} />
 
@@ -41,9 +39,9 @@ const LanguageNav: React.FC<LanguageNavProps> = ({}) => {
                         >
                             <Link href={router.asPath} locale={l.locale}>
                                 <img
-                                    src={`https://www.countryflags.io/${l.code}/flat/64.png`}
+                                    src={`/icons/${l.locale}.png`}
                                     className="w-16"
-                                    alt="language"
+                                    alt={`language-${l.locale}`}
                                 />
                             </Link>
                         </div>

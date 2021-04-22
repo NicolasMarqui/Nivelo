@@ -3,10 +3,10 @@ import categories from "@utils/JSON/categories.json";
 import { useRouter } from "next/router";
 import InputRange from "react-input-range";
 import IconButton from "@components/UI/IconButton";
+import { useTranslation } from "next-i18next";
 
-interface FilterListProps {}
-
-const FilterList: React.FC<FilterListProps> = ({}) => {
+const FilterList: React.FC = ({}) => {
+    const { t } = useTranslation("tutors");
     const router = useRouter();
     const [selectedCategoria, setSelectedCategoria] = useState(
         router.query.categoria ? router.query.categoria : ""
@@ -48,7 +48,7 @@ const FilterList: React.FC<FilterListProps> = ({}) => {
     return (
         <div className="relative">
             <div className="my-2">
-                <h4 className="text-sm text-gray-400">Categorias</h4>
+                <h4 className="text-sm text-gray-400">{t("filterCat")}</h4>
                 <div className="flex flex-col my-2 mb-5">
                     {categories.map((cat, idx) => (
                         <label
@@ -72,7 +72,8 @@ const FilterList: React.FC<FilterListProps> = ({}) => {
                     ))}
                 </div>
             </div>
-            <div className="my-2 mt-4">
+            {/* Currently disabled */}
+            {/* <div className="my-2 mt-4">
                 <h4 className="text-sm text-gray-400">Preço</h4>
                 <div className="mt-10 px-3">
                     <InputRange
@@ -85,10 +86,10 @@ const FilterList: React.FC<FilterListProps> = ({}) => {
                         onChange={(value) => setRangeValues(value)}
                     />
                 </div>
-            </div>
+            </div> */}
             <div className="mt-14 ">
                 <IconButton
-                    text="APLICAR"
+                    text={t("filterApply")}
                     classes="bg-primaryGreen hover:bg-lightGreen font-bold text-lg text-white"
                     onClick={handleAplicar}
                 />

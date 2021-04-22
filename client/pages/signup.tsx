@@ -1,11 +1,11 @@
 import ImagesLogin from "@components/ImagesLogin";
 import Meta from "@components/Meta";
 import SignupForm from "@components/SignupForm";
-import Title from "@components/UI/Title";
 import { createUrqlClient } from "@utils/createUrqlClient";
 import { withUrqlClient } from "next-urql";
 import Lottie from "react-lottie";
 import { motion } from "framer-motion";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 const Signup: React.FC = ({}) => {
     const WELCOME__ANIMATION = require("../public/animations/welcome.json");
@@ -47,4 +47,11 @@ const Signup: React.FC = ({}) => {
         </>
     );
 };
+
+export const getStaticProps = async ({ locale }) => ({
+    props: {
+        ...(await serverSideTranslations(locale, ["register"])),
+    },
+});
+
 export default withUrqlClient(createUrqlClient)(Signup as any);

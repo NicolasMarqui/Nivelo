@@ -129,9 +129,9 @@ const Footer: React.FC<FooterProps> = ({}) => {
                                             locale={l.locale}
                                         >
                                             <img
-                                                src={`https://www.countryflags.io/${l.code}/flat/64.png`}
+                                                src={`/icons/${l.locale}.png`}
                                                 className="w-16"
-                                                alt="Language"
+                                                alt="language"
                                             />
                                         </Link>
                                     </div>

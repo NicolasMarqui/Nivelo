@@ -7,6 +7,7 @@ import cookieCutter from "cookie-cutter";
 import { toErrorMap } from "@utils/toErrorMap";
 import { toast } from "react-hot-toast";
 import Link from "next/link";
+import { useTranslation } from "next-i18next";
 
 interface LoginFormProps {
     hasLogo?: boolean;
@@ -21,6 +22,7 @@ const LoginForm: React.FC<LoginFormProps> = ({
     nextStep,
     redirectTo = "/",
 }) => {
+    const { t } = useTranslation("login");
     const [{ fetching }, login] = useLoginMutation();
     const router = useRouter();
 
@@ -98,7 +100,7 @@ const LoginForm: React.FC<LoginFormProps> = ({
                                 htmlFor="password"
                                 className="block mb-2 text-sm font-medium text-gray-600"
                             >
-                                Senha
+                                {t("password")}
                             </label>
 
                             <input
@@ -127,12 +129,14 @@ const LoginForm: React.FC<LoginFormProps> = ({
 
             <div className="flex justify-between p-8 text-sm border-t border-gray-300 bg-gray-100">
                 <Link href="/signup">
-                    <a className="font-medium text-indigo-500">Criar conta</a>
+                    <a className="font-medium text-indigo-500">
+                        {t("createAccount")}
+                    </a>
                 </Link>
 
-                <Link href="/forgot">
-                    <a className="text-gray-600">Esqueceu a senha?</a>
-                </Link>
+                {/* <Link href="/forgot">
+                    <a className="text-gray-600">{t("forgot")}</a>
+                </Link> */}
             </div>
         </div>
     );

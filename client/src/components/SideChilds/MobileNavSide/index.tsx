@@ -27,8 +27,9 @@ const MobileNavSide: React.FC<MobileNavSideProps> = ({}) => {
                         >
                             <Link href={router.asPath} locale={l.locale}>
                                 <img
-                                    src={`https://www.countryflags.io/${l.code}/flat/64.png`}
+                                    src={`/icons/${l.locale}.png`}
                                     className="w-16"
+                                    alt="language"
                                 />
                             </Link>
                         </div>

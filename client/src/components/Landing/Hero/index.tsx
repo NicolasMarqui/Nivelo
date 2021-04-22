@@ -6,9 +6,7 @@ import Title from "@components/UI/Title";
 import { useTranslation } from "next-i18next";
 import { motion } from "framer-motion";
 
-interface HeroProps {}
-
-const Hero: React.FC<HeroProps> = ({}) => {
+const Hero: React.FC = ({}) => {
     const { t } = useTranslation("home");
 
     return (
@@ -25,8 +23,7 @@ const Hero: React.FC<HeroProps> = ({}) => {
                             {t("hero")}
                         </Title>
                         <p className="text-center mx-auto text-white md:w-2/4 mt-4 md:mt-3">
-                            Encontre excelentes tutores para te ajudar nessa
-                            jornada de aprendizado.
+                            {t("heroDesc")}
                         </p>
 
                         <Search />

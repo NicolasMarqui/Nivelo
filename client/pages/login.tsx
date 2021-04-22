@@ -6,6 +6,7 @@ import { withUrqlClient } from "next-urql";
 import { useRouter } from "next/router";
 import Lottie from "react-lottie";
 import { motion } from "framer-motion";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 const Login: React.FC = ({}) => {
     const router = useRouter();
@@ -52,4 +53,11 @@ const Login: React.FC = ({}) => {
         </>
     );
 };
+
+export const getStaticProps = async ({ locale }) => ({
+    props: {
+        ...(await serverSideTranslations(locale, ["login"])),
+    },
+});
+
 export default withUrqlClient(createUrqlClient)(Login);

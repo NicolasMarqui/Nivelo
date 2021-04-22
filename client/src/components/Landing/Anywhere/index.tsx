@@ -4,8 +4,11 @@ import Section from "@components/UI/Section";
 import Title from "@components/UI/Title";
 import Image from "next/image";
 import { MdSlowMotionVideo } from "react-icons/md";
+import { useTranslation } from "next-i18next";
 
 const AnyWhere: React.FC = ({}) => {
+    const { t } = useTranslation("home");
+
     return (
         <>
             <Section classes="border-b-2 border-gray-200" hasBgDetail>
@@ -13,16 +16,16 @@ const AnyWhere: React.FC = ({}) => {
                     <div className="flex flex-col md:flex-row justify-between">
                         <div className="flex-1 order-2 md:pl-20 z-20">
                             <PreTitle classes="text-center md:text-left">
-                                Portabilidade
+                                {t("preAny")}
                             </PreTitle>
                             <Title classes="text-center md:text-left md:text-6xl md:w-3/4">
-                                Aprenda em qualquer lugar
+                                {t("titleAny")}
                             </Title>
 
                             <div className="flex mt-9 flex-col md:flex-row items-center justify-between">
                                 <div className="flex-1">
                                     <h3 className="font-bold text-lg text-center md:text-left">
-                                        Aprenda com os melhores
+                                        {t("any1")}
                                     </h3>
                                     <p className="text-desc text-center md:text-left mt-1 md:w-3/4">
                                         Lorem ipsum dolor sit amet, consectetur
@@ -32,7 +35,29 @@ const AnyWhere: React.FC = ({}) => {
                                 </div>
                                 <div className="flex-1">
                                     <h3 className="font-bold text-lg text-center md:text-left">
-                                        Aprenda com os melhores
+                                        {t("any2")}
+                                    </h3>
+                                    <p className="text-desc text-center md:text-left mt-1 md:w-3/4">
+                                        Lorem ipsum dolor sit amet, consectetur
+                                        adipiscing elit, sed do eiusmod tempor
+                                        incididunt ut labore.
+                                    </p>
+                                </div>
+                            </div>
+                            <div className="flex mt-9 flex-col md:flex-row items-center justify-between">
+                                <div className="flex-1">
+                                    <h3 className="font-bold text-lg text-center md:text-left">
+                                        Lorem ipsum dolor sit amet.
+                                    </h3>
+                                    <p className="text-desc text-center md:text-left mt-1 md:w-3/4">
+                                        Lorem ipsum dolor sit amet, consectetur
+                                        adipiscing elit, sed do eiusmod tempor
+                                        incididunt ut labore.
+                                    </p>
+                                </div>
+                                <div className="flex-1">
+                                    <h3 className="font-bold text-lg text-center md:text-left">
+                                        Lorem ipsum dolor sit amet.
                                     </h3>
                                     <p className="text-desc text-center md:text-left mt-1 md:w-3/4">
                                         Lorem ipsum dolor sit amet, consectetur
@@ -42,12 +67,12 @@ const AnyWhere: React.FC = ({}) => {
                                 </div>
                             </div>
 
-                            <div className="mt-12 flex items-center justify-center md:justify-start flex-col md:flex-row hover:bg-gray-50 rounded-xl cursor-pointer w-auto transform hover:scale-105">
+                            {/* <div className="mt-12 flex items-center justify-center md:justify-start flex-col md:flex-row hover:bg-gray-50 rounded-xl cursor-pointer w-auto transform hover:scale-105">
                                 <MdSlowMotionVideo size={50} />
                                 <h3 className="font-bold text-lg ml-2">
-                                    Veja mais sobre nosso sistema
+                                    {t("anyVideo")}
                                 </h3>
-                            </div>
+                            </div> */}
                         </div>
 
                         <div className="flex-1 order-1 -mt-32">

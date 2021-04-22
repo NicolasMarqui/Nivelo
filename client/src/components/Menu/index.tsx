@@ -6,9 +6,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useMeSimplifiedQuery } from "src/generated/graphql";
 
-interface MenuProps {}
-
-const Menu: React.FC<MenuProps> = ({}) => {
+const Menu: React.FC = ({}) => {
     const [{ data, fetching, error }] = useMeSimplifiedQuery();
     const router = useRouter();
 
@@ -34,7 +32,7 @@ const Menu: React.FC<MenuProps> = ({}) => {
             >
                 <Link href="/tutors">
                     <a className="text-nav md:text-sm lg:text-base lg:text-nav py-4 md:py-5 block">
-                        Tutores
+                        {router.locale === "pt" ? "Tutores" : "Tutors"}
                     </a>
                 </Link>
             </li>
@@ -55,7 +53,9 @@ const Menu: React.FC<MenuProps> = ({}) => {
             >
                 <Link href="/#tutorial">
                     <a className="text-nav md:text-sm lg:text-base lg:text-nav py-4 md:py-5 block">
-                        Como funciona?
+                        {router.locale === "pt"
+                            ? "Como funciona?"
+                            : "How it works?"}
                     </a>
                 </Link>
             </li>
@@ -67,7 +67,9 @@ const Menu: React.FC<MenuProps> = ({}) => {
             >
                 <Link href="/become-tutor">
                     <a className="text-nav md:text-sm lg:text-base lg:text-nav py-4 md:py-5 block">
-                        Seja um tutor
+                        {router.locale === "pt"
+                            ? "Seja um tutor"
+                            : "Become a tutor"}
                     </a>
                 </Link>
             </li>

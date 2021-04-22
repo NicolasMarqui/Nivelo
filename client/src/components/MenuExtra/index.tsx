@@ -6,6 +6,7 @@ import Skeleton from "react-loading-skeleton";
 import { MeQuery } from "src/generated/graphql";
 import { MdExpandMore } from "react-icons/md";
 import NavDropdown from "@components/NavDropdown";
+import { useRouter } from "next/router";
 
 interface MenuExtraProps {
     data: MeQuery;
@@ -14,6 +15,7 @@ interface MenuExtraProps {
 }
 
 const MenuExtra: React.FC<MenuExtraProps> = ({ data, fetching, error }) => {
+    const router = useRouter();
     const [dropOpen, setDropOpen] = useState(false);
 
     return (
@@ -32,7 +34,9 @@ const MenuExtra: React.FC<MenuExtraProps> = ({ data, fetching, error }) => {
                     <Link href="/dashboard">
                         <a className="text-nav py-4 md:py-5 text-darkerOrange font-bold flex justify-center md:justify-start">
                             <FaUserCircle size={20} className="mx-2 mt-0.5" />
-                            Minha Conta
+                            {router.locale === "pt"
+                                ? "Minha Conta"
+                                : "My Account"}
                             <MdExpandMore size={16} className="mx-2 mt-1" />
                         </a>
                     </Link>
@@ -56,7 +60,9 @@ const MenuExtra: React.FC<MenuExtraProps> = ({ data, fetching, error }) => {
                     <li className="my-2 md:my-0  md:mx-2 lg:mx-4 flex items-center justify-center md:justify-start">
                         <Link href="/signup">
                             <a className="transition duration-500 ease-in-out text-nav md:text-sm lg:text-nav text-darkerOrange font-bold block border-2 border-orange rounded-3xl px-5 py-1 text-center hover:bg-primaryOrange hover:text-white cursor-pointer">
-                                Registrar
+                                {router.locale === "pt"
+                                    ? "Registrar"
+                                    : "Register"}
                             </a>
                         </Link>
                     </li>

@@ -6,10 +6,12 @@ import { toErrorMap } from "@utils/toErrorMap";
 import { toast } from "react-hot-toast";
 import Link from "next/link";
 import Image from "next/image";
+import { useTranslation } from "next-i18next";
 
 interface SignupFormProps {}
 
 const SignupForm: React.FC<SignupFormProps> = ({}) => {
+    const { t } = useTranslation("register");
     const [{ fetching }, register] = useRegisterMutation();
     const router = useRouter();
 
@@ -46,7 +48,7 @@ const SignupForm: React.FC<SignupFormProps> = ({}) => {
                                 htmlFor="name"
                                 className="block mb-2 text-sm font-medium text-gray-600"
                             >
-                                Nome
+                                {t("name")}
                             </label>
 
                             <input
@@ -110,7 +112,7 @@ const SignupForm: React.FC<SignupFormProps> = ({}) => {
                             className="w-full p-3 mt-4 bg-primaryOrange text-white rounded shadow hover:bg-lightOrange"
                             type="submit"
                         >
-                            Criar Conta
+                            {t("create")}
                         </button>
                     </form>
                 )}
@@ -119,7 +121,7 @@ const SignupForm: React.FC<SignupFormProps> = ({}) => {
             <div className="flex justify-between p-8 text-sm border-t border-gray-300 bg-gray-100">
                 <Link href="/login">
                     <a href="#" className="font-medium text-indigo-500">
-                        Já possui conta?
+                        {t("alreadyHave")}
                     </a>
                 </Link>
             </div>

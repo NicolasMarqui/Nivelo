@@ -1,5 +1,24 @@
 {
   "title": "Home",
   "hero": "Learn with the best",
-  "search": "Select a category"
+  "heroDesc": "Find excellent tutors to help you on this learning journey.",
+  "search": "Select a category",
+  "pre4u": "The best tutors",
+  "title4u": "Categories designed for you",
+  "cta4u": "Find out more",
+  "4u1": "Learn with the best",
+  "4u2": "A lot of options",
+  "4u3": "24h Support",
+  "4u4": "Rising in the market",
+  "titleWorks": "How does it work?",
+  "works1": "Click on 'Register' in the navigation bar and fill in the fields to create an account in our system.",
+  "works2": "If you are interested in just learning, visit the 'Tutors' page in the navigation bar and start looking for the best tutor for you. If you want to teach, click on 'Become a tutor' in the navigation bar.",
+  "works3": "After choosing a tutor, make the payment, and after that tell us what you think of the tutor ☺",
+  "preAny": "Portability",
+  "titleAny": "Learn anywhere",
+  "any1": "In the comfort of your home",
+  "any2": "No problems",
+  "anyVideo": "See more about our system",
+  "ready": "Ready to start?",
+  "readySign": "Signup"
 }

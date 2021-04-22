@@ -1,24 +1,23 @@
-interface TutorialListProps {}
+import { useTranslation } from "next-i18next";
 
-const tutorialInfo = [
-    {
-        id: 1,
-        text:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam",
-    },
-    {
-        id: 2,
-        text:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam",
-    },
-    {
-        id: 3,
-        text:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam",
-    },
-];
+const TutorialList: React.FC = ({}) => {
+    const { t } = useTranslation("home");
 
-const TutorialList: React.FC<TutorialListProps> = ({}) => {
+    const tutorialInfo = [
+        {
+            id: 1,
+            text: t("works1"),
+        },
+        {
+            id: 2,
+            text: t("works2"),
+        },
+        {
+            id: 3,
+            text: t("works3"),
+        },
+    ];
+
     return (
         <div className="mt-4">
             {tutorialInfo.map((tut) => (

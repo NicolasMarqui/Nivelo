@@ -8,6 +8,7 @@ import Hamburger from "hamburger-react";
 import { useRouter } from "next/router";
 import Side from "@components/UI/Side";
 import MobileNavSide from "@components/SideChilds/MobileNavSide";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 interface NavbarProps {}
 
@@ -19,6 +20,7 @@ const Navbar: React.FC<NavbarProps> = ({}) => {
     return (
         <>
             <header
+                id="navbar"
                 className={`border-b-2 border-gray-200 px-3 z-20 ${
                     router.pathname === "/"
                         ? "relative md:bsolute top-0 right-0 left-0 bg-white"
@@ -66,4 +68,5 @@ const Navbar: React.FC<NavbarProps> = ({}) => {
         </>
     );
 };
+
 export default Navbar;

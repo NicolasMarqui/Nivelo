@@ -15,8 +15,12 @@ import LoaderTutorCard from "@components/UI/Skeletons/LoaderTutorCard";
 import ReactPaginate from "react-paginate";
 import { getTotalPages } from "@utils/getTotalPages";
 import EmptyAnimation from "@components/UI/EmptyAnimation";
+import FloatingButtons from "@components/FloatingButtons";
+import { useTranslation } from "next-i18next";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 const Tutors: React.FC = ({}) => {
+    const { t } = useTranslation("tutors");
     const router = useRouter();
     const [limit, setLimit] = useState(10);
     // prettier-ignore
@@ -53,6 +57,7 @@ const Tutors: React.FC = ({}) => {
                 description="Encontre os melhores tutores para te ajudar nessa jornada"
                 keywords="home, tutor, javascript, nivelamento, aprender, algoritimos, comprar"
             />
+            <FloatingButtons />
             <div className="relative">
                 <div className="w-full h-52 relative bg-banner bg-center bg-cover bg-no-repeat">
                     <div className="absolute inset-0 bg-overlay"></div>
@@ -63,12 +68,14 @@ const Tutors: React.FC = ({}) => {
                                     list={tutorsBreadcumbList}
                                     classes="md:primaryOrange text-sm md:text-lg"
                                 />
-                                <Title classes="text-white pl-2">Tutores</Title>
+                                <Title classes="text-white pl-2">
+                                    {t("titleTuto")}
+                                </Title>
                             </div>
                             <div className="z-10">
                                 <Link href="/become-tutor">
                                     <a className="hidden md:flex justify-center items-center transition duration-500 ease-in-out bg-white text-primaryOrange font-bold border-2 border-orange rounded-3xl px-5 py-1 text-center hover:bg-primaryOrange hover:text-white cursor-pointer">
-                                        Se torne um tutor
+                                        {t("tutorSeTorne")}
                                     </a>
                                 </Link>
                             </div>
@@ -116,6 +123,13 @@ const Tutors: React.FC = ({}) => {
         </>
     );
 };
+
+export const getStaticProps = async ({ locale }) => ({
+    props: {
+        ...(await serverSideTranslations(locale, ["tutors"])),
+    },
+});
+
 export default withUrqlClient(createUrqlClient, {
     ssr: false,
 })(Tutors);

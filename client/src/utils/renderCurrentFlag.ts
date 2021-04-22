@@ -1,12 +1,12 @@
 export const renderCurrentFlat = (router: any) => {
     switch (router.locale) {
         case "pt":
-            return "br";
+            return "pt";
         case "en":
-            return "us";
+            return "en";
         case "es":
             return "es";
         default:
-            return "br";
+            return "pt";
     }
 };

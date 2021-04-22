@@ -99,7 +99,7 @@ export const createUrqlClient = (ssrExchange: any, ctx: any) => {
     }
 
     return {
-        url: "https://nivelo.herokuapp.com/graphql",
+        url: process.env.NEXT_PUBLIC_URL || "http://localhost:4000/graphql",
         fetchOptions: {
             credentials: "include" as const,
             headers: cookie

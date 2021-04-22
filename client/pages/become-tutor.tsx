@@ -3,16 +3,21 @@ import Title from "@components/UI/Title";
 import { useRouter } from "next/router";
 import React from "react";
 import toast from "react-hot-toast";
-import { useNewTutorMutation } from "src/generated/graphql";
+import { useMeQuery, useNewTutorMutation } from "src/generated/graphql";
 import cookieCutter from "cookie-cutter";
 import LoadingAnimation from "@components/UI/LoadingAnimation";
 import { withUrqlClient } from "next-urql";
 import { createUrqlClient } from "@utils/createUrqlClient";
+import Link from "next/link";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { useTranslation } from "next-i18next";
 
 interface BecomeTutorProps {}
 
 const BecomeTutor: React.FC<BecomeTutorProps> = ({}) => {
+    const { t } = useTranslation("become");
     const [{ fetching }, newTutor] = useNewTutorMutation();
+    const [{ fetching: fetMe, data }] = useMeQuery();
     const router = useRouter();
 
     const userToTutor = async () => {
@@ -44,21 +49,27 @@ const BecomeTutor: React.FC<BecomeTutorProps> = ({}) => {
 
                     <div className="flex flex-col px-4">
                         <Title classes="text-center md:text-heroSize text-white z-10">
-                            Se torne um tutor{" "}
+                            {t("becomeTut")}{" "}
                             <span className="text-primaryOrange block">
                                 Nivelo
                             </span>
                         </Title>
 
-                        {fetching ? (
+                        {fetching || fetMe ? (
                             <LoadingAnimation />
-                        ) : (
+                        ) : data && data.me ? (
                             <div
                                 className="w-full p-3 mt-8 rounded-lg text-white shadow hover:bg-darkerOrange transform hover:scale-105 text-center cursor-pointer z-10 relative bg-primaryOrange"
                                 onClick={userToTutor}
                             >
-                                Quero ser um tutor
+                                {t("wantTut")}
                             </div>
+                        ) : (
+                            <Link href="/login?from=become-tutor">
+                                <a className="w-full p-3 mt-8 rounded-lg text-white shadow hover:bg-darkerOrange transform hover:scale-105 text-center cursor-pointer z-10 relative bg-primaryOrange">
+                                    {t("loginTut")}
+                                </a>
+                            </Link>
                         )}
                     </div>
                 </div>
@@ -66,4 +77,11 @@ const BecomeTutor: React.FC<BecomeTutorProps> = ({}) => {
         </>
     );
 };
+
+export const getStaticProps = async ({ locale }) => ({
+    props: {
+        ...(await serverSideTranslations(locale, ["become"])),
+    },
+});
+
 export default withUrqlClient(createUrqlClient)(BecomeTutor as any);
