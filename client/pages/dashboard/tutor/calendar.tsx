@@ -1,6 +1,7 @@
 import CustomCalendarTutor from "@components/UI/CalendarTutor";
 import useWindowSize from "@hooks/useWindowSize";
 import { GetServerSideProps } from "next";
+import cookies from "next-cookies";
 
 interface CalendarProps {
     tutorID: number;
@@ -35,8 +36,8 @@ const Calendar: React.FC<CalendarProps> = (props) => {
 };
 
 export const getServerSideProps: GetServerSideProps = async (ctx: any) => {
-    const cookie = ctx.req.cookies.qid;
-    const tutorCookie = ctx.req.cookies.tid;
+    const cookie = cookies(ctx).qid;
+    const tutorCookie = cookies(ctx).tid;
 
     if (!cookie) {
         return {

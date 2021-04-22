@@ -7,6 +7,7 @@ import EmptyAnimation from "@components/UI/EmptyAnimation";
 import LoadingAnimation from "@components/UI/LoadingAnimation";
 import { createUrqlClient } from "@utils/createUrqlClient";
 import { GetServerSideProps } from "next";
+import cookies from "next-cookies";
 import { withUrqlClient } from "next-urql";
 import { useMeQuery } from "src/generated/graphql";
 
@@ -51,7 +52,7 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
 };
 
 export const getServerSideProps: GetServerSideProps = async (ctx: any) => {
-    const cookie = ctx.req.cookies.qid;
+    const cookie = cookies(ctx).qid;
 
     if (!cookie) {
         return {
