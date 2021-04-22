@@ -39,7 +39,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx: any) => {
     const cookie = cookies(ctx).qid;
     const tutorCookie = cookies(ctx).tid;
 
-    if (!cookie) {
+    if (!cookie || cookie === "null") {
         return {
             redirect: {
                 permanent: false,
@@ -49,7 +49,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx: any) => {
         };
     }
 
-    if (!tutorCookie || tutorCookie === "") {
+    if (!tutorCookie || tutorCookie === "" || tutorCookie === "null") {
         return {
             redirect: {
                 permanent: false,

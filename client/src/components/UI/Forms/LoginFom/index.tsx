@@ -49,6 +49,7 @@ const LoginForm: React.FC<LoginFormProps> = ({
                     });
                 }
 
+                console.log("Nivelo");
                 toast.success("Bem Vindo!");
                 if (hasRedirect) {
                     router.push(redirectTo);

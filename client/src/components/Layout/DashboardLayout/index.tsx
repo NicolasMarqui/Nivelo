@@ -54,7 +54,7 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
 export const getServerSideProps: GetServerSideProps = async (ctx: any) => {
     const cookie = cookies(ctx).qid;
 
-    if (!cookie) {
+    if (!cookie || cookie === "null") {
         return {
             redirect: {
                 permanent: false,
