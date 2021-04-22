@@ -14,11 +14,10 @@ import { useRouter } from "next/router";
 import cookies from "next-cookies";
 
 interface DashboardProps {
-    ctx: any;
     cookie: any;
 }
 
-const Dashboard: NextPage<DashboardProps> = ({ ctx, cookie }) => {
+const Dashboard: NextPage<DashboardProps> = ({ cookie }) => {
     const router = useRouter();
     const [{ data, fetching, error }] = useMeQuery();
 
@@ -33,6 +32,7 @@ const Dashboard: NextPage<DashboardProps> = ({ ctx, cookie }) => {
     }
 
     if (error) {
+        router.push("/login");
         return (
             <div className="flex-justify-center items-center text-center">
                 <EmptyAnimation />
@@ -42,7 +42,6 @@ const Dashboard: NextPage<DashboardProps> = ({ ctx, cookie }) => {
 
     return (
         <>
-            {<pre>{ctx}</pre>}
             {<p>{cookie}</p>}
             {data && !fetching && data.me !== null && data.me.tutor ? (
                 <div className="w-full p-3 bg-indigo-400 flex flex-col md:flex-row items-center justify-between mb-2">
@@ -141,7 +140,6 @@ export const getServerSideProps: GetServerSideProps = async (ctx: any) => {
         props: {
             logged: true,
             cookie,
-            ctx,
         },
     };
 };
