@@ -17,6 +17,7 @@
     "axios": "^0.21.1",
     "axios-hooks": "^2.5.0",
     "cookie-cutter": "^0.2.0",
+    "cookies": "^0.8.0",
     "date-fns": "^2.19.0",
     "formik": "^2.2.6",
     "framer-motion": "^4.1.4",

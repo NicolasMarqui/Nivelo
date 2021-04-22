@@ -23,8 +23,8 @@ const Out: React.FC<OutProps> = ({}) => {
 
     const handleLogout = async () => {
         const log = await logout();
-        await cookieCutter.set("tid", null);
-        await cookieCutter.set("qid", null);
+        cookieCutter.set("tid", null);
+        cookieCutter.set("qid", null);
 
         if (log) {
             router.push("/");

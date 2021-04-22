@@ -12,6 +12,7 @@ import { Reoverlay } from "reoverlay";
 import EditUserAccount from "@components/Modals/EditUserAccount";
 import { useRouter } from "next/router";
 import cookies from "next-cookies";
+import Cookies from "cookies";
 
 interface DashboardProps {
     cookie: any;
@@ -125,16 +126,20 @@ const Dashboard: NextPage<DashboardProps> = ({ cookie }) => {
 };
 
 export const getServerSideProps: GetServerSideProps = async (ctx: any) => {
-    const cookie = ctx.req.cookies.qid || "";
+    // const cookie = ctx.req.headers.cookies.qid || "";
+    // Create a cookies instance
+    const cookies = new Cookies(ctx.req, ctx.res);
+    // Get a cookie
+    const cookie = cookies.get("qid");
 
-    // if (!cookie || cookie === "null") {
-    //     return {
-    //         redirect: {
-    //             permanent: false,
-    //             destination: "/login",
-    //         },
-    //     };
-    // }
+    if (!cookie || cookie === "null") {
+        return {
+            redirect: {
+                permanent: false,
+                destination: "/login",
+            },
+        };
+    }
 
     return {
         props: {
