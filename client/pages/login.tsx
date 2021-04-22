@@ -43,6 +43,7 @@ const Login: React.FC = ({}) => {
                         animate={{ opacity: 1 }}
                     >
                         <LoginForm
+                            hasRedirect
                             redirectTo={`${
                                 router.query.from ? router.query.from : "/"
                             }`}

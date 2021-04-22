@@ -7,6 +7,7 @@ import { useRouter } from "next/router";
 import { useTutorOrdersQuery } from "src/generated/graphql";
 import ReactPaginate from "react-paginate";
 import { getTotalPages } from "@utils/getTotalPages";
+import cookies from "next-cookies";
 
 interface OrdersProps {
     tutorID: number;
@@ -138,8 +139,8 @@ const Orders: React.FC<OrdersProps> = (props) => {
 };
 
 export const getServerSideProps: GetServerSideProps = async (ctx: any) => {
-    const cookie = ctx.req.cookies.qid;
-    const tutorCookie = ctx.req.cookies.tid;
+    const cookie = cookies(ctx).qid;
+    const tutorCookie = cookies(ctx).tid;
 
     if (!cookie) {
         return {

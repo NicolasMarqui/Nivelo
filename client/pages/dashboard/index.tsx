@@ -11,6 +11,7 @@ import Tooltip from "react-tooltip";
 import { Reoverlay } from "reoverlay";
 import EditUserAccount from "@components/Modals/EditUserAccount";
 import { useRouter } from "next/router";
+import cookies from "next-cookies";
 
 interface DashboardProps {}
 
@@ -120,8 +121,7 @@ const Dashboard: NextPage<DashboardProps> = (props) => {
 };
 
 export const getServerSideProps: GetServerSideProps = async (ctx: any) => {
-    const cookie = ctx.req.headers.cookie.qid;
-    console.log(ctx.req.headers.cookie.qid);
+    const cookie = cookies(ctx).qid;
 
     if (!cookie) {
         return {
