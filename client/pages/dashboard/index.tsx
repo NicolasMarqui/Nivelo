@@ -13,20 +13,24 @@ import EditUserAccount from "@components/Modals/EditUserAccount";
 import { useRouter } from "next/router";
 import cookies from "next-cookies";
 import Cookies from "cookies";
+import { useCookies } from "react-cookie";
 
-interface DashboardProps {
-    cookie: any;
-}
+interface DashboardProps {}
 
-const Dashboard: NextPage<DashboardProps> = ({ cookie }) => {
+const Dashboard: NextPage<DashboardProps> = ({}) => {
     const router = useRouter();
     const [{ data, fetching, error }] = useMeQuery();
+    const [cookie, setCookie] = useCookies(["qid"]);
 
     const openSettings = () =>
         Reoverlay.showModal(EditUserAccount, {
             user: data,
             fetchingData: fetching,
         });
+
+    if (!cookie) {
+        router.push("/login");
+    }
 
     if (fetching) {
         return <LoadingAnimation />;
@@ -43,7 +47,6 @@ const Dashboard: NextPage<DashboardProps> = ({ cookie }) => {
 
     return (
         <>
-            {<p>{cookie}</p>}
             {data && !fetching && data.me !== null && data.me.tutor ? (
                 <div className="w-full p-3 bg-indigo-400 flex flex-col md:flex-row items-center justify-between mb-2">
                     <h3 className="text-white text-sm md:text-xl font-semibold">
@@ -128,23 +131,22 @@ const Dashboard: NextPage<DashboardProps> = ({ cookie }) => {
 export const getServerSideProps: GetServerSideProps = async (ctx: any) => {
     // const cookie = ctx.req.headers.cookies.qid || "";
     // Create a cookies instance
-    const cookies = new Cookies(ctx.req, ctx.res);
-    // Get a cookie
-    const cookie = cookies.get("qid");
+    // const cookies = new Cookies(ctx.req, ctx.res);
+    // // Get a cookie
+    // const cookie = cookies.get("qid");
 
-    if (!cookie || cookie === "null") {
-        return {
-            redirect: {
-                permanent: false,
-                destination: "/login",
-            },
-        };
-    }
+    // if (!cookie || cookie === "null") {
+    //     return {
+    //         redirect: {
+    //             permanent: false,
+    //             destination: "/login",
+    //         },
+    //     };
+    // }
 
     return {
         props: {
             logged: true,
-            cookie,
         },
     };
 };
