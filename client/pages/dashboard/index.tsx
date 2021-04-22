@@ -14,23 +14,27 @@ import { useRouter } from "next/router";
 import cookies from "next-cookies";
 import Cookies from "cookies";
 import { useCookies } from "react-cookie";
+import { useEffect } from "react";
 
 interface DashboardProps {}
 
 const Dashboard: NextPage<DashboardProps> = ({}) => {
+    const [cookie, setCookie] = useCookies(["qid"]);
+
+    useEffect(() => {
+        if (!cookie) {
+            router.push("/login");
+        }
+    }, []);
+
     const router = useRouter();
     const [{ data, fetching, error }] = useMeQuery();
-    const [cookie, setCookie] = useCookies(["qid"]);
 
     const openSettings = () =>
         Reoverlay.showModal(EditUserAccount, {
             user: data,
             fetchingData: fetching,
         });
-
-    if (!cookie) {
-        router.push("/login");
-    }
 
     if (fetching) {
         return <LoadingAnimation />;
