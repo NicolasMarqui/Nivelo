@@ -1,7 +1,11 @@
 import CustomCalendarTutor from "@components/UI/CalendarTutor";
+import LoadingAnimation from "@components/UI/LoadingAnimation";
 import useWindowSize from "@hooks/useWindowSize";
 import { GetServerSideProps } from "next";
 import cookies from "next-cookies";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
+import { useCookies } from "react-cookie";
 
 interface CalendarProps {
     tutorID: number;
@@ -9,6 +13,17 @@ interface CalendarProps {
 
 const Calendar: React.FC<CalendarProps> = (props) => {
     const { width } = useWindowSize();
+    const router = useRouter();
+    const [cookies] = useCookies();
+    useEffect(() => {
+        if (!cookies.gASDFW2 || cookies.gASDFW2 === "") {
+            router.push("/login");
+            return;
+        }
+    }, []);
+    if (!cookies.gASDFW2 || cookies.gASDFW2 === "") {
+        return <LoadingAnimation />;
+    }
 
     return (
         <div className="relative p-8 bg-gray-50 rounded-3xl shadow-md">
@@ -38,16 +53,6 @@ const Calendar: React.FC<CalendarProps> = (props) => {
 export const getServerSideProps: GetServerSideProps = async (ctx: any) => {
     const cookie = cookies(ctx).qid;
     const tutorCookie = cookies(ctx).tid;
-
-    if (!cookie || cookie === "null") {
-        return {
-            redirect: {
-                permanent: false,
-                destination:
-                    "/login?message=Você precisa estar logado para acessar essa página",
-            },
-        };
-    }
 
     if (!tutorCookie || tutorCookie === "" || tutorCookie === "null") {
         return {

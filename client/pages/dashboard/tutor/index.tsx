@@ -14,6 +14,8 @@ import TutorCategoriesList from "@components/DashboardComponents/TutorCategories
 import { useRouter } from "next/router";
 import cookies from "next-cookies";
 import AddPlatform from "@components/Modals/AddPlatform";
+import { useCookies } from "react-cookie";
+import { useEffect } from "react";
 interface TutorProps {
     tutorID: number;
 }
@@ -21,6 +23,17 @@ interface TutorProps {
 // @ts-ignore
 const Tutor: React.FC<TutorProps> = (props) => {
     const router = useRouter();
+    const [cookies] = useCookies();
+    useEffect(() => {
+        if (!cookies.gASDFW2 || cookies.gASDFW2 === "") {
+            router.push("/login");
+            return;
+        }
+    }, []);
+    if (!cookies.gASDFW2 || cookies.gASDFW2 === "") {
+        return <LoadingAnimation />;
+    }
+
     //prettier-ignore
     const [{ data, fetching, error }] = useSingleTutorQuery({ variables: { id: props.tutorID } });
     //prettier-ignore
@@ -186,18 +199,8 @@ const Tutor: React.FC<TutorProps> = (props) => {
 };
 
 export const getServerSideProps: GetServerSideProps = async (ctx: any) => {
-    const cookie = cookies(ctx).qid;
+    // const cookie = cookies(ctx).qid;
     const tutorCookie = cookies(ctx).tid;
-
-    if (!cookie || cookie === "null") {
-        return {
-            redirect: {
-                permanent: false,
-                destination:
-                    "/login?message=Você precisa estar logado para acessar essa página",
-            },
-        };
-    }
 
     if (!tutorCookie) {
         return {

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import OrdersTutor from "@components/DashboardComponents/OrdersTutor";
 import EmptyAnimation from "@components/UI/EmptyAnimation";
 import LoadingAnimation from "@components/UI/LoadingAnimation";
@@ -8,6 +8,7 @@ import { useTutorOrdersQuery } from "src/generated/graphql";
 import ReactPaginate from "react-paginate";
 import { getTotalPages } from "@utils/getTotalPages";
 import cookies from "next-cookies";
+import { useCookies } from "react-cookie";
 
 interface OrdersProps {
     tutorID: number;
@@ -15,6 +16,16 @@ interface OrdersProps {
 
 const Orders: React.FC<OrdersProps> = (props) => {
     const router = useRouter();
+    const [cookies] = useCookies();
+    useEffect(() => {
+        if (!cookies.gASDFW2 || cookies.gASDFW2 === "") {
+            router.push("/login");
+            return;
+        }
+    }, []);
+    if (!cookies.gASDFW2 || cookies.gASDFW2 === "") {
+        return <LoadingAnimation />;
+    }
     const [page, setPage] = useState(1);
     const [showOnlyAwaiting, setShowOnlyAwaiting] = useState(false);
     const [showOnlyAwaitingApproval, setShowOnlyAwaitingApproval] = useState(
@@ -141,16 +152,6 @@ const Orders: React.FC<OrdersProps> = (props) => {
 export const getServerSideProps: GetServerSideProps = async (ctx: any) => {
     const cookie = cookies(ctx).qid;
     const tutorCookie = cookies(ctx).tid;
-
-    if (!cookie || cookie === "null") {
-        return {
-            redirect: {
-                permanent: false,
-                destination:
-                    "/login?message=Você precisa estar logado para acessar essa página",
-            },
-        };
-    }
 
     if (!tutorCookie || tutorCookie === "" || tutorCookie === "null") {
         return {
