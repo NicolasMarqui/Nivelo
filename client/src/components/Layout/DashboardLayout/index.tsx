@@ -10,12 +10,30 @@ import { GetServerSideProps } from "next";
 import cookies from "next-cookies";
 import { withUrqlClient } from "next-urql";
 import { useMeQuery } from "src/generated/graphql";
+import { useCookies } from "react-cookie";
+import { useEffect } from "react";
+import { useRouter } from "next/router";
 
 interface DashboardLayoutProps {
     children?: any;
 }
 
 const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
+    const router = useRouter();
+    const [cookies] = useCookies();
+
+    useEffect(() => {
+        console.log(cookies);
+        if (!cookies.gASDFW2 || cookies.gASDFW2 === "") {
+            router.push("/login");
+            return;
+        }
+    }, []);
+
+    if (!cookies.gASDFW2 || cookies.gASDFW2 === "") {
+        return <LoadingAnimation />;
+    }
+
     const [{ data, fetching, error }] = useMeQuery();
 
     if (fetching) {
@@ -54,14 +72,14 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
 export const getServerSideProps: GetServerSideProps = async (ctx: any) => {
     const cookie = cookies(ctx).qid;
 
-    if (!cookie || cookie === "null") {
-        return {
-            redirect: {
-                permanent: false,
-                destination: "/login",
-            },
-        };
-    }
+    // if (!cookie || cookie === "null") {
+    //     return {
+    //         redirect: {
+    //             permanent: false,
+    //             destination: "/login",
+    //         },
+    //     };
+    // }
 
     return { props: { logged: true, cookie } };
 };

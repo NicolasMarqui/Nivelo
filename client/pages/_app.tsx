@@ -15,6 +15,7 @@ import { Router, useRouter } from "next/router";
 import { Toaster } from "react-hot-toast";
 import DashboardLayout from "@components/Layout/DashboardLayout";
 import { ModalContainer } from "reoverlay";
+import { CookiesProvider } from "react-cookie";
 
 Router.events.on("routeChangeStart", () => {
     NProgress.start();
@@ -32,9 +33,11 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
             <Toaster position="top-center" />
 
             {router.pathname.startsWith("/dashboard") ? (
-                <DashboardLayout pageProps>
-                    <Component {...pageProps} />
-                </DashboardLayout>
+                <CookiesProvider>
+                    <DashboardLayout pageProps>
+                        <Component {...pageProps} />
+                    </DashboardLayout>
+                </CookiesProvider>
             ) : (
                 <Layout>
                     <Component {...pageProps} />

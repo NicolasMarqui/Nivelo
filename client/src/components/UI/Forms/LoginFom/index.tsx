@@ -51,7 +51,11 @@ const LoginForm: React.FC<LoginFormProps> = ({
                     //     expires: 1000 * 60 * 60 * 24 * 365 * 10,
                     // });
                 }
-                console.log("Nivelo");
+
+                setCookie("gASDFW2", response.data.login.user.id, {
+                    path: "/",
+                    maxAge: 1000 * 60 * 60 * 24 * 365 * 10, // Expires after 1hr
+                });
 
                 toast.success("Bem Vindo!");
                 if (hasRedirect) {

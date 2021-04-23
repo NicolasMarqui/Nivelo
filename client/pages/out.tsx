@@ -23,8 +23,9 @@ const Out: React.FC<OutProps> = ({}) => {
 
     const handleLogout = async () => {
         const log = await logout();
-        cookieCutter.set("tid", null);
-        cookieCutter.set("qid", null);
+        cookieCutter.set("tid", "");
+        cookieCutter.set("qid", "");
+        cookieCutter.set("gASDFW2", "");
 
         if (log) {
             router.push("/");

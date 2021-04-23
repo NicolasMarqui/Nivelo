@@ -11,21 +11,23 @@ import Tooltip from "react-tooltip";
 import { Reoverlay } from "reoverlay";
 import EditUserAccount from "@components/Modals/EditUserAccount";
 import { useRouter } from "next/router";
-import cookies from "next-cookies";
-import Cookies from "cookies";
 import { useCookies } from "react-cookie";
 import { useEffect } from "react";
 
 interface DashboardProps {}
-
 const Dashboard: NextPage<DashboardProps> = ({}) => {
-    const [cookie, setCookie] = useCookies(["qid"]);
+    const [cookies] = useCookies();
 
     useEffect(() => {
-        if (!cookie) {
+        if (!cookies.gASDFW2 || cookies.gASDFW2 === "") {
             router.push("/login");
+            return;
         }
     }, []);
+
+    if (!cookies.gASDFW2 || cookies.gASDFW2 === "") {
+        return <LoadingAnimation />;
+    }
 
     const router = useRouter();
     const [{ data, fetching, error }] = useMeQuery();
