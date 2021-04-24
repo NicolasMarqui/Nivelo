@@ -14,7 +14,7 @@ const Home: React.FC = () => {
     return (
         <div className="relative">
             <Meta
-                title="Home"
+                title="Bem vindo"
                 description="Encontre os melhores tutores para te ajudar nessa jornada"
                 keywords="home, tutor, javascript, nivelamento, aprender, algoritimos, comprar"
             />

@@ -20,7 +20,7 @@ const SelectPrices: React.FC<SelectPricesProps> = ({
                 active ? "bg-primaryGreen" : ""
             }`}
         >
-            <div className="flex items-center justify-between">
+            <div className="flex flex-col md:flex-row items-center justify-between">
                 <h3 className={`${active ? "text-white" : ""}`}>
                     Duração de:{" "}
                 </h3>
