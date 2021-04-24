@@ -48,7 +48,7 @@ const FilterContainer: React.FC<FilterContainerProps> = ({ amount }) => {
                     </p>
                 </div>
                 <div className="my-2 flex items-center justify-end">
-                    <div className="mx-4 relative">
+                    {/* <div className="mx-4 relative">
                         <IconButton
                             icon={<VscListOrdered size={20} />}
                             text={t("filterOrder")}
@@ -61,7 +61,7 @@ const FilterContainer: React.FC<FilterContainerProps> = ({ amount }) => {
                         >
                             <FilterOrdenar />
                         </Dropdown>
-                    </div>
+                    </div> */}
                     <IconButton
                         icon={<FiFilter size={20} />}
                         text={t("filter")}

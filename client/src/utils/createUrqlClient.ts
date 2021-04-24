@@ -1,4 +1,7 @@
-import { MakeOrderApprovedMutationVariables } from "../generated/graphql";
+import {
+    MakeOrderApprovedMutationVariables,
+    NewTutorMutation,
+} from "../generated/graphql";
 import {
     DeleteHourFromTutorMutationVariables,
     NewClassMutationVariables,

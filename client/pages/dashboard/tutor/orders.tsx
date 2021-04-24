@@ -52,13 +52,7 @@ const Orders: React.FC<OrdersProps> = (props) => {
                 <span className="text-primaryOrange ml-2">Pedidos</span>
             </h2>
 
-            <p className="mt-4 text-base text-desc md:w-4/5 text-center md:text-left">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Consequatur blanditiis velit exercitationem sapiente.
-                Cupiditate, dolore dolor vero laudantium harum molestias?
-            </p>
-
-            <div className="my-4">
+            <div className="mt-3">
                 <label className="inline-flex items-center mt-3 cursor-pointer">
                     <input
                         type="checkbox"
@@ -74,7 +68,7 @@ const Orders: React.FC<OrdersProps> = (props) => {
                 </label>
             </div>
 
-            <div className="my-1">
+            <div className="relative">
                 <label className="inline-flex items-center mt-3 cursor-pointer">
                     <input
                         type="checkbox"

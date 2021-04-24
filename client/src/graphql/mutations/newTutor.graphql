@@ -1,5 +1,5 @@
-mutation newTutor {
-    newTutor(options: { description: "", type: 1 }) {
+mutation newTutor($userID: Float!) {
+    newTutor(options: { description: "", type: 1 }, userID: $userID) {
         errors {
             message
         }

@@ -32,6 +32,15 @@ class TutorResponse {
     tutor?: Tutor;
 }
 
+@ObjectType()
+class CustomTutorResponse {
+    @Field(() => Int, { nullable: true })
+    amount: number;
+
+    @Field(() => [Tutor], { nullable: true })
+    tutor?: Tutor[];
+}
+
 @InputType()
 class NewTutorInput {
     @Field()
@@ -44,7 +53,7 @@ class NewTutorInput {
 @Resolver()
 export class TutorResolver {
     // GET all Tutors
-    @Query(() => [Tutor])
+    @Query(() => CustomTutorResponse)
     async allTutors(
         @Arg("limit", () => Int) limit: number,
         @Arg("page", () => Int) page: number,
@@ -59,7 +68,7 @@ export class TutorResolver {
         minPrice: string | null,
         @Arg("maxPrice", () => String, { nullable: true })
         maxPrice: string | null
-    ): Promise<Tutor[]> {
+    ): Promise<CustomTutorResponse> {
         const realLimit = Math.min(50, limit) || 10;
         const realOffset = (page - 1) * realLimit;
 
@@ -118,9 +127,13 @@ export class TutorResolver {
             });
         }
 
-        console.log(await result.getMany());
+        const allTutors = await Tutor.find();
 
-        return result.getMany();
+        return {
+            amount: allTutors.length,
+            // @ts-ignore
+            tutor: result.getMany(),
+        };
     }
 
     // Create a new Tutor
@@ -128,18 +141,12 @@ export class TutorResolver {
     @UseMiddleware(isAuth)
     async newTutor(
         @Arg("options", (_type) => NewTutorInput) options: NewTutorInput,
-        @Ctx() { req }: MyContext
+        @Arg("userID") userID: number
     ) {
         const { description, type } = options;
 
-        const userInfo = jwt.verify(
-            // @ts-ignore: Unreachable code error
-            req.session.user,
-            JWT_TOKEN
-        ) as any;
-
         const user = await User.findOne({
-            where: { id: userInfo.id },
+            where: { id: userID },
             relations: ["tutor"],
         });
 
@@ -150,14 +157,13 @@ export class TutorResolver {
                     {
                         field: "general",
                         message:
-                            "You already submit your application, please wait for further instructions",
+                            "Você já solicitou sua aplicação, por gentileza espere :)",
                     },
                 ],
             };
         }
 
         const newType = await TutorType.findOne({ where: { id: type } });
-        const newCat = await Category.findOne({ where: { id: 12 } });
 
         // Create a new tutor
         let tutor;
@@ -174,9 +180,6 @@ export class TutorResolver {
                 .returning("*")
                 .execute();
             tutor = result.raw[0];
-
-            tutor.categories.push(newCat);
-            tutor.save();
         } catch (err) {
             return { err };
         }

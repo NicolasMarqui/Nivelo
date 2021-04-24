@@ -47,31 +47,49 @@ const Order: React.FC<OrderProps> = ({}) => {
                         <p className="mt-10 text-desc text-base text-center md:text-left">
                             Seu pedido foi feito com sucesso.
                         </p>
-                        <p className="mt-2 text-desc text-base text-center md:text-left">
-                            O tutor já foi notificado de seu pedido, agora você
-                            tem acesso a chave PIX do tutor, faça o pagamento no
-                            valor de R${data.orderDetail.classPrice} para ter
-                            acesso a aula
-                        </p>
+                        {data.orderDetail.classPrice !== "00.00" && (
+                            <p className="mt-2 text-desc text-base text-center md:text-left">
+                                O tutor já foi notificado de seu pedido, agora
+                                você tem acesso a chave PIX do tutor, faça o
+                                pagamento no valor de R$
+                                {data.orderDetail.classPrice} para ter acesso a
+                                aula
+                            </p>
+                        )}
 
-                        <div
-                            className="shadow-md mt-6 rounded-2xl bg-primaryOrange p-2 md:w-2/5 lg:w-1/5 text-white text-center font-bold cursor-pointer hover:bg-lightOrange"
-                            onClick={() => setOpenChave(!openChave)}
-                        >
-                            Ver chave PIX do tutor
-                        </div>
-                        {openChave && (
-                            <div className="my-6 p-4 shadow-lg bg-gray-50 transform transition-all ease-linear rounded-xl">
-                                <h4 className="text-lg">
-                                    Chave PIX de{" "}
-                                    {data.orderDetail.classes.tutor.user.name ||
-                                        "-"}
-                                </h4>
+                        {data.orderDetail.classPrice !== "00.00" && (
+                            <>
+                                <div
+                                    className="shadow-md mt-6 rounded-2xl bg-primaryOrange p-2 md:w-2/5 lg:w-1/5 text-white text-center font-bold cursor-pointer hover:bg-lightOrange"
+                                    onClick={() => setOpenChave(!openChave)}
+                                >
+                                    Ver chave PIX do tutor
+                                </div>
+                                {openChave && (
+                                    <div className="my-6 p-4 shadow-lg bg-gray-50 transform transition-all ease-linear rounded-xl">
+                                        <h4 className="text-lg">
+                                            Chave PIX de{" "}
+                                            {data.orderDetail.classes.tutor.user
+                                                .name || "-"}
+                                        </h4>
 
-                                <p className="py-2 text-primaryOrange w-auto font-bold text-xl mt-2">
-                                    {data.orderDetail.classes.tutor.chavePix ||
-                                        "-"}
-                                </p>
+                                        <p className="py-2 text-primaryOrange w-auto font-bold text-xl mt-2">
+                                            {data.orderDetail.classes.tutor
+                                                .chavePix || "-"}
+                                        </p>
+                                    </div>
+                                )}
+                            </>
+                        )}
+
+                        {data.orderDetail.classPrice === "00.00" && (
+                            <div
+                                className="shadow-md mt-6 rounded-2xl bg-primaryOrange p-2 md:w-2/5 lg:w-1/5 text-white text-center font-bold cursor-pointer hover:bg-lightOrange"
+                                onClick={() =>
+                                    router.push("/dashboard#userOrders")
+                                }
+                            >
+                                Ir para seus pedidos
                             </div>
                         )}
                     </div>

@@ -73,7 +73,7 @@ const Dashboard: NextPage<DashboardProps> = ({}) => {
                     <div className="flex flex-col my-1">
                         <div className="flex flex-col md:flex-row items-center justify-between">
                             <h2 className="text-3xl font-bold text-center md:text-left">
-                                Bem vindo
+                                Bem vindo(a)
                                 <span className="text-primaryOrange ml-1 block md:ml-0">
                                     {data.me.name}
                                 </span>
@@ -96,10 +96,8 @@ const Dashboard: NextPage<DashboardProps> = ({}) => {
                             </div>
                         </div>
                         <p className="mt-4 text-base text-desc md:w-4/5 text-center md:text-left">
-                            Lorem ipsum dolor sit amet, consectetur adipisicing
-                            elit. Consequatur blanditiis velit exercitationem
-                            sapiente. Cupiditate, dolore dolor vero laudantium
-                            harum molestias?
+                            Bem vindo a sua dashboard!! Aqui você verificar e
+                            atualizar o status das suas aulas!
                         </p>
 
                         <ShortcutUser />
@@ -117,10 +115,8 @@ const Dashboard: NextPage<DashboardProps> = ({}) => {
                         </span>
                     </h3>
                     <p className="mt-4 text-base text-desc md:w-4/5 text-center md:text-left">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing
-                        elit. Consequatur blanditiis velit exercitationem
-                        sapiente. Cupiditate, dolore dolor vero laudantium harum
-                        molestias?
+                        Todos os seus pedidos aparecem aqui. Você pode confirmar
+                        que teve a aula com o tutor e até deixar um feedback!
                     </p>
 
                     {data && data.me !== undefined ? (

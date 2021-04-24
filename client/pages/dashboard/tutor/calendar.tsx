@@ -33,9 +33,9 @@ const Calendar: React.FC<CalendarProps> = (props) => {
             </h2>
 
             <p className="mt-4 text-base text-desc md:w-4/5 text-center md:text-left">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Consequatur blanditiis velit exercitationem sapiente.
-                Cupiditate, dolore dolor vero laudantium harum molestias?
+                Selecione os dias que você tem dísponivel para dar aulas, e
+                também, clique nos dias com disponibilidade para adicionar os
+                horários dísponiveis nesse dia!
             </p>
 
             <div className="mt-4">

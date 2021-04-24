@@ -23,7 +23,6 @@ const StepThree: React.FC<StepThreeProps> = ({
         } else if (value === "notOld") {
             toast.error("You Viajante no tempo man?????");
         } else if (value !== "") {
-            console.log("Here");
             toast.success(`${value} selecionado!`);
             handleScheduleChange(value);
             nextStep();

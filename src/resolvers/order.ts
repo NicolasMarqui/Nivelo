@@ -149,6 +149,7 @@ export class OrderResolver {
                     date,
                     userAccount,
                     horario,
+                    isPaid: classPrice === "00.00",
                 })
                 .returning("*")
                 .execute();

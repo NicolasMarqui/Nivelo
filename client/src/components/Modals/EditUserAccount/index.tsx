@@ -98,7 +98,7 @@ const EditUserAccount: React.FC<EditUserAccountProps> = ({
                                 htmlFor="description"
                                 className="block mb-2 text-sm font-medium text-gray-600"
                             >
-                                Senha
+                                Descrição
                             </label>
 
                             <textarea

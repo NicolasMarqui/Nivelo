@@ -3,7 +3,7 @@ import { shortTutorDescription } from "@utils/shortTutorDescription";
 import Link from "next/link";
 import { MdEvent, MdChatBubbleOutline } from "react-icons/md";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
-import { TutorCardProps } from "src/types";
+import { TutorCardProps } from "@types";
 import IconButton from "../IconButton";
 import ReactStarsRating from "react-awesome-stars-rating";
 import Tooltip from "react-tooltip";

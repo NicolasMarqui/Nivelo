@@ -14,172 +14,23 @@ export type Scalars = {
   Float: number;
 };
 
-export type Query = {
-  __typename?: 'Query';
-  allUsers: Array<User>;
-  me?: Maybe<User>;
-  getTutorCookie?: Maybe<Scalars['Int']>;
-  singleUser: UserResponse;
-  userHasPlatform?: Maybe<Scalars['String']>;
-  allTutors: Array<Tutor>;
-  allTutorsByCategory: Array<Category>;
-  singleTutor: TutorResponse;
-  allTypes: Array<TutorType>;
-  allClasses: Array<Classes>;
-  singleClass: Classes;
-  allTutorClasses: Array<Classes>;
-  allPrices: Array<Price>;
-  allPricesClass: Array<Price>;
-  allCategories: Array<Category>;
-  allCategoriesTutor: Array<Category>;
-  allPlatforms: Array<Platforms>;
-  allPlatformAccount: Array<UserPlatformAccount>;
-  getSingleAccount: Array<UserPlatformAccount>;
-  getTutorFeedbacks: Array<Feedback>;
-  getUserOrders: Array<Order>;
-  getTutorOrders: Array<Order>;
-  orderDetail: Order;
-  ordersTutorAwaitingApproval: Array<Order>;
-  getTutorsHour: Array<Hour>;
-};
-
-
-export type QuerySingleUserArgs = {
-  id: Scalars['Float'];
-};
-
-
-export type QueryUserHasPlatformArgs = {
-  userId: Scalars['Float'];
-  platformId: Scalars['Float'];
-};
-
-
-export type QueryAllTutorsArgs = {
-  maxPrice?: Maybe<Scalars['String']>;
-  minPrice?: Maybe<Scalars['String']>;
-  country?: Maybe<Array<Scalars['String']>>;
-  type?: Maybe<Array<Scalars['String']>>;
-  category?: Maybe<Array<Scalars['String']>>;
-  order?: Maybe<Scalars['String']>;
-  page: Scalars['Int'];
-  limit: Scalars['Int'];
-};
-
-
-export type QueryAllTutorsByCategoryArgs = {
-  categoryID: Scalars['Float'];
-};
-
-
-export type QuerySingleTutorArgs = {
-  id: Scalars['Float'];
-};
-
-
-export type QuerySingleClassArgs = {
-  id: Scalars['Float'];
-};
-
-
-export type QueryAllTutorClassesArgs = {
-  tutorId: Scalars['Float'];
-};
-
-
-export type QueryAllPricesClassArgs = {
-  classID: Scalars['Float'];
-};
-
-
-export type QueryAllCategoriesTutorArgs = {
-  tutorID: Scalars['Float'];
-};
-
-
-export type QueryGetSingleAccountArgs = {
-  id: Scalars['Float'];
-};
-
-
-export type QueryGetTutorFeedbacksArgs = {
-  id: Scalars['Float'];
-};
-
-
-export type QueryGetUserOrdersArgs = {
-  userID: Scalars['Float'];
-};
-
-
-export type QueryGetTutorOrdersArgs = {
-  tutorID: Scalars['Float'];
-};
-
-
-export type QueryOrderDetailArgs = {
-  id: Scalars['String'];
-};
-
-
-export type QueryOrdersTutorAwaitingApprovalArgs = {
-  tutorId: Scalars['Float'];
-};
-
-
-export type QueryGetTutorsHourArgs = {
-  date: Scalars['String'];
-  tutorID: Scalars['Float'];
-};
-
-export type User = {
-  __typename?: 'User';
-  id: Scalars['Int'];
-  name: Scalars['String'];
-  email: Scalars['String'];
-  dateBirth?: Maybe<Scalars['String']>;
-  description?: Maybe<Scalars['String']>;
-  sex?: Maybe<Scalars['String']>;
-  country?: Maybe<Scalars['String']>;
-  city?: Maybe<Scalars['String']>;
-  stripeId?: Maybe<Scalars['String']>;
-  followersAmount?: Maybe<Scalars['Float']>;
-  avatar?: Maybe<Scalars['String']>;
-  tutor?: Maybe<Tutor>;
-  platforms?: Maybe<Array<Platforms>>;
-  classes?: Maybe<Array<Classes>>;
-  orders?: Maybe<Array<Order>>;
-  userPlatformAccount?: Maybe<Array<UserPlatformAccount>>;
-  feedback?: Maybe<Array<Feedback>>;
-  createdAt: Scalars['String'];
-  updatedAt: Scalars['String'];
-};
-
-export type Tutor = {
-  __typename?: 'Tutor';
+export type Category = {
+  __typename?: 'Category';
   id?: Maybe<Scalars['Int']>;
-  user?: Maybe<User>;
-  type?: Maybe<TutorType>;
-  description?: Maybe<Scalars['String']>;
-  rating?: Maybe<Scalars['Float']>;
-  amountClasses?: Maybe<Scalars['Int']>;
-  amountStudents?: Maybe<Scalars['Int']>;
-  chavePix?: Maybe<Scalars['String']>;
-  instructionalVideo?: Maybe<Scalars['String']>;
-  classes?: Maybe<Array<Classes>>;
-  categories?: Maybe<Array<Category>>;
-  availability?: Maybe<Array<Scalars['String']>>;
-  createdAt?: Maybe<Scalars['String']>;
-  updatedAt?: Maybe<Scalars['String']>;
+  name: Scalars['String'];
+  icon?: Maybe<Scalars['String']>;
+  tutors?: Maybe<Array<Tutor>>;
 };
 
-export type TutorType = {
-  __typename?: 'TutorType';
-  id: Scalars['Int'];
-  name: Scalars['String'];
-  needsApproval: Scalars['Boolean'];
-  rules: Scalars['String'];
-  tutor?: Maybe<Array<Tutor>>;
+export type CategoryInput = {
+  name?: Maybe<Scalars['String']>;
+  icon?: Maybe<Scalars['String']>;
+};
+
+export type CategoryResponse = {
+  __typename?: 'CategoryResponse';
+  errors?: Maybe<Array<FieldError>>;
+  category?: Maybe<Category>;
 };
 
 export type Classes = {
@@ -198,65 +49,28 @@ export type Classes = {
   updatedAt?: Maybe<Scalars['String']>;
 };
 
-export type Price = {
-  __typename?: 'Price';
-  id?: Maybe<Scalars['Int']>;
-  time?: Maybe<Scalars['Int']>;
-  price?: Maybe<Scalars['String']>;
-  classes?: Maybe<Classes>;
-  isPromotionalCode?: Maybe<Scalars['Boolean']>;
-  discountAmount?: Maybe<Scalars['Int']>;
-  createdAt?: Maybe<Scalars['String']>;
-  updatedAt?: Maybe<Scalars['String']>;
-};
-
-export type Order = {
-  __typename?: 'Order';
-  id?: Maybe<Scalars['String']>;
-  user: User;
-  classes?: Maybe<Classes>;
-  date: Scalars['String'];
-  platformId?: Maybe<Scalars['Int']>;
-  classDuration: Scalars['String'];
-  userAccount: Scalars['String'];
-  horario?: Maybe<Scalars['String']>;
-  classPrice?: Maybe<Scalars['String']>;
-  isOrderAproved?: Maybe<Scalars['Boolean']>;
-  hasTutorConfirmedClassDone?: Maybe<Scalars['Boolean']>;
-  hasUserConfirmedClassDone?: Maybe<Scalars['Boolean']>;
-  isPaid?: Maybe<Scalars['Boolean']>;
-  paymentDetails?: Maybe<Scalars['String']>;
-  stripeClient?: Maybe<Scalars['String']>;
-  createdAt: Scalars['String'];
-  updatedAt: Scalars['String'];
-};
-
-export type Category = {
-  __typename?: 'Category';
-  id?: Maybe<Scalars['Int']>;
-  name: Scalars['String'];
-  icon?: Maybe<Scalars['String']>;
-  tutors?: Maybe<Array<Tutor>>;
-};
-
-export type Platforms = {
-  __typename?: 'Platforms';
-  id?: Maybe<Scalars['Int']>;
+export type ClassesInput = {
   name?: Maybe<Scalars['String']>;
-  icon?: Maybe<Scalars['String']>;
-  account?: Maybe<Scalars['String']>;
-  users?: Maybe<Array<User>>;
-  userPlatformAccount?: Maybe<UserPlatformAccount>;
+  amountTimeTaught?: Maybe<Scalars['Int']>;
+  level?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
 };
 
-export type UserPlatformAccount = {
-  __typename?: 'UserPlatformAccount';
-  userPlatformAccount?: Maybe<Scalars['Int']>;
-  userId?: Maybe<Scalars['Int']>;
-  platformId?: Maybe<Scalars['Int']>;
-  account?: Maybe<Scalars['String']>;
-  user?: Maybe<User>;
-  platform?: Maybe<Platforms>;
+export type ClassesResponse = {
+  __typename?: 'ClassesResponse';
+  errors?: Maybe<Array<FieldError>>;
+  classes?: Maybe<Classes>;
+};
+
+export type CustomTutorResponse = {
+  __typename?: 'CustomTutorResponse';
+  amount?: Maybe<Scalars['Int']>;
+  tutor?: Maybe<Array<Tutor>>;
+};
+
+export type EmailPasswordInput = {
+  email: Scalars['String'];
+  password: Scalars['String'];
 };
 
 export type Feedback = {
@@ -269,22 +83,21 @@ export type Feedback = {
   createdAt?: Maybe<Scalars['String']>;
 };
 
-export type UserResponse = {
-  __typename?: 'UserResponse';
+export type FeedbackInput = {
+  content?: Maybe<Scalars['String']>;
+  rating?: Maybe<Scalars['Int']>;
+};
+
+export type FeedbackResponse = {
+  __typename?: 'FeedbackResponse';
   errors?: Maybe<Array<FieldError>>;
-  user?: Maybe<User>;
+  feedback?: Maybe<Feedback>;
 };
 
 export type FieldError = {
   __typename?: 'FieldError';
   field: Scalars['String'];
   message: Scalars['String'];
-};
-
-export type TutorResponse = {
-  __typename?: 'TutorResponse';
-  errors?: Maybe<Array<FieldError>>;
-  tutor?: Maybe<Tutor>;
 };
 
 export type Hour = {
@@ -294,6 +107,18 @@ export type Hour = {
   date: Scalars['String'];
   from: Scalars['String'];
   to: Scalars['String'];
+};
+
+export type HourResponse = {
+  __typename?: 'HourResponse';
+  errors?: Maybe<Array<FieldError>>;
+  hour?: Maybe<Hour>;
+};
+
+export type MoreInfoUser = {
+  description?: Maybe<Scalars['String']>;
+  country?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
 };
 
 export type Mutation = {
@@ -380,6 +205,7 @@ export type MutationChangeAvatarArgs = {
 
 
 export type MutationNewTutorArgs = {
+  userID: Scalars['Float'];
   options: NewTutorInput;
 };
 
@@ -595,111 +421,30 @@ export type MutationDeleteHourFromTutorArgs = {
   id: Scalars['String'];
 };
 
-export type UsernameEmailPasswordInput = {
-  name: Scalars['String'];
-  email: Scalars['String'];
-  password: Scalars['String'];
-};
-
-export type EmailPasswordInput = {
-  email: Scalars['String'];
-  password: Scalars['String'];
-};
-
-export type MoreInfoUser = {
-  description?: Maybe<Scalars['String']>;
-  country?: Maybe<Scalars['String']>;
-  name?: Maybe<Scalars['String']>;
-};
-
 export type NewTutorInput = {
   description: Scalars['String'];
   type: Scalars['Float'];
 };
 
-export type TutorInput = {
-  description?: Maybe<Scalars['String']>;
-  rating?: Maybe<Scalars['Float']>;
-  amountClasses?: Maybe<Scalars['Float']>;
-  amountStudents?: Maybe<Scalars['Float']>;
-  instructionalVideo?: Maybe<Scalars['String']>;
-};
-
-export type TypeResponse = {
-  __typename?: 'TypeResponse';
-  errors?: Maybe<Array<FieldError>>;
-  type?: Maybe<TutorType>;
-};
-
-export type TypeInput = {
-  name: Scalars['String'];
-  needsApproval: Scalars['Boolean'];
-  rules: Scalars['String'];
-};
-
-export type ClassesResponse = {
-  __typename?: 'ClassesResponse';
-  errors?: Maybe<Array<FieldError>>;
+export type Order = {
+  __typename?: 'Order';
+  id?: Maybe<Scalars['String']>;
+  user: User;
   classes?: Maybe<Classes>;
-};
-
-export type ClassesInput = {
-  name?: Maybe<Scalars['String']>;
-  amountTimeTaught?: Maybe<Scalars['Int']>;
-  level?: Maybe<Scalars['String']>;
-  description?: Maybe<Scalars['String']>;
-};
-
-export type PriceResponse = {
-  __typename?: 'PriceResponse';
-  errors?: Maybe<Array<FieldError>>;
-  price?: Maybe<Price>;
-};
-
-export type PriceInput = {
-  time?: Maybe<Scalars['Int']>;
-  price?: Maybe<Scalars['String']>;
-  isPromotionalCode: Scalars['Boolean'];
-  discountAmount?: Maybe<Scalars['Int']>;
-};
-
-export type CategoryResponse = {
-  __typename?: 'CategoryResponse';
-  errors?: Maybe<Array<FieldError>>;
-  category?: Maybe<Category>;
-};
-
-export type CategoryInput = {
-  name?: Maybe<Scalars['String']>;
-  icon?: Maybe<Scalars['String']>;
-};
-
-export type PlatformsResponse = {
-  __typename?: 'PlatformsResponse';
-  errors?: Maybe<Array<FieldError>>;
-  platforms?: Maybe<Platforms>;
-};
-
-export type PlatformsInput = {
-  name?: Maybe<Scalars['String']>;
-  icon?: Maybe<Scalars['String']>;
-};
-
-export type FeedbackResponse = {
-  __typename?: 'FeedbackResponse';
-  errors?: Maybe<Array<FieldError>>;
-  feedback?: Maybe<Feedback>;
-};
-
-export type FeedbackInput = {
-  content?: Maybe<Scalars['String']>;
-  rating?: Maybe<Scalars['Int']>;
-};
-
-export type OrderResponse = {
-  __typename?: 'OrderResponse';
-  errors?: Maybe<Array<FieldError>>;
-  order?: Maybe<Order>;
+  date: Scalars['String'];
+  platformId?: Maybe<Scalars['Int']>;
+  classDuration: Scalars['String'];
+  userAccount: Scalars['String'];
+  horario?: Maybe<Scalars['String']>;
+  classPrice?: Maybe<Scalars['String']>;
+  isOrderAproved?: Maybe<Scalars['Boolean']>;
+  hasTutorConfirmedClassDone?: Maybe<Scalars['Boolean']>;
+  hasUserConfirmedClassDone?: Maybe<Scalars['Boolean']>;
+  isPaid?: Maybe<Scalars['Boolean']>;
+  paymentDetails?: Maybe<Scalars['String']>;
+  stripeClient?: Maybe<Scalars['String']>;
+  createdAt: Scalars['String'];
+  updatedAt: Scalars['String'];
 };
 
 export type OrderInput = {
@@ -712,10 +457,272 @@ export type OrderInput = {
   userAccount: Scalars['String'];
 };
 
-export type HourResponse = {
-  __typename?: 'HourResponse';
+export type OrderResponse = {
+  __typename?: 'OrderResponse';
   errors?: Maybe<Array<FieldError>>;
-  hour?: Maybe<Hour>;
+  order?: Maybe<Order>;
+};
+
+export type Platforms = {
+  __typename?: 'Platforms';
+  id?: Maybe<Scalars['Int']>;
+  name?: Maybe<Scalars['String']>;
+  icon?: Maybe<Scalars['String']>;
+  account?: Maybe<Scalars['String']>;
+  users?: Maybe<Array<User>>;
+  userPlatformAccount?: Maybe<UserPlatformAccount>;
+};
+
+export type PlatformsInput = {
+  name?: Maybe<Scalars['String']>;
+  icon?: Maybe<Scalars['String']>;
+};
+
+export type PlatformsResponse = {
+  __typename?: 'PlatformsResponse';
+  errors?: Maybe<Array<FieldError>>;
+  platforms?: Maybe<Platforms>;
+};
+
+export type Price = {
+  __typename?: 'Price';
+  id?: Maybe<Scalars['Int']>;
+  time?: Maybe<Scalars['Int']>;
+  price?: Maybe<Scalars['String']>;
+  classes?: Maybe<Classes>;
+  isPromotionalCode?: Maybe<Scalars['Boolean']>;
+  discountAmount?: Maybe<Scalars['Int']>;
+  createdAt?: Maybe<Scalars['String']>;
+  updatedAt?: Maybe<Scalars['String']>;
+};
+
+export type PriceInput = {
+  time?: Maybe<Scalars['Int']>;
+  price?: Maybe<Scalars['String']>;
+  isPromotionalCode: Scalars['Boolean'];
+  discountAmount?: Maybe<Scalars['Int']>;
+};
+
+export type PriceResponse = {
+  __typename?: 'PriceResponse';
+  errors?: Maybe<Array<FieldError>>;
+  price?: Maybe<Price>;
+};
+
+export type Query = {
+  __typename?: 'Query';
+  allUsers: Array<User>;
+  me?: Maybe<User>;
+  getTutorCookie?: Maybe<Scalars['Int']>;
+  singleUser: UserResponse;
+  userHasPlatform?: Maybe<Scalars['String']>;
+  allTutors: CustomTutorResponse;
+  allTutorsByCategory: Array<Category>;
+  singleTutor: TutorResponse;
+  allTypes: Array<TutorType>;
+  allClasses: Array<Classes>;
+  singleClass: Classes;
+  allTutorClasses: Array<Classes>;
+  allPrices: Array<Price>;
+  allPricesClass: Array<Price>;
+  allCategories: Array<Category>;
+  allCategoriesTutor: Array<Category>;
+  allPlatforms: Array<Platforms>;
+  allPlatformAccount: Array<UserPlatformAccount>;
+  getSingleAccount: Array<UserPlatformAccount>;
+  getTutorFeedbacks: Array<Feedback>;
+  getUserOrders: Array<Order>;
+  getTutorOrders: Array<Order>;
+  orderDetail: Order;
+  ordersTutorAwaitingApproval: Array<Order>;
+  getTutorsHour: Array<Hour>;
+};
+
+
+export type QuerySingleUserArgs = {
+  id: Scalars['Float'];
+};
+
+
+export type QueryUserHasPlatformArgs = {
+  userId: Scalars['Float'];
+  platformId: Scalars['Float'];
+};
+
+
+export type QueryAllTutorsArgs = {
+  maxPrice?: Maybe<Scalars['String']>;
+  minPrice?: Maybe<Scalars['String']>;
+  country?: Maybe<Array<Scalars['String']>>;
+  type?: Maybe<Array<Scalars['String']>>;
+  category?: Maybe<Array<Scalars['String']>>;
+  order?: Maybe<Scalars['String']>;
+  page: Scalars['Int'];
+  limit: Scalars['Int'];
+};
+
+
+export type QueryAllTutorsByCategoryArgs = {
+  categoryID: Scalars['Float'];
+};
+
+
+export type QuerySingleTutorArgs = {
+  id: Scalars['Float'];
+};
+
+
+export type QuerySingleClassArgs = {
+  id: Scalars['Float'];
+};
+
+
+export type QueryAllTutorClassesArgs = {
+  tutorId: Scalars['Float'];
+};
+
+
+export type QueryAllPricesClassArgs = {
+  classID: Scalars['Float'];
+};
+
+
+export type QueryAllCategoriesTutorArgs = {
+  tutorID: Scalars['Float'];
+};
+
+
+export type QueryGetSingleAccountArgs = {
+  id: Scalars['Float'];
+};
+
+
+export type QueryGetTutorFeedbacksArgs = {
+  id: Scalars['Float'];
+};
+
+
+export type QueryGetUserOrdersArgs = {
+  userID: Scalars['Float'];
+};
+
+
+export type QueryGetTutorOrdersArgs = {
+  tutorID: Scalars['Float'];
+};
+
+
+export type QueryOrderDetailArgs = {
+  id: Scalars['String'];
+};
+
+
+export type QueryOrdersTutorAwaitingApprovalArgs = {
+  tutorId: Scalars['Float'];
+};
+
+
+export type QueryGetTutorsHourArgs = {
+  date: Scalars['String'];
+  tutorID: Scalars['Float'];
+};
+
+export type Tutor = {
+  __typename?: 'Tutor';
+  id?: Maybe<Scalars['Int']>;
+  user?: Maybe<User>;
+  type?: Maybe<TutorType>;
+  description?: Maybe<Scalars['String']>;
+  rating?: Maybe<Scalars['Float']>;
+  amountClasses?: Maybe<Scalars['Int']>;
+  amountStudents?: Maybe<Scalars['Int']>;
+  chavePix?: Maybe<Scalars['String']>;
+  instructionalVideo?: Maybe<Scalars['String']>;
+  classes?: Maybe<Array<Classes>>;
+  categories?: Maybe<Array<Category>>;
+  availability?: Maybe<Array<Scalars['String']>>;
+  createdAt?: Maybe<Scalars['String']>;
+  updatedAt?: Maybe<Scalars['String']>;
+};
+
+export type TutorInput = {
+  description?: Maybe<Scalars['String']>;
+  rating?: Maybe<Scalars['Float']>;
+  amountClasses?: Maybe<Scalars['Float']>;
+  amountStudents?: Maybe<Scalars['Float']>;
+  instructionalVideo?: Maybe<Scalars['String']>;
+};
+
+export type TutorResponse = {
+  __typename?: 'TutorResponse';
+  errors?: Maybe<Array<FieldError>>;
+  tutor?: Maybe<Tutor>;
+};
+
+export type TutorType = {
+  __typename?: 'TutorType';
+  id: Scalars['Int'];
+  name: Scalars['String'];
+  needsApproval: Scalars['Boolean'];
+  rules: Scalars['String'];
+  tutor?: Maybe<Array<Tutor>>;
+};
+
+export type TypeInput = {
+  name: Scalars['String'];
+  needsApproval: Scalars['Boolean'];
+  rules: Scalars['String'];
+};
+
+export type TypeResponse = {
+  __typename?: 'TypeResponse';
+  errors?: Maybe<Array<FieldError>>;
+  type?: Maybe<TutorType>;
+};
+
+export type User = {
+  __typename?: 'User';
+  id: Scalars['Int'];
+  name: Scalars['String'];
+  email: Scalars['String'];
+  dateBirth?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+  sex?: Maybe<Scalars['String']>;
+  country?: Maybe<Scalars['String']>;
+  city?: Maybe<Scalars['String']>;
+  stripeId?: Maybe<Scalars['String']>;
+  followersAmount?: Maybe<Scalars['Float']>;
+  avatar?: Maybe<Scalars['String']>;
+  tutor?: Maybe<Tutor>;
+  platforms?: Maybe<Array<Platforms>>;
+  classes?: Maybe<Array<Classes>>;
+  orders?: Maybe<Array<Order>>;
+  userPlatformAccount?: Maybe<Array<UserPlatformAccount>>;
+  feedback?: Maybe<Array<Feedback>>;
+  createdAt: Scalars['String'];
+  updatedAt: Scalars['String'];
+};
+
+export type UserPlatformAccount = {
+  __typename?: 'UserPlatformAccount';
+  userPlatformAccount?: Maybe<Scalars['Int']>;
+  userId?: Maybe<Scalars['Int']>;
+  platformId?: Maybe<Scalars['Int']>;
+  account?: Maybe<Scalars['String']>;
+  user?: Maybe<User>;
+  platform?: Maybe<Platforms>;
+};
+
+export type UserResponse = {
+  __typename?: 'UserResponse';
+  errors?: Maybe<Array<FieldError>>;
+  user?: Maybe<User>;
+};
+
+export type UsernameEmailPasswordInput = {
+  name: Scalars['String'];
+  email: Scalars['String'];
+  password: Scalars['String'];
 };
 
 export type RegularUserFragment = (
@@ -1222,7 +1229,9 @@ export type NewPriceMutation = (
   ) }
 );
 
-export type NewTutorMutationVariables = Exact<{ [key: string]: never; }>;
+export type NewTutorMutationVariables = Exact<{
+  userID: Scalars['Float'];
+}>;
 
 
 export type NewTutorMutation = (
@@ -1734,34 +1743,38 @@ export type TutorsQueryVariables = Exact<{
 
 export type TutorsQuery = (
   { __typename?: 'Query' }
-  & { allTutors: Array<(
-    { __typename?: 'Tutor' }
-    & Pick<Tutor, 'id' | 'description' | 'rating' | 'amountClasses' | 'amountStudents'>
-    & { type?: Maybe<(
-      { __typename?: 'TutorType' }
-      & Pick<TutorType, 'id' | 'name'>
-    )>, user?: Maybe<(
-      { __typename?: 'User' }
-      & Pick<User, 'id' | 'name' | 'email' | 'sex' | 'country' | 'city' | 'avatar'>
-      & { userPlatformAccount?: Maybe<Array<(
-        { __typename?: 'UserPlatformAccount' }
-        & { platform?: Maybe<(
-          { __typename?: 'Platforms' }
-          & Pick<Platforms, 'id' | 'name' | 'account'>
-        )> }
+  & { allTutors: (
+    { __typename?: 'CustomTutorResponse' }
+    & Pick<CustomTutorResponse, 'amount'>
+    & { tutor?: Maybe<Array<(
+      { __typename?: 'Tutor' }
+      & Pick<Tutor, 'id' | 'description' | 'rating' | 'amountClasses' | 'amountStudents'>
+      & { type?: Maybe<(
+        { __typename?: 'TutorType' }
+        & Pick<TutorType, 'id' | 'name'>
+      )>, user?: Maybe<(
+        { __typename?: 'User' }
+        & Pick<User, 'id' | 'name' | 'email' | 'sex' | 'country' | 'city' | 'avatar'>
+        & { userPlatformAccount?: Maybe<Array<(
+          { __typename?: 'UserPlatformAccount' }
+          & { platform?: Maybe<(
+            { __typename?: 'Platforms' }
+            & Pick<Platforms, 'id' | 'name' | 'account'>
+          )> }
+        )>> }
+      )>, classes?: Maybe<Array<(
+        { __typename?: 'Classes' }
+        & Pick<Classes, 'id' | 'name' | 'description' | 'active' | 'amountTimeTaught'>
+        & { price?: Maybe<Array<(
+          { __typename?: 'Price' }
+          & Pick<Price, 'id' | 'price' | 'time'>
+        )>> }
+      )>>, categories?: Maybe<Array<(
+        { __typename?: 'Category' }
+        & Pick<Category, 'id' | 'name' | 'icon'>
       )>> }
-    )>, classes?: Maybe<Array<(
-      { __typename?: 'Classes' }
-      & Pick<Classes, 'id' | 'name' | 'description' | 'active' | 'amountTimeTaught'>
-      & { price?: Maybe<Array<(
-        { __typename?: 'Price' }
-        & Pick<Price, 'id' | 'price' | 'time'>
-      )>> }
-    )>>, categories?: Maybe<Array<(
-      { __typename?: 'Category' }
-      & Pick<Category, 'id' | 'name' | 'icon'>
     )>> }
-  )> }
+  ) }
 );
 
 export type AllTypesQueryVariables = Exact<{ [key: string]: never; }>;
@@ -2405,8 +2418,8 @@ export function useNewPriceMutation() {
   return Urql.useMutation<NewPriceMutation, NewPriceMutationVariables>(NewPriceDocument);
 };
 export const NewTutorDocument = gql`
-    mutation newTutor {
-  newTutor(options: {description: "", type: 1}) {
+    mutation newTutor($userID: Float!) {
+  newTutor(options: {description: "", type: 1}, userID: $userID) {
     errors {
       message
     }
@@ -3071,47 +3084,50 @@ export const TutorsDocument = gql`
     minPrice: $minPrice
     maxPrice: $maxPrice
   ) {
-    id
-    description
-    type {
+    amount
+    tutor {
       id
-      name
-    }
-    rating
-    amountClasses
-    amountStudents
-    user {
-      id
-      name
-      email
-      sex
-      country
-      city
-      avatar
-      userPlatformAccount {
-        platform {
-          id
-          name
-          account
+      description
+      type {
+        id
+        name
+      }
+      rating
+      amountClasses
+      amountStudents
+      user {
+        id
+        name
+        email
+        sex
+        country
+        city
+        avatar
+        userPlatformAccount {
+          platform {
+            id
+            name
+            account
+          }
         }
       }
-    }
-    classes {
-      id
-      name
-      description
-      active
-      amountTimeTaught
-      price {
+      classes {
         id
-        price
-        time
+        name
+        description
+        active
+        amountTimeTaught
+        price {
+          id
+          price
+          time
+        }
       }
-    }
-    categories {
-      id
-      name
-      icon
+      categories {
+        id
+        name
+        icon
+      }
     }
   }
 }

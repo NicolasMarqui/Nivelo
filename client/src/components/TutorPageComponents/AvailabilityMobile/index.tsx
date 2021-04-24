@@ -36,6 +36,7 @@ const AvailabilityMobile: React.FC<AvailabilityMobileProps> = ({
                 />
                 <IconButton
                     icon={<MdChatBubbleOutline size={18} color="#222" />}
+                    isActive={false}
                     classes="ml-2 bg-primaryGreen hover:bg-lightGreen text-white"
                 />
             </div>

@@ -7,6 +7,7 @@ import { toast } from "react-hot-toast";
 import Link from "next/link";
 import Image from "next/image";
 import { useTranslation } from "next-i18next";
+import { useCookies } from "react-cookie";
 
 interface SignupFormProps {}
 
@@ -14,6 +15,7 @@ const SignupForm: React.FC<SignupFormProps> = ({}) => {
     const { t } = useTranslation("register");
     const [{ fetching }, register] = useRegisterMutation();
     const router = useRouter();
+    const [cookie, setCookie] = useCookies();
 
     const formik = useFormik({
         initialValues: {
@@ -27,8 +29,12 @@ const SignupForm: React.FC<SignupFormProps> = ({}) => {
             if (response.data.signup.errors) {
                 setErrors(toErrorMap(response.data.signup.errors));
             } else if (response.data.signup.user) {
+                setCookie("gASDFW2", response.data.signup.user.id, {
+                    path: "/",
+                    maxAge: 1000 * 60 * 60 * 24 * 365 * 10, // Expires after 1hr
+                });
                 toast.success("Bem Vindo!");
-                router.push("/");
+                router.push("/dashboard");
             }
         },
     });

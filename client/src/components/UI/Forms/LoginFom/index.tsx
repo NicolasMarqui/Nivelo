@@ -3,7 +3,6 @@ import { useFormik } from "formik";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { useLoginMutation } from "src/generated/graphql";
-import cookieCutter from "cookie-cutter";
 import { toErrorMap } from "@utils/toErrorMap";
 import { toast } from "react-hot-toast";
 import Link from "next/link";
@@ -40,7 +39,6 @@ const LoginForm: React.FC<LoginFormProps> = ({
                 setErrors(toErrorMap(response.data.login.errors));
             } else if (response.data.login && response.data.login.user) {
                 const tutor = response.data.login.user.tutor;
-                console.log(tutor && Object.keys(tutor).length);
 
                 if (tutor && Object.keys(tutor).length !== 0) {
                     setCookie("tid", tutor.id, {

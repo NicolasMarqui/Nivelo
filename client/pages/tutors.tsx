@@ -22,7 +22,7 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 const Tutors: React.FC = ({}) => {
     const { t } = useTranslation("tutors");
     const router = useRouter();
-    const [limit, setLimit] = useState(10);
+    const [limit, setLimit] = useState(100);
     // prettier-ignore
     const [page, setPage] = useState(typeof router.query.page === "string" ? parseInt(router.query.page) : 1);
     const [{ data, fetching, error }] = useTutorsQuery({
@@ -84,19 +84,19 @@ const Tutors: React.FC = ({}) => {
                 </div>
                 <Container>
                     <FilterContainer
-                        amount={data ? data.allTutors.length : "-"}
+                        amount={data ? data.allTutors.tutor.length : "-"}
                     />
                     {fetching || error ? (
                         Array(6)
                             .fill(0)
                             .map((_, idx) => <LoaderTutorCard key={idx} />)
                     ) : !data ||
-                      !data.allTutors ||
-                      data.allTutors.length === 0 ? (
+                      !data.allTutors.tutor ||
+                      data.allTutors.tutor.length === 0 ? (
                         <EmptyAnimation />
                     ) : (
                         <>
-                            <TutorResults data={data.allTutors} />
+                            <TutorResults data={data.allTutors.tutor} />
                             <div className="my-4">
                                 <ReactPaginate
                                     previousLabel={"Anterior"}
@@ -104,8 +104,8 @@ const Tutors: React.FC = ({}) => {
                                     containerClassName={"pagination"}
                                     activeClassName={"active"}
                                     pageCount={getTotalPages(
-                                        data.allTutors.length,
-                                        10
+                                        data.allTutors.amount,
+                                        100
                                     )}
                                     marginPagesDisplayed={2}
                                     pageRangeDisplayed={5}

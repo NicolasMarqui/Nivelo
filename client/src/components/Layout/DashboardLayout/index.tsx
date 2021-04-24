@@ -21,10 +21,8 @@ interface DashboardLayoutProps {
 const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
     const router = useRouter();
     const [cookies] = useCookies();
-    console.log("NIvelo");
 
     useEffect(() => {
-        console.log(cookies);
         if (!cookies.gASDFW2 || cookies.gASDFW2 === "") {
             router.push("/login");
             return;

@@ -23,7 +23,7 @@ scheduleRouter.get(
             dates: { $elemMatch: { month } },
         });
 
-        res.status(200).send({ data: allSchedule });
+        return res.status(200).send({ data: allSchedule });
     }
 );
 
@@ -38,7 +38,7 @@ scheduleRouter.get(
             "dates.month": "03",
         });
 
-        res.status(200).send({ data: allSchedule });
+        return res.status(200).send({ data: allSchedule });
     }
 );
 
@@ -66,7 +66,8 @@ scheduleRouter.post(
                     });
                 }
 
-                return res.status(201).send({ status: "SUCCESS", data: doc });
+                res.status(201).json({ status: "SUCCESS", data: doc });
+                return;
             });
         }
 
@@ -86,7 +87,6 @@ scheduleRouter.post(
                 useFindAndModify: false,
             },
             (err, doc) => {
-                console.log("Going once");
                 if (err) {
                     return res.status(500).send({
                         status: "ERROR",

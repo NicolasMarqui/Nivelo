@@ -11,6 +11,7 @@ import { createUrqlClient } from "@utils/createUrqlClient";
 import Link from "next/link";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "next-i18next";
+import { useCookies } from "react-cookie";
 
 interface BecomeTutorProps {}
 
@@ -19,17 +20,22 @@ const BecomeTutor: React.FC<BecomeTutorProps> = ({}) => {
     const [{ fetching }, newTutor] = useNewTutorMutation();
     const [{ fetching: fetMe, data }] = useMeQuery();
     const router = useRouter();
+    const [cookies, setCookie] = useCookies();
 
     const userToTutor = async () => {
-        const response = await newTutor();
+        const response = await newTutor({ userID: Number(cookies.gASDFW2) });
 
         if (response.data.newTutor.errors) {
             toast.error("Tente novamente!");
             toast.error(response.data.newTutor.errors[0].message);
         } else if (response.data.newTutor.tutor) {
-            cookieCutter.set("tid", response.data.newTutor.tutor.id, {
-                expires: 1000 * 60 * 60 * 24 * 365 * 10,
+            setCookie("tid", response.data.newTutor.tutor.id, {
+                path: "/",
+                maxAge: 1000 * 60 * 60 * 24 * 365 * 10, // Expires after 1hr
             });
+            // cookieCutter.set("tid", response.data.newTutor.tutor.id, {
+            //     expires: 1000 * 60 * 60 * 24 * 365 * 10,
+            // });
 
             toast.success("Bem vindo ao Nivelo!");
             router.push("/dashboard/tutor?welcome=true");

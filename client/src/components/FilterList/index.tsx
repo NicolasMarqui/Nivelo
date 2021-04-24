@@ -16,15 +16,13 @@ const FilterList: React.FC = ({}) => {
     const handleAplicar = () => {
         const customQuery = {
             ...router.query,
-            minPreco: rangeValues.min,
-            maxPreco: rangeValues.max,
+            // minPreco: rangeValues.min,
+            // maxPreco: rangeValues.max,
         };
 
         if (selectedCategoria !== "") {
             Object.assign(customQuery, { categoria: selectedCategoria });
         }
-
-        console.log(customQuery);
 
         router.push(
             {

@@ -55,7 +55,8 @@ const Availability: React.FC<AvailabilityProps> = ({
                                             color="#222"
                                         />
                                     }
-                                    classes="ml-2 bg-primaryGreen hover:bg-lightGreen text-white"
+                                    isActive={false}
+                                    classes="ml-2 bg-primaryGreen hover:bg-lightGreen text-white cursor-not-allowed"
                                 />
                             </div>
                         </div>
