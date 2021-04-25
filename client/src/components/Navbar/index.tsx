@@ -8,17 +8,37 @@ import Hamburger from "hamburger-react";
 import { useRouter } from "next/router";
 import Side from "@components/UI/Side";
 import MobileNavSide from "@components/SideChilds/MobileNavSide";
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { FaTimes } from "react-icons/fa";
 
 interface NavbarProps {}
 
 const Navbar: React.FC<NavbarProps> = ({}) => {
     const router = useRouter();
     const [isOpen, setOpen] = useState(false);
+    const [isOpenAviso, setIsOpenAviso] = useState(true);
     const handleToggle = () => setOpen(!isOpen);
 
     return (
         <>
+            {router.locale === "en" && isOpenAviso && (
+                <div className="w-full p-2 bg-red-400">
+                    <Container classes="px-3">
+                        <div className="flex items-center justify-between">
+                            <p className="text-white">
+                                <span className="font-bold">NOTICE: </span>The
+                                translations are a work in progress, soon the
+                                whole website will be in English
+                            </p>
+                            <FaTimes
+                                size={20}
+                                color="#fff"
+                                className="cursor-pointer transform hover:scale-105"
+                                onClick={() => setIsOpenAviso(false)}
+                            />
+                        </div>
+                    </Container>
+                </div>
+            )}
             <header
                 id="navbar"
                 className={`border-b-2 border-gray-200 px-3 z-20 ${
