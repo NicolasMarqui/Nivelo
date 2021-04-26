@@ -1,6 +1,8 @@
 import BgIcon from "@components/UI/BgIcon";
 import { MdRecordVoiceOver } from "react-icons/md";
 import { useTranslation } from "next-i18next";
+import { RiComputerLine } from "react-icons/ri";
+import { AiOutlineClockCircle, AiOutlineLineChart } from "react-icons/ai";
 
 const List4u: React.FC = ({}) => {
     const { t } = useTranslation("home");
@@ -22,7 +24,7 @@ const List4u: React.FC = ({}) => {
             </div>
             <div className="flex flex-col w-full md:w-1/2 lg:flex-1 my-3 md:my-6">
                 <BgIcon
-                    icon={<MdRecordVoiceOver size={30} color="#68E1FD" />}
+                    icon={<RiComputerLine size={30} color="#68E1FD" />}
                     bgColor="rgba(104, 225, 253, 0.31)"
                 />
                 <h3 className="font-bold text-lg text-center md:text-left">
@@ -35,7 +37,7 @@ const List4u: React.FC = ({}) => {
             </div>
             <div className="flex flex-col w-full md:w-1/2 lg:flex-1 my-3 md:my-6">
                 <BgIcon
-                    icon={<MdRecordVoiceOver size={30} color="#57CC99" />}
+                    icon={<AiOutlineClockCircle size={30} color="#57CC99" />}
                     bgColor="rgba(87, 204, 153, 0.31)"
                 />
                 <h3 className="font-bold text-lg text-center md:text-left">
@@ -48,7 +50,7 @@ const List4u: React.FC = ({}) => {
             </div>
             <div className="flex flex-col w-full md:w-1/2 lg:flex-1 my-3 md:my-6">
                 <BgIcon
-                    icon={<MdRecordVoiceOver size={30} color="#F4D35E" />}
+                    icon={<AiOutlineLineChart size={30} color="#F4D35E" />}
                     bgColor="rgba(244, 211, 94, 0.31)"
                 />
                 <h3 className="font-bold text-lg text-center md:text-left">
