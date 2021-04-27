@@ -59,6 +59,13 @@ const Tutor: React.FC<TutorProps> = (props) => {
         }
     };
 
+    const handlePlatOpen = () => {
+        Reoverlay.showModal(AddPlatform, {
+            userID: data.singleTutor.tutor.user.id,
+            platforms: data.singleTutor.tutor.user.userPlatformAccount,
+        });
+    };
+
     return (
         <>
             {(!fetching &&
@@ -87,14 +94,7 @@ const Tutor: React.FC<TutorProps> = (props) => {
                     </h3>
                     <div
                         className="p-1.5 bg-white text-black222 flex items-center justify-center mt-2 md:mt-0 cursor-pointer transform hover:scale-105 hover:bg-gray-50"
-                        onClick={() =>
-                            Reoverlay.showModal(AddPlatform, {
-                                userID: data.singleTutor.tutor.user.id,
-                                platforms:
-                                    data.singleTutor.tutor.user
-                                        .userPlatformAccount,
-                            })
-                        }
+                        onClick={handlePlatOpen}
                     >
                         Gerenciar
                     </div>

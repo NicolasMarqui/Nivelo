@@ -100,7 +100,7 @@ const Dashboard: NextPage<DashboardProps> = ({}) => {
                             atualizar o status das suas aulas!
                         </p>
 
-                        <ShortcutUser />
+                        {/* <ShortcutUser /> */}
                     </div>
                 ) : (
                     <EmptyAnimation />
