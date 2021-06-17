@@ -9,7 +9,7 @@ import { withUrqlClient } from "next-urql";
 
 const Faq: React.FC = ({}) => {
     return (
-        <>
+        <div className="dark:bg-gray-800">
             <Meta
                 title="F.A.Q"
                 description="Encontre os melhores tutores para te ajudar nessa jornada"
@@ -17,7 +17,7 @@ const Faq: React.FC = ({}) => {
             />
 
             <Container>
-                <div className="flex flex-col mt-14 items-center ">
+                <div className="flex flex-col pt-14 items-center">
                     <BackButton />
                     <Title classes="text-center  md:text-heroSize text-white z-10 text-black222 dark:text-white">
                         F.A.Q
@@ -26,7 +26,7 @@ const Faq: React.FC = ({}) => {
 
                 <FaqContent />
             </Container>
-        </>
+        </div>
     );
 };
 

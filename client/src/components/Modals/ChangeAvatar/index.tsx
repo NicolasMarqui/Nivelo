@@ -82,7 +82,9 @@ const ChangeAvatar: React.FC<ChangeAvatarProps> = ({ userId }) => {
 
     return (
         <ModalContainer>
-            <h2 className="text-2xl md:text-3xl font-semibold">Avatar</h2>
+            <h2 className="text-2xl md:text-3xl font-semibold dark:text-black222">
+                Avatar
+            </h2>
             {!isLoading ? (
                 <>
                     <div

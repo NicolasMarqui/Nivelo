@@ -6,10 +6,7 @@ import { tutorBreadcumbList } from "@utils/breadumbList";
 import { useEffect, useState } from "react";
 import { StickyContainer } from "react-sticky";
 import Side from "@components/UI/Side";
-import {
-    useMeSimplifiedQuery,
-    useSingleTutorQuery,
-} from "src/generated/graphql";
+import { useSingleTutorQuery } from "src/generated/graphql";
 import { useRouter } from "next/router";
 import LoaderTutorPage from "@components/UI/Skeletons/LoaderTutorPage";
 import { withUrqlClient } from "next-urql";
@@ -23,9 +20,7 @@ import AvailabilityMobile from "@components/TutorPageComponents/AvailabilityMobi
 import Agendar from "@components/Agendar";
 import EmptyAnimation from "@components/UI/EmptyAnimation";
 
-interface TutorProps {}
-
-const Tutor: React.FC<TutorProps> = ({}) => {
+const Tutor: React.FC = () => {
     const router = useRouter();
     const { width } = useWindowSize();
     const [agendarOpen, setAgendarOpen] = useState(false);
@@ -48,7 +43,7 @@ const Tutor: React.FC<TutorProps> = ({}) => {
     }, [router.query, data]);
 
     return (
-        <>
+        <div className="dark:bg-gray-800">
             <Meta
                 title="Tutores"
                 description="Encontre os melhores tutores para te ajudar nessa jornada"
@@ -146,7 +141,7 @@ const Tutor: React.FC<TutorProps> = ({}) => {
                     />
                 </Side>
             )}
-        </>
+        </div>
     );
 };
 export default withUrqlClient(createUrqlClient, { ssr: false })(Tutor);

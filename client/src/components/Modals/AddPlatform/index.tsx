@@ -23,10 +23,8 @@ interface AddPlatformProps {
 const AddPlatform: React.FC<AddPlatformProps> = ({ userID, platforms }) => {
     const [{ data, fetching }] = useAllPlatformsQuery();
     const [{ fetching: fetAdd }, addPlatform] = useAddPlatformUserMutation();
-    const [
-        { fetching: fetRem },
-        removePlatform,
-    ] = useRemovePlatformUserMutation();
+    const [{ fetching: fetRem }, removePlatform] =
+        useRemovePlatformUserMutation();
 
     const [allIds, setAllIds] = useState(
         platforms.map((plat) => plat.platform.id)
@@ -68,7 +66,7 @@ const AddPlatform: React.FC<AddPlatformProps> = ({ userID, platforms }) => {
 
     return (
         <ModalContainer>
-            <h2 className="text-2xl md:text-3xl font-semibold">
+            <h2 className="text-2xl md:text-3xl font-semibold dark:text-black222">
                 Suas Plataformas
             </h2>
 
@@ -98,7 +96,9 @@ const AddPlatform: React.FC<AddPlatformProps> = ({ userID, platforms }) => {
                                     className="h-20 w-20"
                                 />
 
-                                <h3 className="my-2">{plat.name}</h3>
+                                <h3 className="my-2 dark:text-black222">
+                                    {plat.name}
+                                </h3>
 
                                 <div className="mt-2">
                                     {checkIfHasPLatform(plat).has ? (

@@ -63,7 +63,7 @@ const AddPriceForm: React.FC<AddPriceFormProps> = ({ classID }) => {
                             placeholder="Tempo de duração da aula"
                             onChange={formik.handleChange}
                             value={formik.values.time}
-                            className="block w-full p-3 rounded bg-gray-100 border border-transparent focus:outline-none focus:border-orange"
+                            className="block w-full p-3 rounded bg-gray-100 border border-transparent focus:outline-none focus:border-orange dark:text-black222"
                         />
                     </div>
 
@@ -77,7 +77,7 @@ const AddPriceForm: React.FC<AddPriceFormProps> = ({ classID }) => {
 
                         <div className="flex items-center">
                             <div className="p-1 mr-2">
-                                <p>R$</p>
+                                <p className="dark:text-black222">R$</p>
                             </div>
                             <InputMask
                                 mask="99.99"
@@ -85,7 +85,7 @@ const AddPriceForm: React.FC<AddPriceFormProps> = ({ classID }) => {
                                 onChange={formik.handleChange}
                                 value={formik.values.price}
                                 required
-                                className="block w-full p-3 rounded bg-gray-100 border border-transparent focus:outline-none focus:border-orange resize-none  relative"
+                                className="block w-full p-3 rounded bg-gray-100 border border-transparent focus:outline-none focus:border-orange dark:text-black222 resize-none  relative"
                             />
                         </div>
                     </div>

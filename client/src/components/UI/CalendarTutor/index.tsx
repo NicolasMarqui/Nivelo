@@ -11,6 +11,7 @@ import toast from "react-hot-toast";
 import { useRouter } from "next/router";
 import TutorHours from "@components/Modals/TutorHours";
 import { FcApproval } from "react-icons/fc";
+import { useTheme } from "next-themes";
 
 interface CustomCalendarTutorProps {
     isTutorDashView?: Boolean;
@@ -32,6 +33,8 @@ const CustomCalendarTutor: React.FC<CustomCalendarTutorProps> = ({
     selectedDay,
 }) => {
     const router = useRouter();
+    const { theme } = useTheme();
+
     const [currentMonth, setCurrentMonth] = useState(new Date());
     const [selectedDate, setSelectedDate] = useState(new Date());
 
@@ -66,7 +69,11 @@ const CustomCalendarTutor: React.FC<CustomCalendarTutorProps> = ({
                     data-tip="Mês anterior"
                     data-for="prev"
                 >
-                    <MdChevronLeft size={24} onClick={prevMonth} />
+                    <MdChevronLeft
+                        size={24}
+                        color={theme === "dark" ? "#fff" : "#000"}
+                        onClick={prevMonth}
+                    />
                     <ReactTooltip
                         effect="solid"
                         place={smaller ? "top" : "left"}
@@ -74,7 +81,7 @@ const CustomCalendarTutor: React.FC<CustomCalendarTutorProps> = ({
                     />
                 </div>
                 <div className="col col-center">
-                    <span className="header__span">
+                    <span className="header__span dark:text-black222">
                         {dateFns.format(currentMonth, dateFormat, {
                             locale: ptBr,
                         })}
@@ -85,7 +92,11 @@ const CustomCalendarTutor: React.FC<CustomCalendarTutorProps> = ({
                     data-tip="Próximo mês"
                     data-for="next"
                 >
-                    <MdChevronRight size={24} onClick={nextMonth} />
+                    <MdChevronRight
+                        size={24}
+                        color={theme === "dark" ? "#fff" : "#000"}
+                        onClick={nextMonth}
+                    />
                     <ReactTooltip
                         id="next"
                         effect="solid"
@@ -153,7 +164,9 @@ const CustomCalendarTutor: React.FC<CustomCalendarTutorProps> = ({
                                 : ""
                         }
                     >
-                        <span className="number">{formattedDate}</span>
+                        <span className="number dark:text-black222">
+                            {formattedDate}
+                        </span>
                         <span className="bg">{formattedDate}</span>
                         {isAgendando &&
                             selectedDay ===

@@ -31,7 +31,7 @@ const DeleteClass: React.FC<DeleteClassProps> = ({ classID }) => {
 
     return (
         <ModalContainer>
-            <h2 className="text-2xl md:text-3xl font-semibold">
+            <h2 className="text-2xl md:text-3xl font-semibold dark:text-black222">
                 Tem certeza que deseja excluir essa aula?
             </h2>
 

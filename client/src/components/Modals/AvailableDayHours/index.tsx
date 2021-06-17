@@ -68,12 +68,12 @@ const AvailableDayHours: React.FC<AvailableDayHoursProps> = ({
 
     return (
         <ModalContainer>
-            <h2 className="text-2xl text-center md:text-3xl font-semibold">
+            <h2 className="text-2xl text-center md:text-3xl font-semibold dark:text-black222">
                 Horarios no dia{" "}
                 <span className="block text-primaryOrange">{day}</span>
             </h2>
 
-            <p className="my-4">
+            <p className="my-4 dark:text-black222">
                 Adicione os horários que você tem disponível nesse dia!
             </p>
 
@@ -92,6 +92,7 @@ const AvailableDayHours: React.FC<AvailableDayHoursProps> = ({
                                     placeholder="10:00"
                                     menuPlacement="bottom"
                                     menuIsOpen
+                                    className="dark:text-black222"
                                     onChange={(e) => handleFrom(e)}
                                 />
                             </div>
@@ -102,6 +103,7 @@ const AvailableDayHours: React.FC<AvailableDayHoursProps> = ({
                                     placeholder="10:00"
                                     menuPlacement="bottom"
                                     menuIsOpen
+                                    className="dark:text-black222"
                                     onChange={(e) => handleTo(e)}
                                 />
                             </div>

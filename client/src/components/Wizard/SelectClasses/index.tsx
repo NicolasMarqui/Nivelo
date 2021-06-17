@@ -29,10 +29,14 @@ const SelectClasses: React.FC<SelectClassesProps> = ({
             data-tip={singleClass.description}
         >
             <div className="flex-none">
-                <h3 className={`${active ? "text-white" : ""}`}>
+                <h3 className={`${active ? "text-white" : "text-black"}`}>
                     {singleClass.name}
                 </h3>
-                <p className={`${active ? "text-white" : ""} text-sm `}>
+                <p
+                    className={`${
+                        active ? "text-white" : "text-black"
+                    } text-sm `}
+                >
                     {singleClass.amountTimeTaught} aula(s)
                 </p>
             </div>

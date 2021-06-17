@@ -62,7 +62,7 @@ const EditUserAccount: React.FC<EditUserAccountProps> = ({
 
     return (
         <ModalContainer>
-            <h2 className="text-2xl md:text-3xl font-semibold">
+            <h2 className="text-2xl md:text-3xl font-semibold dark:text-black222">
                 Suas Informações
             </h2>
 
@@ -84,7 +84,7 @@ const EditUserAccount: React.FC<EditUserAccountProps> = ({
                                 name="name"
                                 onChange={formik.handleChange}
                                 value={formik.values.name}
-                                className="block w-full p-3 rounded bg-gray-100 border border-transparent focus:outline-none focus:border-orange"
+                                className="block w-full p-3 rounded bg-gray-100 border border-transparent focus:outline-none focus:border-orange dark:text-black222"
                             />
                             {formik.errors.name && (
                                 <p className="my-1 bg-red-200 p-2 text-sm text-white text-center">
@@ -105,7 +105,7 @@ const EditUserAccount: React.FC<EditUserAccountProps> = ({
                                 name="description"
                                 onChange={formik.handleChange}
                                 value={formik.values.description}
-                                className="block w-full p-3 rounded bg-gray-100 border border-transparent focus:outline-none focus:border-orange h-52 resize-none md:w-96"
+                                className="block w-full p-3 rounded bg-gray-100 border border-transparent focus:outline-none focus:border-orange dark:text-black222 h-52 resize-none md:w-96"
                             />
                             {formik.errors.description && (
                                 <p className="my-1 bg-red-200 p-2 text-sm text-white text-center">
@@ -121,6 +121,7 @@ const EditUserAccount: React.FC<EditUserAccountProps> = ({
                                 value={formik.values.country as any}
                                 menuPlacement="top"
                                 placeholder={userCountry}
+                                className="dark:text-black222"
                                 onChange={(e) => setUserCountry(e.label)}
                                 options={countries.map((c: any) => {
                                     return {

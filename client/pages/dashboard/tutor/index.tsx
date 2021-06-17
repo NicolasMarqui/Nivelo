@@ -122,7 +122,7 @@ const Tutor: React.FC<TutorProps> = (props) => {
             ) : (
                 ""
             )}
-            <div className="relative p-8 bg-gray-50 rounded-3xl shadow-md">
+            <div className="relative p-8 bg-gray-50 dark:bg-gray-600 rounded-3xl shadow-md">
                 {data && data.singleTutor !== undefined ? (
                     <div className="flex flex-col my-1">
                         <div className="flex flex-col md:flex-row items-center justify-between">
@@ -140,7 +140,7 @@ const Tutor: React.FC<TutorProps> = (props) => {
                                 />
                             </div>
                         </div>
-                        <p className="mt-4 text-base text-desc md:w-4/5 text-center md:text-left">
+                        <p className="mt-4 text-base text-desc dark:text-gray-400 md:w-4/5 text-center md:text-left">
                             Bem vindo a sua área de tutor, aqui você pode
                             gerenciar suas aulas, seus alunos, suas datas e
                             muito mais!
@@ -150,7 +150,7 @@ const Tutor: React.FC<TutorProps> = (props) => {
                     <EmptyAnimation />
                 )}
             </div>
-            <div className="relative p-8 bg-gray-50 rounded-3xl shadow-md mt-5">
+            <div className="relative p-8 bg-gray-50 dark:bg-gray-600 rounded-3xl shadow-md mt-5">
                 <h2 className="text-3xl md:text-4xl font-bold text-center md:text-left">
                     Suas
                     <span className="text-primaryOrange ml-2">Categorias</span>
@@ -165,7 +165,7 @@ const Tutor: React.FC<TutorProps> = (props) => {
                 )}
             </div>
             <div
-                className="relative p-8 bg-gray-50 rounded-3xl shadow-md mt-5"
+                className="relative p-8 bg-gray-50 dark:bg-gray-600 rounded-3xl shadow-md mt-5"
                 id="classes"
             >
                 <div className="flex flex-col my-1">

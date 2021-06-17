@@ -50,7 +50,7 @@ const TutorDate: React.FC<TutorDateProps> = ({}) => {
     };
 
     return (
-        <div className="relative p-8 bg-gray-50 rounded-3xl shadow-md">
+        <div className="relative p-8 bg-gray-50 dark:bg-gray-600 rounded-3xl shadow-md">
             <h2 className="text-3xl md:text-4xl font-bold text-center md:text-left">
                 Suas Informações do dia
                 <span className="block text-primaryOrange">
@@ -58,7 +58,7 @@ const TutorDate: React.FC<TutorDateProps> = ({}) => {
                 </span>
             </h2>
 
-            <p className="mt-4 text-base text-desc md:w-4/5 text-center md:text-left">
+            <p className="mt-4 text-base text-desc dark:text-gray-400 md:w-4/5 text-center md:text-left">
                 Aqui você pode definir os horários que você está disponível
                 nesse dia, além de remover como disponivel e afins...
             </p>
@@ -74,14 +74,18 @@ const TutorDate: React.FC<TutorDateProps> = ({}) => {
                         <div className="relative" key={h.id}>
                             <div className="flex flex-row items-center justify-between w-full my-2">
                                 <div className="w-full md:flex-2 bg-white rounded-xl shadow-sm px-6 py-2 mr-2 md:mr-0">
-                                    <p className="text-sm">A partir de: </p>
-                                    <h3 className="text-lg font-bold">
+                                    <p className="text-sm dark:text-black222">
+                                        A partir de:{" "}
+                                    </p>
+                                    <h3 className="text-lg font-bold dark:text-black222">
                                         {h.from}
                                     </h3>
                                 </div>
                                 <div className="w-full md:flex-2 md:mx-2 bg-white rounded-xl shadow-sm px-6 py-2">
-                                    <p className="text-sm">Até: </p>
-                                    <h3 className="text-lg font-bold">
+                                    <p className="text-sm dark:text-black222">
+                                        Até:{" "}
+                                    </p>
+                                    <h3 className="text-lg font-bold dark:text-black222">
                                         {h.to}
                                     </h3>
                                 </div>

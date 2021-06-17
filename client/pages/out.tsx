@@ -7,9 +7,7 @@ import { useEffect } from "react";
 import { useLogoutMutation } from "src/generated/graphql";
 import cookieCutter from "cookie-cutter";
 
-interface OutProps {}
-
-const Out: React.FC<OutProps> = ({}) => {
+const Out: React.FC = () => {
     const router = useRouter();
     const [_, logout] = useLogoutMutation();
 
@@ -33,7 +31,7 @@ const Out: React.FC<OutProps> = ({}) => {
     };
 
     return (
-        <div className="h-screen">
+        <div className="h-screen dark:bg-gray-700">
             <Meta
                 title="Aguarde..."
                 description="Encontre os melhores tutores para te ajudar nessa jornada"
@@ -41,11 +39,11 @@ const Out: React.FC<OutProps> = ({}) => {
             />
 
             <LoadingAnimation />
-            <h3 className="mt-4 text-xl md:text-3xl font-semibold text-center">
+            <h3 className="mt-4 text-xl md:text-3xl font-semibold text-center dark:text-white">
                 Aguarde enquanto você está sendo deslogado!
             </h3>
 
-            <p className="mt-4 text-center">
+            <p className="mt-4 text-center dark:text-white">
                 Você será redirecionado para a página inicial assim que
                 completo...
             </p>

@@ -39,14 +39,14 @@ const SecondRow: React.FC<SecondRowProps> = ({
                     classes="text-center"
                 />
             </div>
-            <h3 className="text-black222 text-xl md:text-3xl font-bold mt-2 md:mt-5">
+            <h3 className="text-black222 dark:text-white text-xl md:text-3xl font-bold mt-2 md:mt-5">
                 {name}
             </h3>
             <p className="text-sm text-primaryOrange md:-mt-1">
                 {getCategoriesFromArray(categories)}
             </p>
 
-            <p className="mt-4 text-base text-desc md:w-4/5 text-center md:text-left">
+            <p className="mt-4 text-base text-desc dark:text-gray-400 md:w-4/5 text-center md:text-left">
                 {description}
             </p>
 

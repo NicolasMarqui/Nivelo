@@ -92,7 +92,7 @@ const LoginForm: React.FC<LoginFormProps> = ({
                                 name="email"
                                 onChange={formik.handleChange}
                                 value={formik.values.email}
-                                className="block w-full p-3 rounded bg-gray-100 border border-transparent focus:outline-none focus:border-orange"
+                                className="block w-full p-3 rounded bg-gray-100 border border-transparent focus:outline-none focus:border-orange dark:text-black222"
                             />
                             {formik.errors.email && (
                                 <p className="my-1 bg-red-400 p-2 text-sm text-white text-center">
@@ -114,7 +114,7 @@ const LoginForm: React.FC<LoginFormProps> = ({
                                 name="password"
                                 onChange={formik.handleChange}
                                 value={formik.values.password}
-                                className="block w-full p-3 rounded bg-gray-100 border border-transparent focus:outline-none focus:border-orange"
+                                className="block w-full p-3 rounded bg-gray-100 border border-transparent focus:outline-none focus:border-orange dark:text-black222"
                             />
                             {formik.errors.password && (
                                 <p className="my-1 bg-red-400 p-2 text-sm text-white text-center">

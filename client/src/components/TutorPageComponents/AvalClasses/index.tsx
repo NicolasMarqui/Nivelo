@@ -13,7 +13,7 @@ const AvalClasses: React.FC<AvalClassesProps> = ({ classes, tutorId }) => {
             <div className="classes__detail detail__ball1"></div>
             <div className="classes__detail detail__ball2"></div>
             <div className="classes__detail detail__ball3"></div>
-            <h3 className="text-black222 text-center md:text-left text-xl md:text-3xl font-bold mt-2 md:mt-4">
+            <h3 className="text-black222 dark:text-white text-center md:text-left text-xl md:text-3xl font-bold mt-2 md:mt-4">
                 Aulas disponíveis
             </h3>
 

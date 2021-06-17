@@ -119,7 +119,7 @@ module.exports = {
                         maxWidth: "80%",
                     },
                     "@screen md": {
-                        maxWidth: "90%",
+                        maxWidth: "92%",
                     },
                     "@screen lg": {
                         maxWidth: "1024px",

@@ -6,8 +6,8 @@ export default function FaqContent() {
     const { t } = useTranslation("faq");
 
     return (
-        <div className="w-full px-4 pt-10">
-            <div className="w-full max-w-md p-2 mx-auto bg-white rounded-2xl">
+        <div className="w-full px-4 pt-10 pb-20">
+            <div className="w-full max-w-md p-2 mx-auto bg-white dark:bg-gray-600 rounded-2xl">
                 <Disclosure>
                     {({ open }) => (
                         <>
@@ -19,7 +19,7 @@ export default function FaqContent() {
                                     } w-5 h-5 text-purple-500`}
                                 />
                             </Disclosure.Button>
-                            <Disclosure.Panel className="px-4 pt-4 pb-2 text-sm text-gray-500">
+                            <Disclosure.Panel className="px-4 pt-4 pb-2 text-sm text-gray-500 dark:text-white">
                                 {t("faq1Resp")}
                             </Disclosure.Panel>
                         </>
@@ -36,7 +36,7 @@ export default function FaqContent() {
                                     } w-5 h-5 text-purple-500`}
                                 />
                             </Disclosure.Button>
-                            <Disclosure.Panel className="px-4 pt-4 pb-2 text-sm text-gray-500">
+                            <Disclosure.Panel className="px-4 pt-4 pb-2 text-sm text-gray-500 dark:text-white">
                                 {t("faq2Resp")}
                             </Disclosure.Panel>
                         </>
@@ -53,7 +53,7 @@ export default function FaqContent() {
                                     } w-5 h-5 text-purple-500`}
                                 />
                             </Disclosure.Button>
-                            <Disclosure.Panel className="px-4 pt-4 pb-2 text-sm text-gray-500">
+                            <Disclosure.Panel className="px-4 pt-4 pb-2 text-sm text-gray-500 dark:text-white">
                                 {t("faq3Resp")}
                             </Disclosure.Panel>
                         </>
@@ -70,7 +70,7 @@ export default function FaqContent() {
                                     } w-5 h-5 text-purple-500`}
                                 />
                             </Disclosure.Button>
-                            <Disclosure.Panel className="px-4 pt-4 pb-2 text-sm text-gray-500">
+                            <Disclosure.Panel className="px-4 pt-4 pb-2 text-sm text-gray-500 dark:text-white">
                                 {t("faq4Resp")}
                             </Disclosure.Panel>
                         </>
@@ -87,7 +87,7 @@ export default function FaqContent() {
                                     } w-5 h-5 text-purple-500`}
                                 />
                             </Disclosure.Button>
-                            <Disclosure.Panel className="px-4 pt-4 pb-2 text-sm text-gray-500">
+                            <Disclosure.Panel className="px-4 pt-4 pb-2 text-sm text-gray-500 dark:text-white">
                                 {t("faq5Resp")}
                             </Disclosure.Panel>
                         </>

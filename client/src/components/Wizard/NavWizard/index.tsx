@@ -54,14 +54,8 @@ const NavWizard: React.FC<NavWizardProps> = ({
     totalSteps,
     userBuyingID,
 }) => {
-    const {
-        tutorName,
-        selectedClass,
-        classPrice,
-        classSchedule,
-        tool,
-        hour,
-    } = info;
+    const { tutorName, selectedClass, classPrice, classSchedule, tool, hour } =
+        info;
 
     const dots = [];
     for (let i = 1; i <= totalSteps; i += 1) {
@@ -86,10 +80,10 @@ const NavWizard: React.FC<NavWizardProps> = ({
     return (
         <>
             <div className="flex justify-center flex-col items-center my-2 mx-3">
-                <h3 className="text-center text-xl font-semibold text-black222">
+                <h3 className="text-center text-xl font-semibold text-black222 dark:text-white">
                     {renderTitleAgendar(currentStep, userBuyingID)}
                 </h3>
-                <p className="mt-1 text-center">
+                <p className="mt-1 text-center text-black dark:text-white">
                     Tutor:{" "}
                     <span className="text-primaryOrange">{tutorName}</span>
                 </p>
@@ -105,7 +99,7 @@ const NavWizard: React.FC<NavWizardProps> = ({
                     />
                 </div>
                 <div className="flex-3 justify-center">
-                    <h4 className="text-center text-xl font-bold">
+                    <h4 className="text-center text-xl font-bold dark:text-black222">
                         R${classPrice.price || 0}
                     </h4>
                 </div>

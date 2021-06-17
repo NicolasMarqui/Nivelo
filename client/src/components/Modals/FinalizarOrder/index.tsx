@@ -89,7 +89,7 @@ const FinalizarOrder: React.FC<FinalizarOrderProps> = ({
 
     return (
         <ModalContainer>
-            <h2 className="text-3xl font-bold text-center md:text-left">
+            <h2 className="text-3xl font-bold text-center md:text-left dark:text-black222">
                 Verifique as informações
             </h2>
 
@@ -99,36 +99,54 @@ const FinalizarOrder: React.FC<FinalizarOrderProps> = ({
                 <>
                     <div className="mt-2">
                         <div className="flex flex-col my-2">
-                            <p className={`text-sm`}>Aula Selecionada: </p>
-                            <h3 className={`text-lg font-bold`}>
+                            <p className={`text-sm dark:text-black222`}>
+                                Aula Selecionada:{" "}
+                            </p>
+                            <h3
+                                className={`text-lg font-bold dark:text-black222`}
+                            >
                                 {selectedClass ? selectedClass.name : "-"}
                             </h3>
                         </div>
                         <div className="flex flex-col my-2">
-                            <p className={`text-sm`}>Opções da aula: </p>
-                            <h3 className={`text-lg font-bold`}>
+                            <p className={`text-sm dark:text-black222`}>
+                                Opções da aula:{" "}
+                            </p>
+                            <h3
+                                className={`text-lg font-bold dark:text-black222`}
+                            >
                                 {classPrice
                                     ? `${classPrice.time}/min - R$${classPrice.time}`
                                     : "-"}
                             </h3>
                         </div>
                         <div className="flex flex-col my-2">
-                            <p className={`text-sm`}>Dia Selecionado: </p>
-                            <h3 className={`text-lg font-bold`}>
+                            <p className={`text-sm dark:text-black222`}>
+                                Dia Selecionado:{" "}
+                            </p>
+                            <h3
+                                className={`text-lg font-bold dark:text-black222`}
+                            >
                                 {classSchedule || "-"}
                             </h3>
                         </div>
                         <div className="flex flex-col my-2">
-                            <p className={`text-sm`}>
+                            <p className={`text-sm dark:text-black222`}>
                                 Horário de preferência:{" "}
                             </p>
-                            <h3 className={`text-lg font-bold`}>
+                            <h3
+                                className={`text-lg font-bold dark:text-black222`}
+                            >
                                 {hour ? `${hour.from}-${hour.to}` : "-"}
                             </h3>
                         </div>
                         <div className="flex flex-col my-2">
-                            <p className={`text-sm`}>Plataforma escolhida: </p>
-                            <h3 className={`text-lg font-bold`}>
+                            <p className={`text-sm dark:text-black222`}>
+                                Plataforma escolhida:{" "}
+                            </p>
+                            <h3
+                                className={`text-lg font-bold dark:text-black222`}
+                            >
                                 {tool ? tool.name : "-"}
                             </h3>
                         </div>

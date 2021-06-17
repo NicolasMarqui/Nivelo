@@ -54,7 +54,7 @@ const OrdersTutor: React.FC<OrdersTutorProps> = ({ order }) => {
     };
 
     return (
-        <div className="my-5 bg-white rounded-3xl py-6 px-7 flex flex-col md:flex-row items-center">
+        <div className="my-5 bg-white dark:bg-gray-500 rounded-3xl py-6 px-7 flex flex-col md:flex-row items-center">
             <div className="flex-1">
                 <p className="text-primaryOrange text-xs text-center md:text-left">
                     {id}
@@ -74,17 +74,22 @@ const OrdersTutor: React.FC<OrdersTutorProps> = ({ order }) => {
 
                 <h4 className="mt-4">
                     Aluno:{" "}
-                    <span className="text-indigo-500 underline">
+                    <span className="text-indigo-500 dark:text-black222 underline">
                         {user.name}
                     </span>
                 </h4>
 
                 <h4 className="font-bold text-center md:text-left">
-                    Dia: <span className="text-primaryOrange">{date}</span>
+                    Dia:{" "}
+                    <span className="text-primaryOrange dark:text-black222">
+                        {date}
+                    </span>
                 </h4>
                 <h4 className="font-bold text-center text-base md:text-left">
                     Horário:{" "}
-                    <span className="text-primaryOrange">{horario || "-"}</span>
+                    <span className="text-primaryOrange dark:text-black222">
+                        {horario || "-"}
+                    </span>
                 </h4>
 
                 <div className="mt-4">{}</div>
@@ -93,7 +98,7 @@ const OrdersTutor: React.FC<OrdersTutorProps> = ({ order }) => {
                 <div className="flex-1">
                     <h4 className="text-base text-center md:text-right md:text-lg">
                         Valor:{" "}
-                        <span className="text-primaryOrange text-lg md:text-xl font-semibold">
+                        <span className="text-primaryOrange dark:text-black222 text-lg md:text-xl font-semibold">
                             R$ {classPrice}
                         </span>
                     </h4>

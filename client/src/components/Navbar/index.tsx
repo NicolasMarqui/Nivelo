@@ -9,6 +9,7 @@ import { useRouter } from "next/router";
 import Side from "@components/UI/Side";
 import MobileNavSide from "@components/SideChilds/MobileNavSide";
 import { FaTimes } from "react-icons/fa";
+import Toggle from "@components/Toggle";
 
 const Navbar: React.FC = () => {
     const router = useRouter();
@@ -36,7 +37,7 @@ const Navbar: React.FC = () => {
     }, []);
 
     return (
-        <div className="nav__wrapper">
+        <div className="nav__wrapper" id="navbar">
             {router.locale === "en" && isOpenAviso && (
                 <div className="w-full p-2 bg-red-400">
                     <Container classes="px-3">
@@ -57,7 +58,6 @@ const Navbar: React.FC = () => {
                 </div>
             )}
             <header
-                id="navbar"
                 className={`border-b-2 border-gray-200 dark:border-gray-700 px-3 z-30 bg-white transform transition-all dark:bg-gray-700 animatedFixedNav ${
                     isFixed
                         ? "fixed top-0 left-0 right-0 shadow-lg isFixed animate-fade-in-down"
@@ -81,6 +81,9 @@ const Navbar: React.FC = () => {
                             </Link>
                         </div>
                         <div className="flex-1 flex items-center justify-between">
+                            <div className="flex ml-5 md:hidden">
+                                <Toggle />
+                            </div>
                             <LanguageNav />
                             <div className="hidden md:block">
                                 <Menu pageProps />

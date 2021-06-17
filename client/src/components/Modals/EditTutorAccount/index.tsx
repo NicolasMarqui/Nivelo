@@ -50,7 +50,7 @@ const EditTutorAccount: React.FC<EditTutorAccountProps> = ({ tutor }) => {
 
     return (
         <ModalContainer>
-            <h2 className="text-2xl md:text-3xl font-semibold">
+            <h2 className="text-2xl md:text-3xl font-semibold dark:text-black222">
                 Suas Informações
             </h2>
             {fetching ? (
@@ -70,7 +70,7 @@ const EditTutorAccount: React.FC<EditTutorAccountProps> = ({ tutor }) => {
                                 name="description"
                                 onChange={formik.handleChange}
                                 value={formik.values.description}
-                                className="block w-full p-3 rounded bg-gray-100 border border-transparent focus:outline-none focus:border-orange h-52 resize-none md:w-96"
+                                className="block w-full p-3 rounded bg-gray-100 border border-transparent focus:outline-none focus:border-orange dark:text-black222 h-52 resize-none md:w-96"
                             />
                             {formik.errors.description && (
                                 <p className="my-1 bg-red-200 p-2 text-sm text-white text-center">
@@ -91,7 +91,7 @@ const EditTutorAccount: React.FC<EditTutorAccountProps> = ({ tutor }) => {
                                 name="pix"
                                 onChange={formik.handleChange}
                                 value={formik.values.pix}
-                                className="block w-full p-3 rounded bg-gray-100 border border-transparent focus:outline-none focus:border-orange resize-none md:w-96"
+                                className="block w-full p-3 rounded bg-gray-100 border border-transparent focus:outline-none focus:border-orange dark:text-black222 resize-none md:w-96"
                             />
                         </div>
 

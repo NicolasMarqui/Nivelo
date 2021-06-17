@@ -18,7 +18,7 @@ const AddClass: React.FC<AddClassProps> = ({}) => {
 
     return (
         <ModalContainer>
-            <h2 className="text-2xl md:text-3xl font-semibold">
+            <h2 className="text-2xl md:text-3xl font-semibold dark:text-black222">
                 Adicionar {activeStep === 1 ? "Aula" : "Horários"}
             </h2>
             <p className="mt-2 text-desc text-center md:text-left">

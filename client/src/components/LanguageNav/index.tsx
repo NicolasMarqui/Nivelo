@@ -5,17 +5,14 @@ import { MdExpandMore } from "react-icons/md";
 import languages from "@utils/JSON/languages.json";
 import Link from "next/link";
 import { renderCurrentFlat } from "@utils/renderCurrentFlag";
-import DarkModeToggle from "react-dark-mode-toggle";
-import { useTheme } from "next-themes";
+import Toggle from "@components/Toggle";
 
 interface LanguageNavProps {}
 
 const LanguageNav: React.FC<LanguageNavProps> = ({}) => {
     const router = useRouter();
-    const { theme, setTheme } = useTheme();
 
     const [isOpen, setIsOpen] = useState(false);
-    const [isDarkMode, setIsDarkMode] = useState(theme === "dark");
 
     const handleOpen = (value: boolean) => setIsOpen(value);
 
@@ -30,7 +27,7 @@ const LanguageNav: React.FC<LanguageNavProps> = ({}) => {
                     alt="Language"
                     className="w-10 ml-2"
                 />
-                <MdExpandMore size={17} color={isDarkMode ? "#fff" : "#000"} />
+                <MdExpandMore size={17} />
 
                 <Dropdown
                     isOpen={isOpen}
@@ -57,15 +54,7 @@ const LanguageNav: React.FC<LanguageNavProps> = ({}) => {
             </div>
 
             <div className="flex-1 flex items-center justify-center ml-2">
-                <DarkModeToggle
-                    className="outline-none border-none"
-                    onChange={() => {
-                        setTheme(theme === "dark" ? "light" : "dark");
-                        setIsDarkMode(!isDarkMode);
-                    }}
-                    checked={isDarkMode}
-                    size={50}
-                />
+                <Toggle />
             </div>
         </div>
     );
