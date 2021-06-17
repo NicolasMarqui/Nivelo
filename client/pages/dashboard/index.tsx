@@ -1,5 +1,4 @@
 import OrdersUsers from "@components/DashboardComponents/OrdersUser";
-import ShortcutUser from "@components/DashboardComponents/ShotcutUser";
 import EmptyAnimation from "@components/UI/EmptyAnimation";
 import LoadingAnimation from "@components/UI/LoadingAnimation";
 import { createUrqlClient } from "@utils/createUrqlClient";
@@ -52,7 +51,7 @@ const Dashboard: NextPage<DashboardProps> = ({}) => {
     }
 
     return (
-        <>
+        <div className="dark:bg-gray-700">
             {data && !fetching && data.me !== null && data.me.tutor ? (
                 <div className="w-full p-3 bg-indigo-400 flex flex-col md:flex-row items-center justify-between mb-2">
                     <h3 className="text-white text-sm md:text-xl font-semibold">
@@ -68,7 +67,7 @@ const Dashboard: NextPage<DashboardProps> = ({}) => {
             ) : (
                 ""
             )}
-            <div className="relative p-8 bg-gray-50 rounded-3xl shadow-md">
+            <div className="relative p-8 bg-gray-50 dark:bg-gray-600 rounded-3xl shadow-md">
                 {data && data.me !== undefined ? (
                     <div className="flex flex-col my-1">
                         <div className="flex flex-col md:flex-row items-center justify-between">
@@ -95,7 +94,7 @@ const Dashboard: NextPage<DashboardProps> = ({}) => {
                                 />
                             </div>
                         </div>
-                        <p className="mt-4 text-base text-desc md:w-4/5 text-center md:text-left">
+                        <p className="mt-4 text-base text-desc dark:text-gray-400 md:w-4/5 text-center md:text-left">
                             Bem vindo a sua dashboard!! Aqui você verificar e
                             atualizar o status das suas aulas!
                         </p>
@@ -106,7 +105,7 @@ const Dashboard: NextPage<DashboardProps> = ({}) => {
                     <EmptyAnimation />
                 )}
             </div>
-            <div className="relative p-8 bg-gray-50 rounded-3xl mt-6 shadow-md">
+            <div className="relative p-8 bg-gray-50 dark:bg-gray-600  rounded-3xl mt-6 shadow-md">
                 <div className="flex flex-col my-1">
                     <h3 className="text-3xl font-bold text-center md:text-left">
                         Seus
@@ -114,7 +113,7 @@ const Dashboard: NextPage<DashboardProps> = ({}) => {
                             Pedidos
                         </span>
                     </h3>
-                    <p className="mt-4 text-base text-desc md:w-4/5 text-center md:text-left">
+                    <p className="mt-4 text-base text-desc dark:text-gray-400 md:w-4/5 text-center md:text-left">
                         Todos os seus pedidos aparecem aqui. Você pode confirmar
                         que teve a aula com o tutor e até deixar um feedback!
                     </p>
@@ -126,7 +125,7 @@ const Dashboard: NextPage<DashboardProps> = ({}) => {
                     )}
                 </div>
             </div>
-        </>
+        </div>
     );
 };
 

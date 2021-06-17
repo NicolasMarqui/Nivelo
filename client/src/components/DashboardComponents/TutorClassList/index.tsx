@@ -19,7 +19,7 @@ const TutorClassList: React.FC<TutorClassListProps> = ({ classes }) => {
                     classes.map((cl: ClassesProps) => (
                         <div
                             className={`
-                            flex flex-col md:flex-row bg-white rounded-3xl my-3 py-4 px-6 items-center justify-center md:justify-between transform
+                            flex flex-col md:flex-row bg-white dark:bg-gray-500 rounded-3xl my-3 py-4 px-6 items-center justify-center md:justify-between transform
                             ${!cl.active ? " opacity-60" : " "}
                         `}
                             key={cl.id}
@@ -34,7 +34,7 @@ const TutorClassList: React.FC<TutorClassListProps> = ({ classes }) => {
                                         {cl.level}
                                     </span>
                                 </h3>
-                                <p className="text-center md:text-left text-desc text-sm md:text-base">
+                                <p className="text-center md:text-left text-desc dark:text-gray-400 text-sm md:text-base">
                                     Ensinada {cl.amountTimeTaught} vezes
                                 </p>
                             </div>

@@ -26,13 +26,13 @@ const Calendar: React.FC<CalendarProps> = (props) => {
     }
 
     return (
-        <div className="relative p-8 bg-gray-50 rounded-3xl shadow-md">
+        <div className="relative p-8 bg-gray-50 dark:bg-gray-600 rounded-3xl shadow-md">
             <h2 className="text-3xl md:text-4xl font-bold text-center md:text-left">
                 Seu
                 <span className="text-primaryOrange ml-2">Calendário</span>
             </h2>
 
-            <p className="mt-4 text-base text-desc md:w-4/5 text-center md:text-left">
+            <p className="mt-4 text-base text-desc dark:text-gray-400 md:w-4/5 text-center md:text-left">
                 Selecione os dias que você tem dísponivel para dar aulas, e
                 também, clique nos dias com disponibilidade para adicionar os
                 horários dísponiveis nesse dia!

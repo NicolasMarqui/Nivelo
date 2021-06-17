@@ -9,7 +9,7 @@ const Tutorial: React.FC = ({}) => {
     const { t } = useTranslation("home");
 
     return (
-        <div id="tutorial">
+        <div id="tutorial" className="dark:bg-black222">
             <Section classes="bg-lightPink overflow-hidden">
                 <Container classes="px-4">
                     <PreTitle classes="text-center md:text-left">

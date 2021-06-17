@@ -10,7 +10,7 @@ const MobileNavSide: React.FC<MobileNavSideProps> = ({}) => {
     const router = useRouter();
 
     return (
-        <div className="flex flex-col">
+        <div className="flex flex-col dark:bg-gray-700">
             <Image src="/logo.svg" width={170} height={50} />
 
             <div className="mt-3">

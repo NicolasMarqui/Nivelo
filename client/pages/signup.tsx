@@ -11,7 +11,7 @@ const Signup: React.FC = ({}) => {
     const WELCOME__ANIMATION = require("../public/animations/welcome.json");
 
     return (
-        <>
+        <div className="dark:bg-gray-700">
             <Meta
                 title="Criar conta"
                 description="Encontre os melhores tutores para te ajudar nessa jornada"
@@ -44,7 +44,7 @@ const Signup: React.FC = ({}) => {
                     </motion.div>
                 </div>
             </div>
-        </>
+        </div>
     );
 };
 

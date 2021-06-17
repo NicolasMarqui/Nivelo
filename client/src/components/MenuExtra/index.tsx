@@ -7,7 +7,6 @@ import { MeQuery } from "src/generated/graphql";
 import { MdExpandMore } from "react-icons/md";
 import NavDropdown from "@components/NavDropdown";
 import { useRouter } from "next/router";
-import useWindowSize from "@hooks/useWindowSize";
 
 interface MenuExtraProps {
     data: MeQuery;
@@ -17,7 +16,6 @@ interface MenuExtraProps {
 
 const MenuExtra: React.FC<MenuExtraProps> = ({ data, fetching, error }) => {
     const router = useRouter();
-    const { width } = useWindowSize();
     const [dropOpen, setDropOpen] = useState(false);
 
     return (
@@ -52,7 +50,7 @@ const MenuExtra: React.FC<MenuExtraProps> = ({ data, fetching, error }) => {
                 </li>
             ) : (
                 <>
-                    <li className="my-2 md:my-0  md:mx-2 lg:mx-4 md:ml-9 hoverMenu">
+                    <li className="my-2 md:my-0  md:mx-2 lg:mx-4 lg:ml-9 hoverMenu">
                         <Link href="/login">
                             <a className="text-nav md:text-sm lg:text-nav py-4 md:py-5 text-darkerOrange font-bold flex justify-start">
                                 Login

@@ -28,9 +28,8 @@ const Orders: React.FC<OrdersProps> = (props) => {
     }
     const [page, setPage] = useState(1);
     const [showOnlyAwaiting, setShowOnlyAwaiting] = useState(false);
-    const [showOnlyAwaitingApproval, setShowOnlyAwaitingApproval] = useState(
-        false
-    );
+    const [showOnlyAwaitingApproval, setShowOnlyAwaitingApproval] =
+        useState(false);
     const [{ data, fetching, error }] = useTutorOrdersQuery({
         variables: { id: props.tutorID },
     });
@@ -46,7 +45,7 @@ const Orders: React.FC<OrdersProps> = (props) => {
     };
 
     return (
-        <div className="relative p-8 bg-gray-50 rounded-3xl shadow-md">
+        <div className="relative p-8 bg-gray-50 dark:bg-gray-600 rounded-3xl shadow-md">
             <h2 className="text-3xl md:text-4xl font-bold text-center md:text-left">
                 Seus
                 <span className="text-primaryOrange ml-2">Pedidos</span>

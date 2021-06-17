@@ -13,13 +13,17 @@ import { useRouter } from "next/router";
 import { lowestPriceAval } from "@utils/lowestPriceClasses";
 
 const TutorCard: React.FC<TutorCardProps> = ({ tutor }) => {
+    console.log(tutor);
     const router = useRouter();
 
     return (
-        <div className="flex flex-col md:flex-row rounded-3xl items-center md:items-start bg-gray-100 mt-4 px-4 md:px-12 py-3 md:py-7 relative">
+        <div className="flex flex-col md:flex-row rounded-3xl items-center md:items-start bg-gray-100 dark:bg-gray-600 mt-4 px-4 md:px-12 py-3 md:py-7 relative">
             <div className="flex-none flex flex-col">
                 <img
-                    src={checkAvatar(tutor.user.avatar, tutor.user.name)}
+                    src={
+                        tutor.user &&
+                        checkAvatar(tutor.user.avatar, tutor.user.name)
+                    }
                     className="flex-none rounded-full order-2 md:order-1 object-cover h-28 w-28 mt-4 md:mt-0"
                 />
 
@@ -47,14 +51,14 @@ const TutorCard: React.FC<TutorCardProps> = ({ tutor }) => {
             <div className="flex-2 px-4 md:px-14 md:mr-4 md:border-r-2 md:border-gray-300 cursor-pointer">
                 <Link href="/tutor/[id]" as={`/tutor/${tutor.id}`}>
                     <a className="flex flex-col items-center md:items-start">
-                        <h3 className="text-black222 text-xl md:text-2xl font-bold mt-2 md:mt-0">
+                        <h3 className="text-black222 dark:text-white text-xl md:text-2xl font-bold mt-2 md:mt-0">
                             {tutor.user.name}
                         </h3>
                         <p className="text-sm text-primaryOrange md:-mt-1">
                             {getCategoriesFromArray(tutor.categories)}
                         </p>
 
-                        <p className="mt-4 text-base text-desc md:w-4/5 text-center md:text-left">
+                        <p className="mt-4 text-base text-desc dark:text-gray-400 md:w-4/5 text-center md:text-left">
                             {shortTutorDescription(
                                 tutor.description ||
                                     "Nenhuma descrição disponível",
@@ -114,13 +118,13 @@ const TutorCard: React.FC<TutorCardProps> = ({ tutor }) => {
                             <div className="flex flex-row items-center justify-center">
                                 <div className="flex-none flex items-center mr-7">
                                     <div className="h-3 w-3 bg-primaryGreen rounded-full mr-1"></div>
-                                    <h5 className="text-sm text-desc">
+                                    <h5 className="text-sm text-desc dark:text-gray-400">
                                         Disponível
                                     </h5>
                                 </div>
                                 <div className="flex-none flex items-center">
                                     <div className="h-3 w-3 bg-white rounded-full mr-1 border-2 border-gray-500"></div>
-                                    <h5 className="text-sm text-desc">
+                                    <h5 className="text-sm text-desc dark:text-gray-400">
                                         Não disponível
                                     </h5>
                                 </div>

@@ -44,7 +44,7 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
     }
 
     return (
-        <>
+        <div className="dark:bg-gray-800">
             <Meta
                 title={`Dashboard - ${data && data.me ? data.me.name : ""}`}
                 description="Encontre os melhores tutores para te ajudar nessa jornada"
@@ -54,17 +54,17 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
             <div className="mt-20">
                 <Container classes="px-3">
                     <div className="flex md:flex-row flex-col items-start">
-                        <div className="flex-none bg-white shadow-2xl rounded-2xl p-3 mb-3 md:mb-0 w-full md:w-auto">
+                        <div className="flex-none bg-white dark:bg-gray-600 shadow-2xl rounded-2xl p-3 mb-3 md:mb-0 w-full md:w-auto">
                             <Sidebar user={data} />
                         </div>
-                        <div className="flex flex-2 bg-white rounded-2xl p-3 w-full md:w-auto md:ml-4 flex-col">
+                        <div className="flex flex-2 bg-white dark:bg-gray-800 rounded-2xl p-3 w-full md:w-auto md:ml-4 flex-col">
                             {children}
                         </div>
                     </div>
                 </Container>
             </div>
             <Footer />
-        </>
+        </div>
     );
 };
 

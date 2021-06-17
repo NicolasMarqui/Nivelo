@@ -37,7 +37,7 @@ const Sidebar: React.FC<SidebarProps> = ({ user }) => {
 
                 <div>
                     <h2
-                        className="mt-4 font-bold text-xl md:text-3xl text-black222"
+                        className="mt-4 font-bold text-xl md:text-3xl text-black222 dark:text-white"
                         data-for="userName"
                         data-tip={name}
                     >

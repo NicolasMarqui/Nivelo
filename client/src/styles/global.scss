@@ -94,6 +94,10 @@ body {
         &.previous {
             margin-right: 30px;
 
+            a {
+                color: #000;
+            }
+
             &.disabled {
                 opacity: 0.4;
                 pointer-events: none;
@@ -102,6 +106,10 @@ body {
 
         &.next {
             margin-left: 30px;
+
+            a {
+                color: #000;
+            }
 
             &.disabled {
                 opacity: 0.4;

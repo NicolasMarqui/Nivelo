@@ -69,7 +69,7 @@ const AddClassForm: React.FC<AddClassFormProps> = ({
                             name="name"
                             onChange={formik.handleChange}
                             value={formik.values.name}
-                            className="block w-full p-3 rounded bg-gray-100 border border-transparent focus:outline-none focus:border-orange"
+                            className="block w-full p-3 rounded bg-gray-100 border border-transparent focus:outline-none focus:border-orange dark:text-black222"
                         />
                         {formik.errors.name && (
                             <p className="my-1 bg-red-200 p-2 text-sm text-white text-center">
@@ -90,7 +90,7 @@ const AddClassForm: React.FC<AddClassFormProps> = ({
                             name="description"
                             onChange={formik.handleChange}
                             value={formik.values.description}
-                            className="block w-full p-3 rounded bg-gray-100 border border-transparent focus:outline-none focus:border-orange h-52 resize-none"
+                            className="block w-full p-3 rounded bg-gray-100 border border-transparent focus:outline-none focus:border-orange dark:text-black222 h-52 resize-none"
                         />
                         {formik.errors.description && (
                             <p className="my-1 bg-red-200 p-2 text-sm text-white text-center">
@@ -105,6 +105,7 @@ const AddClassForm: React.FC<AddClassFormProps> = ({
                             name="level"
                             closeMenuOnSelect={true}
                             placeholder={"Nível da aula"}
+                            className="dark:text-black222"
                             onChange={(e: any) =>
                                 formik.setFieldValue("level", e.value)
                             }

@@ -9,7 +9,7 @@ const FourOFour: React.FC<FourOFourProps> = ({}) => {
     const NOTFOUND__ANIMATION = require("../public/animations/not_found.json");
 
     return (
-        <>
+        <div className="dark:bg-gray-800">
             <Meta
                 title="Essa página não existe - 404"
                 description="Encontre os melhores tutores para te ajudar nessa jornada"
@@ -41,7 +41,7 @@ const FourOFour: React.FC<FourOFourProps> = ({}) => {
                     </span>
                 </p>
             </div>
-        </>
+        </div>
     );
 };
 export default FourOFour;

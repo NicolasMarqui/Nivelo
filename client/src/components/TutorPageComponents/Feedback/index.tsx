@@ -23,7 +23,7 @@ const Feedback: React.FC<FeedbackProps> = ({ tutorId }) => {
             className="flex mt-20 flex-col relative w-full justify-center md:justify-start"
             id="feedbacks"
         >
-            <h3 className="text-black222 text-center md:text-left text-xl md:text-3xl font-bold mt-2 md:mt-4">
+            <h3 className="text-black222 dark:text-white text-center md:text-left text-xl md:text-3xl font-bold mt-2 md:mt-4">
                 Feedbacks
             </h3>
 

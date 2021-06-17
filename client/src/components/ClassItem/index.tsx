@@ -70,8 +70,8 @@ const ClassItem: React.FC<ClassItemProps> = ({
                     handleClose={() => setMoreInfoClass(!moreInfoClass)}
                     header={{ title: name }}
                 >
-                    <h3 className="text-xl font-bold">{name}</h3>
-                    <p>
+                    <h3 className="text-xl font-bold text-black222">{name}</h3>
+                    <p className="text-desc dark:text-gray-400 mt-3">
                         {description
                             ? description
                             : "Essa aula não possui descrição!"}

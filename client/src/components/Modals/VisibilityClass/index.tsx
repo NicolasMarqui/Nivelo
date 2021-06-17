@@ -35,7 +35,7 @@ const VisibilityClass: React.FC<VisibilityClassProps> = ({
 
     return (
         <ModalContainer>
-            <h2 className="text-2xl md:text-3xl font-semibold">
+            <h2 className="text-2xl md:text-3xl font-semibold dark:text-black222">
                 Deseja {active ? " desativar" : " ativar"} essa aula?
             </h2>
 

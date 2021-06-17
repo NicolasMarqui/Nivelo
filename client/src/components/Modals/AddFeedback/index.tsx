@@ -54,10 +54,12 @@ const AddFeedback: React.FC<AddFeedbackProps> = ({ userID, tutorID }) => {
 
     return (
         <ModalContainer>
-            <h2 className="text-2xl md:text-3xl font-semibold">
+            <h2 className="text-2xl md:text-3xl font-semibold dark:text-black222">
                 Adicionar Feedback
             </h2>
-            <p>Conte-nos mais como foi sua experiencia de ensino!!</p>
+            <p className="dark:text-black222">
+                Conte-nos mais como foi sua experiencia de ensino!!
+            </p>
 
             <div className="mt-4 w-full">
                 {fetching || error || fetUp ? (
@@ -76,7 +78,7 @@ const AddFeedback: React.FC<AddFeedbackProps> = ({ userID, tutorID }) => {
                                 name="description"
                                 onChange={formik.handleChange}
                                 value={formik.values.description}
-                                className="block w-full p-3 rounded bg-gray-100 border border-transparent focus:outline-none focus:border-orange h-52 resize-none"
+                                className="block w-full p-3 rounded bg-gray-100 border border-transparent focus:outline-none focus:border-orange h-52 resize-none dark:text-black222"
                             />
                         </div>
 
@@ -99,7 +101,7 @@ const AddFeedback: React.FC<AddFeedbackProps> = ({ userID, tutorID }) => {
                                 />
                             </div>
                             <div className="flex-none">
-                                <h3 className="text-lg text-right">
+                                <h3 className="text-lg text-right dark:text-black222">
                                     Nota final{" "}
                                     <span className="block font-bold">
                                         {formik.values.rating}

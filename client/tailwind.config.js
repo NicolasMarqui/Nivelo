@@ -1,6 +1,6 @@
 module.exports = {
     purge: ["./pages/**/*.tsx", "./src/**/*.tsx"],
-    darkMode: false, // or 'media' or 'class'
+    darkMode: "class", // or 'media' or 'class'
     theme: {
         extend: {
             colors: {
@@ -119,7 +119,7 @@ module.exports = {
                         maxWidth: "80%",
                     },
                     "@screen md": {
-                        maxWidth: "90%",
+                        maxWidth: "92%",
                     },
                     "@screen lg": {
                         maxWidth: "1024px",

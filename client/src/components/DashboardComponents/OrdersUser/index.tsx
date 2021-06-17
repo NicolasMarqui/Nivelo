@@ -1,6 +1,5 @@
 import EmptyAnimation from "@components/UI/EmptyAnimation";
 import LoadingAnimation from "@components/UI/LoadingAnimation";
-import { useRouter } from "next/router";
 import { useState } from "react";
 import { useUserOrdersQuery } from "src/generated/graphql";
 import OrdersUserList from "../OrdersUserList";

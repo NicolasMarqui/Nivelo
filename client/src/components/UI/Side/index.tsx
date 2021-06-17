@@ -74,7 +74,9 @@ const Side: React.FC<SideProps> = ({
                     </div>
                 )}
                 <div
-                    className={`${header ? "pt-16 pb-2 h-full" : "py-7"} px-4`}
+                    className={`${
+                        header ? "pt-16 pb-2 h-full" : "py-7"
+                    } px-4 dark:bg-gray-700`}
                 >
                     {children}
                 </div>

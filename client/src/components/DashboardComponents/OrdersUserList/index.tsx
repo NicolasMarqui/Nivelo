@@ -24,12 +24,12 @@ const OrdersUserList: React.FC<OrdersUserListProps> = ({
     } = order;
 
     return (
-        <div className="my-5 bg-white rounded-3xl py-6 flex flex-col lg:flex-row items-center shadow-md px-8">
+        <div className="my-5 bg-white dark:bg-gray-500 rounded-3xl py-6 flex flex-col lg:flex-row items-center shadow-md px-8">
             <div className="flex-2">
                 <p className="text-primaryOrange text-xs text-center md:text-left">
                     {id}
                 </p>
-                <h3 className="text-lg text-center md:text-left font-semibold md:text-2xl mb-3">
+                <h3 className="text-lg text-center md:text-left font-semibold md:text-2xl mb-3 dark:text-white">
                     {classes.name}
                 </h3>
                 <div className="flex flex-col my-5 md:my-0">
@@ -44,9 +44,11 @@ const OrdersUserList: React.FC<OrdersUserListProps> = ({
                             />
                         )}
                         {isPaid ? (
-                            <p className="text-base text-desc">Pago!</p>
+                            <p className="text-base text-desc dark:text-gray-400">
+                                Pago!
+                            </p>
                         ) : (
-                            <p className="text-base text-desc">
+                            <p className="text-base text-desc dark:text-gray-400">
                                 Tutor não confirmou o recebimento do pagamento!
                             </p>
                         )}
@@ -62,11 +64,11 @@ const OrdersUserList: React.FC<OrdersUserListProps> = ({
                             />
                         )}
                         {hasUserConfirmedClassDone ? (
-                            <p className="text-base text-desc">
+                            <p className="text-base text-desc dark:text-gray-400">
                                 Você confirmou a finalização da aula!
                             </p>
                         ) : (
-                            <p className="text-base text-desc">
+                            <p className="text-base text-desc dark:text-gray-400">
                                 Você não confirmou a finalização da aula!
                             </p>
                         )}
@@ -82,11 +84,11 @@ const OrdersUserList: React.FC<OrdersUserListProps> = ({
                             />
                         )}
                         {hasTutorConfirmedClassDone ? (
-                            <p className="text-base text-desc">
+                            <p className="text-base text-desc dark:text-gray-400">
                                 Tutor confirmou a finalização da aula!
                             </p>
                         ) : (
-                            <p className="text-base text-desc">
+                            <p className="text-base text-desc dark:text-gray-400">
                                 Tutor não confirmou a finalização da aula!
                             </p>
                         )}

@@ -3,15 +3,17 @@ import PreTitle from "@components/UI/PreTitle";
 import Section from "@components/UI/Section";
 import Title from "@components/UI/Title";
 import Image from "next/image";
-import { MdSlowMotionVideo } from "react-icons/md";
 import { useTranslation } from "next-i18next";
 
 const AnyWhere: React.FC = ({}) => {
     const { t } = useTranslation("home");
 
     return (
-        <>
-            <Section classes="border-b-2 border-gray-200" hasBgDetail>
+        <div className="dark:bg-gray-800">
+            <Section
+                classes="border-b-2 border-gray-200 dark:border-gray-700"
+                hasBgDetail
+            >
                 <Container classes="px-4 z-20">
                     <div className="flex flex-col md:flex-row justify-between">
                         <div className="flex-1 order-2 md:pl-20 z-20">
@@ -27,7 +29,7 @@ const AnyWhere: React.FC = ({}) => {
                                     <h3 className="font-bold text-lg text-center md:text-left">
                                         {t("any1")}
                                     </h3>
-                                    <p className="text-desc text-center md:text-left mt-1 md:w-3/4">
+                                    <p className="text-desc dark:text-gray-200 text-center md:text-left mt-1 md:w-3/4">
                                         Lorem ipsum dolor sit amet, consectetur
                                         adipiscing elit, sed do eiusmod tempor
                                         incididunt ut labore.
@@ -37,7 +39,7 @@ const AnyWhere: React.FC = ({}) => {
                                     <h3 className="font-bold text-lg text-center md:text-left">
                                         {t("any2")}
                                     </h3>
-                                    <p className="text-desc text-center md:text-left mt-1 md:w-3/4">
+                                    <p className="text-desc dark:text-gray-200 text-center md:text-left mt-1 md:w-3/4">
                                         Lorem ipsum dolor sit amet, consectetur
                                         adipiscing elit, sed do eiusmod tempor
                                         incididunt ut labore.
@@ -49,7 +51,7 @@ const AnyWhere: React.FC = ({}) => {
                                     <h3 className="font-bold text-lg text-center md:text-left">
                                         Lorem ipsum dolor sit amet.
                                     </h3>
-                                    <p className="text-desc text-center md:text-left mt-1 md:w-3/4">
+                                    <p className="text-desc dark:text-gray-200 text-center md:text-left mt-1 md:w-3/4">
                                         Lorem ipsum dolor sit amet, consectetur
                                         adipiscing elit, sed do eiusmod tempor
                                         incididunt ut labore.
@@ -59,20 +61,13 @@ const AnyWhere: React.FC = ({}) => {
                                     <h3 className="font-bold text-lg text-center md:text-left">
                                         Lorem ipsum dolor sit amet.
                                     </h3>
-                                    <p className="text-desc text-center md:text-left mt-1 md:w-3/4">
+                                    <p className="text-desc dark:text-gray-200 text-center md:text-left mt-1 md:w-3/4">
                                         Lorem ipsum dolor sit amet, consectetur
                                         adipiscing elit, sed do eiusmod tempor
                                         incididunt ut labore.
                                     </p>
                                 </div>
                             </div>
-
-                            {/* <div className="mt-12 flex items-center justify-center md:justify-start flex-col md:flex-row hover:bg-gray-50 rounded-xl cursor-pointer w-auto transform hover:scale-105">
-                                <MdSlowMotionVideo size={50} />
-                                <h3 className="font-bold text-lg ml-2">
-                                    {t("anyVideo")}
-                                </h3>
-                            </div> */}
                         </div>
 
                         <div className="flex-1 order-1 -mt-32">
@@ -87,7 +82,7 @@ const AnyWhere: React.FC = ({}) => {
                     </div>
                 </Container>
             </Section>
-        </>
+        </div>
     );
 };
 export default AnyWhere;
