@@ -51,7 +51,7 @@ const Tutors: React.FC = ({}) => {
     };
 
     return (
-        <div className="dark:bg-gray-700">
+        <div className="dark:bg-gray-800">
             <Meta
                 title="Tutores"
                 description="Encontre os melhores tutores para te ajudar nessa jornada"

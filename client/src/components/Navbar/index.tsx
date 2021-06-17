@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import Container from "@components/container";
@@ -10,16 +10,33 @@ import Side from "@components/UI/Side";
 import MobileNavSide from "@components/SideChilds/MobileNavSide";
 import { FaTimes } from "react-icons/fa";
 
-interface NavbarProps {}
-
-const Navbar: React.FC<NavbarProps> = ({}) => {
+const Navbar: React.FC = () => {
     const router = useRouter();
+
     const [isOpen, setOpen] = useState(false);
     const [isOpenAviso, setIsOpenAviso] = useState(true);
+    const [isFixed, setIsFixed] = useState(false);
+
     const handleToggle = () => setOpen(!isOpen);
 
+    const fixedNav = () => {
+        if (window.pageYOffset > 300) {
+            setIsFixed(true);
+        } else {
+            setIsFixed(false);
+        }
+    };
+
+    useEffect(() => {
+        window.addEventListener("scroll", fixedNav);
+
+        return () => {
+            window.removeEventListener("scroll", fixedNav);
+        };
+    }, []);
+
     return (
-        <>
+        <div className="nav__wrapper">
             {router.locale === "en" && isOpenAviso && (
                 <div className="w-full p-2 bg-red-400">
                     <Container classes="px-3">
@@ -41,9 +58,9 @@ const Navbar: React.FC<NavbarProps> = ({}) => {
             )}
             <header
                 id="navbar"
-                className={`border-b-2 border-gray-200 dark:border-gray-700 px-3 z-20 bg-white dark:bg-gray-700 ${
-                    router.pathname === "/"
-                        ? "relative md:bsolute top-0 right-0 left-0"
+                className={`border-b-2 border-gray-200 dark:border-gray-700 px-3 z-30 bg-white transform transition-all dark:bg-gray-700 animatedFixedNav ${
+                    isFixed
+                        ? "fixed top-0 left-0 right-0 shadow-lg isFixed animate-fade-in-down"
                         : "relative"
                 }`}
             >
@@ -85,7 +102,7 @@ const Navbar: React.FC<NavbarProps> = ({}) => {
                     <MobileNavSide />
                 </Side>
             )}
-        </>
+        </div>
     );
 };
 
