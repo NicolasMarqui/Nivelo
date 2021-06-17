@@ -31,7 +31,7 @@ const TutorialList: React.FC = ({}) => {
                         </p>
                     </div>
                     <div className="flex-1 mt-4 md:mt-0 md:ml-5">
-                        <p className="text-center md:text-left text-gray-400">
+                        <p className="text-center md:text-left text-gray-400 dark:text-gray-200">
                             {tut.text}
                         </p>
                     </div>

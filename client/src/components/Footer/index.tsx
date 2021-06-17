@@ -60,7 +60,7 @@ const Footer: React.FC<FooterProps> = ({}) => {
                                     <Link
                                         href={`/tutors?categoria=${cat.value}`}
                                     >
-                                        <a className="text-base text-desc group-hover:underline">
+                                        <a className="text-base text-desc dark:text-gray-400 group-hover:underline">
                                             {cat.value}
                                         </a>
                                     </Link>
@@ -75,35 +75,35 @@ const Footer: React.FC<FooterProps> = ({}) => {
                         <ul className="p-0 m-0 flex flex-col text-center md:text-left">
                             <li className="mt-1 group">
                                 <Link href="/faq">
-                                    <a className="text-base text-desc group-hover:underline">
+                                    <a className="text-base text-desc dark:text-gray-400 group-hover:underline">
                                         Como funciona?
                                     </a>
                                 </Link>
                             </li>
                             <li className="mt-1 group">
                                 <Link href="/faq">
-                                    <a className="text-base text-desc group-hover:underline">
+                                    <a className="text-base text-desc dark:text-gray-400 group-hover:underline">
                                         Como me torno um tutor?
                                     </a>
                                 </Link>
                             </li>
                             <li className="mt-1 group">
                                 <Link href="/faq">
-                                    <a className="text-base text-desc group-hover:underline">
+                                    <a className="text-base text-desc dark:text-gray-400 group-hover:underline">
                                         Como funciona o pagamento?
                                     </a>
                                 </Link>
                             </li>
                             <li className="mt-1 group">
                                 <Link href="/faq">
-                                    <a className="text-base text-desc group-hover:underline">
+                                    <a className="text-base text-desc dark:text-gray-400 group-hover:underline">
                                         Como criar uma conta?
                                     </a>
                                 </Link>
                             </li>
                             <li className="mt-1 group">
                                 <Link href="/faq">
-                                    <a className="text-base text-desc group-hover:underline">
+                                    <a className="text-base text-desc dark:text-gray-400 group-hover:underline">
                                         Qual a porcentagem?
                                     </a>
                                 </Link>

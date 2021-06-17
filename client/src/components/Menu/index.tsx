@@ -19,7 +19,7 @@ const Menu: React.FC = ({}) => {
                 )}`}
             >
                 <Link href="/">
-                    <a className="text-nav md:text-sm lg:text-base lg:text-nav py-4 md:py-5 block text-black">
+                    <a className="text-nav md:text-sm lg:text-base lg:text-nav py-4 md:py-5 block text-black dark:text-white">
                         Home
                     </a>
                 </Link>
@@ -31,7 +31,7 @@ const Menu: React.FC = ({}) => {
                 )}`}
             >
                 <Link href="/tutors">
-                    <a className="text-nav md:text-sm lg:text-base lg:text-nav py-4 md:py-5 block text-black">
+                    <a className="text-nav md:text-sm lg:text-base lg:text-nav py-4 md:py-5 block text-black dark:text-white">
                         {router.locale === "pt" ? "Tutores" : "Tutors"}
                     </a>
                 </Link>
@@ -43,16 +43,16 @@ const Menu: React.FC = ({}) => {
                 )}`}
             >
                 <Link href="/faq">
-                    <a className="text-nav md:text-sm lg:text-base lg:text-nav py-4 md:py-5 block text-black">
+                    <a className="text-nav md:text-sm lg:text-base lg:text-nav py-4 md:py-5 block text-black dark:text-white">
                         F.A.Q
                     </a>
                 </Link>
             </li>
             <li
-                className={`my-1 md:my-0 md:px-3 lg:px-5 hoverMenu md:border-r-2 md:border-gray-200`}
+                className={`my-1 md:my-0 md:px-3 lg:px-5 hoverMenu md:border-r-2 md:border-gray-200 dark:border-gray-700`}
             >
                 <Link href="/#tutorial">
-                    <a className="text-nav md:text-sm lg:text-base lg:text-nav py-4 md:py-5 block text-black">
+                    <a className="text-nav md:text-sm lg:text-base lg:text-nav py-4 md:py-5 block text-black dark:text-white">
                         {router.locale === "pt"
                             ? "Como funciona?"
                             : "How it works?"}
@@ -60,13 +60,13 @@ const Menu: React.FC = ({}) => {
                 </Link>
             </li>
             <li
-                className={`my-1 md:my-0 md:px-3 lg:px-5 hoverMenu md:border-r-2 md:border-gray-200 ${checkIfActive(
+                className={`my-1 md:my-0 md:px-3 lg:px-5 hoverMenu md:border-r-2 md:border-gray-200 dark:border-gray-700 ${checkIfActive(
                     router.pathname,
                     "/become-tutor"
                 )}`}
             >
                 <Link href="/become-tutor">
-                    <a className="text-nav md:text-sm lg:text-base lg:text-nav py-4 md:py-5 block text-black">
+                    <a className="text-nav md:text-sm lg:text-base lg:text-nav py-4 md:py-5 block text-black dark:text-white">
                         {router.locale === "pt"
                             ? "Seja um tutor"
                             : "Become a tutor"}

@@ -30,7 +30,7 @@ const LanguageNav: React.FC<LanguageNavProps> = ({}) => {
                     alt="Language"
                     className="w-10 ml-2"
                 />
-                <MdExpandMore size={17} color="#000" />
+                <MdExpandMore size={17} color={isDarkMode ? "#fff" : "#000"} />
 
                 <Dropdown
                     isOpen={isOpen}

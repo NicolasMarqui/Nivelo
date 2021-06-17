@@ -17,7 +17,7 @@ const List4u: React.FC = ({}) => {
                 <h3 className="font-bold text-lg text-center md:text-left">
                     {t("4u1")}
                 </h3>
-                <p className="text-desc text-center md:text-left mt-1 md:w-3/4">
+                <p className="text-desc dark:text-gray-100 text-center md:text-left mt-1 md:w-3/4">
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
                     do eiusmod tempor incididunt ut labore.
                 </p>
@@ -30,7 +30,7 @@ const List4u: React.FC = ({}) => {
                 <h3 className="font-bold text-lg text-center md:text-left">
                     {t("4u2")}
                 </h3>
-                <p className="text-desc text-center md:text-left mt-1 md:w-3/4">
+                <p className="text-desc dark:text-gray-100 text-center md:text-left mt-1 md:w-3/4">
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
                     do eiusmod tempor incididunt ut labore.
                 </p>
@@ -43,7 +43,7 @@ const List4u: React.FC = ({}) => {
                 <h3 className="font-bold text-lg text-center md:text-left">
                     {t("4u3")}
                 </h3>
-                <p className="text-desc text-center md:text-left mt-1 md:w-3/4">
+                <p className="text-desc dark:text-gray-100 text-center md:text-left mt-1 md:w-3/4">
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
                     do eiusmod tempor incididunt ut labore.
                 </p>
@@ -56,7 +56,7 @@ const List4u: React.FC = ({}) => {
                 <h3 className="font-bold text-lg text-center md:text-left">
                     {t("4u4")}
                 </h3>
-                <p className="text-desc text-center md:text-left mt-1 md:w-3/4">
+                <p className="text-desc dark:text-gray-100 text-center md:text-left mt-1 md:w-3/4">
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
                     do eiusmod tempor incididunt ut labore.
                 </p>

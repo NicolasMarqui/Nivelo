@@ -19,7 +19,7 @@ const Faq: React.FC = ({}) => {
             <Container>
                 <div className="flex flex-col mt-14 items-center ">
                     <BackButton />
-                    <Title classes="text-center  md:text-heroSize text-white z-10 text-black222">
+                    <Title classes="text-center  md:text-heroSize text-white z-10 text-black222 dark:text-white">
                         F.A.Q
                     </Title>
                 </div>

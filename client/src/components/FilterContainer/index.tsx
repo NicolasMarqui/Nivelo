@@ -39,7 +39,7 @@ const FilterContainer: React.FC<FilterContainerProps> = ({ amount }) => {
         <>
             <div className="mt-2 flex flex-col md:flex-row items-center justify-between">
                 <div className="my-2">
-                    <p className="text-base text-black222">
+                    <p className="text-base text-black222 dark:text-white">
                         {t("amountResult")}
                         <span className="text-lg font-bold text-primaryOrange mx-1">
                             {amount}

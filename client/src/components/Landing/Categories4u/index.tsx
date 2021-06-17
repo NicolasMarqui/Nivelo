@@ -10,7 +10,7 @@ const Categories4u: React.FC = ({}) => {
     const { t } = useTranslation("home");
 
     return (
-        <Section classes="z-0">
+        <Section classes="z-0 dark:bg-gray-800">
             <Container classes="z-0 relative ">
                 <div className="flex flex-col md:flex-row items-center justify-between">
                     <div className="flex flex-col flex-2">

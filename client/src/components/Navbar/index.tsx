@@ -41,15 +41,15 @@ const Navbar: React.FC<NavbarProps> = ({}) => {
             )}
             <header
                 id="navbar"
-                className={`border-b-2 border-gray-200 px-3 z-20 ${
+                className={`border-b-2 border-gray-200 dark:border-gray-700 px-3 z-20 bg-white dark:bg-gray-700 ${
                     router.pathname === "/"
-                        ? "relative md:bsolute top-0 right-0 left-0 bg-white"
+                        ? "relative md:bsolute top-0 right-0 left-0"
                         : "relative"
                 }`}
             >
                 <Container classes="p-0">
                     <div className="flex justify-betweeen items-center">
-                        <div className="flex-none border-r-2 border-gray-200 pt-3">
+                        <div className="flex-none border-r-2 border-gray-200 dark:border-gray-700 pt-3">
                             <Link href="/">
                                 <a>
                                     <h1>
