@@ -19,7 +19,7 @@ const Menu: React.FC = ({}) => {
                 )}`}
             >
                 <Link href="/">
-                    <a className="text-nav md:text-sm lg:text-base lg:text-nav py-4 md:py-5 block">
+                    <a className="text-nav md:text-sm lg:text-base lg:text-nav py-4 md:py-5 block text-black">
                         Home
                     </a>
                 </Link>
@@ -31,7 +31,7 @@ const Menu: React.FC = ({}) => {
                 )}`}
             >
                 <Link href="/tutors">
-                    <a className="text-nav md:text-sm lg:text-base lg:text-nav py-4 md:py-5 block">
+                    <a className="text-nav md:text-sm lg:text-base lg:text-nav py-4 md:py-5 block text-black">
                         {router.locale === "pt" ? "Tutores" : "Tutors"}
                     </a>
                 </Link>
@@ -43,7 +43,7 @@ const Menu: React.FC = ({}) => {
                 )}`}
             >
                 <Link href="/faq">
-                    <a className="text-nav md:text-sm lg:text-base lg:text-nav py-4 md:py-5 block">
+                    <a className="text-nav md:text-sm lg:text-base lg:text-nav py-4 md:py-5 block text-black">
                         F.A.Q
                     </a>
                 </Link>
@@ -52,7 +52,7 @@ const Menu: React.FC = ({}) => {
                 className={`my-1 md:my-0 md:px-3 lg:px-5 hoverMenu md:border-r-2 md:border-gray-200`}
             >
                 <Link href="/#tutorial">
-                    <a className="text-nav md:text-sm lg:text-base lg:text-nav py-4 md:py-5 block">
+                    <a className="text-nav md:text-sm lg:text-base lg:text-nav py-4 md:py-5 block text-black">
                         {router.locale === "pt"
                             ? "Como funciona?"
                             : "How it works?"}
@@ -66,7 +66,7 @@ const Menu: React.FC = ({}) => {
                 )}`}
             >
                 <Link href="/become-tutor">
-                    <a className="text-nav md:text-sm lg:text-base lg:text-nav py-4 md:py-5 block">
+                    <a className="text-nav md:text-sm lg:text-base lg:text-nav py-4 md:py-5 block text-black">
                         {router.locale === "pt"
                             ? "Seja um tutor"
                             : "Become a tutor"}

@@ -7,7 +7,6 @@ import { MeQuery } from "src/generated/graphql";
 import { MdExpandMore } from "react-icons/md";
 import NavDropdown from "@components/NavDropdown";
 import { useRouter } from "next/router";
-import useWindowSize from "@hooks/useWindowSize";
 
 interface MenuExtraProps {
     data: MeQuery;
@@ -17,7 +16,6 @@ interface MenuExtraProps {
 
 const MenuExtra: React.FC<MenuExtraProps> = ({ data, fetching, error }) => {
     const router = useRouter();
-    const { width } = useWindowSize();
     const [dropOpen, setDropOpen] = useState(false);
 
     return (
