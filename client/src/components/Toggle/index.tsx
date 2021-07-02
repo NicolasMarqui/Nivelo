@@ -1,21 +1,25 @@
-import { useState } from "react";
-import DarkModeToggle from "react-dark-mode-toggle";
+import { useEffect, useState } from "react";
 import { useTheme } from "next-themes";
+import { DarkModeSwitch } from "react-toggle-dark-mode";
 
 const Toggle: React.FC = ({}) => {
     const { theme, setTheme } = useTheme();
-    const [isDarkMode, setIsDarkMode] = useState(theme === "dark");
+    const [mounted, setMounted] = useState(false);
+
+    useEffect(() => setMounted(true), []);
+
+    if (!mounted) return null;
 
     return (
-        <DarkModeToggle
-            className="outline-none border-0"
-            onChange={() => {
-                setTheme(theme === "dark" ? "light" : "dark");
-                setIsDarkMode(!isDarkMode);
-            }}
-            checked={isDarkMode}
-            size={50}
-        />
+        <div className="p-3 shadow-sm bg-gray-100 dark:bg-darkPrimaryBg rounded-lg flex items-center justify-center w-12 h-12">
+            <DarkModeSwitch
+                moonColor="#222"
+                sunColor="#fff"
+                checked={theme && theme === "light"}
+                onChange={() => setTheme(theme === "dark" ? "light" : "dark")}
+                size={50}
+            />
+        </div>
     );
 };
 export default Toggle;
