@@ -3,11 +3,14 @@ import Link from "next/link";
 import Categories from "@utils/JSON/categories.json";
 import { useRouter } from "next/router";
 import languages from "@utils/JSON/languages.json";
+import { useTheme } from "next-themes";
+import { useEffect, useState } from "react";
 
-interface FooterProps {}
-
-const Footer: React.FC<FooterProps> = ({}) => {
+const Footer: React.FC = ({}) => {
     const router = useRouter();
+    const { theme } = useTheme();
+
+    const [mounted, setMounted] = useState(false);
 
     const marginClass =
         router.pathname === "/become-tutor" ||
@@ -17,6 +20,10 @@ const Footer: React.FC<FooterProps> = ({}) => {
             ? "mt-0"
             : "mt-10";
 
+    useEffect(() => setMounted(true), []);
+
+    if (!mounted) return null;
+
     return (
         <footer
             className={`dark:bg-darkSecondaryBg border-t-4 border-orange ${marginClass}`}
@@ -25,7 +32,9 @@ const Footer: React.FC<FooterProps> = ({}) => {
                 <div className="flex flex-col md:flex-row py-8">
                     <div className="flex-1.5 flex flex-col items-center md:items-start">
                         <img
-                            src="/logo.svg"
+                            src={`/${
+                                theme === "dark" ? "logoWhite" : "logo"
+                            }.svg`}
                             width={170}
                             height={50}
                             className="block"

@@ -10,10 +10,13 @@ import Side from "@components/UI/Side";
 import MobileNavSide from "@components/SideChilds/MobileNavSide";
 import { FaTimes } from "react-icons/fa";
 import Toggle from "@components/Toggle";
+import { useTheme } from "next-themes";
 
 const Navbar: React.FC = () => {
     const router = useRouter();
+    const { theme } = useTheme();
 
+    const [mounted, setMounted] = useState(false);
     const [isOpen, setOpen] = useState(false);
     const [isOpenAviso, setIsOpenAviso] = useState(true);
     const [isFixed, setIsFixed] = useState(false);
@@ -35,6 +38,10 @@ const Navbar: React.FC = () => {
             window.removeEventListener("scroll", fixedNav);
         };
     }, []);
+
+    useEffect(() => setMounted(true), []);
+
+    if (!mounted) return null;
 
     return (
         <div className="nav__wrapper" id="navbar">
@@ -71,7 +78,11 @@ const Navbar: React.FC = () => {
                                 <a>
                                     <h1>
                                         <Image
-                                            src="/logo.svg"
+                                            src={`/${
+                                                theme === "dark"
+                                                    ? "logoWhite"
+                                                    : "logo"
+                                            }.svg`}
                                             width={170}
                                             height={50}
                                             alt="Nivelo"
