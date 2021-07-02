@@ -25,7 +25,7 @@ const AvalClasses: React.FC<AvalClassesProps> = ({ classes, tutorId }) => {
                         <ClassItem
                             key={cl.id}
                             singleClass={cl}
-                            extraClasses="bg-gray-100 p-4 my-2"
+                            extraClasses="bg-gray-100 p-4 my-2 dark:bg-gray-400"
                             tutorId={tutorId}
                         />
                     ))

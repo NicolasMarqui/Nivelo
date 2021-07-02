@@ -49,7 +49,7 @@ const Menu: React.FC = ({}) => {
                 </Link>
             </li>
             <li
-                className={`my-1 md:my-0 md:px-2 lg:px-5 hoverMenu md:border-r-2 md:border-gray-200 dark:border-gray-700`}
+                className={`my-1 md:my-0 md:px-2 lg:px-5 hoverMenu md:border-r-2 md:border-gray-200 dark:border-darkSecondaryBorder`}
             >
                 <Link href="/#tutorial">
                     <a className="text-nav md:text-sm lg:text-base lg:text-nav py-4 md:py-5 block text-black dark:text-white">
@@ -60,7 +60,7 @@ const Menu: React.FC = ({}) => {
                 </Link>
             </li>
             <li
-                className={`my-1 md:my-0 md:px-2 lg:px-5 hoverMenu md:border-r-2 md:border-gray-200 dark:border-gray-700 ${checkIfActive(
+                className={`my-1 md:my-0 md:px-2 lg:px-5 hoverMenu md:border-r-2 md:border-gray-200 dark:border-darkSecondaryBorder ${checkIfActive(
                     router.pathname,
                     "/become-tutor"
                 )}`}

@@ -42,7 +42,7 @@ const Availability: React.FC<AvailabilityProps> = ({
                                 <IconButton
                                     text="Agendar"
                                     icon={<MdEvent size={18} color="#222" />}
-                                    classes="bg-primaryPink hover:bg-lightOrange text-white ml-0"
+                                    classes="bg-primaryPink dark:bg-primaryPink hover:bg-lightOrange text-white ml-0"
                                     onClick={() =>
                                         setAgendarOpen(!isAgendarOpen)
                                     }

@@ -58,7 +58,7 @@ const Navbar: React.FC = () => {
                 </div>
             )}
             <header
-                className={`border-b-2 border-gray-200 dark:border-gray-700 px-3 z-30 bg-white transform transition-all dark:bg-gray-700 animatedFixedNav ${
+                className={`border-b-2 border-gray-200 dark:border-darkSecondaryBg px-3 z-30 bg-white transform transition-all dark:bg-darkSecondaryBg animatedFixedNav ${
                     isFixed
                         ? "fixed top-0 left-0 right-0 shadow-lg isFixed animate-fade-in-down"
                         : "relative"
@@ -66,7 +66,7 @@ const Navbar: React.FC = () => {
             >
                 <Container classes="p-0">
                     <div className="flex justify-betweeen items-center">
-                        <div className="flex-none border-r-2 border-gray-200 dark:border-gray-700 pt-3">
+                        <div className="flex-none border-r-2 border-gray-200 dark:border-darkSecondaryBg pt-3">
                             <Link href="/">
                                 <a>
                                     <h1>

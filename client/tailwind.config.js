@@ -27,6 +27,8 @@ module.exports = {
                 lightBG: "#FAFAFC",
                 lightPink: "rgba(255, 146, 139, 0.13)",
                 start: "#F27059",
+                darkPrimaryBg: "#272727",
+                darkSecondaryBg: "#1d1d1d",
             },
             backgroundImage: (theme) => ({
                 banner: "url('/images/banner.jpg')",
@@ -40,6 +42,8 @@ module.exports = {
             },
             borderColor: (theme) => ({
                 orange: "#FF4338",
+                darkPrimaryBorder: "#272727",
+                darkSecondaryBorder: "#1d1d1d",
             }),
             fontSize: {
                 nav: "1.05rem",

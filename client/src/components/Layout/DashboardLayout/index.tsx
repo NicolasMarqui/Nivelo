@@ -44,7 +44,7 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
     }
 
     return (
-        <div className="dark:bg-gray-800">
+        <div className="dark:bg-darkPrimaryBg">
             <Meta
                 title={`Dashboard - ${data && data.me ? data.me.name : ""}`}
                 description="Encontre os melhores tutores para te ajudar nessa jornada"

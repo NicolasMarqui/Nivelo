@@ -70,7 +70,7 @@ const LoginForm: React.FC<LoginFormProps> = ({
     });
 
     return (
-        <div className="bg-white rounded-lg overflow-hidden shadow-2xl">
+        <div className="bg-white dark:bg-darkSecondaryBg rounded-lg overflow-hidden shadow-2xl">
             <div className="hidden md:flex flex-col my-3">
                 <Image src="/logo.svg" width={170} height={50} />
             </div>
@@ -82,7 +82,7 @@ const LoginForm: React.FC<LoginFormProps> = ({
                         <div className="mb-5">
                             <label
                                 htmlFor="email"
-                                className="block mb-2 text-sm font-medium text-gray-600"
+                                className="block mb-2 text-sm font-medium text-gray-600 dark:text-white"
                             >
                                 Email
                             </label>
@@ -104,7 +104,7 @@ const LoginForm: React.FC<LoginFormProps> = ({
                         <div className="mb-5">
                             <label
                                 htmlFor="password"
-                                className="block mb-2 text-sm font-medium text-gray-600"
+                                className="block mb-2 text-sm font-medium text-gray-600 dark:text-white"
                             >
                                 {t("password")}
                             </label>
@@ -133,7 +133,7 @@ const LoginForm: React.FC<LoginFormProps> = ({
                 )}
             </div>
 
-            <div className="flex justify-between p-8 text-sm border-t border-gray-300 bg-gray-100">
+            <div className="flex justify-between p-8 text-sm border-t border-gray-300 bg-gray-100 dark:border-darkSecondaryBorder dark:bg-darkSecondaryBg">
                 <Link href="/signup">
                     <a className="font-medium text-indigo-500">
                         {t("createAccount")}
@@ -141,7 +141,7 @@ const LoginForm: React.FC<LoginFormProps> = ({
                 </Link>
 
                 {/* <Link href="/forgot">
-                    <a className="text-gray-600">{t("forgot")}</a>
+                    <a className="text-gray-600 dark:text-white">{t("forgot")}</a>
                 </Link> */}
             </div>
         </div>
