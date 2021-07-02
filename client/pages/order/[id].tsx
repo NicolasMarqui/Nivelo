@@ -28,7 +28,7 @@ const Order: React.FC<OrderProps> = ({}) => {
     }
 
     return (
-        <>
+        <div className="dark:bg-darkPrimaryBg">
             <Meta
                 title={`Order - ${router.query.id}`}
                 description="Encontre os melhores tutores para te ajudar nessa jornada"
@@ -95,7 +95,7 @@ const Order: React.FC<OrderProps> = ({}) => {
                     </div>
                 </Container>
             </Section>
-        </>
+        </div>
     );
 };
 export default withUrqlClient(createUrqlClient)(Order);

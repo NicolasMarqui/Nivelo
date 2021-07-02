@@ -43,7 +43,7 @@ const Tutor: React.FC = () => {
     }, [router.query, data]);
 
     return (
-        <div className="dark:bg-gray-800">
+        <div className="dark:bg-darkPrimaryBg">
             <Meta
                 title="Tutores"
                 description="Encontre os melhores tutores para te ajudar nessa jornada"
@@ -99,13 +99,11 @@ const Tutor: React.FC = () => {
                                         data.singleTutor.tutor.categories
                                     }
                                     createdAt={data.singleTutor.tutor.createdAt}
-                                    // @ts-ignore
                                     classes={data.singleTutor.tutor.classes}
                                 />
                                 {width > 1024 ? (
                                     <Availability
                                         tutorId={data.singleTutor.tutor.id}
-                                        // @ts-ignore
                                         classes={data.singleTutor.tutor.classes}
                                         setAgendarOpen={handleAgendar}
                                         isAgendarOpen={agendarOpen}
@@ -113,7 +111,6 @@ const Tutor: React.FC = () => {
                                 ) : (
                                     <AvailabilityMobile
                                         tutorId={data.singleTutor.tutor.id}
-                                        // @ts-ignore
                                         classes={data.singleTutor.tutor.classes}
                                         setAgendarOpen={handleAgendar}
                                         isAgendarOpen={agendarOpen}

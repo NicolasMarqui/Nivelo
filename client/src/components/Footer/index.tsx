@@ -18,7 +18,9 @@ const Footer: React.FC<FooterProps> = ({}) => {
             : "mt-10";
 
     return (
-        <footer className={`border-t-4 border-orange ${marginClass}`}>
+        <footer
+            className={`dark:bg-darkSecondaryBg border-t-4 border-orange ${marginClass}`}
+        >
             <Container classes="px-3">
                 <div className="flex flex-col md:flex-row py-8">
                     <div className="flex-1.5 flex flex-col items-center md:items-start">

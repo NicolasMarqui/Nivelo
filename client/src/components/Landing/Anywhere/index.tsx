@@ -9,9 +9,9 @@ const AnyWhere: React.FC = ({}) => {
     const { t } = useTranslation("home");
 
     return (
-        <div className="dark:bg-gray-800">
+        <div className="dark:bg-darkPrimaryBg">
             <Section
-                classes="border-b-2 border-gray-200 dark:border-gray-700"
+                classes="border-b-2 border-gray-200 dark:border-darkPrimaryBg"
                 hasBgDetail
             >
                 <Container classes="px-4 z-20">

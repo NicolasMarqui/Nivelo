@@ -10,7 +10,7 @@ const Hero: React.FC = ({}) => {
     const { t } = useTranslation("home");
 
     return (
-        <div className="relative border-b-2 border-gray-200 dark:border-gray-700 heroHeight">
+        <div className="relative border-b-2 border-gray-200 dark:border-darkPrimaryBorder heroHeight">
             <Container classes="h-full px-4 z-2">
                 <div className="flex flex-col md:flex-row items-center justify-center h-full">
                     <motion.div

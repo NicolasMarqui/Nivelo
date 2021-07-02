@@ -9,7 +9,7 @@ import { withUrqlClient } from "next-urql";
 
 const Faq: React.FC = ({}) => {
     return (
-        <div className="dark:bg-gray-800">
+        <div className="dark:bg-darkPrimaryBg">
             <Meta
                 title="F.A.Q"
                 description="Encontre os melhores tutores para te ajudar nessa jornada"

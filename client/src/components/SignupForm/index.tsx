@@ -40,7 +40,7 @@ const SignupForm: React.FC<SignupFormProps> = ({}) => {
     });
 
     return (
-        <div className="bg-white rounded-lg overflow-hidden shadow-2xl">
+        <div className="bg-white dark:bg-darkSecondaryBg rounded-lg overflow-hidden shadow-2xl">
             <div className="hidden md:flex flex-col my-3">
                 <Image src="/logo.svg" width={170} height={50} />
             </div>
@@ -52,7 +52,7 @@ const SignupForm: React.FC<SignupFormProps> = ({}) => {
                         <div className="mb-5">
                             <label
                                 htmlFor="name"
-                                className="block mb-2 text-sm font-medium text-gray-600"
+                                className="block mb-2 text-sm font-medium text-gray-600 dark:text-white"
                             >
                                 {t("name")}
                             </label>
@@ -73,7 +73,7 @@ const SignupForm: React.FC<SignupFormProps> = ({}) => {
                         <div className="mb-5">
                             <label
                                 htmlFor="email"
-                                className="block mb-2 text-sm font-medium text-gray-600"
+                                className="block mb-2 text-sm font-medium text-gray-600 dark:text-white"
                             >
                                 Email
                             </label>
@@ -95,7 +95,7 @@ const SignupForm: React.FC<SignupFormProps> = ({}) => {
                         <div className="mb-5">
                             <label
                                 htmlFor="password"
-                                className="block mb-2 text-sm font-medium text-gray-600"
+                                className="block mb-2 text-sm font-medium text-gray-600 dark:text-white"
                             >
                                 Senha
                             </label>
@@ -124,7 +124,7 @@ const SignupForm: React.FC<SignupFormProps> = ({}) => {
                 )}
             </div>
 
-            <div className="flex justify-between p-8 text-sm border-t border-gray-300 bg-gray-100">
+            <div className="flex justify-between p-8 text-sm border-t border-gray-300 bg-gray-100 dark:border-darkSecondaryBorder dark:bg-darkSecondaryBg">
                 <Link href="/login">
                     <a href="#" className="font-medium text-indigo-500">
                         {t("alreadyHave")}
