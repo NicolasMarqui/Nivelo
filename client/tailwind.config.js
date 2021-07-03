@@ -29,6 +29,7 @@ module.exports = {
                 start: "#F27059",
                 darkPrimaryBg: "#272727",
                 darkSecondaryBg: "#1d1d1d",
+                darkThirdBg: "#4B4B4B",
             },
             backgroundImage: (theme) => ({
                 banner: "url('/images/banner.jpg')",

@@ -43,11 +43,11 @@ const ClassItem: React.FC<ClassItemProps> = ({
                 onClick={handleClick}
             >
                 <div className="flex-none">
-                    <MdSchool size={22} />
+                    <MdSchool size={22} color="#222" />
                 </div>
                 <div className="flex-1 mx-6">
                     <h5 className="text-lg text-black222">{name}</h5>
-                    <p className="text-sm text-gray-400">
+                    <p className="text-sm text-gray-400 dark:text-black">
                         {amountTimeTaught} aulas dadas
                     </p>
                 </div>
@@ -70,14 +70,16 @@ const ClassItem: React.FC<ClassItemProps> = ({
                     handleClose={() => setMoreInfoClass(!moreInfoClass)}
                     header={{ title: name }}
                 >
-                    <h3 className="text-xl font-bold text-black222">{name}</h3>
+                    <h3 className="text-xl font-bold text-black222 dark:text-white">
+                        {name}
+                    </h3>
                     <p className="text-desc dark:text-gray-400 mt-3">
                         {description
                             ? description
                             : "Essa aula não possui descrição!"}
                     </p>
 
-                    <div className="my-5 border-2 border-gray-200"></div>
+                    <div className="my-5 border-2 border-gray-200 dark:border-gray-500"></div>
 
                     <IconButton
                         text="Agendar"

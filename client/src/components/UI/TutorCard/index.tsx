@@ -13,11 +13,10 @@ import { useRouter } from "next/router";
 import { lowestPriceAval } from "@utils/lowestPriceClasses";
 
 const TutorCard: React.FC<TutorCardProps> = ({ tutor }) => {
-    console.log(tutor);
     const router = useRouter();
 
     return (
-        <div className="flex flex-col md:flex-row rounded-3xl items-center md:items-start bg-gray-100 dark:bg-gray-600 mt-4 px-4 md:px-12 py-3 md:py-7 relative">
+        <div className="flex flex-col md:flex-row rounded-3xl items-center md:items-start bg-gray-100 dark:bg-darkThirdBg mt-4 px-4 md:px-12 py-3 md:py-7 relative">
             <div className="flex-none flex flex-col">
                 <img
                     src={
@@ -48,7 +47,7 @@ const TutorCard: React.FC<TutorCardProps> = ({ tutor }) => {
                     {tutor.type.name}
                 </p>
             </div>
-            <div className="flex-2 px-4 md:px-14 md:mr-4 md:border-r-2 md:border-gray-300 cursor-pointer">
+            <div className="flex-2 px-4 md:px-14 md:mr-4 md:border-r-2 md:border-gray-300 md:dark:border-darkSecondaryBorder cursor-pointer">
                 <Link href="/tutor/[id]" as={`/tutor/${tutor.id}`}>
                     <a className="flex flex-col items-center md:items-start">
                         <h3 className="text-black222 dark:text-white text-xl md:text-2xl font-bold mt-2 md:mt-0">
@@ -87,7 +86,7 @@ const TutorCard: React.FC<TutorCardProps> = ({ tutor }) => {
                             onClick={() =>
                                 router.push(`/tutor/${tutor.id}?agendar=true`)
                             }
-                            classes="bg-primaryPink hover:bg-lightOrange text-white"
+                            classes="bg-primaryPink dark:bg-primaryPink hover:bg-lightOrange text-white"
                         />
                         <IconButton
                             text="Veja mais"
@@ -95,7 +94,7 @@ const TutorCard: React.FC<TutorCardProps> = ({ tutor }) => {
                                 <MdChatBubbleOutline size={18} color="#222" />
                             }
                             onClick={() => router.push(`/tutor/${tutor.id}`)}
-                            classes="ml-2 bg-primaryGreen hover:bg-lightGreen text-white"
+                            classes="ml-2 bg-primaryGreen dark:bg-primaryGreen hover:bg-lightGreen text-white"
                         />
                     </div>
                 </div>

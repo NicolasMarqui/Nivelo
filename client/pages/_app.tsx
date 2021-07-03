@@ -30,7 +30,7 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
     const router = useRouter();
 
     return (
-        <ThemeProvider attribute="class">
+        <ThemeProvider attribute="class" defaultTheme="light">
             <ModalContainer />
             <Toaster position="top-center" />
 

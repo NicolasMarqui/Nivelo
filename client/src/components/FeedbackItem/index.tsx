@@ -13,7 +13,7 @@ const FeedbackItem: React.FC<FeedbackItemProps> = ({ feed }) => {
     const { user, rating, content, createdAt } = feed;
 
     return (
-        <div className="flex bg-gray-100 rounded-xl my-2 p-8 flex-col md:flex-row justify-center md:justify-start">
+        <div className="flex bg-gray-100 dark:bg-darkThirdBg rounded-xl my-2 p-8 flex-col md:flex-row justify-center md:justify-start">
             <div className="flex-none flex justify-center md:-ml-20">
                 <img
                     src={checkAvatar(user.avatar, user.name)}
@@ -21,11 +21,11 @@ const FeedbackItem: React.FC<FeedbackItemProps> = ({ feed }) => {
                 />
             </div>
             <div className="px-3 md:px-6 flex-1">
-                <h3 className="text-black222 text-xl font-bold text-center md:text-left">
+                <h3 className="text-black222 dark:text-white text-xl font-bold text-center md:text-left">
                     {user.name}
                 </h3>
 
-                <p className="mt-2 text-base text-gray-500 md:w-4/5 text-center md:text-left">
+                <p className="mt-2 text-base text-gray-500 dark:text-gray-200 md:w-4/5 text-center md:text-left">
                     {content || "Nenhun detalhe foi dado"}
                 </p>
 

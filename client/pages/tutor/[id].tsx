@@ -43,7 +43,7 @@ const Tutor: React.FC = () => {
     }, [router.query, data]);
 
     return (
-        <div className="dark:bg-darkPrimaryBg">
+        <div className="dark:bg-darkPrimaryBg pb-24">
             <Meta
                 title="Tutores"
                 description="Encontre os melhores tutores para te ajudar nessa jornada"

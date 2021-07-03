@@ -51,7 +51,7 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
                 keywords="home, tutor, javascript, nivelamento, aprender, algoritimos, comprar"
             />
             <Navbar />
-            <div className="mt-20">
+            <div className="mt-20 mb-10">
                 <Container classes="px-3">
                     <div className="flex md:flex-row flex-col items-start">
                         <div className="flex-none bg-white dark:bg-gray-600 shadow-2xl rounded-2xl p-3 mb-3 md:mb-0 w-full md:w-auto">

@@ -89,7 +89,7 @@ const NavWizard: React.FC<NavWizardProps> = ({
                 </p>
             </div>
 
-            <div className="fixed bg-white z-20 bottom-0 left-0 right-0 border-t-2 border-gray-300 flex items-center justify-between p-4 mx-auto">
+            <div className="fixed bg-white dark:bg-darkThirdBg z-20 bottom-0 left-0 right-0 border-t-2 border-gray-300 dark:border-darkThirdBg flex items-center justify-between p-4 mx-auto">
                 <div className="flex-none justify-start text-left">
                     <IconButton
                         text="Anterior"
@@ -99,7 +99,7 @@ const NavWizard: React.FC<NavWizardProps> = ({
                     />
                 </div>
                 <div className="flex-3 justify-center">
-                    <h4 className="text-center text-xl font-bold dark:text-black222">
+                    <h4 className="text-center text-xl font-bold dark:text-white">
                         R${classPrice.price || 0}
                     </h4>
                 </div>
