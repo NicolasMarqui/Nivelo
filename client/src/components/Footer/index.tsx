@@ -12,22 +12,12 @@ const Footer: React.FC = ({}) => {
 
     const [mounted, setMounted] = useState(false);
 
-    const marginClass =
-        router.pathname === "/become-tutor" ||
-        router.pathname === "/login" ||
-        router.pathname === "/signup" ||
-        router.pathname === "/"
-            ? "mt-0"
-            : "mt-10";
-
     useEffect(() => setMounted(true), []);
 
     if (!mounted) return null;
 
     return (
-        <footer
-            className={`dark:bg-darkSecondaryBg border-t-4 border-orange ${marginClass}`}
-        >
+        <footer className="dark:bg-darkSecondaryBg border-t-4 border-orange">
             <Container classes="px-3">
                 <div className="flex flex-col md:flex-row py-8">
                     <div className="flex-1.5 flex flex-col items-center md:items-start">
@@ -132,7 +122,7 @@ const Footer: React.FC = ({}) => {
                             <div className="flex items-center justify-center md:justify-start">
                                 {languages.map((l) => (
                                     <div
-                                        className="hover:scale-105 transform hover:bg-gray-50 cursor-pointer mr-2"
+                                        className="hover:scale-105 transform hover:bg-gray-50 dark:hover:bg-darkThirdBg cursor-pointer mr-2"
                                         key={l.locale}
                                     >
                                         <Link

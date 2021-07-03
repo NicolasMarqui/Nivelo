@@ -5,7 +5,7 @@ import IconButton from "@components/UI/IconButton";
 import Side from "@components/UI/Side";
 import useWindowSize from "@hooks/useWindowSize";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FiFilter } from "react-icons/fi";
 import { MdClose } from "react-icons/md";
 import { VscListOrdered } from "react-icons/vsc";
@@ -63,7 +63,7 @@ const FilterContainer: React.FC<FilterContainerProps> = ({ amount }) => {
                         </Dropdown>
                     </div> */}
                     <IconButton
-                        icon={<FiFilter size={20} />}
+                        icon={<FiFilter size={20} color="#222" />}
                         text={t("filter")}
                         onClick={() => setIsOpenFilter(true)}
                     />

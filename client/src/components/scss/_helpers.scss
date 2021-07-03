@@ -302,3 +302,7 @@ input:checked + svg {
 .nav__wrapper {
     height: 70px;
 }
+
+.react-tabs__tab-list {
+    margin-bottom: -10px !important;
+}

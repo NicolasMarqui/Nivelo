@@ -63,7 +63,7 @@ const FilterList: React.FC = ({}) => {
                                     setSelectedCategoria(cat.value)
                                 }
                             />
-                            <span className="ml-2 text-gray-700">
+                            <span className="ml-2 text-gray-700 dark:text-white">
                                 {cat.value}
                             </span>
                         </label>

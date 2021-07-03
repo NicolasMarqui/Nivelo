@@ -24,13 +24,13 @@ const Availability: React.FC<AvailabilityProps> = ({
             <Sticky topOffset={-120}>
                 {({ style, isSticky }) => (
                     <div
-                        className={`bg-white rounded-3xl shadow-md ${
+                        className={`bg-white dark:bg-darkThirdBg rounded-3xl shadow-md ${
                             isSticky ? "mt-20" : ""
                         }`}
                         style={style}
                     >
                         <div className="relative p-7">
-                            <h5 className="text-center md:text-left text-base dark:text-black222">
+                            <h5 className="text-center md:text-left text-base dark:text-white">
                                 Preço por hora a partir de
                             </h5>
                             <p className="text-2xl text-primaryOrange text-center md:text-left font-bold">
@@ -61,10 +61,10 @@ const Availability: React.FC<AvailabilityProps> = ({
                             </div>
                         </div>
 
-                        <div className="my-1 w-full border-2 border-gray-200"></div>
+                        <div className="my-1 w-full border-2 border-gray-200 dark:border-gray-400"></div>
 
                         <div className="mt-2 px-7 py-5">
-                            <h5 className="text-center text-base font-bold dark:text-black222">
+                            <h5 className="text-center text-base font-bold dark:text-white">
                                 Disponibilidade
                             </h5>
 

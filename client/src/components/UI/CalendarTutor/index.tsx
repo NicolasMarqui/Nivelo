@@ -35,6 +35,7 @@ const CustomCalendarTutor: React.FC<CustomCalendarTutorProps> = ({
     const router = useRouter();
     const { theme } = useTheme();
 
+    const [mounted, setMounted] = useState(false);
     const [currentMonth, setCurrentMonth] = useState(new Date());
     const [selectedDate, setSelectedDate] = useState(new Date());
 
@@ -59,21 +60,21 @@ const CustomCalendarTutor: React.FC<CustomCalendarTutorProps> = ({
         }api/schedule/available/${tutorId}`,
     });
 
+    useEffect(() => setMounted(true), []);
+
+    if (!mounted) return null;
+
     const renderHeader = () => {
         const dateFormat = "MMMM yyyy";
 
         return (
-            <div className="header row flex-middle">
+            <div className="header row flex-middle dark:bg-white">
                 <div
                     className="col col-start"
                     data-tip="Mês anterior"
                     data-for="prev"
                 >
-                    <MdChevronLeft
-                        size={24}
-                        color={theme === "dark" ? "#fff" : "#000"}
-                        onClick={prevMonth}
-                    />
+                    <MdChevronLeft size={24} color="#000" onClick={prevMonth} />
                     <ReactTooltip
                         effect="solid"
                         place={smaller ? "top" : "left"}
@@ -94,7 +95,7 @@ const CustomCalendarTutor: React.FC<CustomCalendarTutorProps> = ({
                 >
                     <MdChevronRight
                         size={24}
-                        color={theme === "dark" ? "#fff" : "#000"}
+                        color="#000"
                         onClick={nextMonth}
                     />
                     <ReactTooltip
